@@ -1,3 +1,4 @@
 git is a version control system.
 git is free software.
 today is Wednesday.
+oh! today is just a shit day!
