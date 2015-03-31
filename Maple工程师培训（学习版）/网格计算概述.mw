@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Worksheet>
+<Version major="17" minor="0"/>
+<Label-Scheme value="2" prefix=""/>
+<View-Properties presentation="false" autoexpanding_sections="true"><Zoom percentage="150"/>
+<Hide name="Group Range"/>
+</View-Properties>
+<MapleNet-Properties elisiondigitsbefore="100" labelling="true" indentamount="4" elisiontermsthreshold="10000" ansi="false" errorbreak="1" useclientjvm="true" echo="1" imaginaryunit="I" labelwidth="20" contextmenusize="automatic" plotdriver="opengl" elisiondigitsafter="100" plotoutput="terminal" helpbrowser="standard" rtablesize="10" elisiontermsbefore="100" elisiondigitsthreshold="10000" typesetting="standard" plotdevice="inline" verboseproc="1" showassumed="1" errorcursor="false" longdelim="true" plotoptions="" quiet="false" elisiontermsafter="100" screenwidth="79" preplot="" prettyprint="3" displayprecision="-1" screenpixelheight="768" warnlevel="3" screenheight="25" latexwidth="8.0" postplot="" prompt="&gt; " ShowLabels="true"/>
+<Styles>
+<Font name="" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 1" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Annotation Text" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 2" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 3" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 4" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 5" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Maple Name" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[104,64,92]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Annotation Title" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Text Output" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Halfline" background="[255,255,255]" bold="false" executable="false" family="DejaVu Sans" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="11" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="key" background="[255,255,255]" bold="true" executable="false" family="Courier New" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Navigation" background="[0,0,0]" bold="false" executable="false" family="Arial" foreground="[0,128,128]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Dash Item" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Input" background="[255,255,255]" bold="true" executable="true" family="Monospaced" foreground="[255,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading4Blue" background="[255,255,255]" bold="false" executable="false" family="Verdana" foreground="[18,93,153]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="2D Output" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,255]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="HyperlinkError" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Heading3Blue" background="[255,255,255]" bold="false" executable="false" family="Arial" foreground="[18,93,153]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Page Number" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Subtitle4" background="[0,0,0]" bold="true" executable="false" family="Arial" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Subtitle3" background="[0,0,0]" bold="false" executable="false" family="Arial" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="16" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Bullet Item" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Subtitle2" background="[0,0,0]" bold="false" executable="false" family="Arial" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Subtitle1" background="[0,0,0]" bold="true" executable="false" family="Arial" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="20" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Author" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Calling Sequence" background="[255,255,255]" bold="false" executable="false" family="DejaVu Sans Mono" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="11" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Warning" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Caption Reference" background="[255,255,255]" bold="true" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Input Placeholder" background="[255,255,255]" bold="true" executable="true" family="SimSun" foreground="[200,0,200]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="true"/>
+<Font name="Code" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Plot" background="[255,255,255]" bold="false" executable="false" family="DejaVu Sans" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="11" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Line Printed Output" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Diagnostic" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[40,120,40]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Inert Output" background="[255,255,255]" bold="false" executable="true" family="SimSun" foreground="[144,144,144]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="TOC Hyperlink" background="[255,255,255]" bold="false" executable="false" family="Serif" foreground="[0,128,128]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Normal" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Comment" background="[0,0,0]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Hyperlink" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,128,128]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Maple Output" background="[255,255,255]" bold="false" executable="false" family="Calibri" foreground="[128,0,128]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Navigation Title" background="[0,0,0]" bold="true" executable="false" family="Arial" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Input" background="[255,255,255]" bold="false" executable="true" family="Times New Roman" foreground="[255,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Header and Footer" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Title" background="[255,255,255]" bold="true" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Error" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 1" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Text" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Equation Label" background="[255,255,255]" bold="true" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 4" background="[255,255,255]" bold="false" executable="false" family="Serif" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Chapter Title" background="[0,0,0]" bold="true" executable="false" family="Arial" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="24" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 3" background="[255,255,255]" bold="true" executable="false" family="Calibri" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="HyperlinkWarning" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Heading 2" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Atomic Variable" background="[255,255,255]" bold="false" executable="false" family="SimSun" foreground="[175,0,175]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Dictionary Hyperlink" background="[255,255,255]" bold="false" executable="false" family="Serif" foreground="[147,0,15]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Caption Text" background="[255,255,255]" bold="true" executable="false" family="SimSun" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="List Item" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Fixed" background="[255,255,255]" bold="false" executable="false" family="DejaVu Sans Mono" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="11" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Layout name="Ordered List 1" alignment="left" bullet="numeric" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 2" alignment="left" bullet="alphabetic" firstindent="0" leftmargin="36" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 3" alignment="left" bullet="roman" firstindent="0" leftmargin="72" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 4" alignment="left" bullet="ALPHABETIC" firstindent="0" leftmargin="108" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="No Name208" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="4" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Ordered List 5" alignment="left" bullet="ROMAN" firstindent="0" leftmargin="144" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Chapter Subtitle" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Author" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="8" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Annotation Title" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="12" spacebelow="12" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Warning" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Maple Plot" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Line Printed Output" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Text Output" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="newline" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Diagnostic" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="any" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="No Name" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="4" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Normal" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="10" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="2D Comment" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Navigation" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Maple Output" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Dash Item" alignment="left" bullet="dash" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Navigation Title" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="HyperlinkError" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Title" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="12" spacebelow="12" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Error" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 1" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="4" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Subtitle4" alignment="left" bullet="none" firstindent="0" leftmargin="150" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="stye-for-paragraph" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="6" spacebelow="6" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Subtitle3" alignment="left" bullet="none" firstindent="0" leftmargin="100" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Bullet Item" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 4" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Title" alignment="right" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 3" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="HyperlinkWarning" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 2" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="2" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Subtitle2" alignment="left" bullet="none" firstindent="0" leftmargin="50" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Chapter Subtitle1" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="7" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="List Item" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Pencil-style name="Pencil 5" pen-color="[255,0,0]" pen-height="5.0" pen-width="5.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 4" pen-color="[0,0,255]" pen-height="3.0" pen-width="3.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 3" pen-color="[0,0,0]" pen-height="3.0" pen-width="3.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 2" pen-color="[0,0,255]" pen-height="1.0" pen-width="1.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 1" pen-color="[0,0,0]" pen-height="1.0" pen-width="1.0" pen-opacity="1.0"/>
+<Highlighter-style name="Highlighter 2" pen-color="[255,204,0]" pen-height="14.0" pen-width="14.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 1" pen-color="[255,153,255]" pen-height="12.0" pen-width="8.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 4" pen-color="[0,255,255]" pen-height="32.0" pen-width="32.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 3" pen-color="[51,255,0]" pen-height="24.0" pen-width="24.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 5" pen-color="[255,255,0]" pen-height="48.0" pen-width="48.0" pen-opacity="0.8"/>
+</Styles>
+<Metadata-table>
+    <Metadata-category name="&lt;default&gt;"/>
+    <Metadata-tag id="0" category="&lt;default&gt;" name="Document Properties">
+        <Metadata-attribute name="Active" value="false"/>
+        <Metadata-attribute name="Alias" value="Grid/Overview"/>
+        <Metadata-attribute name="Topic" value="Grid/Overview"/>
+    </Metadata-tag>
+</Metadata-table>
+<Task-table>
+    <Task-category name="&lt;default&gt;"/>
+</Task-table>
+<Task/>
+<Text-field style="Heading 1" layout="Heading 1">Grid Computing Toolbox</Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\344\273\213\347\273\215</Font></Text-field></Title>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font style="Text">Grid Computing Toolbox</Font> <Font encoding="UTF-8">\347\224\250\344\272\216\351\207\212\346\224\276Grid\345\207\275\346\225\260\345\214\205\347\232\204\345\212\237\350\203\275\345\256\236\347\216\260\345\210\206\345\270\203\345\274\217\345\271\266\350\241\214\350\256\241\347\256\227\343\200\202Grid\345\207\275\346\225\260\345\214\205\345\261\236\344\272\216Maple\346\240\207\345\207\206\347\211\210\347\232\204\344\270\200\351\203\250\345\210\206\343\200\202\350\257\245\345\207\275\346\225\260\345\214\205\345\214\205\345\220\253\344\270\200\344\270\252\345\255\220\346\250\241\345\235\227\357\274\232 </Font></Text-field>
+<Text-field style="List Item" layout="Bullet Item" spaceabove="8" bullet="dot">- <Hyperlink linktarget="Help:Grid,Server,StartServer" hyperlink="true"><Font style="Hyperlink">Server</Font></Hyperlink><Font encoding="UTF-8"> \346\250\241\345\235\227\346\217\220\344\276\233\345\221\275\344\273\244\347\224\250\344\272\216\345\234\250\346\234\254\345\234\260\347\224\265\350\204\221\344\270\212\345\220\257\345\212\250/\345\201\234\346\255\242\347\275\221\346\240\274\350\256\241\347\256\227\346\234\215\345\212\241\343\200\202</Font></Text-field>
+<Text-field style="List Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">Grid\345\207\275\346\225\260\345\214\205\346\217\220\344\276\233\347\250\213\345\272\217\345\256\236\347\216\260\345\260\206\350\256\241\347\256\227\344\273\273\345\212\241\345\210\206\345\270\203\345\210\260\344\273\273\346\204\217\346\225\260\351\207\217\347\232\204\347\224\265\350\204\221\346\210\226\350\200\205\345\220\214\344\270\200\347\224\265\350\204\221\344\270\212\347\232\204CPUs\344\270\212\343\200\202\346\257\217\344\270\252\347\224\265\350\204\221\346\210\226CPU\347\247\260\344\270\272\347\275\221\346\240\274\344\270\212\347\232\204\344\270\200\344\270\252\342\200\234\350\212\202\347\202\271\342\200\235(node)\343\200\202</Font></Text-field>
+<Text-field style="List Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">Grid\346\217\220\344\276\233\347\261\273\344\274\274\344\272\216MPI\347\232\204\345\221\275\344\273\244\345\256\236\347\216\260\346\266\210\346\201\257\344\274\240\351\200\222\343\200\202\345\217\246\345\244\226\350\277\230\346\217\220\344\276\233\345\244\232\344\270\252\351\253\230\347\272\247\345\271\266\350\241\214\345\221\275\344\273\244\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">Grid\345\207\275\346\225\260\345\214\205\346\234\2113\347\247\215\346\250\241\345\274\217\357\274\232
+&quot;local&quot; - \351\273\230\350\256\244\346\250\241\345\274\217\357\274\214\345\256\236\347\216\260\345\215\225\344\270\252\347\224\265\350\204\221\344\270\212\347\232\204\345\271\266\350\241\214\345\244\232\350\277\233\347\250\213\350\256\241\347\256\227\343\200\202
+&quot;mpi&quot; - \344\272\244\344\272\222\345\274\217\344\275\277\347\224\250\346\234\254\345\234\260\346\266\210\346\201\257\344\274\240\351\200\222\346\216\245\345\217\243(</Font>Message Passing Interface, <Font encoding="UTF-8">MPI)\345\215\217\350\256\256\345\222\214\350\260\203\345\272\246\347\256\227\346\263\225\345\256\236\347\216\260\346\211\271\345\244\204\347\220\206\343\200\202
+&quot;hpc&quot; - \345\234\250\345\274\202\346\236\204\347\275\221\347\273\234\344\270\255\345\256\236\347\216\260\345\210\206\345\270\203\345\274\217\350\256\241\347\256\227\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">&quot;hpc&quot;\346\250\241\345\274\217\344\270\213\357\274\214\346\257\217\344\270\252\350\212\202\347\202\271\345\277\205\351\241\273\350\277\220\350\241\214\344\270\200\344\270\252grid server\350\277\233\347\250\213\343\200\202\351\273\230\350\256\244\346\203\205\345\206\265\344\270\213\357\274\214grid server\344\274\232\350\207\252\345\212\250\347\233\270\344\272\222\346\220\234\347\264\242\357\274\214\345\271\266\347\273\204\346\210\220\350\256\241\347\256\227\347\275\221\346\240\274\357\274\214\346\227\240\351\234\200\344\272\272\345\267\245\345\271\262\351\242\204\343\200\202\345\246\202\346\236\234\345\271\266\350\241\214\346\234\272\345\244\204\344\272\216\345\217\227\346\216\247\347\216\257\345\242\203\344\270\255\357\274\214\344\276\213\345\246\202PBS\357\274\214\347\224\250\346\210\267\351\234\200\350\246\201\345\205\263\351\227\255Auto-discovery\345\212\237\350\203\275\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">&quot;mpi&quot;\346\250\241\345\274\217\344\270\213\357\274\214\351\234\200\350\246\201\345\256\211\350\243\205MPI\345\272\223\343\200\202\345\205\263\344\272\216\350\257\245\345\272\223\347\232\204\346\233\264\345\244\232\344\277\241\346\201\257\357\274\214\350\257\267\345\217\202\350\200\203 </Font><Hyperlink linktarget="http://www.mcs.anl.gov/research/projects/mpi/" hyperlink="true"><Font style="Hyperlink">http://www.mcs.anl.gov/research/projects/mpi/</Font></Hyperlink>.  
+<Font encoding="UTF-8">- \345\257\271\344\272\216Windows\345\271\263\345\217\260\357\274\214Grid Computing Toolbox\346\224\257\346\214\201Microsoft\302\256 Windows\302\256 Server 2008 clusters\344\270\213\347\232\204</Font>Microsoft<Font encoding="UTF-8">\302\256 high-performance computing (HPC) MPI\343\200\202
+- \345\257\271\344\272\216UNIX\345\222\214Linux\345\271\263\345\217\260\357\274\214Grid Computing Toolbox\346\224\257\346\214\201MPICH2\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">\345\271\266\350\241\214\344\273\273\345\212\241\345\217\257\344\273\245\344\273\216Maple\347\216\257\345\242\203\344\270\255\346\216\247\345\210\266\345\222\214\347\231\273\345\275\225\357\274\214\351\234\200\350\246\201\346\217\220\344\276\233\345\217\202\344\270\216\350\256\241\347\256\227\347\232\204\350\212\202\347\202\271\346\225\260\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" spaceabove="8" bullet="dot"><Font encoding="UTF-8">\345\271\266\350\241\214\344\273\273\345\212\241\344\271\237\345\217\257\344\273\245\344\273\216PBS\347\263\273\347\273\237\344\270\255\346\216\247\345\210\266\345\222\214\347\231\273\345\275\225\357\274\214PBS\345\217\257\344\273\245\346\216\247\345\210\266\345\217\202\344\270\216\350\256\241\347\256\227\347\232\204\350\212\202\347\202\271\346\225\260\343\200\202</Font></Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">Grid License\347\261\273\345\236\213</Font></Text-field></Title>
+<Text-field style="Text" layout="No Name208"><Font encoding="UTF-8">Grid Licenses\346\216\247\345\210\266\345\215\225\344\270\252\347\224\265\350\204\221\344\270\212\345\217\257\345\220\257\345\212\250\347\232\204\346\234\215\345\212\241\346\225\260\351\207\217 (gridcpus)\357\274\214\344\273\245\345\217\212\345\217\202\344\270\216\345\271\266\350\241\214\344\273\273\345\212\241\347\232\204\346\234\200\345\244\247\350\212\202\347\202\271\346\225\260 (gridnodes)\343\200\202\345\246\202\346\236\234Grid library\344\270\215\350\203\275\346\211\276\345\210\260\346\234\211\346\225\210\347\232\204license\357\274\214\350\275\257\344\273\266\345\260\206\344\273\205\345\205\201\350\256\270\344\275\277\347\224\250&quot;local&quot;\346\250\241\345\274\217\343\200\202</Font></Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">Grid\345\207\275\346\225\260\345\214\205\345\221\275\344\273\244\345\210\227\350\241\250</Font></Text-field></Title>
+<Text-field style="Bullet Item" layout="Bullet Item"></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item"><Hyperlink linktarget="Help:Grid" hyperlink="true"><Font style="Hyperlink">Overview of the Grid Package</Font></Hyperlink><Font encoding="UTF-8"> \345\270\256\345\212\251\351\241\265\345\210\227\344\270\276\344\272\206\345\221\275\344\273\244\345\210\227\350\241\250\345\222\214\344\275\277\347\224\250\350\257\264\346\230\216\343\200\202</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item"></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item"><Font encoding="UTF-8">\345\255\220\346\250\241\345\235\227 </Font><Hyperlink linktarget="Help:Grid[Server]" hyperlink="true"><Font style="Hyperlink">Grid[Server]</Font></Hyperlink><Font encoding="UTF-8"> \345\222\214\345\221\275\344\273\244 </Font><Hyperlink linktarget="Help:Grid[Setup]" hyperlink="true"><Font style="Hyperlink">Grid[Setup]</Font></Hyperlink><Font encoding="UTF-8"> \347\211\271\345\210\253\346\234\211\347\224\250\343\200\202</Font></Text-field>
+<Text-field style="Text" layout="Normal" spacebelow="0" linebreak="newline"></Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\345\261\236\346\200\247\346\226\207\344\273\266\350\256\276\347\275\256</Font></Text-field></Title>
+<Text-field style="Text" layout="No Name"><Font encoding="UTF-8">\347\275\221\346\240\274\350\256\241\347\256\227\345\267\245\345\205\267\347\256\261\347\232\204\350\256\276\347\275\256\346\226\207\344\273\266\346\230\257\357\274\232...</Font><Font bold="true">conf/grid.properties</Font><Font encoding="UTF-8"> \357\274\214\350\257\246\347\273\206\350\267\257\345\276\204\344\277\241\346\201\257\345\217\257\344\275\277\347\224\250\345\221\275\344\273\244\350\216\267\345\217\226 </Font><Hyperlink linktarget="Help:kernelopts" hyperlink="true"><Font style="Hyperlink">kernelopts(toolboxdir=&quot;Grid&quot;)</Font></Hyperlink>.</Text-field>
+<Text-field style="Text" layout="No Name"><Font encoding="UTF-8">\345\246\202\344\275\225\350\256\276\347\275\256\350\277\231\344\272\233\345\217\202\346\225\260\357\274\214\350\247\201 </Font><Hyperlink linktarget="Help:Grid,Properties" hyperlink="true"><Font style="Hyperlink">Properties</Font></Hyperlink><Font encoding="UTF-8"> \345\270\256\345\212\251\351\241\265\343\200\202</Font></Text-field>
+<Group labelreference="L17" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">?Grid,Properties</Text-field>
+</Input>
+</Group>
+<Text-field style="Text" layout="No Name"></Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1">Personal Grid Server</Text-field></Title>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Personal Grid Server\347\232\204\344\275\234\347\224\250\357\274\232 \345\234\250\345\260\206\347\250\213\345\272\217\350\277\220\350\241\214\345\210\260\345\256\236\351\231\205\347\275\221\346\240\274\350\256\241\347\256\227\350\212\202\347\202\271\344\271\213\345\211\215\357\274\214\344\275\240\345\217\257\344\273\245\344\275\277\347\224\250</Font>personal server<Font encoding="UTF-8">\345\234\250\344\270\252\344\272\272\347\224\265\350\204\221\344\270\212\345\274\200\345\217\221\345\222\214\346\265\213\350\257\225\345\271\266\350\241\214\347\250\213\345\272\217\343\200\202</Font></Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\344\270\213\351\235\242\347\232\204</Font><Hyperlink linktarget="Help:Grid,wks,PersonalGridServer" hyperlink="true"><Font style="Hyperlink">PersonalGridServer worksheet</Font></Hyperlink><Font encoding="UTF-8">\345\205\201\350\256\270\344\275\240\345\277\253\351\200\237\345\274\200\345\247\213\344\275\277\347\224\250\344\270\200\344\270\252personal server\343\200\202\344\275\240\345\217\257\344\273\245\345\234\250\344\270\252\344\272\272\347\224\265\350\204\221\344\270\212\346\250\241\346\213\237\344\273\273\346\204\217\346\225\260\351\207\217\347\232\204\350\256\241\347\256\227\350\212\202\347\202\271\343\200\202</Font></Text-field><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L276" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="20" initial="-1" spaceabove="10" bullet="numeric"><Hyperlink linktarget="Help:Grid,wks,PersonalGridServer" hyperlink="true"><Font style="Text" foreground="[0,128,128]">Personal Grid Server</Font></Hyperlink></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L285" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="20" initial="-1" spaceabove="10" bullet="numeric"><Hyperlink linktarget="Help:Grid,wks,Grid" hyperlink="true"><Font style="Text" encoding="UTF-8" foreground="[0,128,128]">\344\275\277\347\224\250\344\272\244\344\272\222\345\274\217worksheet\346\217\220\344\272\244\345\271\266\350\241\214\344\273\273\345\212\241</Font></Hyperlink></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L289" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\345\234\250Maple\344\270\255\344\275\277\347\224\250Grid\345\221\275\344\273\244\345\256\236\347\216\260\347\275\221\346\240\274\350\256\241\347\256\227</Font></Text-field></Title>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">Grid Package\345\221\275\344\273\244\345\210\227\350\241\250</Font></Text-field></Title>
+<Text-field style="Text" layout="Bullet Item" bullet="indent">The following is a list of available commands.</Text-field><Table interior="group" showinput="true" alignment="left" exterior="none" width="100%" labelreference="L293" showlabel="true" captionalignment="0" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="100" separator="false"></Table-Column><Table-Column weight="100" separator="false"></Table-Column><Table-Column weight="100" separator="false"></Table-Column><Table-Column weight="100" separator="false"></Table-Column><Table-Row align="top" separator="false"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Barrier]" hyperlink="true"><Font style="Hyperlink">Barrier</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Interrupt]" hyperlink="true"><Font style="Hyperlink">Interrupt</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Launch]" hyperlink="true"><Font style="Hyperlink">Launch</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Map]" hyperlink="true"><Font style="Hyperlink">Map</Font></Hyperlink></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="false"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[MyNode]" hyperlink="true"><Font style="Hyperlink">MyNode</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[NumNodes]" hyperlink="true"><Font style="Hyperlink">NumNodes</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Receive]" hyperlink="true"><Font style="Hyperlink">Receive</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Send]" hyperlink="true"><Font style="Hyperlink">Send</Font></Hyperlink></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="false"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Seq]" hyperlink="true"><Font style="Hyperlink">Seq</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Server][StartServer]" hyperlink="true"><Font style="Hyperlink">Server</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Setup]" hyperlink="true"><Font style="Hyperlink">Setup</Font></Hyperlink></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Hyperlink linktarget="Help:Grid[Status]" hyperlink="true"><Font style="Hyperlink">Status</Font></Hyperlink></Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Bullet Item" bullet="indent">To display the help page for a particular <Font style="Help Maple Name">Grid</Font> command, see <Hyperlink linktarget="Help:UsingPackages#gethelp" hyperlink="true"><Font style="Hyperlink">Getting Help with a Command in a Package</Font></Hyperlink>.</Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Getting Started</Text-field></Title>
+<Text-field style="Text" layout="Normal" bullet="dot">In order to configure Grid for running on a cluster of machines, in &quot;hpc&quot; mode you must start Grid Servers on each machine that you want to run a parallel job on. Once the servers are started, you, or anyone else with the Grid package and access to the servers, can run any number of parallel jobs until the servers are shut down. See <Hyperlink linktarget="Help:Grid,Server,StartServer" hyperlink="true"><Font style="Hyperlink">Starting the grid server</Font></Hyperlink> for more details.  In &quot;mpi&quot; and &quot;local&quot; modes, no external Grid Server process needs to be started.</Text-field>
+<Text-field style="Normal" layout="Normal" bullet="dot"><Font style="Text">Now you are ready to launch parallel jobs, you must first choose a mode of execution by running the </Font><Hyperlink linktarget="Help:Grid[Setup]" hyperlink="true"><Font style="Hyperlink">Grid[Setup]</Font></Hyperlink><Font style="Text"> command.  When choosing a distributed mode, either &quot;mpi&quot; or &quot;hpc&quot;, the simplest next step is to execute the </Font><Font style="Help Maple Name">Grid[Launch]()</Font><Font style="Text"> command (with no arguments). This will open this </Font><Hyperlink linktarget="Help:Grid,wks,Grid" hyperlink="true"><Font style="Hyperlink">Interactive worksheet</Font></Hyperlink><Font style="Text"> that allows you to easily launch jobs. There are also examples on how to write a parallel Maple program. <Font italic="true">Note: This command only works using the Standard Worksheet Interface.</Font></Font></Text-field>
+<Text-field style="Text" layout="Normal" bullet="dot">For advanced use, there are a number of other ways to start parallel jobs. You can use the <Hyperlink linktarget="Help:Grid,Launch" hyperlink="true"><Font style="Hyperlink">Grid[Launch]</Font></Hyperlink> command, specifying the number of nodes and the code to run, or you can use a command-line tool to <Hyperlink linktarget="Help:Grid,Batch" hyperlink="true"><Font style="Hyperlink">launch parallel batch jobs</Font></Hyperlink>.</Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field bookmark="examples" style="Heading 2" layout="Heading 2">Examples</Text-field></Title>
+<Group labelreference="L294" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">Define settings for a local server.</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">grid_host := &quot;localhost&quot;:
+grid_port := 2000:
+numNodes := 3:
+Grid[Setup]( &quot;hpc&quot;, host=grid_host, port=grid_port );</Text-field>
+</Input>
+</Group>
+<Group labelreference="L295" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">Create a small test environment - This will start 3 nodes locally on this computer.<Font bold="true"> </Font>
+<Font bold="true">Note: </Font>These nodes are running in a child process of Maple and should be stopped prior to a restart or closing Maple.</Text-field>
+<Text-field style="Text" layout="Normal">The server would normally be started from the script provided in the bin directory that is part of the Grid Computing Toolbox installation.</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Grid[Server][StartServer]( port=grid_port, numnodes=numNodes );</Text-field>
+</Input>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkjbW5HNiMvSSttb2R1bGVuYW1lRzYiSSxUeXBlc2V0dGluZ0dJKF9zeXNsaWJHRic2JFEmMjMzNTFGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">IiZeTCM=</Equation></Text-field>
+</Output>
+</Group>
+<Group labelreference="L297" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">Determine if the nodes are available.</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">(TotalNodes, AvailableNodes) := Grid[Status]();</Text-field>
+</Input>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYqLUkjbWlHRiQ2JVErVG90YWxOb2Rlc0YnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RKCZjb21tYTtGJy9GM1Enbm9ybWFsRicvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRjEvJSlzdHJldGNoeUdGPS8lKnN5bW1ldHJpY0dGPS8lKGxhcmdlb3BHRj0vJS5tb3ZhYmxlbGltaXRzR0Y9LyUnYWNjZW50R0Y9LyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMzMzMzMzM2VtRictRiw2JVEvQXZhaWxhYmxlTm9kZXNGJ0YvRjItRjY2LVEpJkFzc2lnbjtGJ0Y5RjsvRj9GPUZARkJGREZGRkgvRktRLDAuMjc3Nzc3OGVtRicvRk5GWC1JI21uR0YkNiRRIjNGJ0Y5RjVGWkY5">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+NiRJK1RvdGFsTm9kZXNHRihJL0F2YWlsYWJsZU5vZGVzR0YoNiQiIiRGMTckRjFGMQ==</Equation></Text-field>
+</Output>
+</Group>
+<Group labelreference="L298" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font style="Text">Define a self-contained procedure containing code that will be executed on each of the nodes.
+</Font><Font style="Maple Input">sampleCode := proc()
+   uses Grid;
+   local thisNode, maxNodes, val, i, rply;
+   thisNode := MyNode();
+   maxNodes := NumNodes();
+   print(&quot;PID=&quot;, kernelopts(pid));
+   if thisNode &lt;&gt; 0 then
+      # The other nodes: read input from the Master node
+      val := Receive(0);
+      val := val^thisNode;
+      print(val);
+      Send(0, val);
+   else
+      # This is the master node
+      # Send something to other nodes
+      for i from 1 to (maxNodes-1) do
+         Send(i, (i+10));
+      od;
+      rply := 0;
+      for i from 1 to (maxNodes-1) do
+         val := Receive(i);
+         print(val);
+         rply := rply, val;
+      od;
+      return [rply];
+   fi;
+end:</Font></Text-field>
+</Input>
+</Group>
+<Group labelreference="L299" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">Execute the code on the grid network. The Master Node, node 0, that controls the grid is defined by the Setup command.</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">result := Grid[Launch](numnodes=AvailableNodes, sampleCode );</Text-field>
+</Input>
+<Output>
+<Text-field style="Line Printed Output" layout="Line Printed Output">Node 0: &quot;PID=&quot;, 23461</Text-field>
+<Text-field style="Line Printed Output" layout="Line Printed Output">Node 1: &quot;PID=&quot;, 23465
+Node 2: &quot;PID=&quot;, 23463</Text-field>
+<Text-field style="Line Printed Output" layout="Line Printed Output">Node 2: 144
+Node 1: 11
+Node 0: 11
+Node 0: 144</Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JVEncmVzdWx0RicvJSdpdGFsaWNHUSV0cnVlRicvJSxtYXRodmFyaWFudEdRJ2l0YWxpY0YnLUkjbW9HRiQ2LVEpJkFzc2lnbjtGJy9GM1Enbm9ybWFsRicvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRj0vJSlzdHJldGNoeUdGPS8lKnN5bW1ldHJpY0dGPS8lKGxhcmdlb3BHRj0vJS5tb3ZhYmxlbGltaXRzR0Y9LyUnYWNjZW50R0Y9LyUnbHNwYWNlR1EsMC4yNzc3Nzc4ZW1GJy8lJ3JzcGFjZUdGTC1JKG1mZW5jZWRHRiQ2Ji1GIzYpLUkjbW5HRiQ2JFEiMEYnRjktRjY2LVEiLEYnRjlGOy9GP0YxRkBGQkZERkZGSC9GS1EmMC4wZW1GJy9GTlEsMC4zMzMzMzMzZW1GJy1GVTYkUSMxMUYnRjlGWC1GVTYkUSQxNDRGJ0Y5LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJ0Y5RjkvJSVvcGVuR1EnJmxzcWI7RicvJSZjbG9zZUdRJyZyc3FiO0YnRjk=">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+SSdyZXN1bHRHRig3JSIiISIjNiIkVyI3I0Yu</Equation></Text-field>
+</Output>
+</Group>
+<Group labelreference="L300" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Grid[Server][StopServer](port=grid_port, numnodes=numNodes);</Text-field>
+</Input>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkjbW5HNiMvSSttb2R1bGVuYW1lRzYiSSxUeXBlc2V0dGluZ0dJKF9zeXNsaWJHRic2JFEiMEYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJw==">IiIh</Equation></Text-field>
+</Output>
+</Group>
+<Group labelreference="L296" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Equation executable="true" style="2D Input" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRicvJStmb3JlZ3JvdW5kR1EoWzAsMCwwXUYnLyUrZXhlY3V0YWJsZUdRJmZhbHNlRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
+</Input>
+</Group>
+</Section>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\350\204\232\346\234\254\345\222\214\346\211\271\345\244\204\347\220\206\346\226\271\345\274\217\345\256\236\347\216\260\347\275\221\346\240\274\350\256\241\347\256\227</Font></Text-field></Title>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\350\277\231\351\207\214\344\270\273\350\246\201\350\256\250\350\256\272\346\224\257\346\214\201hpc\343\200\201mpi\347\275\221\346\240\274\350\256\241\347\256\227\347\232\204\350\204\232\346\234\254\345\221\275\344\273\244\357\274\214\350\277\231\344\272\233\350\204\232\346\234\254\351\234\200\350\246\201\345\234\250\346\223\215\344\275\234\347\263\273\347\273\237\345\221\275\344\273\244\350\241\214\344\270\212\350\277\220\350\241\214\343\200\202</Font></Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">HPC\346\250\241\345\274\217</Font></Text-field></Title>
+<Text-field style="Text" layout="Normal">This script can be used to submit a file containing Maple code directly to a running Grid from an Operating System command line.
+Before running the launcher script make sure that Grid Servers are running on the remote machines that are to be used.
+The remote servers must all be configured similarly for port number and licenses.</Text-field><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L377" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"><Font style="Code" encoding="UTF-8">\346\233\264\345\244\232\345\270\256\345\212\251\357\274\232</Font></Text-field>
+</Input>
+</Group>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L361" drawlabel="true">
+<Input>
+<Text-field style="Text" executable="true" layout="Normal"><Equation executable="true" style="2D Input" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JlElaGVscEYnLyUlc2l6ZUdRIzExRicvJSdpdGFsaWNHUSV0cnVlRicvJSxtYXRodmFyaWFudEdRJ2l0YWxpY0YnLUkobWZlbmNlZEdGJDYlLUYjNictRiw2I1EhRictSSNtc0dGJDYjUStHcmlkLEJhdGNoRidGPS8lK2V4ZWN1dGFibGVHUSZmYWxzZUYnL0Y2USdub3JtYWxGJ0YvRkdGREZH">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JlElaGVscEYnLyUlc2l6ZUdRIzExRicvJSdpdGFsaWNHUSV0cnVlRicvJSxtYXRodmFyaWFudEdRJ2l0YWxpY0YnLUkobWZlbmNlZEdGJDYlLUYjNictRiw2I1EhRictSSNtc0dGJDYjUStHcmlkLEJhdGNoRidGPS8lK2V4ZWN1dGFibGVHUSZmYWxzZUYnL0Y2USdub3JtYWxGJ0YvRkdGREZH</Equation></Text-field>
+</Input>
+</Group>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L363" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">\344\275\277\347\224\250\342\200\234hpc\342\200\235\346\250\241\345\274\217\344\275\277\347\224\250\347\275\221\346\240\274\350\256\241\347\256\227</Font></Text-field></Title><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L352" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L351" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">The system manager can configure a shell script that starts the Maple grid listener at startup so that when user submits a job the grid network auto-assembles. To do this you have to do the following:</Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" bold="true" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric"><Font bold="true" opaque="true" background="[255,255,153]">Install Maple and Grid Toolbox on the required nodes.</Font></Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="."><Font opaque="true" background="[255,255,153]">on each Maple Grid node, add a shell script in the &quot;init.d&quot; directory to run the commands</Font></Text-field>
+<Text-field style="Text" layout="Normal">     &lt;maple&gt;/toolbox/Grid/bin/gridserver.sh start</Text-field>
+<Text-field style="Text" layout="Normal">    and</Text-field>
+<Text-field style="Text" layout="Normal">     &lt;maple&gt;/toolbox/Grid/bin/gridserver.sh stop</Text-field>
+<Text-field style="Text" layout="Normal">   for system startup and shutdown.</Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal">   This gets Maple's grid listener running on each node when the node is booted.</Text-field>
+<Text-field style="Text" layout="Normal">   Once these listeners are running they will communicate among each other (self discovery) using the grid broadcast address.</Text-field>
+<Text-field style="Text" layout="Normal">   These listeners are constantly running awaiting jobs that are done via the launcher.sh and/or pbslauncher.sh scripts.</Text-field>
+</Input>
+</Group><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L372" drawlabel="true">
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L349" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">Grid.properties\350\256\276\347\275\256</Font></Text-field></Title>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L302" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">Ensure that the &lt;maple&gt;/toolbox/Grid/conf/Grid.properties file is correctly configured by the installer.</Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\346\211\223\345\274\200Grid.properties\346\226\207\344\273\266\357\274\232</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\345\216\237\346\226\207\344\273\266\345\206\205\345\256\271\357\274\232</Font></Text-field>
+<Text-field style="Text" layout="Normal">#</Text-field>
+<Text-field style="Text" layout="Normal"># Grid.properties - settings for the grid engine</Text-field>
+<Text-field style="Text" layout="Normal"><Font opaque="true" background="[255,255,153]">grid.broadcast=192.168.255.255</Font></Text-field>
+<Text-field style="Text" layout="Normal">grid.broadcastport=4400</Text-field>
+<Text-field style="Text" layout="Normal">grid.broadcastdelay=60</Text-field>
+<Text-field style="Text" layout="Normal">grid.debug=false</Text-field>
+<Text-field style="Text" layout="Normal">grid.DeadlockDelay=10</Text-field>
+<Text-field style="Text" layout="Normal">grid.license=license/Grid.dat</Text-field>
+<Text-field style="Text" layout="Normal">grid.logfile=logs/gridlog.txt</Text-field>
+<Text-field style="Text" layout="Normal"><Font opaque="true" background="[255,255,153]">grid.nodes=</Font></Text-field>
+<Text-field style="Text" layout="Normal">#grid.numcpus=1</Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">grid.maple=C:\134\134Program Files\134\134Maple 17\134\134bin.X86_64_WINDOWS\134\134cmaple.exe</Font></Text-field>
+<Text-field style="Text" layout="Normal">grid.port=2000</Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\350\257\264\346\230\216\357\274\232</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">1. \344\270\272\344\273\200\344\271\210\344\277\256\346\224\271\344\270\272192.168.255.255</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\345\216\237\345\233\240\357\274\232\347\224\265\350\204\221\347\232\204IP\345\234\260\345\235\200\344\270\272192.168.1.34\357\274\214\345\217\202\344\270\216\350\256\241\347\256\227\347\232\204\347\275\221\346\256\265\344\270\272192.168.1.*\357\274\214\344\277\256\346\224\271\345\220\216Grid\345\260\206\346\220\234\347\264\242192.168.1.\347\275\221\346\256\265\345\206\205\345\217\257\347\224\250\347\232\204\350\212\202\347\202\271\343\200\202</Font></Text-field>
+<Text-field style="Text" layout="Normal">2. grid.numcpus</Text-field>
+<Text-field style="Text" layout="Normal">The number of CPUs to use on this machine. Specifying a value less than 1 will cause the system to attempt to query the machine for the number of CPUs and assign a node for each.</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L348" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\345\246\202\346\236\234\345\210\200\347\211\207\344\270\212\346\234\211\344\270\244\344\270\2522CPUs, \346\257\217\344\270\252CPU\346\234\21116\344\270\252\346\240\270\357\274\214\351\202\243\344\271\210\346\255\243\347\241\256\351\205\215\347\275\256\345\272\224\350\257\245\346\230\25732. \346\210\226\350\200\205\350\256\276\347\275\256\344\270\272grid. \357\274\210\345\234\250Maple\344\270\255\357\274\214\344\270\200\344\270\2524\346\240\270CPU\350\242\253\350\256\244\344\270\272\346\230\2574CPUs\357\274\214\345\220\214\346\240\267\350\257\245\351\200\273\350\276\221\351\200\202\347\224\250\344\272\216\351\233\206\347\276\244\346\234\272\357\274\211\343\200\202\346\216\250\350\215\220\350\256\276\347\275\256\344\270\272numcpus=0\357\274\214\347\263\273\347\273\237\345\260\206\350\207\252\345\267\261\345\217\221\347\216\260\351\200\202\345\220\210\347\232\204\345\200\274\343\200\202</Font></Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">\345\217\202\346\225\260\350\257\264\346\230\216\357\274\232</Font></Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.broadcast</Font> - this is an IP address mask that will define an Internet subnet. A Grid Server, when running, will broadcast its availabilty using UDP broadcasts. The mask determines which machines it will broadcast to. For example if all Grid Servers are on IP addresses 10.10.50.x, then a suitable mask will be 10.10.50.255. This will cause a message to be sent to every machine on the 10.10.50. network. If machines are distributed over a wider IP range, such as 10.10.50.x, 10.10.55.x and 10.10.90.x, then a mask of 10.10.255.255 must be used to send to all 10.10.x.y addresses. The default mask is 10.10.255.255.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.broadcastport</Font> - this is the UDP port that each server will broadcast on to find other Grid Servers. The default port is 4400.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.broadcastdelay</Font> - this is the time in seconds between UDP messages. Default value is 10 seconds.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.debug</Font> - this controls whether extra information is written to the log files. This value should be true to enable debugging information, or false otherwise.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.DeadlockDelay</Font> - this is the time, in seconds, the running nodes can be stalled during an ongoing computation. While a computation is in progress, the Master node, node 0, will query the state of executing nodes. If any node fails to indicate progress over a period longer than this parameter, the grid computations will be halted and an error returned. This parameter must be in the range 1 to 60 seconds. The default is 10 seconds.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.license</Font> - this is the path to the license file. If the path is a relative path, such as the default value license/Grid.dat, then it is taken relative to the Grid Computing Toolbox directory.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.logfile</Font> - this is the path to a file to receive logging information. If the path is a relative path, such as the default value logs/gridlog.txt, then it is taken relative to the Grid Computing Toolbox directory.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.nodes</Font> - this is the name of file that lists the names of grid servers, one per line to be used when maple code is submitted by the launcher script. Generally this name should be left blank in the properties file and specified on the command line. See <Hyperlink linktarget="Help:Grid,Batch" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">Batch</Font></Hyperlink> processing for details on how the node list is used.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.numcpus</Font> - this is the number of cpus to use on this machine. Specifying a value less than 1 will cause the system to attempt to query the machine for the number of CPUs and assign a node for each. The default is to assign a node to each CPU available.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.maple</Font> - this is a full path specification pointing to the command line version of Maple to be used by the grid node(s) on this machine.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font style="Text">grid.port</Font> - this is the port that the Server on this machine will use to receive messages from other nodes via the <Hyperlink linktarget="Help:Grid,Send" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">Send</Font></Hyperlink> and <Hyperlink linktarget="Help:Grid,Receive" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">Receive</Font></Hyperlink> commmands. If more than 1 cpu is being used, numcpus &gt; 1, then cpu 0 will use this port, cpu 1 will use port + 1, cpu 2 will use port +2, etc.</Text-field>
+<Text-field style="Bullet Item" layout="Bullet Item" bullet="dot"><Font bold="true" style="Text">Note: </Font>commenting out a parameter using the # character will cause the default value for that key to be used.</Text-field>
+</Input>
+</Group><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L350" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Starting and Stopping the Grid Server</Text-field></Title><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L373" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">In order to configure Grid for running on a cluster of machines, in &quot;hpc&quot; mode you must start Grid Servers on each machine that you want to run a parallel job on. Once the servers are started, you, or anyone else with the Grid package and access to the servers, can run any number of parallel jobs until the servers are shut down. </Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L355" drawlabel="true">
+</Group></Presentation-Block>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L374" drawlabel="true">
+<Input>
+<Text-field style="Text" bold="true" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric"><Font bold="true" opaque="true" background="[255,255,153]">Starting and Stopping the Grid Server</Font></Text-field>
+</Input>
+</Group><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L376" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal" bullet="dot">Interactive Start/Stop of the Grid Server via the Grid Library</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L362" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal" bullet="dot">Shell Script and Batch File to Start/Stop the Grid Server</Text-field>
+</Input>
+</Group></Presentation-Block>
+<Text-field style="Text" bold="true" layout="Normal"><Font bold="true">Interactive Start/Stop of the Grid Server via the Grid Library</Font></Text-field>
+<Text-field style="Text" layout="Normal">One method to start/stop the server is interactively using the Grid library functions <Hyperlink linktarget="Help:Grid,Server,StartServer" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">StartServer</Font></Hyperlink> and <Hyperlink linktarget="Help:Grid,Server,StopServer" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">StopServer</Font></Hyperlink>. These functions are Maple commands and can be used when interactively running or testing grid code from within a Maple Worksheet.</Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" bold="true" layout="Normal"><Font bold="true">Shell Script and Batch File to Start/Stop the Grid Server</Font></Text-field><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L359" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">The script, gridserver.sh (Linux) and batch file, gridserver.bat (Windows) start or stop an instance of the Grid Server on a local computer. These scripts are run from the operating system command interpreter.</Text-field>
+<Text-field style="Text" layout="Normal">The syntax of the gridserver script/batch file is one of</Text-field>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12">  <Font style="Code">gridserver [options] startmultiple [port [count]]</Font></Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">  gridserver [options] start         [port [cpu_index]]</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">  gridserver [options] stop          [port [cpu_index]]</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L364" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"><Font style="Text">where one of the following modes can be specified</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L370" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="38" separator="true"></Table-Column><Table-Column weight="162" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Code" layout="Normal">start</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"><Font style="Text">Causes a single Node to start on the indicated port</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">startmultiple</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"><Font style="Text">Causes </Font><Font style="Code">count</Font><Font style="Text"> Nodes to be started on a single computer beginning at the indicated port.</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">stop</Font> </Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" spacebelow="0" leftmargin="12">Halts the Node associated with <Font style="Code">port</Font>. If Node was from a <Font style="Code">startmultiple</Font> then all Nodes are halted.</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"></Text-field>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"><Font style="Text">If no mode is specified then startmultiple is assumed and the modes take the following optional parameters</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="99.87389%" labelreference="L369" showlabel="true" captionalignment="0" title="" drawtitle="false" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="147" separator="true"></Table-Column><Table-Column weight="645" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">cpu_index</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0"><Font style="Text">The index. Should be set zero to allow AutoDiscovery with broadcast.</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">port</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0"><Font style="Text">The port associated with the Node. If not specified then use port from the </Font><Font style="Code">-p </Font><Font style="Text">option or from the configuration file.</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">count</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0"><Font style="Text">The number of Nodes to start. If not specified the use the </Font><Font style="Code">-n</Font><Font style="Text"> option or the value from the configuration file.</Font></Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"></Text-field>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"><Font style="Text">Options may be one or more of:</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L371" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="37" separator="true"></Table-Column><Table-Column weight="163" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">-a address</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0"><Font style="Text">UDP broadcast address (e.g </Font><Font style="Code">192.168.255.255</Font><Font style="Text">) for AutoDiscovery. Use </Font><Font style="Code">255</Font><Font style="Text"> to indicate the portion of the subnet to use. This example will broadcast to all computers on the </Font><Font style="Code">192.168.*.*</Font><Font style="Text"> address.</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">-b port</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0"><Font style="Text">UDP broadcast port (e.g. 4400). Set to 0 to disable Autodiscovery.</Font></Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code"> -d</Font>  </Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" spacebelow="0">Enable debug messages to the log file</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">-f file</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Path and filename of log file (e.g. <Font style="Code">logs/grid.log</Font>)The path can be relative to Grid Computing Toolbox directory</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">-m path </Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">The full path to commandline Maple binary</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Code" layout="Normal">-n num </Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Number of Nodes to create</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal"><Font style="Code">-p port</Font></Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">TCP/IP base port for the Nodes</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Help Fixed" layout="Normal" spacebelow="0" leftmargin="12"></Text-field>
+<Text-field style="Text" layout="Normal" spacebelow="0" leftmargin="12">Any option not specified will be taken from the configuration file  <Font style="Code">conf/grid.properties</Font></Text-field>
+<Text-field style="Text" layout="Normal" spacebelow="0" leftmargin="12"></Text-field>
+<Text-field style="Text" layout="Normal">The  <Font style="Code">startmultiple</Font>  mode starts the specified count of Grid Servers on the <Font underline="true">same</Font> machine. Count should generally not exceed the number of CPUs on the machine as then several instances of Maple will likely use the same CPU instead of being distributed over multi-CPUs. However one reason to set count higher than the number of CPUs is during initial testing of grid code using a single machine. This might be done when a network of Grid Servers is not available. To perform testing using a single machine the following command could be used at the operating system prompt:</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.sh -a 127.0.0.255 -b 4401 startmultiple 2000 5   (Linux)</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.bat -a 127.0.0.255 -b 4401 startmultiple 2000 5   (Windows)</Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed">
+</Font><Font style="Text">This would start 5 instances of the Grid Server on the local machine each instance using a port from 2000 to 2004.</Font></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Text">-----------------------------</Font></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Text">
+Jobs would be submitted using the </Font><Hyperlink linktarget="Help:Grid,Launch" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">Launch</Font></Hyperlink><Font style="Text"> library function after issuing a </Font><Hyperlink linktarget="Help:Grid,Setup" hyperlink="true"><Font style="Text" underline="true" foreground="[0,128,128]">Setup</Font></Hyperlink><Font style="Text"> using localhost (127.0.0.1) and port 2000 as the parameters.</Font></Text-field>
+<Text-field style="Text" layout="Normal">
+The<Font style="Code"> start</Font> command would be used where Autodiscovery is not practical (e.g. Grid Servers are not on a common Internet subnet). In this case each server would be started using an operating system command similar to:</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.sh -b 0 start 2000    (Linux)</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.bat -b 0 start 2000   (Windows)</Text-field>
+<Text-field style="Help Fixed" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal">The same port must be used for each computer where the Grid Server is started as well as on the client machine from which the grid code is to be sent from. Access to the Grid Servers started with the <Font style="Code">start</Font> option must be done from either the Launcher script or PBS script shown below. This is because these scripts will receive a file listing the nodes to use in the grid computations.</Text-field>
+<Text-field style="Text" layout="Normal">The <Font style="Code">stop</Font> parameter would be used to terminate the running Grid Server on the local machine.</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.sh stop 2000    (Linux)</Text-field>
+<Text-field style="Code" layout="Normal" spacebelow="0" leftmargin="12">gridserver.bat stop 2000   (Windows)</Text-field>
+<Text-field style="Help Fixed" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal">If the server was started with the <Font style="Code">startmultiple</Font> parameter then all instances of the Grid Server on that machine are stopped. For servers started with the <Font style="Code">start</Font> parameter then each instance would require a matching <Font style="Code">stop</Font>  call to halt that instance of the Grid Server.</Text-field><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L365" drawlabel="true">
+</Group></Presentation-Block>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Submitting Maple Code to the Grid Server via Script or Batch Files</Text-field></Title>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L368" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">These scripts can be used to submit a file containing Maple code directly to a running &quot;HPC&quot; Grid from an operating system command line interface.</Text-field>
+<Text-field style="Text" layout="Normal">Launcher can be invoked using either of the following 2 forms:
+
+<Font family="Courier New"> </Font><Font style="Code">launcher.bat [-p port] maplefile nodefile   (Window)
+   launcher.sh  [-p port] maplefile nodefile (Unix/Linux/Mac)</Font>
+or
+<Font family="Courier New"> </Font><Font style="Code">launcher.bat [-p port] -h host -n num maplefile (Windows)
+   launcher.sh  [-p port] -h host -n num maplefile (Unix/Linux/Mac)</Font>
+
+Specify the optional <Font bold="true">-p port</Font> option if the port of the master node is different than the default port in the grid.properties file.</Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" hide-output="true" inline-output="false" labelreference="L360" drawlabel="true">
+<Input>
+<Text-field style="Text" layout="Normal">To submit a maple file, simple.mpl, on a Linux system to these nodes for execution you would issue the command</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Help Fixed" opaque="true" background="[255,255,153]" size="12">launcher.sh ../samples/Simple.mpl nodes.txt</Font></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed" opaque="true" background="[255,255,153]" encoding="UTF-8" size="12">\346\263\250\346\204\217</Font><Font style="Help Fixed" encoding="UTF-8">\357\274\232</Font><Font style="Text">To create a text file listing the names of the servers that you need to use for this Grid calculation. For example if you have 3 remote servers named grid1.somewhere.com, grid2.somewhere.com and grid3.somewhere.com you would create a text file, say nodes.txt that contained the lines.</Font></Text-field>
+<Text-field style="Help Fixed" layout="Normal" firstindent="6" spacebelow="0" rightmargin="6" leftmargin="6">grid1.somewhere.com</Text-field>
+<Text-field style="Help Fixed" layout="Normal" firstindent="6" spacebelow="0" rightmargin="6" leftmargin="6">grid2.somewhere.com</Text-field>
+<Text-field style="Help Fixed" layout="Normal" firstindent="6" spacebelow="0" rightmargin="6" leftmargin="6">grid3.somewhere.com</Text-field>
+<Text-field style="Normal" layout="Normal"></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed" encoding="UTF-8">\346\210\226\350\200\205</Font></Text-field>
+<Text-field style="Normal" family="DejaVu Sans Mono" layout="Normal"><Font opaque="true" family="DejaVu Sans Mono" background="[255,255,153]">launcher.sh -h Grid1.somewhere.com ../samples/Simple.mpl</Font></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed" opaque="true" background="[255,255,153]" encoding="UTF-8">\346\263\250\346\204\217</Font><Font style="Help Fixed" encoding="UTF-8">\357\274\232\345\221\275\344\273\244\350\241\214\344\270\255\347\232\204-h grid.somewhere.com </Font><Font encoding="UTF-8">\351\234\200\350\246\201\344\277\256\346\224\271\344\270\272\345\275\223\345\211\215\347\232\204\351\205\215\347\275\256\343\200\202</Font></Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed">
+</Font><Font style="Text">The Grid launcher script will send the maple code contained in the file <Font bold="true">example.mpl</Font> to the nodes listed in the <Font bold="true">nodes.txt</Font> file. The server listed as the first node, grid1.somewhere.com in this example, will be considered the master node for controlling the computations. Output from the grid computations will be printed to the console's standard output.</Font></Text-field>
+</Input>
+</Group><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L375" drawlabel="true">
+</Group></Presentation-Block>
+</Section><Presentation-Block>
+<Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L353" drawlabel="true">
+</Group></Presentation-Block>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">MPI\346\250\241\345\274\217</Font></Text-field></Title>
+<Text-field style="Text" layout="Normal">The Grid Computing Toolbox (GCT) library code can utilize operating system implementations of the MPI standard (see http://www.mcs.anl.gov/research/projects/mpi/). This document outlines the basics of setting up and using MPI.</Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Windows</Text-field></Title>
+<Text-field style="Text" layout="Normal">The current library supports Microsoft's MPI implementation, msmpi, found on the Windows Server 2008 HPC clusters. Other MPI implementations may work but have not been tested.</Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3">Server Setup</Text-field></Title>
+<Text-field style="Text" layout="Normal">The default location of the  Grid toolbox server installation  is <Font bold="true" encoding="UTF-8">&lt;maple&gt;\134toolbox\134Grid </Font> where <Font bold="true">&lt;maple&gt;</Font><Font encoding="UTF-8"> represents where the main Maple program is installed. Additionally, you should create the directory\134<Font bold="true">shared\134mpi</Font></Font> plus subdirectories. The directory <Font bold="true" encoding="UTF-8">\134shared\134mpi\134bin</Font> will contain additional scripts that are used by client workstations submitting Grid code to the cluster. The file  maple.ini contains generic settings to enable the Grid MPI procedures.</Text-field>
+<Text-field style="Text" layout="Normal">The Maple command<Font bold="true"> Grid[Setup](&quot;mpi&quot;, mpidll=&quot;msmpi&quot;)</Font>; instructs the Grid toolbox to use the &quot;mpi&quot; interface instead of the default local implementation. The second argument, &quot;msmpi&quot; refers to the operating system basename of the MPI implementation dll or shared libary. This dll or shared libary should be found in one of the directories named in the PATH environment variable.</Text-field>
+<Text-field style="Text" layout="Normal"><Font bold="true">Notes:</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font encoding="UTF-8">The \134shared\134mpi directory on the head node should be shared with all the other compute nodes in the cluster. This is because any Maple GCT code submitted will be stored in the \134<Font bold="true">\134headnode\134shared\134mpi\134grid</Font></Font> subdirectory. Also any output generated will be stored there.</Text-field>
+<Text-field style="Text" layout="Normal">This directory must allow read/write persmission for Grid users as their temporary files will be place there. User files will be placed in <Font bold="true" encoding="UTF-8">\134shared\134mpi\134grid\134&lt;username&gt;</Font> where <Font bold="true">&lt;username&gt;</Font> will be the user who submitted the job.    </Text-field>
+<Text-field style="Text" layout="Normal">Also the compute nodes should be configured so that PATH environment variable contains the directory for the cmaple.exe program. </Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3">Running the MPIlauncher Scripts</Text-field></Title>
+<Text-field style="Text" layout="Normal">This script can be used to submit a file containing Maple code directly to a  Grid running MPI from an Operating System command line.
+
+Before running the mpilauncher script make sure that Grid cluster is setup as per the instructions in the previous section.</Text-field>
+<Text-field style="Text" layout="Normal">The mpi launcher can be invoked using the following script command and a combination of options and parameters:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code" encoding="UTF-8">&lt;maple&gt;\134toolbox\134Grid\134bin\134mpilauncher.bat -s  hh nn  ff
+</Font><Font family="Courier New" encoding="UTF-8" foreground="[255,0,0]">&lt;maple&gt;\134toolbox\134Grid\134bin\134mpilauncher.bat -q</Font><Font family="Courier New" foreground="[255,0,0]">|-r|-c  hh  jj
+<Font encoding="UTF-8">&lt;maple&gt;\134toolbox\134Grid\134bin\134mpilauncher.bat -a  hh
+&lt;maple&gt;\134toolbox\134Grid\134bin\134mpilauncher.bat -d  ss</Font></Font>   </Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">where the script command parameters are defined as:</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L354" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="23" separator="true"></Table-Column><Table-Column weight="177" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">hh</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">hostname of the head node of the HPC cluster</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">nn</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">number of nodes requested for the job</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">ff</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">absolute file path to Maple code</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">jj</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">job id of submitted job</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">ss</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">seconds for delay</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">and the script command options are defined as:</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L367" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="18" separator="true"></Table-Column><Table-Column weight="182" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-s</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">submit Maple file, ff to nn nodes</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-q</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">query status of running job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-r</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">retrieve results of completed job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-c</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">cleanup/remove temp files and output of completed job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-d</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">sleep for ss secs</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-a</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">get number of total and available nodes</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal">To get the total number of available nodes use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -a hh</Font></Text-field>
+<Text-field style="Text" layout="Normal">where hh is the headnode.</Text-field>
+<Text-field style="Text" layout="Normal">To set a pause in the excecution of the batch file, use the command</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -d ss </Font></Text-field>
+<Text-field style="Text" layout="Normal">where ss is the length of the pause</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">To submit the Maple script file containing your Maple code use the command:</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -s hh nn ff</Font><Font font_style_name="2D Math Italic Small216" superscript="false" placeholder="false" executable="false" selection-placeholder="false" italic="false" size="12" bold="false" style="2D Math Italic Small216" subscript="false" family="Times New Roman" opaque="false" underline="false" background="[255,255,255]" readonly="false" foreground="[0,0,0]">f</Font></Text-field>
+<Text-field style="Text" layout="Normal">When you run the mpilauncher.bat script, the Maple script you specified with parameter ff is submitted to the headnode, hh. The headnode then hands copies this script to each of the nn nodes specified, where each node will run the Maple script.</Text-field>
+<Text-field style="Text" layout="Normal">The Maple script is copied to a directory on the head node. The directory will be of the form <Font bold="true" encoding="UTF-8">\134shared\134mpi\134grid\134&lt;username&gt;</Font> where <Font bold="true">&lt;username&gt;</Font> is the name of the user running the mpilauncher script. </Text-field>
+<Text-field style="Text" layout="Normal">The filename will be of the form <Font bold="true">maple_jj.code.mpl</Font> where jj is the job id for this submission. This job id is then echoed to the console.</Text-field>
+<Text-field style="Text" layout="Normal">Maple output is saved in <Font bold="true">maple_jj.stdout.txt</Font> and <Font bold="true">maple_jj.stderr.txt. </Font>Where jj is the job id.</Text-field>
+<Text-field style="Text" layout="Normal">To check the status of the submitted job use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -q hh jj</Font></Text-field>
+<Text-field style="Text" layout="Normal">where hh is the name of the headnode and jj is the job id of the submission.</Text-field>
+<Text-field style="Text" layout="Normal">The command returns one of the following status messages:</Text-field><Table interior="all" showinput="true" alignment="left" exterior="all" width="74.43609%" labelreference="L366" showlabel="true" captionalignment="0" title="" drawtitle="false" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="76" separator="true"></Table-Column><Table-Column weight="419" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Done</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job is complete</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Failed</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was submitted but failed</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Aborted</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was aborted (usually done by a System Administrator)</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Active </Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job is running on the grid</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Created</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was submitted but is not running yet</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal">To retrieve the results of a submitted job use the command:</Text-field>
+<Text-field style="Text" layout="Normal">  <Font style="Code">mpilauncher -r  nn job</Font> </Text-field>
+<Text-field style="Text" layout="Normal">The contents of the file will be returned to the console.</Text-field>
+<Text-field style="Text" layout="Normal">To clean up results and temporary files from the head node use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -c nn job</Font></Text-field>
+<Text-field style="Text" layout="Normal">This will delete the file associated with the job id.</Text-field>
+</Section>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Linux</Text-field></Title>
+<Text-field style="Text" layout="Normal">The current library supports the MPICH MPI implementation, MPICH2. Before you start setting up the Grid toolbox, you must ensure that you have a copy of MPICH2 installed on in the same location on each machine that you will be using for Grid computing. </Text-field>
+<Text-field style="Text" layout="Normal">You will need to have passwordless ssh logins for all computational nodes or else the mpiexec program used for job submission will prompt you for a password for every node when a job is submitted. </Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3">Server Setup</Text-field></Title>
+<Text-field style="Text" layout="Normal">Before you can run the mpilauncher scripts, you must setup the machines you will be using for Grid computing, by performing the following steps.</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric">Create an NFS network share on one machine in the network that all users can read and write from. For example, /var/mpi.</Text-field>
+<Text-field style="Code" layout="Normal" bulletsuffix="." leftmargin="15">&gt; exportfs -o rw,root_squash,sync,no_subtree_check :/var/mpi</Text-field>
+<Text-field style="Code" layout="Normal" bulletsuffix="." leftmargin="15"><Font style="Text">Other machines must mount this share at the same location and be readable and writable by all users. For example,</Font></Text-field>
+<Text-field style="Code" layout="Normal" bulletsuffix="." leftmargin="15">mount -t &lt;type&gt; grid01.myserver.com:/var/mpi/var/mpi</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric">The Grid toolbox creates user directories in this shared location to store intermediate work files, specifically maple code and output.</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric">Create a hostfile in the shared mount location, for example in the /var/mpi/hostfile directory. This hostfile should contain the hostname of each host, one per line, that MPICH2 can use as Grid nodes.</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15">Optionally, after each hostname you can add a colon and a number to indicate how many nodes can be run on that host.</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15">If you create this file in the shared mount location, for example, /var/mpi/hostfile, then all machines can share the same hostfile.</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15">Example hostfile:</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15"><Font style="Code">grid01.myserver.com</Font>    # Can handle 1 nodes</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15"><Font style="Code">grid02.myserver.com:2</Font>  # Can handle 2 nodes</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15"><Font style="Code">grid03.myserver.com:4</Font>  # Can handle 4 nodes, maybe a quadcore</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." leftmargin="15"><Font style="Code">grid04.myserver.com:2</Font>  # Can handle 2 nodes</Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="."></Text-field>
+<Text-field style="Text" layout="Normal" bulletsuffix="." initial="-1" bullet="numeric">Install the Grid toolbox on each machine. The default location of the  Grid toolbox server installation  is <Font bold="true">&lt;maple&gt;/toolbox/Grid </Font> where <Font bold="true">&lt;maple&gt;</Font> represents where the main Maple program is installed.  </Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font bold="true">Notes</Font>:</Text-field>
+<Text-field style="Text" layout="Normal">Also the compute nodes should be configured so that PATH environment variable contains the directory for the <Font style="Code">xmaple</Font> program. </Text-field>
+<Text-field style="Text" layout="Normal">The Maple command<Font bold="true"> Grid[Setup](&quot;mpi&quot;, mpidll=&quot;mpich&quot;)</Font>; instructs the Grid toolbox to use the &quot;mpi&quot; interface instead of the default local implementation. The second argument, &quot;mpich&quot; refers to the operating system basename of the MPI implementation dll or shared libary. This dll or shared libary should be found in one of the directories named in the PATH environment variable.</Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3">Running the MPIlauncher Scripts</Text-field></Title>
+<Text-field style="Text" layout="Normal">This script can be used to submit a file containing Maple code directly to a  Grid running MPI from an Operating System command line.
+
+Before running the mpilauncher script make sure that Grid cluster is setup as per the instructions in the previous section.</Text-field>
+<Text-field style="Text" layout="Normal">The mpi launcher can be invoked using the following script command and a combination of options and parameters:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">&lt;maple&gt;/toolbox/Grid/bin/mpilauncher -s  hh nn  ff
+</Font><Font family="Courier New" foreground="[255,0,0]">&lt;maple&gt;/toolbox/Grid/bin/mpilauncher -q|-r|-c  hh  jj
+&lt;maple&gt;/toolbox/Grid/bin/mpilauncher -a  hh
+&lt;maple&gt;/toolbox/Grid/bin/mpilauncher -d  ss</Font>   </Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">where the script command parameters are defined as:</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L357" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="23" separator="true"></Table-Column><Table-Column weight="177" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">hh</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">localhost</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">nn</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">number of nodes requested for the job</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">ff</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">absolute file path to Maple code</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">jj</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">job id of submitted job</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">ss</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">seconds for delay</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">and the script command options are defined as:</Font></Text-field><Table interior="group" showinput="true" alignment="left" exterior="all" width="100%" labelreference="L358" showlabel="true" captionalignment="0" title="" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="18" separator="true"></Table-Column><Table-Column weight="182" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-s</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">submit Maple file, ff to nn nodes</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-q</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">query status of running job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-r</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">retrieve results of completed job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-c</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">cleanup/remove temp files and output of completed job jj</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-d</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">sleep for ss secs</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">-a</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">get number of total and available nodes</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal"></Text-field>
+<Text-field style="Text" layout="Normal">To get the total number of available nodes use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -a hh</Font></Text-field>
+<Text-field style="Text" layout="Normal">where hh is localhost.</Text-field>
+<Text-field style="Text" layout="Normal">To set a pause in the excecution of the batch file, use the command</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -d ss </Font></Text-field>
+<Text-field style="Text" layout="Normal">where ss is the length of the pause </Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">To submit the Maple script file containing your Maple code use the command:</Font></Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -s hh nn ff</Font><Font font_style_name="2D Math Italic Small216" superscript="false" placeholder="false" executable="false" selection-placeholder="false" italic="false" size="12" bold="false" style="2D Math Italic Small216" subscript="false" family="Times New Roman" opaque="false" underline="false" background="[255,255,255]" readonly="false" foreground="[0,0,0]">f</Font></Text-field>
+<Text-field style="Text" layout="Normal">When you run the mpilauncher script, the Maple script you specified with parameter ff is submitted to the mpi program and then delegated to the appropriate nodes.</Text-field>
+<Text-field style="Text" layout="Normal">The Maple script is copied to a file in tthe shared directory that you created in the previous section. The name of the file will be of the form <Font bold="true">jj.mpl</Font> where jj is the job id for this submission. </Text-field>
+<Text-field style="Text" layout="Normal">Maple output is saved in <Font bold="true">maple_jj.stdout.txt</Font> and <Font bold="true">maple_jj.stderr.txt. </Font>Where jj is the job id.</Text-field>
+<Text-field style="Text" layout="Normal">To check the status of the submitted job use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -q hh jj</Font></Text-field>
+<Text-field style="Text" layout="Normal">where hh is localhost and jj is the job id of the submission.</Text-field>
+<Text-field style="Text" layout="Normal">The command returns one of the following status messages:</Text-field><Table interior="all" showinput="true" alignment="left" exterior="all" width="74.43609%" labelreference="L356" showlabel="true" captionalignment="0" title="" drawtitle="false" order="row" drawcaption="false" randomized="false" captionposition="1" plotalignlists="" pagebreak="cell" postexecute="insert" showgroup="true"><Table-Column weight="76" separator="true"></Table-Column><Table-Column weight="419" separator="true"></Table-Column><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Done</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job is complete</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Failed</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was submitted but failed</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Aborted</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was aborted (usually done by a System Administrator)</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Active </Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job is running on the grid</Text-field></Table-Cell></Table-Row><Table-Row align="top" separator="true"><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal">Created</Text-field></Table-Cell><Table-Cell columnspan="1" backgroundstyle="0" rowspan="1" fillcolor="[255,255,255]">
+<Text-field style="Text" layout="Normal" bullet="dash">the job was submitted but is not running yet</Text-field></Table-Cell></Table-Row></Table>
+<Text-field style="Text" layout="Normal">To retrieve the results of a submitted job use the command:</Text-field>
+<Text-field style="Text" layout="Normal">  <Font style="Code">mpilauncher -r  hh job</Font> </Text-field>
+<Text-field style="Text" layout="Normal">The contents of the file will be returned to the console.</Text-field>
+<Text-field style="Text" layout="Normal">To clean up results and temporary files from the head node use the command:</Text-field>
+<Text-field style="Text" layout="Normal"><Font style="Code">mpilauncher -c hh job</Font></Text-field>
+<Text-field style="Text" layout="Normal">This will delete the file associated with the job id.</Text-field>
+</Section>
+</Section>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">PBSLauncher</Text-field></Title>
+<Text-field style="Text" layout="Normal">The pbslauncher.sh and pbslauncher.bat script are intended to be run in PBS(tm) environment. Jobs submitted to PBS have an environment variable PBS_NODEFILE that point to a file containing the names of the servers running this job, one server name per line in the file. This is the same format as the nodes.txt shown in the Launcher section above.
+
+Note: all servers in the PBS environment must be configured for the same ports via the grid.properties file as the port cannot be overridden from the pbslauncher script.</Text-field>
+<Text-field style="Text" layout="Normal">To submit a maple file, example.mpl, on a Linux system to the PBS nodes for execution you would issue the command</Text-field>
+<Text-field style="Help Fixed" layout="Normal" firstindent="6" spacebelow="0" rightmargin="6" leftmargin="6">pbslauncher.sh example.mpl</Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed">
+</Font><Font style="Text">The pbslauncher script will determine the node file from the PBS_NODEFILE variable and then use this to invoke the equivalent of</Font></Text-field>
+<Text-field style="Help Fixed" layout="Normal" firstindent="6" spacebelow="0" rightmargin="6" leftmargin="6">launcher.sh example.mpl $PBS_NODEFILE</Text-field>
+<Text-field style="Normal" layout="Normal"><Font style="Help Fixed">
+</Font><Font style="Text">to send the maple code contained in the file <Font bold="true">example.mpl</Font> to the PBS nodes. Output from the grid computations will be printed to the console's standard output.</Font></Text-field>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Section>
+<Text-field style="Text" layout="Normal"></Text-field>
+</Section>
+</Worksheet>

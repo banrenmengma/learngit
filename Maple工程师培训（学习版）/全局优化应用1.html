@@ -1,0 +1,1212 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp936">
+<title>全局优化应用1.html</title>
+<!-- Created by Maple 17.01, Windows 7 -->
+</head>
+<a name="MapleAutoBookmark1" />
+
+<body bgcolor="FFFFFF">
+<p align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_1.gif" width="768" height="75" alt="Image" align="center" border="0"></font>&nbsp;</p>
+<p align="center"><font color="#000000" size="5" face="Times New Roman"><strong>B5: 全局优化应用</strong></font>&nbsp;</p>
+<p align="center"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="2" face="Times New Roman">&#169; 莎益博工程系统开发（上海）有限公司，2010</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark2" />
+<p align="left"><a name="intro"><font color="#000000" size="5" face="Times New Roman"><strong>优化介绍</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">优化（<!-- HelpHyperlink topic=Definition,optimization -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>optimization</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）的目标是从一组可能的答案中发现问题的最佳解。答案通过使用一个或多个问题变量的实际值目标函数（<!-- HelpHyperlink topic=Definition,objective function -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>objective function</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）进行对比。可能的集合（<!-- HelpHyperlink topic=Definition,feasible set -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>feasible set</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman"> ）由约束条件（<!-- HelpHyperlink topic=Definition,constraint -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>constraints</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）决定，约束条件通常是关于问题变量的不等式或方程（组）。数学意义上，目的是发现目标函数的最大值（maximizes）或最小值（<!-- HelpHyperlink topic=Definition,minimize -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>minimizes</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman"> ）、同时满足（ <!-- HelpHyperlink topic=Definition,satisfy -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>satisfying</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）约束条件的点，这个点称为极值（<!-- HelpHyperlink topic=Definition,extremum -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>extremum</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）。优化问题定义如下。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/全局优化应用_2.gif" width="30" height="13" alt="f(x)" align="center" border="0"> 的最大值（或最小值 </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;约束条件 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/全局优化应用_3.gif" width="56" height="18" alt="`<=`(g[i](x), 0)" align="center" border="0">, <img src="images/全局优化应用_4.gif" width="43" height="14" alt="i = 1 .. p" align="center" border="0">, </font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;和 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/全局优化应用_5.gif" width="51" height="18" alt="h[i](x) = 0" align="center" border="0">, <img src="images/全局优化应用_6.gif" width="45" height="14" alt="i = 1 .. m" align="center" border="0"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里， &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="images/全局优化应用_7.gif" width="45" height="17" alt="`in`(x, `^`(R, n))" align="center" border="0"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">优化模型由<img src="images/全局优化应用_8.gif" width="30" height="14" alt="f(x)" align="center" border="0">, <img src="images/全局优化应用_9.gif" width="33" height="18" alt="g[i](x)" align="center" border="0">, 和 <img src="images/全局优化应用_10.gif" width="33" height="18" alt="h[i](x)" align="center" border="0">的结构分类。如果所有的函数是 x 线性函数，这个模型是一个线性规划（<!-- HelpHyperlink topic=Definition,linearprogramming -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>linear program</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）。如果 <img src="images/全局优化应用_11.gif" width="30" height="13" alt="f(x)" align="center" border="0"> 是 x 的二次函数，以及 <img src="images/全局优化应用_12.gif" width="33" height="18" alt="g[i](x)" align="center" border="0"> 和 <img src="images/全局优化应用_13.gif" width="33" height="18" alt="h[i](x)" align="center" border="0"> 是 x 的线性函数，这个模型是一个二次规划（<!-- HelpHyperlink topic=Definition,quadraticprogramming -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>quadratic program</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）。如果 <img src="images/全局优化应用_14.gif" width="30" height="14" alt="f(x)" align="center" border="0"> 是一个平方和函数，这个模型是一个非线性规划（<!-- HelpHyperlink topic=Definition,leastsquares -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>least-squares problem</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）。对于其他任意结构，模型称为非线性回归（NLP）。Maple 9.5中的优化程序包（<!-- HelpHyperlink topic=Optimization -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Optimization</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）提供了一系列算法分别求解这些类型的问题。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">传统上，优化研究集中在局部搜索算法（<!-- HelpHyperlink topic=Definition,local -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>local</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）。局部搜索的目的是发现 f(x) 在可行区域内的局部极值。从一个初始点出发，局部搜索算法迭代（<!-- HelpHyperlink topic=Definition/iterative -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>iteratively</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）搜索当前点领域中的一个点，提高目标函数值，同时维持或逼近可行性、使用当前点上关于 <img src="images/全局优化应用_15.gif" width="30" height="14" alt="f(x)" align="center" border="0">, <img src="images/全局优化应用_16.gif" width="33" height="18" alt="g[i](x)" align="center" border="0">, 和 <img src="images/全局优化应用_17.gif" width="33" height="18" alt="h[i](x)" align="center" border="0">的迭代信息。理想情况下，搜索会终止于一个可行的局部极值。优化算法的不同决定它们如何衡量逼近可行，以及它们如何搜索。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">当<img src="images/全局优化应用_18.gif" width="30" height="14" alt="f(x)" align="center" border="0">在可行区域内有唯一的局部极值时，局部搜索是有效的，这是因为搜索发现的局部解是问题的全局解。如果<img src="images/全局优化应用_19.gif" width="30" height="14" alt="f(x)" align="center" border="0">, <img src="images/全局优化应用_20.gif" width="33" height="18" alt="g[i](x)" align="center" border="0">都是凸函数（<!-- HelpHyperlink topic=Definition,convex -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>convex</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">），并且所有的<img src="images/全局优化应用_21.gif" width="33" height="17" alt="h[i](x)" align="center" border="0">是仿射函数（<!-- HelpHyperlink topic=Definition,affine -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>affine</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）时，极值是唯一的。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">当 <img src="images/全局优化应用_22.gif" width="30" height="14" alt="f(x)" align="center" border="0">在可行区域内有许多局部极值，局部搜索难以完成。在这种情况下，局部极值的发现依赖于起始点，但可能并不是全局解。当任一个<img src="images/全局优化应用_23.gif" width="30" height="14" alt="f(x)" align="center" border="0">, <img src="images/全局优化应用_24.gif" width="33" height="18" alt="g[i](x)" align="center" border="0"> 是非凸函数，或者任一个<img src="images/全局优化应用_25.gif" width="33" height="18" alt="h[i](x)" align="center" border="0"> 是非线性函数时，存在多个局部最小值。非凸性经常存在于现实问题中，可能是求解优化问题最大的障碍。全局优化（<!-- HelpHyperlink topic=Definition,global -->
+</font><font color="#93000f" size="3" face="Times New Roman"><u>Global</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）是最新的和最成功方法，能够克服这个障碍。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark3" />
+<p align="left"><font color="#000000" size="5" face="Times New Roman"><strong>1. 全局优化的优势</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">优化程序包（<!-- HelpHyperlink topic=Optimization -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Optimization</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）中的优化算法是局部搜索方法。局部搜索方法使用一次和二次导数发现局部极值，反复迭代生成点提高目标函数同时维持或逼近可行性。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局优化工具箱（<!-- HelpHyperlink topic=Global Optimization toolbox -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Global Optimization toolbox</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）使用了全局搜索方法。不同于使用求导发现局部极值，它们系统地搜索整个可行区域寻找一个全局极值。对于可能有许多局部极值的优化模型，全局搜索方法寻找一个全局极值。这些方法并不依赖于初始点。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">尽管全局搜索不依赖于起始点，但它需要所有决策变量的有限边界，限定搜索空间。同时相比局部搜索方法，随着变量数的增加，全局搜索方法的计算工作量会急剧增加。这种情况通常并不明显，除非变量的数目达到上百个。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">为了了解全局优化相比局部优化的优势，考虑下面的问题，对比优化程序包（<!-- HelpHyperlink topic=Optimization -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Optimization</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）中的局部非线性求解器<!-- HelpHyperlink topic=Optimization:-NLPSolve -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>NLPSolve</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">，和全局优化工具箱（<!-- HelpHyperlink topic=Global Optimization toolbox -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Global Optimization toolbox</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman">）中的 <!-- HelpHyperlink topic=GlobalOptimization:-GlobalSolve -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>GlobalSolve</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman"> 命令。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark4" />
+<p align="left"><a name="bookmark0"><font color="#000000" size="4" face="Times New Roman"><strong>1. 全局优化工具箱介绍</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Times New Roman"><strong><u>概述</u></strong></font><font color="#000000" size="3" face="Times New Roman"><strong>：</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局优化工具箱提供世界级的全局优化技术求解优化模型的最优解，鲁棒和高效。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">该工具箱的功能包括：提供多个求解器模块求解非线性优化问题，包括branch-and-bound全局搜索、全局自适应随机搜索、全局随机多起点搜索、和一个广义简约梯度局部搜索。</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Times New Roman">可以求解包含数千个变量和约束的模型，利用Maple任意精度计算的功能，大大地降低了数值不稳定性。 </font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Times New Roman">支持任意类型的目标函数和约束条件，包括预定义的特殊函数（例如，贝赛耳、超几何分布）、导数和积分、分段函数、以及用Maple语言编写的程序体。</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Times New Roman">交互式的全局优化助手，提供简单易用的图形界面，帮助您输入问题和选择求解方法。</font></li></ul>&nbsp;</p>
+<p align="left"><ul><li><font color="#000000" size="3" face="Times New Roman">Maple内置的模型可视化功能，可以观察目标函数的一维和二维子空间投影图，以及通过目标表面上的面或线图形显示约束函数。</font></li></ul>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font><font color="#000000" size="3" face="Times New Roman"><strong><u>初始化：</u></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">为了使用Global Optimization Toolbox，需要首先使用下面的命令加载</font><font color="#000000" size="3" face="Times New Roman"><strong>GlobalOptimization</strong></font><font color="#000000" size="3" face="Times New Roman">程序包。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_26.gif" width="286" height="14" alt="" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">您可以选择使用命令求解预定义的优化模型，或者使用全局优化助手，如下图所示。</font>&nbsp;</p>
+<p align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_27.gif" width="423" height="421" alt="Image" align="center" border="0"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark5" />
+<p align="left"><a name="bookmark6"><font color="#000000" size="4" face="Times New Roman"><strong>使用全局优化工具箱求解问题</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">对于许多优化问题，简单的方法并不能足以发现最优解。它们仅能发现局部极值，通常是最靠近用户给定的搜索起始点的极值点。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_28.gif" width="206" height="14" alt="interface(warnlevel = 0); -1; with(plots); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_29.gif" width="149" height="13" alt="plot(`*`(ln(x), `*`(sin(x))), x = 1 .. 50)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_30.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">您也许可以通过观察图形发现给定区域内的全局最小值。但如果您不能正确地求它的近似值，使用常规的优化算法并不能发现全局最小值。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_31.gif" width="248" height="13" alt="Optimization[Minimize](`*`(ln(x), `*`(sin(x))), x = 1 .. 50)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_32.gif" width="247" height="13" alt="[HFloat(-3.396186907402094), [x = HFloat(29.854992010743675)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">根据 <!-- HelpHyperlink topic=Optimization/Minimize -->
+</font><font color="#008080" size="3" face="Times New Roman"><strong><u>Minimize</u></strong></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman"> 命令的计算结果，最小值发生在 </font><font color="#000000" size="3" face="Times New Roman"><em>x</em></font><font color="#000000" size="3" face="Times New Roman"> = 30。但是您可以通过上面的图形发现它并不是全局最小值。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">通过使用全局优化工具箱中有等效功能的命令，可以确保发现指定区间内的全局最小值。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_33.gif" width="145" height="13" alt="with(GlobalOptimization); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_34.gif" width="190" height="13" alt="GlobalSolve(`*`(ln(x), `*`(sin(x))), x = 1 .. 50)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_35.gif" width="265" height="13" alt="[-3.88562417153593120, [x = HFloat(48.69997056925441)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">为了查看使用了何种方法发现全局最小值，改变 </font><font color="#000000" size="3" face="Times New Roman"><em>infolevel</em></font><font color="#000000" size="3" face="Times New Roman"> 变量，然后重新执行命令。设置 </font><font color="#000000" size="3" face="Times New Roman"><em>infolevel</em></font><font color="#000000" size="3" face="Times New Roman"> = 3，命令显示输入模型的大小和类型，求解器运行模式和参数，以及详细的运行时间信息。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_36.gif" width="191" height="13" alt="infolevel[GlobalOptimization] := 3; -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_37.gif" width="190" height="13" alt="GlobalSolve(`*`(ln(x), `*`(sin(x))), x = 1 .. 50)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman">GlobalSolve: calling NLP solver</td>
+</tr></font>&nbsp;</p>
+<p align="left"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman">SolveGeneral: calling global optimization solver
+<br>SolveGeneral: number of problem variables 1
+<br>SolveGeneral: number of nonlinear inequality constraints 0
+<br>SolveGeneral: number of nonlinear equality constraints 0
+<br>SolveGeneral: method multistart
+<br>SolveGeneral: merit function evaluation limit 1000
+<br>SolveGeneral: non-improving merit function evaluation limit 200
+<br>SolveGeneral: constraint penalty multiplier 100.0
+<br>SolveGeneral: target merit function value -0.10e11
+<br>SolveGeneral: local search target objective function value -0.10e11
+<br>SolveGeneral: local search feasibility tolerance 0.10e-5
+<br>SolveGeneral: local search optimality tolerance 0.10e-5
+<br>SolveGeneral: time limit in seconds 100</td>
+</tr></font>&nbsp;</p>
+<p align="left"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman">SolveGeneral: trying evalhf mode
+<br>SolveGeneral: total number of function evaluations 1120
+<br>SolveGeneral: runtime in external solver 0.
+<br>SolveGeneral: maximum constraint infeasibility 0.
+<br>SolveGeneral: cycling or stall detected in solver</td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_38.gif" width="265" height="13" alt="[-3.88562417153593120, [x = HFloat(48.69997056925441)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">通常，</font><font color="#000000" size="3" face="Times New Roman"><em>infolevel </em></font><font color="#000000" size="3" face="Times New Roman">设置为默认值 0。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_39.gif" width="191" height="13" alt="infolevel[GlobalOptimization] := 0; -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">下面是一个例子，使用线性方法不能发现全局最小值，但全局求解器可以发现最优值。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">例子：</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">考虑一个非线性方程组：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_40.gif" width="314" height="20" alt="eq1 := `+`(sqrt(`+`(`*`(`^`(y, 4)), `*`(`^`(x, 2)))), exp(`+`(`-`(`*`(`^`(y, 2))), x)), `*`(5, `*`(sin(`+`(`-`(`*`(4, `*`(x, `*`(y)))), `*`(2, `*`(x)))))), `-`(`*`(12, `*`(cos(`*`(x, `*`(y))))))); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_41.gif" width="232" height="16" alt="eq2 := `+`(`*`(5, `*`(ln(`+`(`*`(`^`(x, 2)), 1)))), exp(`+`(`-`(y), x)), `*`(5, `*`(sin(`+`(`*`(6, `*`(x, `*`(y)))))))); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">最小二乘误差函数有多个极值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_42.gif" width="448" height="16" alt="plot3d(`+`(`*`(`^`(eq1, 2)), `*`(`^`(eq2, 2))), x = -2 .. 2, y = -1 .. 3, grid = [30, 30], lightmodel = light4, axes = boxed)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_43.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">为了求最小二乘误差的全局最小值，定义要优化的目标函数和约束。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_44.gif" width="109" height="16" alt="objf := `+`(`*`(`^`(eq1, 2)), `*`(`^`(eq2, 2))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_45.gif" width="539" height="23" alt="`+`(`*`(`^`(`+`(`*`(`^`(`+`(`*`(`^`(x, 2)), `*`(`^`(y, 4))), `/`(1, 2))), exp(`+`(x, `-`(`*`(`^`(y, 2))))), `-`(`*`(5, `*`(sin(`+`(`-`(`*`(2, `*`(x))), `*`(4, `*`(x, `*`(y)))))))), `-`(`*`(12, `*`(cos..." align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_46.gif" width="108" height="13" alt="cons := {eq1, eq2}; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_47.gif" width="510" height="20" alt="{`+`(`*`(5, `*`(ln(`+`(1, `*`(`^`(x, 2)))))), exp(`+`(`-`(y), x)), `*`(5, `*`(sin(`+`(`*`(6, `*`(x, `*`(y)))))))), `+`(`*`(`^`(`+`(`*`(`^`(x, 2)), `*`(`^`(y, 4))), `/`(1, 2))), exp(`+`(x, `-`(`*`(`^`(..." align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">首先，使用Maple内置的 <!-- HelpHyperlink topic=Optimization -->
+</font><font color="#008080" size="3" face="Times New Roman"><u>Optimization</u></font>
+<!-- /HelpHyperlink -->
+<font color="#000000" size="3" face="Times New Roman"> 程序包求局部解。由于方程组的复杂性，线性优化求解器并不能发现可行的解。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_48.gif" width="409" height="13" alt="localsoln := Optimization[Minimize](objf, {eq1 = 0, eq2 = 0}, x = -1 .. 2, y = -2 .. 1)" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#ff00ff" size="3" face="Times New Roman"><u><a href="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20Optimization%3A-NLPSolve)%20no%20improved%20point%20could%20be%20found"></u></font><font color="#ff00ff" size="3" face="Times New Roman"><u>Error, (in Optimization:-NLPSolve) no improved point could be found</u></font></a></td>
+<td width='5%' align='center'></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">然而，全局优化算法可以发现全局最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_49.gif" width="399" height="14" alt="sol := GlobalSolve(objf, {eq1 = 0, eq2 = 0}, x = -1 .. 2, y = -2 .. 1); -1; sol[1]; 1; sol[2]" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_50.gif" width="145" height="16" alt="0.524626533431424086e-22" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_51.gif" width="267" height="13" alt="[x = HFloat(-0.5589724979377271), y = HFloat(-1.5823452371862783)]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">代入约束函数，结果显示最小二乘逼近是相当精确的解。也就是说，发生在该最小点上的最小二乘逼近的误差非常小。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_52.gif" width="97" height="13" alt="eval(cons, sol[2])" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_53.gif" width="265" height="16" alt="{HFloat(2.915889751875511e-12), HFloat(6.630251903061435e-12)}" align="center" border="0"></td>
+<td width='5%' align='center'>(2.2.7)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">通过了解上面的例子，您可以有信心使用全局优化工具箱求解任意复杂的数学问题。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark6" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>四次多项式</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">求四次多项式在区间 [0, 5] 上的全局最小值。注意该函数是一个非凸函数，有两个局部最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_54.gif" width="226" height="13" alt="poly := `*`(`+`(x, `-`(1)), `*`(`+`(x, `-`(2)), `*`(`+`(x, `-`(3.5)), `*`(`+`(x, `-`(4.8)))))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_55.gif" width="223" height="13" alt="`*`(`+`(x, `-`(1)), `*`(`+`(x, `-`(2)), `*`(`+`(x, `-`(3.5)), `*`(`+`(x, `-`(4.8))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(2.3.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_56.gif" width="113" height="13" alt="plot(poly, x = 0 .. 5); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_57.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">取决于给出的起始点，内置的局部 NLP 求解器返回位于 <img src="images/全局优化应用_58.gif" width="52" height="14" alt="x = 4.298" align="center" border="0"> 处的全局最小值，或者是位于 <img src="images/全局优化应用_59.gif" width="52" height="14" alt="x = 1.407" align="center" border="0"> 处的次优局部最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_60.gif" width="204" height="13" alt="NLPSolve(poly, initialpoint = [x = 5]); 1; NLPSolve(poly, initialpoint = [x = 3]); 1; NLPSolve(poly, initialpoint = [x = 2]); 1; NLPSolve(poly, initialpoint = [x = 0]); 1" align="center" border="0"><br><img src="images/全局优化应用_61.gif" width="204" height="14" alt="NLPSolve(poly, initialpoint = [x = 5]); 1; NLPSolve(poly, initialpoint = [x = 3]); 1; NLPSolve(poly, initialpoint = [x = 2]); 1; NLPSolve(poly, initialpoint = [x = 0]); 1" align="center" border="0"><br><img src="images/全局优化应用_62.gif" width="204" height="14" alt="NLPSolve(poly, initialpoint = [x = 5]); 1; NLPSolve(poly, initialpoint = [x = 3]); 1; NLPSolve(poly, initialpoint = [x = 2]); 1; NLPSolve(poly, initialpoint = [x = 0]); 1" align="center" border="0"><br><img src="images/全局优化应用_63.gif" width="204" height="14" alt="NLPSolve(poly, initialpoint = [x = 5]); 1; NLPSolve(poly, initialpoint = [x = 3]); 1; NLPSolve(poly, initialpoint = [x = 2]); 1; NLPSolve(poly, initialpoint = [x = 0]); 1" align="center" border="0"><br><img src="images/全局优化应用_64.gif" width="8" height="14" alt="NLPSolve(poly, initialpoint = [x = 5]); 1; NLPSolve(poly, initialpoint = [x = 3]); 1; NLPSolve(poly, initialpoint = [x = 2]); 1; NLPSolve(poly, initialpoint = [x = 0]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_65.gif" width="265" height="13" alt="[-1.71396627012779357, [x = HFloat(1.4067993306872324)]]" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_66.gif" width="265" height="13" alt="[-3.03603863879697267, [x = HFloat(4.29790996157305)]]" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_67.gif" width="265" height="13" alt="[-1.71396627012779401, [x = HFloat(1.406799329784305)]]" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_68.gif" width="265" height="13" alt="[-1.71396627012779468, [x = HFloat(1.4067993306859095)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.3.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局优化求解器总是求全局最小值。注意到调用格式并不依赖于起始点，但需要 </font><font color="#000000" size="3" face="Times New Roman"><em>x</em></font><font color="#000000" size="3" face="Times New Roman"> 的有限范围，这个问题定义为 0..5。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_69.gif" width="154" height="13" alt="GlobalSolve(poly, x = 0 .. 5); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_70.gif" width="265" height="13" alt="[-3.03603863879697311, [x = HFloat(4.297909961756918)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.3.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark7" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>非凸二次函数</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">求一个二维非凸二次函数在矩形区域上的全局最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_71.gif" width="125" height="13" alt="with(LinearAlgebra); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">使用非正定矩阵构建非凸函数。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_72.gif" width="208" height="13" alt="Q := Matrix(`<|>`(`<,>`(1.9, -3.5), `<,>`(5, -`/`(1, 3)))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_73.gif" width="104" height="56" alt="Matrix(%id = 113603408)" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">检查该矩阵是否是正定的。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_74.gif" width="87" height="13" alt="IsDefinite(Q); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_75.gif" width="30" height="13" alt="false" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">构建函数 <img src="images/全局优化应用_76.gif" width="40" height="16" alt="`*`(`^`(x, t), `*`(Q, `*`(x)))" align="center" border="0">。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_77.gif" width="332" height="13" alt="NonconvexQuadratic := expand(Typesetting:-delayDotProduct(Typesetting:-delayDotProduct(Transpose(`<,>`(x, y)), Q), `<,>`(x, y))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_78.gif" width="240" height="28" alt="`+`(`*`(1.9, `*`(`^`(x, 2))), `*`(1.5, `*`(x, `*`(y))), `-`(`*`(`/`(1, 3), `*`(`^`(y, 2)))))" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">对函数绘图并画出等高线图。全局最小值发生在[3.947, -10.000] 和 [-3.947, 10.000]，鞍点发生在 [0, 0]。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_79.gif" width="539" height="13" alt="p1 := plot3d(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, axes = boxed, transparency = .7, style = patch); -1; p2 := plot3d(-100, x = -10 .. 10, y = -10 .. 10, style = patchnogrid, color = Noncon..." align="center" border="0"><br><img src="images/全局优化应用_80.gif" width="486" height="14" alt="p1 := plot3d(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, axes = boxed, transparency = .7, style = patch); -1; p2 := plot3d(-100, x = -10 .. 10, y = -10 .. 10, style = patchnogrid, color = Noncon..." align="center" border="0"><br><img src="images/全局优化应用_81.gif" width="246" height="14" alt="p1 := plot3d(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, axes = boxed, transparency = .7, style = patch); -1; p2 := plot3d(-100, x = -10 .. 10, y = -10 .. 10, style = patchnogrid, color = Noncon..." align="center" border="0"><br><img src="images/全局优化应用_82.gif" width="8" height="14" alt="p1 := plot3d(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, axes = boxed, transparency = .7, style = patch); -1; p2 := plot3d(-100, x = -10 .. 10, y = -10 .. 10, style = patchnogrid, color = Noncon..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_83.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">从大部分起始点出发，Maple局部优化求解器会发现发生在[3.947, -10.000]上的全局最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_84.gif" width="435" height="13" alt="NLPSolve(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, initialpoint = [x = .1, y = 0]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_85.gif" width="311" height="13" alt="[-62.9385964912280614, [x = HFloat(3.947368421052632), y = HFloat(-10.0)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">如果起始点选择不佳，局部优化求解器会停止在鞍点 [0, 0] 上。求解诶其停止的原因是它发现在当前点是零梯度。鞍点有零梯度但不是极值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_86.gif" width="432" height="13" alt="NLPSolve(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10, initialpoint = [x = 0, y = 0]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_87.gif" width="103" height="13" alt="[0., [x = HFloat(0.0), y = HFloat(0.0)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局优化求解器总是发现两个全局最小值中的一个。必须定义</font><font color="#000000" size="3" face="Times New Roman"><em>x</em></font><font color="#000000" size="3" face="Times New Roman">和</font><font color="#000000" size="3" face="Times New Roman"><em>y</em></font><font color="#000000" size="3" face="Times New Roman">的有限范围。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_88.gif" width="310" height="13" alt="GlobalSolve(NonconvexQuadratic, x = -10 .. 10, y = -10 .. 10); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_89.gif" width="311" height="13" alt="[-62.9385964912280684, [x = HFloat(3.9473684210526274), y = HFloat(-10.0)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.4.6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark8" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>非凸可行区域</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">求一个二维凸函数在一个缺失单位圆盘的平面上的全局最小值，这是一个非凸区域。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_90.gif" width="143" height="13" alt="obj := `+`(`*`(`^`(x, 2)), `*`(`^`(y, 2)), `-`(x), y); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_91.gif" width="112" height="16" alt="`+`(`*`(`^`(x, 2)), `*`(`^`(y, 2)), `-`(x), y)" align="center" border="0"></td>
+<td width='5%' align='center'>(2.5.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_92.gif" width="158" height="13" alt="constraint := `>=`(`+`(`*`(`^`(x, 2)), `*`(`^`(y, 2))), 1); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_93.gif" width="128" height="16" alt="`<=`(1, `+`(`*`(`^`(x, 2)), `*`(`^`(y, 2))))" align="center" border="0"></td>
+<td width='5%' align='center'>(2.5.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局最小值发生在近似点 [.707, -.707]，见下图中的可行区域边界的红圈，同时显示了目标函数的几个等高线。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">起点是[-2, 2]，Maple局部优化求解器发现在近似点 [-.707, .707] 处的非最优局部最小值，表示为蓝色。目标函数在[-.707, .707]上的梯度垂直于可行区域的边界，终止了局部搜索。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_94.gif" width="244" height="13" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_95.gif" width="443" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_96.gif" width="431" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_97.gif" width="485" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_98.gif" width="166" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_99.gif" width="8" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><br><img src="images/全局优化应用_100.gif" width="8" height="14" alt="p1 := plottools[disk]([0, 0], 1, color = green); -1; p2 := plots[contourplot](obj, x = -2 .. 2, y = -2 .. 2, coloring = [blue, red], contours = 20); -1; p3 := plots[pointplot]([[.707, -.707]], color =..." align="center" border="0"><img src="images/全局优化应用_101.gif" width="8" height="14" alt="" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_102.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">局部搜索从 [-2, 2] 开始发现次优局部最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_103.gif" width="393" height="13" alt="NLPSolve(obj, {constraint}, x = -2 .. 2, y = -2 .. 2, initialpoint = [x = -2, y = 2]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_104.gif" width="393" height="13" alt="[2.41421356273966215, [x = HFloat(-0.7071067812624661), y = HFloat(0.7071067812624661)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.5.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局搜索发现全局最小值发生在[.707, -.707]。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_105.gif" width="266" height="13" alt="GlobalSolve(obj, {constraint}, x = -2 .. 2, y = -2 .. 2); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_106.gif" width="407" height="13" alt="[-.414213564542023516, [x = HFloat(0.7071067760613929), y = HFloat(-0.7071067810754457)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.5.4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark9" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>高维平坦函数</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">考虑一个四维函数，这个函数有一个非常平坦、但非定常、靠近全局最小值的区域。局部搜索方法往往发现这个平坦区域，但在发现全局最优值之前终止，原因是函数在该区域上的梯度接近于0。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_107.gif" width="654" height="13" alt="objWood := `+`(`*`(100, `*`(`^`(`+`(`-`(`*`(`^`(x, 2))), y), 2))), `*`(`^`(`+`(1, `-`(x)), 2)), `*`(90, `*`(`^`(`+`(`-`(`*`(`^`(w, 2))), z), 2))), `*`(`^`(`+`(1, `-`(w)), 2)), `*`(10.1, `+`(`*`(`^`(`+..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_108.gif" width="609" height="19" alt="`+`(`*`(100, `*`(`^`(`+`(y, `-`(`*`(`^`(x, 2)))), 2))), `*`(`^`(`+`(1, `-`(x)), 2)), `*`(90, `*`(`^`(`+`(z, `-`(`*`(`^`(w, 2)))), 2))), `*`(`^`(`+`(1, `-`(w)), 2)), `*`(10.1, `*`(`^`(`+`(y, `-`(1)), 2..." align="center" border="0"></td>
+<td width='5%' align='center'>(2.6.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">全局最小值发生在 <img src="images/全局优化应用_109.gif" width="16" height="13" alt="w" align="center" border="0"> = <img src="images/全局优化应用_110.gif" width="13" height="13" alt="x" align="center" border="0"> = <img src="images/全局优化应用_111.gif" width="13" height="13" alt="y" align="center" border="0"> = <img src="images/全局优化应用_112.gif" width="12" height="13" alt="z" align="center" border="0"> = 1。为了查看为什么这个函数难以最小化，考虑它在 <img src="images/全局优化应用_113.gif" width="30" height="14" alt="z = 1" align="center" border="0"> 和 <img src="images/全局优化应用_114.gif" width="34" height="14" alt="w = 1" align="center" border="0"> 上的2-D投影。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_115.gif" width="250" height="13" alt="objWoodXY := eval(objWood, {w = 1, z = 1}); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_116.gif" width="287" height="19" alt="`+`(`*`(100, `*`(`^`(`+`(y, `-`(`*`(`^`(x, 2)))), 2))), `*`(`^`(`+`(1, `-`(x)), 2)), `*`(10.1, `*`(`^`(`+`(y, `-`(1)), 2))))" align="center" border="0"></td>
+<td width='5%' align='center'>(2.6.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">等高线表明该函数砸原点附近非常平坦。局部搜索方法通常在这样的区域找到局部最小值，并终止搜索。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_117.gif" width="502" height="13" alt="p1 := plot3d(`+`(objWoodXY, 800), x = -2 .. 2, y = -2 .. 2, axes = boxed, transparency = .5, style = patch); -1; p2 := plot3d(0, x = -2 .. 2, y = -2 .. 2, style = patchnogrid, color = objWoodXY); -1; ..." align="center" border="0"><br><img src="images/全局优化应用_118.gif" width="391" height="14" alt="p1 := plot3d(`+`(objWoodXY, 800), x = -2 .. 2, y = -2 .. 2, axes = boxed, transparency = .5, style = patch); -1; p2 := plot3d(0, x = -2 .. 2, y = -2 .. 2, style = patchnogrid, color = objWoodXY); -1; ..." align="center" border="0"><br><img src="images/全局优化应用_119.gif" width="240" height="14" alt="p1 := plot3d(`+`(objWoodXY, 800), x = -2 .. 2, y = -2 .. 2, axes = boxed, transparency = .5, style = patch); -1; p2 := plot3d(0, x = -2 .. 2, y = -2 .. 2, style = patchnogrid, color = objWoodXY); -1; ..." align="center" border="0"><br><img src="images/全局优化应用_120.gif" width="8" height="14" alt="p1 := plot3d(`+`(objWoodXY, 800), x = -2 .. 2, y = -2 .. 2, axes = boxed, transparency = .5, style = patch); -1; p2 := plot3d(0, x = -2 .. 2, y = -2 .. 2, style = patchnogrid, color = objWoodXY); -1; ..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_121.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">Maple的局部搜索在找到全局最小值之前已经终止，但是全局搜索可以轻松发现最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_122.gif" width="688" height="14" alt="NLPSolve(objWood, initialpoint = [w = 3, x = -2, y = 2, z = -2]); 1; GlobalSolve(objWood, w = -10 .. 10, x = -10 .. 10, y = -10 .. 10, z = -10 .. 10); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_123.gif" width="625" height="13" alt="[.148242645237016024, [w = HFloat(1.1099033925628146), x = HFloat(0.9420011040819362), y = HFloat(0.8721552023705788), z = HFloat(1.2218529489057977)]]" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_124.gif" width="645" height="16" alt="[0.146859883390000718e-16, [w = HFloat(1.0000000010012873), x = HFloat(0.9999999987684957), y = HFloat(0.9999999977336174), z = HFloat(1.000000002266021)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(2.6.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark10" />
+<p align="left"><font color="#000000" size="5" face="Times New Roman"><strong>2. 全局优化的应用</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">在上一节中，通过几个简单的例子说明了全局搜索方法如何大大优于局部搜索方法。下面是几个应用全局优化解决实际问题的范例。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark11" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>汽车悬架系统的调校</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">考虑悬架系统设计中的问题，显示路面颠簸时的响应。问题变量是弹簧常数 k 和阻尼常数 b。每个车轮上车重给定，m，以及一个典型的颠簸的期望幅度，求 k 和 b 的值，创建与期望响应匹配的系统响应。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">要最小化的目标函数是期望和实际响应之间的平方误差，是关于 k 和 b 在离散时间集上的函数。在通过求解系统的微分方程得到实际响应后，使用优化算法求 k 和 b 的值，最小化误差值。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark12" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>目标响应</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">假设目标响应是一个衰减指数函数。当汽车碰到一个幅度为 0.1 米的颠簸时，其振荡幅度呈指数衰减。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_125.gif" width="46" height="13" alt="restart; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_126.gif" width="294" height="13" alt="Target := proc (t) options operator, arrow; `*`(.14, `*`(exp(`*`(-1, `*`(4.9, `*`(t)))), `*`(cos(`+`(`*`(5, `*`(t)), `-`(.7754)))))) end proc; -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_127.gif" width="482" height="13" alt="plot(Target(t), t = 0 .. 1, title = "Target Response", labels = ["seconds", "metres"], thickness = 2); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_128.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark13" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>计算实际响应</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">为了得到系统对颠簸的实际响应，求解微分方程组，初始条件是 x(0) = 0.1。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">自然状态下质量-弹簧-阻尼系统的微分方程是：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_129.gif" width="365" height="13" alt="System_Equation := `+`(`*`(m, `*`(diff(x(t), t, t))), `*`(b, `*`(diff(x(t), t))), `*`(k, `*`(x(t)))) = 0; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_130.gif" width="319" height="34" alt="`+`(`*`(m, `*`(diff(diff(x(t), t), t))), `*`(b, `*`(diff(x(t), t))), `*`(k, `*`(x(t)))) = 0" align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.2.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">求解微分方程，定义响应为k, b, 和t的函数，质量为m=450 kg。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_131.gif" width="63" height="13" alt="m := 450; -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_132.gif" width="309" height="13" alt="sol := dsolve({System_Equation, x(0) = .1, (D(x))(0) = 0}); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_133.gif" width="648" height="47" alt="x(t) = `+`(`/`(`*`(`/`(1, 20), `*`(`+`(`*`(b, `*`(`^`(`+`(`*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `/`(1, 2)))), `*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `*`(exp(`*`(`+`(`-`(`*`(`/`(1, 900), `*`(b))),..." align="center" border="0"><br><img src="images/全局优化应用_134.gif" width="648" height="47" alt="x(t) = `+`(`/`(`*`(`/`(1, 20), `*`(`+`(`*`(b, `*`(`^`(`+`(`*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `/`(1, 2)))), `*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `*`(exp(`*`(`+`(`-`(`*`(`/`(1, 900), `*`(b))),..." align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.2.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">系统的实际响应是关于k, b, 和t的函数。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_135.gif" width="200" height="13" alt="Actual := unapply(rhs(sol), k, b, t); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">k=10^4 N/m 和 b=10^3 Ns/m 条件下的目标响应和实际响应。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_136.gif" width="475" height="14" alt="plot([Target(t), Actual(`^`(10, 4), `^`(10, 3), t)], t = 0 .. 1, thickness = 3, labels = ["seconds", "metres"], title = "Target Response and Actual Response for k = 10^4 and b = 10^3", legend = ["Targ..." align="center" border="0"><br><img src="images/全局优化应用_137.gif" width="636" height="14" alt="plot([Target(t), Actual(`^`(10, 4), `^`(10, 3), t)], t = 0 .. 1, thickness = 3, labels = ["seconds", "metres"], title = "Target Response and Actual Response for k = 10^4 and b = 10^3", legend = ["Targ..." align="center" border="0"><br><img src="images/全局优化应用_138.gif" width="8" height="14" alt="plot([Target(t), Actual(`^`(10, 4), `^`(10, 3), t)], t = 0 .. 1, thickness = 3, labels = ["seconds", "metres"], title = "Target Response and Actual Response for k = 10^4 and b = 10^3", legend = ["Targ..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_139.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">显然 k 和 b 的值没有很好地匹配目标。提高匹配性的一个方法是代入 k 和 b 不同的组合，直到发现一个可接受的结果。下面的小节描述了一个更加系统的方法：使用优化。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark14" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>测量目标和实际响应之间的误差</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">理想情况下，误差是目标和实际响应的平方差的积分。但是在这个应用中由于响应函数的复杂性，求积分值非常困难。作为近似，在一些关键的时间点上取函数样本，函数对这些时间点上的平方差相加。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">在时间<img src="images/全局优化应用_140.gif" width="73" height="28" alt="t = `/`(1, 2), 1, `/`(3, 2), 2" align="center" border="0">上的输出样本：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_141.gif" width="162" height="13" alt="time_sample := `/`(1, 2), 1, `/`(3, 2), 2; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_142.gif" width="142" height="28" alt="`/`(1, 2), 1, `/`(3, 2), 2" align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.3.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">目标函数是实际和目标响应在这4个时间点上的平方差的和。尽管误差函数仅有两个变量，但是可以看出非常复杂。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_143.gif" width="432" height="13" alt="Error := add(`*`(`^`(`+`(Actual(k, b, time_sample[i]), `-`(Target(time_sample[i]))), 2)), i = 1 .. 4); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_144.gif" width="648" height="97" alt="`+`(`*`(`^`(`+`(`/`(`*`(`/`(1, 20), `*`(`+`(`*`(b, `*`(`^`(`+`(`*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `/`(1, 2)))), `*`(`^`(b, 2)), `-`(`*`(1800, `*`(k)))), `*`(exp(`+`(`-`(`*`(`/`(1, 1800), `*`(b))..." align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.3.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">画出误差函数在 k-b 平面上的图形。函数不仅仅是非凸的，而且在可能含有全局最小值的区域比较平坦。在计算前还不知道下面显示的图形区域是否含有期望的答案。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">（注意：根据微分方程理论，通常取消响应函数和误差函数的虚部项。但是，Maple的绘图函数在计算之前并不能检验。为了正确地绘图，对误差函数的虚部绘图，等同于函数绘图。）</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_145.gif" width="264" height="14" alt="plot3d(Re(Error), b = 100 .. 5000, k = 1000 .. 25000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"><br><img src="images/全局优化应用_146.gif" width="490" height="14" alt="plot3d(Re(Error), b = 100 .. 5000, k = 1000 .. 25000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"><br><img src="images/全局优化应用_147.gif" width="8" height="14" alt="plot3d(Re(Error), b = 100 .. 5000, k = 1000 .. 25000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_148.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark15" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>使用全局优化最小化误差</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">使用全局优化工具箱求误差函数的最小值。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_149.gif" width="142" height="13" alt="with(GlobalOptimization); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_150.gif" width="219" height="13" alt="[GetLastSolution, GlobalSolve, Interactive]" align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.4.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">工具箱发现全局最小值。注意到误差值非常小，接近于0，正如期望的一样。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_151.gif" width="336" height="13" alt="sol := GlobalSolve(Re(Error), b = 100 .. 10000, k = 100 .. 40000); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_152.gif" width="426" height="16" alt="[0.396363826829140810e-7, [b = HFloat(4530.568667447407), k = HFloat(22691.71384494988)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(3.1.4.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">画出全局最小值领域内的误差函数。即使在这个小区域内，图形也不能明显地显示全局最小值的位置。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_153.gif" width="276" height="14" alt="plot3d(Re(Error), b = 4300 .. 4600, k = 21000 .. 23000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"><br><img src="images/全局优化应用_154.gif" width="490" height="14" alt="plot3d(Re(Error), b = 4300 .. 4600, k = 21000 .. 23000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"><br><img src="images/全局优化应用_155.gif" width="8" height="14" alt="plot3d(Re(Error), b = 4300 .. 4600, k = 21000 .. 23000, axes = boxed, shading = zhue, transparency = .35, style = patchnogrid, orientation = [75, 75]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_156.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark16" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>测试结果</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">在同一图形上显示实际响应和目标响应，k 和 b 使用全局优化得到的值。它们可以很好地匹配。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_157.gif" width="93" height="13" alt="assign(sol[2]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_158.gif" width="269" height="14" alt="plot([Target(t), `+`(Actual(k, b, t), 0.5e-1), 0.5e-1], t = 0 .. 1, labels = ["seconds", "metres"], title = "Target and Actual Responses Overlaid (with vertical offset)", thickness = 2, color = [red, ..." align="center" border="0"><br><img src="images/全局优化应用_159.gif" width="648" height="14" alt="plot([Target(t), `+`(Actual(k, b, t), 0.5e-1), 0.5e-1], t = 0 .. 1, labels = ["seconds", "metres"], title = "Target and Actual Responses Overlaid (with vertical offset)", thickness = 2, color = [red, ..." align="center" border="0"><br><img src="images/全局优化应用_160.gif" width="648" height="14" alt="plot([Target(t), `+`(Actual(k, b, t), 0.5e-1), 0.5e-1], t = 0 .. 1, labels = ["seconds", "metres"], title = "Target and Actual Responses Overlaid (with vertical offset)", thickness = 2, color = [red, ..." align="center" border="0"><br><img src="images/全局优化应用_161.gif" width="8" height="14" alt="plot([Target(t), `+`(Actual(k, b, t), 0.5e-1), 0.5e-1], t = 0 .. 1, labels = ["seconds", "metres"], title = "Target and Actual Responses Overlaid (with vertical offset)", thickness = 2, color = [red, ..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_162.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">从目标响应和实际响应之间差的图形上可以发现，即使是最大差值也可以忽略。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_163.gif" width="236" height="14" alt="plot(abs(`+`(Target(t), `-`(Actual(k, b, t)))), t = 0 .. 1, title = "Absolute Value of Target minus Actual Response", labels = ["seconds", "meters"], thickness = 2); 1" align="center" border="0"><br><img src="images/全局优化应用_164.gif" width="540" height="14" alt="plot(abs(`+`(Target(t), `-`(Actual(k, b, t)))), t = 0 .. 1, title = "Absolute Value of Target minus Actual Response", labels = ["seconds", "meters"], thickness = 2); 1" align="center" border="0"><br><img src="images/全局优化应用_165.gif" width="8" height="14" alt="plot(abs(`+`(Target(t), `-`(Actual(k, b, t)))), t = 0 .. 1, title = "Absolute Value of Target minus Actual Response", labels = ["seconds", "meters"], thickness = 2); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_166.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark17" />
+<p align="left"><font color="#000000" size="4" face="Times New Roman"><strong>香水瓶子设计的优化</strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">一家香水公司希望设计一个新的香水瓶子，要求容量固定的前提下降低运费。运费是与包装盒占有的体积成正比。因此设计任务是最小化占有空间，同时保持瓶子的容量和美观性。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">瓶子的设计是椭圆体、平底。这里有4个问题变量：椭圆的3个离心率参数，椭圆体被切除形成平底的高度位置。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark18" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>瓶子模型</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><font color="#ff0000" size="3" face="Times New Roman"><strong>restart;</td>
+</tr>
+</table></strong></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_167.gif" width="285" height="13" alt="interface(warnlevel = 0); -1; with(plots); -1; with(plottools); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_168.gif" width="148" height="13" alt="with(GlobalOptimization); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_169.gif" width="219" height="13" alt="[GetLastSolution, GlobalSolve, Interactive]" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.1.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">瓶子形状的模型是一个包含参数 a, b, c 的椭圆体，中心在原点。上面部分是椭圆体，但椭圆体地段是平面 <img src="images/全局优化应用_170.gif" width="38" height="14" alt="z = `+`(`-`(h))" align="center" border="0">，这里 h 是模型的第4个参数。长度单位是 cm，体积是 mL。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_171.gif" width="271" height="13" alt="bottleShape := `+`(`/`(`*`(`^`(x, 2)), `*`(`^`(a, 2))), `/`(`*`(`^`(y, 2)), `*`(`^`(b, 2))), `/`(`*`(`^`(z, 2)), `*`(`^`(c, 2)))) = 1; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_172.gif" width="181" height="34" alt="`+`(`/`(`*`(`^`(x, 2)), `*`(`^`(a, 2))), `/`(`*`(`^`(y, 2)), `*`(`^`(b, 2))), `/`(`*`(`^`(z, 2)), `*`(`^`(c, 2)))) = 1" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.1.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">对应的图形是一个平底瓶。目的是使用优化方法改进这个形状。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_173.gif" width="468" height="14" alt="implicitplot3d(eval(bottleShape, {a = 2, b = 1.5, c = 1}), x = -2 .. 2, y = -1.5 .. 1.5, z = `+`(`-`(`*`(6, `/`(1, 10)))) .. 1, scaling = constrained, orientation = [75, 80], style = patchnogrid, ligh..." align="center" border="0"><br><img src="images/全局优化应用_174.gif" width="479" height="14" alt="implicitplot3d(eval(bottleShape, {a = 2, b = 1.5, c = 1}), x = -2 .. 2, y = -1.5 .. 1.5, z = `+`(`-`(`*`(6, `/`(1, 10)))) .. 1, scaling = constrained, orientation = [75, 80], style = patchnogrid, ligh..." align="center" border="0"><br><img src="images/全局优化应用_175.gif" width="8" height="14" alt="implicitplot3d(eval(bottleShape, {a = 2, b = 1.5, c = 1}), x = -2 .. 2, y = -1.5 .. 1.5, z = `+`(`-`(`*`(6, `/`(1, 10)))) .. 1, scaling = constrained, orientation = [75, 80], style = patchnogrid, ligh..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_176.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark19" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>目标函数</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">目标函数：包装体积</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">包含瓶子的盒子是一个平行六面体，宽度是 2a，长度是 2b，高度是 <img src="images/全局优化应用_177.gif" width="55" height="14" alt="`+`(h, c, 1)" align="center" border="0">，这里额外的长度是为喷嘴准备的空间。目标是最小化 <img src="images/全局优化应用_178.gif" width="103" height="14" alt="`+`(`*`(4, `*`(a, `*`(b, `*`(`+`(h, c, 1))))))" align="center" border="0">。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_179.gif" width="221" height="13" alt="packageVolume := `+`(`*`(4, `*`(a, `*`(b, `*`(`+`(h, c, 1)))))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_180.gif" width="186" height="13" alt="`+`(`*`(4, `*`(a, `*`(b, `*`(`+`(h, c, 1))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.2.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark20" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>约束条件</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">约束条件1：瓶子体积</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">瓶子必须能够至少装 40 mL 的香水。瓶子的体积是椭圆体的横截面，是关于 z 的函数，在区间 <img src="images/全局优化应用_181.gif" width="51" height="14" alt="z = `+`(`-`(h)) .. c" align="center" border="0"> 上的的积分。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_182.gif" width="225" height="13" alt="z_crossSection := `*`(Pi, `*`(a, `*`(b, `*`(`+`(1, `-`(`/`(`*`(`^`(z, 2)), `*`(`^`(c, 2))))))))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_183.gif" width="176" height="34" alt="`*`(Pi, `*`(a, `*`(b, `*`(`+`(1, `-`(`/`(`*`(`^`(z, 2)), `*`(`^`(c, 2)))))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_184.gif" width="476" height="14" alt="perfumeVolume := Int(z_crossSection, z = `+`(`-`(h)) .. c); 1; perfumeVolume := value(perfumeVolume); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_185.gif" width="209" height="48" alt="Int(`*`(Pi, `*`(a, `*`(b, `*`(`+`(1, `-`(`/`(`*`(`^`(z, 2)), `*`(`^`(c, 2))))))))), z = `+`(`-`(h)) .. c)" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_186.gif" width="287" height="35" alt="`+`(`-`(`/`(`*`(`/`(1, 3), `*`(Pi, `*`(a, `*`(b, `*`(`+`(`*`(`^`(c, 3)), `*`(`^`(h, 3)))))))), `*`(`^`(c, 2)))), `*`(Pi, `*`(a, `*`(b, `*`(`+`(h, c))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">通过求它在 <img src="images/全局优化应用_187.gif" width="31" height="13" alt="h = c" align="center" border="0"> 上的值检查公式。变为一个求椭圆体的公式，符合期望。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_188.gif" width="174" height="13" alt="eval(perfumeVolume, {h = c}); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_189.gif" width="57" height="28" alt="`+`(`*`(`/`(4, 3), `*`(Pi, `*`(a, `*`(b, `*`(c))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_190.gif" width="192" height="13" alt="constraint1 := `>=`(perfumeVolume, 40); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_191.gif" width="295" height="35" alt="`<=`(40, `+`(`-`(`/`(`*`(`/`(1, 3), `*`(Pi, `*`(a, `*`(b, `*`(`+`(`*`(`^`(c, 3)), `*`(`^`(h, 3)))))))), `*`(`^`(c, 2)))), `*`(Pi, `*`(a, `*`(b, `*`(`+`(h, c)))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">约束条件2：底的宽度</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">底必须至少有 2 cm 的直径，以保持瓶子的稳定性。作为 h 的函数，在平面  <img src="images/全局优化应用_192.gif" width="38" height="14" alt="z = `+`(`-`(h))" align="center" border="0"> 上的横截面最小直径是 <img src="images/全局优化应用_193.gif" width="105" height="38" alt="`+`(`*`(2, `*`(sqrt(`*`(`^`(b, 2), `*`(`+`(1, `-`(`/`(`*`(`^`(h, 2)), `*`(`^`(c, 2)))))))))))" align="center" border="0">。约束 h 让直径至少是 2 cm。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_194.gif" width="320" height="13" alt="hSquareMax := solve(`+`(`*`(4, `*`(`^`(b, 2), `*`(`+`(1, `-`(`/`(`*`(`^`(h, 2)), `*`(`^`(c, 2))))))))) = `^`(2, 2), `*`(`^`(h, 2))); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_195.gif" width="158" height="34" alt="`/`(`*`(`+`(`-`(1), `*`(`^`(b, 2))), `*`(`^`(c, 2))), `*`(`^`(b, 2)))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">得到下面的约束：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_196.gif" width="185" height="13" alt="constraint2 := `<=`(`*`(`^`(h, 2)), hSquareMax); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_197.gif" width="178" height="34" alt="`<=`(`*`(`^`(h, 2)), `/`(`*`(`+`(`-`(1), `*`(`^`(b, 2))), `*`(`^`(c, 2))), `*`(`^`(b, 2))))" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">约束条件3：美学比例</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">客户通常喜欢圆滑瓶。尽管是最经济的设计，但公司不会销售球形香水瓶。限制瓶子的比例满足 <img src="images/全局优化应用_198.gif" width="49" height="14" alt="`<=`(`+`(`*`(2, `*`(b))), a)" align="center" border="0">。</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_199.gif" width="133" height="13" alt="constraint3 := `<=`(`+`(`*`(2, `*`(b))), a); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_200.gif" width="116" height="13" alt="`<=`(`+`(`*`(2, `*`(b))), a)" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.3.7)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark21" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>优化</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_201.gif" width="280" height="13" alt="constraints := {constraint1, constraint2, constraint3}; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_202.gif" width="457" height="35" alt="{`<=`(40, `+`(`-`(`/`(`*`(`/`(1, 3), `*`(Pi, `*`(a, `*`(b, `*`(`+`(`*`(`^`(c, 3)), `*`(`^`(h, 3)))))))), `*`(`^`(c, 2)))), `*`(Pi, `*`(a, `*`(b, `*`(`+`(h, c))))))), `<=`(`*`(`^`(h, 2)), `/`(`*`(`+`(`..." align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.4.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">使用全局优化工具箱发现最优解。得到包装体积的最小值 &nbsp;77.69 mL，显然大于瓶子的体积 40 mL，满足期望。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_203.gif" width="459" height="13" alt="sol := GlobalSolve(packageVolume, constraints, a = 1 .. 10, b = 1 .. 10, c = 1 .. 10, h = 1 .. 10); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_204.gif" width="638" height="13" alt="[77.6889319096612782, [a = HFloat(2.1529645589603263), b = HFloat(1.0764822794801638), c = HFloat(5.386231100896985), h = HFloat(1.9939883883001093)]]" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.4.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<dl style="margin-left:40px"><a name="MapleAutoBookmark22" />
+<p align="left"><font color="#000000" size="3" face="Times New Roman"><strong><em>测试</em></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">检查得到的结果是否在可接受的精度内满足所有的约束条件。为了更精确，使用 GlobalSolve 调用格式中的 feasibilitytolerance 和 penaltymultiplier 参数项。</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_205.gif" width="215" height="13" alt="subs(sol[2], constraints); -1; evalf[6](%); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_206.gif" width="294" height="13" alt="{`<=`(2.15296, 2.15296), `<=`(3.97599, 3.97599), `<=`(40., 40.0000)}" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.5.1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">优化后的椭圆体：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_207.gif" width="220" height="13" alt="bottleShape := eval(bottleShape, sol[2]); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_208.gif" width="466" height="16" alt="`+`(`*`(HFloat(0.21573779644549212), `*`(`^`(x, 2))), `*`(HFloat(0.8629511857819675), `*`(`^`(y, 2))), `*`(HFloat(0.03446910710435114), `*`(`^`(z, 2)))) = 1" align="center" border="0"></td>
+<td width='5%' align='center'>(3.2.5.2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_209.gif" width="458" height="13" alt="A := eval(a, sol[2]); -1; B := eval(b, sol[2]); -1; C := eval(c, sol[2]); -1; H := eval(h, sol[2]); -1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">优化后的香水瓶的轮廓图：</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#ff0000" size="3" face="Times New Roman"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/全局优化应用_210.gif" width="341" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_211.gif" width="353" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_212.gif" width="243" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_213.gif" width="11" height="13" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_214.gif" width="648" height="13" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_215.gif" width="648" height="13" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_216.gif" width="8" height="13" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_217.gif" width="263" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_218.gif" width="11" height="13" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_219.gif" width="308" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"><br><img src="images/全局优化应用_220.gif" width="8" height="14" alt="glass := implicitplot3d(bottleShape, x = `+`(`-`(A)) .. A, y = `+`(`-`(B)) .. B, z = `+`(`-`(H)) .. C, grid = [8, 8, 8], style = patchnogrid, lightmodel = light4, transparency = .1, color = gold); -1;..." align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#000000" size="3" face="Times New Roman"><img src="images/全局优化应用_221.gif" width="400" height="400" alt="Plot_2d" align="center" border="0"></td>
+<td width='5%' align='center'></td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+</dl>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</dl>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="SimSun"></font>&nbsp;</p>
+</body>
+</html>
