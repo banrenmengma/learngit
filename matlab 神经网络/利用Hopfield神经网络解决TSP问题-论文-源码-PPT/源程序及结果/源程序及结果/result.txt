@@ -1,0 +1,830 @@
+4
+4个城市坐标
+第0城市  0.666494	0.139836
+第1城市  0.90463	0.387432
+第2城市  0.11298	0.398053
+第3城市  0.705863	0.148503
+**********************************************
+--------------------------A=B=C=0.05	D=0.1-------------------------
+--------------------------A=B=C=0.1	D=0.1-------------------------
+--------------------------A=B=C=0.15	D=0.1-------------------------
+
+iterations=3068	E=0.139459
+2	right path
+TotaoDis=1.90837
+1	3	2	0	
+
+iterations=3116	E=0.139459
+6	right path
+TotaoDis=1.90837
+2	3	1	0	
+
+iterations=3024	E=0.139459
+9	right path
+TotaoDis=1.90837
+1	0	2	3	
+
+iterations=3014	E=0.139459
+10	right path
+TotaoDis=1.90837
+3	2	0	1	
+
+iterations=3142	E=0.139459
+20	right path
+TotaoDis=1.90837
+2	3	1	0	
+最短路径长度：1.90837	最小路径为：1  3  2  0  --------------------------A=B=C=0.2	D=0.1-------------------------
+
+iterations=2506	E=0.126357
+1	right path
+TotaoDis=1.75361
+2	1	3	0	
+
+iterations=2384	E=0.126357
+2	right path
+TotaoDis=1.75361
+1	2	0	3	
+
+iterations=2476	E=0.130594
+3	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2509	E=0.126357
+4	right path
+TotaoDis=1.75361
+1	2	0	3	
+
+iterations=2561	E=0.130594
+5	right path
+TotaoDis=1.81882
+1	0	3	2	
+
+iterations=2798	E=0.152028
+6	right path
+TotaoDis=1.90837
+2	0	1	3	
+
+iterations=2653	E=0.152028
+7	right path
+TotaoDis=1.90837
+1	3	2	0	
+
+iterations=2488	E=0.130594
+8	right path
+TotaoDis=1.81882
+2	3	0	1	
+
+iterations=2622	E=0.126357
+9	right path
+TotaoDis=1.75361
+1	2	0	3	
+
+iterations=2537	E=0.126357
+10	right path
+TotaoDis=1.75361
+0	3	1	2	
+
+iterations=2526	E=0.130594
+11	right path
+TotaoDis=1.81882
+3	2	1	0	
+
+iterations=2171	E=0.130594
+12	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2704	E=0.130594
+13	right path
+TotaoDis=1.81882
+0	1	2	3	
+
+iterations=2734	E=0.152028
+14	right path
+TotaoDis=1.90837
+2	3	1	0	
+
+iterations=2638	E=0.126357
+15	right path
+TotaoDis=1.75361
+1	2	0	3	
+
+iterations=2702	E=0.152028
+16	right path
+TotaoDis=1.90837
+2	3	1	0	
+
+iterations=2679	E=0.152028
+17	right path
+TotaoDis=1.90837
+3	1	0	2	
+
+iterations=2491	E=0.130594
+18	right path
+TotaoDis=1.81882
+0	3	2	1	
+
+iterations=2541	E=0.130594
+19	right path
+TotaoDis=1.81882
+3	2	1	0	
+
+iterations=2454	E=0.130594
+20	right path
+TotaoDis=1.81882
+0	1	2	3	
+最短路径长度：1.75361	最小路径为：2  1  3  0  --------------------------A=B=C=0.25	D=0.1-------------------------
+
+iterations=2682	E=0.159806
+1	right path
+TotaoDis=1.90837
+1	3	2	0	
+
+iterations=2849	E=0.159806
+2	right path
+TotaoDis=1.90837
+0	2	3	1	
+
+iterations=2350	E=0.140774
+3	right path
+TotaoDis=1.81882
+0	3	2	1	
+
+iterations=2532	E=0.136094
+4	right path
+TotaoDis=1.75361
+1	3	0	2	
+
+iterations=2595	E=0.140774
+5	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2512	E=0.136094
+6	right path
+TotaoDis=1.75361
+2	0	3	1	
+
+iterations=2553	E=0.140774
+7	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2663	E=0.140774
+8	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2645	E=0.140774
+9	right path
+TotaoDis=1.81882
+2	1	0	3	
+
+iterations=2431	E=0.140774
+10	right path
+TotaoDis=1.81882
+2	3	0	1	
+
+iterations=2616	E=0.140774
+11	right path
+TotaoDis=1.81882
+2	3	0	1	
+
+iterations=2073	E=0.140774
+12	right path
+TotaoDis=1.81882
+2	1	0	3	
+
+iterations=2480	E=0.140774
+13	right path
+TotaoDis=1.81882
+2	1	0	3	
+
+iterations=2270	E=0.136094
+14	right path
+TotaoDis=1.75361
+2	1	3	0	
+
+iterations=2576	E=0.140774
+15	right path
+TotaoDis=1.81882
+0	1	2	3	
+
+iterations=2644	E=0.136094
+16	right path
+TotaoDis=1.75361
+1	2	0	3	
+
+iterations=2470	E=0.140774
+17	right path
+TotaoDis=1.81882
+2	3	0	1	
+
+iterations=2803	E=0.159806
+18	right path
+TotaoDis=1.90837
+0	2	3	1	
+
+iterations=2626	E=0.140774
+19	right path
+TotaoDis=1.81882
+3	2	1	0	
+
+iterations=2498	E=0.140774
+20	right path
+TotaoDis=1.81882
+0	1	2	3	
+最短路径长度：1.75361	最小路径为：1  3  0  2  --------------------------A=B=C=0.3	D=0.1-------------------------
+
+iterations=2436	E=0.147639
+1	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2606	E=0.142658
+2	right path
+TotaoDis=1.75361
+0	2	1	3	
+
+iterations=2544	E=0.142658
+3	right path
+TotaoDis=1.75361
+0	2	1	3	
+
+iterations=2521	E=0.142658
+4	right path
+TotaoDis=1.75361
+1	3	0	2	
+
+iterations=2768	E=0.16505
+5	right path
+TotaoDis=1.90837
+2	3	1	0	
+
+iterations=2579	E=0.147639
+6	right path
+TotaoDis=1.81882
+0	1	2	3	
+
+iterations=2544	E=0.147639
+7	right path
+TotaoDis=1.81882
+0	3	2	1	
+
+iterations=2509	E=0.147639
+8	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2633	E=0.142658
+9	right path
+TotaoDis=1.75361
+3	0	2	1	
+
+iterations=2560	E=0.142658
+10	right path
+TotaoDis=1.75361
+3	0	2	1	
+
+iterations=2838	E=0.16505
+11	right path
+TotaoDis=1.90837
+2	0	1	3	
+
+iterations=2509	E=0.142658
+12	right path
+TotaoDis=1.75361
+2	1	3	0	
+
+iterations=2719	E=0.147639
+13	right path
+TotaoDis=1.81882
+1	2	3	0	
+
+iterations=2514	E=0.16505
+14	right path
+TotaoDis=1.90837
+3	1	0	2	
+
+iterations=2713	E=0.16505
+15	right path
+TotaoDis=1.90837
+2	0	1	3	
+
+iterations=2523	E=0.147639
+16	right path
+TotaoDis=1.81882
+3	0	1	2	
+
+iterations=2448	E=0.147639
+17	right path
+TotaoDis=1.81882
+2	1	0	3	
+
+iterations=2462	E=0.147639
+18	right path
+TotaoDis=1.81882
+2	1	0	3	
+
+iterations=2771	E=0.147639
+19	right path
+TotaoDis=1.81882
+0	1	2	3	
+
+iterations=2849	E=0.147639
+20	right path
+TotaoDis=1.81882
+1	2	3	0	
+最短路径长度：1.75361	最小路径为：0  2  1  3  **********************************************
+
+
+
+4
+4个城市坐标
+第0城市  0.670278	0.341014
+第1城市  0.491379	0.073397
+第2城市  0.164953	0.0662557
+第3城市  0.267464	0.149236
+**********************************************
+--------------------------A=B=C=0.05	D=0.1-------------------------
+
+iterations=9000	E=0.0781352
+1	right path
+TotaoDis=0.6948
+1	2	3	0	
+
+iterations=7710	E=0.0698326
+3	right path
+TotaoDis=0.6948
+2	3	1	0	
+
+iterations=9000	E=0.0698326
+6	right path
+TotaoDis=0.6948
+1	3	2	0	
+
+iterations=8734	E=0.0698326
+10	right path
+TotaoDis=0.6948
+1	3	2	0	
+
+iterations=9000	E=0.0698326
+12	right path
+TotaoDis=1.01671
+1	3	2	0	
+
+iterations=8810	E=0.0698326
+13	right path
+TotaoDis=0.6948
+2	1	3	0	
+
+iterations=9000	E=0.0781352
+15	right path
+TotaoDis=0.6948
+2	1	3	0	
+
+iterations=8380	E=0.0698326
+19	right path
+TotaoDis=0.6948
+3	1	2	0	
+
+iterations=8247	E=0.0698326
+20	right path
+TotaoDis=1.01671
+1	3	2	0	
+最短路径长度：0.6948	最小路径为：1  2  3  0  --------------------------A=B=C=0.1	D=0.1-------------------------
+
+iterations=4980	E=0.0981268
+1	right path
+TotaoDis=1.22643
+3	2	1	0	
+
+iterations=5950	E=0.109138
+2	right path
+TotaoDis=0.6948
+1	2	3	0	
+
+iterations=3356	E=0.0887252
+3	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3248	E=0.0887252
+4	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=4852	E=0.0981268
+5	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=3478	E=0.0887252
+7	right path
+TotaoDis=1.26539
+0	2	3	1	
+
+iterations=4945	E=0.0981268
+9	right path
+TotaoDis=1.22643
+1	2	3	0	
+
+iterations=3518	E=0.0887252
+10	right path
+TotaoDis=1.26539
+1	0	2	3	
+
+iterations=3322	E=0.0887252
+11	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=5063	E=0.0981268
+13	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3521	E=0.0887252
+14	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=5048	E=0.0981268
+15	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=3474	E=0.0887252
+16	right path
+TotaoDis=1.26539
+1	3	2	0	
+
+iterations=3397	E=0.0887252
+17	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=4968	E=0.0981268
+19	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=3493	E=0.0887252
+20	right path
+TotaoDis=1.26539
+2	3	1	0	
+最短路径长度：0.6948	最小路径为：1  2  3  0  --------------------------A=B=C=0.15	D=0.1-------------------------
+
+iterations=3359	E=0.100886
+1	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=4770	E=0.106395
+2	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=4397	E=0.106395
+3	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3380	E=0.100886
+4	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=5047	E=0.106395
+5	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=4857	E=0.106395
+6	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3537	E=0.100886
+7	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=3280	E=0.100886
+8	right path
+TotaoDis=1.26539
+0	2	3	1	
+
+iterations=3405	E=0.125427
+9	right path
+TotaoDis=1.58424
+1	3	0	2	
+
+iterations=4814	E=0.106395
+10	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=4516	E=0.106395
+11	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=3334	E=0.100886
+12	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3698	E=0.100886
+13	right path
+TotaoDis=1.26539
+1	3	2	0	
+
+iterations=3500	E=0.125427
+14	right path
+TotaoDis=1.58424
+2	0	3	1	
+
+iterations=3575	E=0.125427
+15	right path
+TotaoDis=1.58424
+1	3	0	2	
+
+iterations=3324	E=0.100886
+16	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=3441	E=0.100886
+17	right path
+TotaoDis=1.26539
+2	0	1	3	
+
+iterations=5148	E=0.106395
+18	right path
+TotaoDis=1.22643
+1	0	3	2	
+
+iterations=4881	E=0.106395
+19	right path
+TotaoDis=1.22643
+0	1	2	3	
+
+iterations=5045	E=0.106395
+20	right path
+TotaoDis=1.22643
+1	2	3	0	
+最短路径长度：1.22643	最小路径为：2  1  0  3  --------------------------A=B=C=0.2	D=0.1-------------------------
+
+iterations=3064	E=0.107416
+1	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=4314	E=0.110641
+2	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=4803	E=0.110641
+3	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=3373	E=0.133778
+4	right path
+TotaoDis=1.58424
+1	3	0	2	
+
+iterations=4626	E=0.110641
+5	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=4794	E=0.110641
+6	right path
+TotaoDis=1.22643
+1	2	3	0	
+
+iterations=4249	E=0.110641
+7	right path
+TotaoDis=1.22643
+1	0	3	2	
+
+iterations=4796	E=0.110641
+8	right path
+TotaoDis=1.22643
+0	3	2	1	
+
+iterations=4662	E=0.110641
+9	right path
+TotaoDis=1.22643
+3	2	1	0	
+
+iterations=3533	E=0.107416
+10	right path
+TotaoDis=1.26539
+2	3	1	0	
+
+iterations=2721	E=0.107416
+11	right path
+TotaoDis=1.26539
+2	0	1	3	
+
+iterations=4643	E=0.110641
+12	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=4719	E=0.110641
+13	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3292	E=0.107416
+14	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=4386	E=0.110641
+15	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=3500	E=0.107416
+16	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3259	E=0.107416
+17	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=3230	E=0.107416
+18	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=2943	E=0.107416
+19	right path
+TotaoDis=1.26539
+0	2	3	1	
+
+iterations=3449	E=0.107416
+20	right path
+TotaoDis=1.26539
+3	1	0	2	
+最短路径长度：1.22643	最小路径为：3  0  1  2  --------------------------A=B=C=0.25	D=0.1-------------------------
+
+iterations=4205	E=0.113181
+1	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=3510	E=0.111394
+2	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=3487	E=0.111394
+3	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3740	E=0.138905
+4	right path
+TotaoDis=1.58424
+2	0	3	1	
+
+iterations=4332	E=0.113181
+5	right path
+TotaoDis=1.22643
+2	1	0	3	
+
+iterations=3853	E=0.113181
+6	right path
+TotaoDis=1.22643
+1	0	3	2	
+
+iterations=4136	E=0.113181
+7	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3273	E=0.111394
+8	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3857	E=0.113181
+9	right path
+TotaoDis=1.22643
+3	2	1	0	
+
+iterations=3137	E=0.111394
+10	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=3922	E=0.113181
+11	right path
+TotaoDis=1.22643
+1	2	3	0	
+
+iterations=3954	E=0.113181
+12	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=4270	E=0.113181
+13	right path
+TotaoDis=1.22643
+3	0	1	2	
+
+iterations=4276	E=0.138905
+14	right path
+TotaoDis=1.58424
+1	2	0	3	
+
+iterations=3599	E=0.111394
+15	right path
+TotaoDis=1.26539
+1	3	2	0	
+
+iterations=3344	E=0.111394
+16	right path
+TotaoDis=1.26539
+1	0	2	3	
+
+iterations=4036	E=0.113181
+17	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=4148	E=0.113181
+18	right path
+TotaoDis=1.22643
+0	3	2	1	
+
+iterations=3241	E=0.111394
+19	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=3239	E=0.111394
+20	right path
+TotaoDis=1.26539
+3	1	0	2	
+最短路径长度：1.22643	最小路径为：3  0  1  2  --------------------------A=B=C=0.3	D=0.1-------------------------
+
+iterations=3354	E=0.11405
+1	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=3547	E=0.11405
+2	right path
+TotaoDis=1.26539
+2	0	1	3	
+
+iterations=3499	E=0.11405
+3	right path
+TotaoDis=1.26539
+3	2	0	1	
+
+iterations=4203	E=0.114863
+4	right path
+TotaoDis=1.22643
+3	2	1	0	
+
+iterations=3871	E=0.114863
+5	right path
+TotaoDis=1.22643
+3	2	1	0	
+
+iterations=3176	E=0.11405
+6	right path
+TotaoDis=1.26539
+1	0	2	3	
+
+iterations=3899	E=0.114863
+7	right path
+TotaoDis=1.22643
+1	0	3	2	
+
+iterations=3897	E=0.114863
+8	right path
+TotaoDis=1.22643
+2	3	0	1	
+
+iterations=3362	E=0.11405
+9	right path
+TotaoDis=1.26539
+3	1	0	2	
+
+iterations=3717	E=0.14233
+10	right path
+TotaoDis=1.58424
+0	3	1	2	

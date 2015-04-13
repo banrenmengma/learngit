@@ -1,0 +1,403 @@
+5
+5个城市坐标
+第0城市  0.493606	0.0332347
+第1城市  0.0324717	0.28312
+第2城市  0.976959	0.48558
+第3城市  0.907834	0.14185
+第4城市  0.401837	0.842372
+**********************************************
+--------------------------A=B=C=0.05	D=0.1-------------------------
+--------------------------A=B=C=0.1	D=0.1-------------------------
+--------------------------A=B=C=0.15	D=0.1-------------------------
+
+iterations=3000	E=0.261005
+1	right path
+TotaoDis=3.38384
+3	1	4	0	2	
+
+iterations=3000	E=0.271279
+2	right path
+TotaoDis=3.38384
+1	3	2	0	4	
+
+iterations=3000	E=0.264258
+3	right path
+TotaoDis=3.51952
+2	1	0	4	3	
+
+iterations=3000	E=0.207939
+5	right path
+TotaoDis=2.65035
+3	2	4	1	0	
+
+iterations=3000	E=0.25454
+6	right path
+TotaoDis=3.25292
+1	3	2	4	0	
+
+iterations=3000	E=0.264258
+8	right path
+TotaoDis=3.51952
+1	0	4	3	2	
+
+iterations=2943	E=0.269231
+9	right path
+TotaoDis=3.45962
+1	0	3	4	2	
+
+iterations=3000	E=0.207939
+10	right path
+TotaoDis=2.65035
+3	2	4	1	0	
+
+iterations=3000	E=0.207939
+11	right path
+TotaoDis=2.65035
+2	3	0	1	4	
+
+iterations=3000	E=0.207939
+13	right path
+TotaoDis=2.65035
+2	3	0	1	4	
+
+iterations=3000	E=0.207939
+14	right path
+TotaoDis=2.65035
+0	3	2	4	1	
+
+iterations=3000	E=0.25454
+15	right path
+TotaoDis=3.25292
+4	0	1	3	2	
+
+iterations=2974	E=0.261005
+16	right path
+TotaoDis=3.38384
+3	2	0	4	1	
+
+iterations=3000	E=0.264258
+17	right path
+TotaoDis=3.51952
+3	2	1	0	4	
+
+iterations=3000	E=0.264258
+18	right path
+TotaoDis=3.51952
+0	4	3	2	1	
+
+iterations=3000	E=0.239194
+19	right path
+TotaoDis=2.26997
+3	2	4	0	1	
+
+iterations=3000	E=0.264258
+20	right path
+TotaoDis=3.51952
+1	2	3	4	0	
+--------------------------A=B=C=0.2	D=0.1-------------------------
+
+iterations=3000	E=0.221534
+1	right path
+TotaoDis=2.65035
+4	2	3	0	1	
+
+iterations=3000	E=0.285523
+2	right path
+TotaoDis=3.51952
+2	3	4	0	1	
+
+iterations=2910	E=0.28863
+3	right path
+TotaoDis=3.45962
+1	2	4	3	0	
+
+iterations=3000	E=0.27543
+4	right path
+TotaoDis=3.32394
+4	2	0	3	1	
+
+iterations=3000	E=0.28863
+5	right path
+TotaoDis=3.45962
+2	4	3	0	1	
+
+iterations=2743	E=0.250846
+6	right path
+TotaoDis=3.07147
+2	3	4	1	0	
+
+iterations=3000	E=0.295069
+7	right path
+TotaoDis=3.77199
+2	1	3	0	4	
+
+iterations=2914	E=0.250846
+8	right path
+TotaoDis=3.07147
+2	3	4	1	0	
+
+iterations=3000	E=0.285523
+9	right path
+TotaoDis=3.51952
+1	0	4	3	2	
+
+iterations=3000	E=0.272305
+10	right path
+TotaoDis=3.25292
+3	1	0	4	2	
+
+iterations=2912	E=0.221534
+11	right path
+TotaoDis=2.65035
+4	2	3	0	1	
+
+iterations=3000	E=0.221534
+12	right path
+TotaoDis=2.65035
+1	4	2	3	0	
+
+iterations=2510	E=0.28863
+13	right path
+TotaoDis=3.45962
+0	3	4	2	1	
+
+iterations=2987	E=0.280347
+14	right path
+TotaoDis=3.38384
+0	2	3	1	4	
+
+iterations=2761	E=0.258359
+15	right path
+TotaoDis=3.22933
+1	2	3	0	4	
+
+iterations=3000	E=0.285523
+16	right path
+TotaoDis=3.51952
+3	4	0	1	2	
+
+iterations=2802	E=0.221534
+17	right path
+TotaoDis=2.65035
+4	2	3	0	1	
+
+iterations=3000	E=0.272305
+18	right path
+TotaoDis=3.25292
+4	2	3	1	0	
+
+iterations=2775	E=0.250846
+19	right path
+TotaoDis=3.07147
+1	0	2	3	4	
+
+iterations=2883	E=0.221534
+20	right path
+TotaoDis=2.65035
+3	2	4	1	0	
+--------------------------A=B=C=0.25	D=0.1-------------------------
+
+iterations=3000	E=0.230162
+1	right path
+TotaoDis=2.65035
+1	4	2	3	0	
+
+iterations=2896	E=0.286627
+2	right path
+TotaoDis=3.32394
+0	3	1	4	2	
+
+iterations=3000	E=0.270875
+3	right path
+TotaoDis=3.22933
+2	3	0	4	1	
+
+iterations=3000	E=0.298568
+4	right path
+TotaoDis=3.51952
+3	2	1	0	4	
+
+iterations=3000	E=0.310635
+5	right path
+TotaoDis=3.77199
+3	1	2	4	0	
+
+iterations=3000	E=0.230162
+6	right path
+TotaoDis=2.65035
+1	0	3	2	4	
+
+iterations=3000	E=0.230162
+7	right path
+TotaoDis=2.65035
+0	1	4	2	3	
+
+iterations=3000	E=0.286627
+8	right path
+TotaoDis=3.32394
+2	4	1	3	0	
+
+iterations=2937	E=0.292073
+9	right path
+TotaoDis=3.38384
+1	3	2	0	4	
+
+iterations=3000	E=0.308548
+10	right path
+TotaoDis=3.59055
+0	3	4	1	2	
+
+iterations=2881	E=0.292073
+11	right path
+TotaoDis=3.38384
+2	3	1	4	0	
+
+iterations=2484	E=0.270875
+12	right path
+TotaoDis=3.22933
+1	2	3	0	4	
+
+iterations=3000	E=0.270875
+13	right path
+TotaoDis=3.22933
+1	2	3	0	4	
+
+iterations=2743	E=0.230162
+14	right path
+TotaoDis=2.65035
+1	0	3	2	4	
+
+iterations=3000	E=0.230162
+15	right path
+TotaoDis=2.65035
+4	2	3	0	1	
+
+iterations=3000	E=0.230162
+16	right path
+TotaoDis=2.65035
+3	0	1	4	2	
+
+iterations=3000	E=0.28305
+17	right path
+TotaoDis=3.25292
+4	2	3	1	0	
+
+iterations=3000	E=0.230162
+18	right path
+TotaoDis=2.65035
+0	1	4	2	3	
+
+iterations=3000	E=0.230162
+19	right path
+TotaoDis=2.65035
+2	3	0	1	4	
+
+iterations=2832	E=0.292073
+20	right path
+TotaoDis=3.38384
+2	0	4	1	3	
+--------------------------A=B=C=0.3	D=0.1-------------------------
+
+iterations=3000	E=0.279488
+1	right path
+TotaoDis=3.22933
+2	3	0	4	1	
+
+iterations=3000	E=0.290238
+2	right path
+TotaoDis=3.25292
+0	1	3	2	4	
+
+iterations=2952	E=0.31713
+3	right path
+TotaoDis=3.59055
+1	4	3	0	2	
+
+iterations=2688	E=0.2692
+4	right path
+TotaoDis=3.07147
+3	2	0	1	4	
+
+iterations=3000	E=0.23604
+5	right path
+TotaoDis=2.65035
+4	2	3	0	1	
+
+iterations=2800	E=0.2692
+6	right path
+TotaoDis=3.07147
+1	4	3	2	0	
+
+iterations=2536	E=0.279488
+7	right path
+TotaoDis=3.22933
+3	2	1	4	0	
+
+iterations=3000	E=0.316691
+8	right path
+TotaoDis=3.59055
+2	1	4	3	0	
+
+iterations=2798	E=0.2692
+9	right path
+TotaoDis=3.07147
+3	2	0	1	4	
+
+iterations=2853	E=0.2692
+10	right path
+TotaoDis=3.07147
+2	3	4	1	0	
+
+iterations=3000	E=0.316691
+11	right path
+TotaoDis=3.59055
+4	1	2	0	3	
+
+iterations=3000	E=0.29423
+12	right path
+TotaoDis=3.32394
+3	0	2	4	1	
+
+iterations=2778	E=0.2692
+13	right path
+TotaoDis=3.07147
+3	4	1	0	2	
+
+iterations=2956	E=0.2692
+14	right path
+TotaoDis=3.07147
+0	1	4	3	2	
+
+iterations=3000	E=0.23604
+15	right path
+TotaoDis=2.65035
+0	3	2	4	1	
+
+iterations=2793	E=0.2692
+16	right path
+TotaoDis=3.07147
+2	3	4	1	0	
+
+iterations=3000	E=0.23604
+17	right path
+TotaoDis=2.65035
+3	2	4	1	0	
+
+iterations=3000	E=0.290238
+18	right path
+TotaoDis=3.25292
+2	3	1	0	4	
+
+iterations=3000	E=0.307387
+19	right path
+TotaoDis=3.51952
+2	3	4	0	1	
+
+iterations=3000	E=0.279488
+20	right path
+TotaoDis=3.22933
+0	4	1	2	3	
+**********************************************
+
+
+

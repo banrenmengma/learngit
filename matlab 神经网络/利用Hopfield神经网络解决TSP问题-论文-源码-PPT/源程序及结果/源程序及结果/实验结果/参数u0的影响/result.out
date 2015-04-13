@@ -1,0 +1,1438 @@
+10
+0	0.00125126	0.563585
+1	0.193304	0.808741
+2	0.585009	0.479873
+3	0.350291	0.895962
+4	0.82284	0.746605
+5	0.174108	0.858943
+6	0.710501	0.513535
+7	0.303995	0.0149846
+8	0.0914029	0.364452
+9	0.147313	0.165899
+**********************************************
+-----------------u0=0.01	A=B=C=0.05	D=0.1-----------------
+-----------------u0=0.01	A=B=C=0.1	D=0.1-----------------
+
+iterations=2554	E=0.236287
+1	right path
+TotaoDis=2.64544
+1	5	0	8	9	7	2	6	4	3	
+
+iterations=3000	E=0.281253
+2	right path
+TotaoDis=3.24564
+6	2	4	3	1	5	0	7	9	8	
+
+iterations=2772	E=0.247795
+3	right path
+TotaoDis=2.84412
+4	3	1	5	0	8	9	7	6	2	
+
+iterations=3000	E=0.307289
+4	right path
+TotaoDis=3.57314
+9	6	4	2	3	1	5	0	7	8	
+
+iterations=3000	E=0.257311
+6	right path
+TotaoDis=2.98678
+2	6	4	3	5	1	0	7	9	8	
+
+iterations=2733	E=0.289143
+13	right path
+TotaoDis=3.31922
+2	6	4	1	5	3	0	9	8	7	
+
+iterations=2549	E=0.281108
+14	right path
+TotaoDis=2.79986
+4	3	1	5	8	0	9	2	6	7	
+
+iterations=2589	E=0.236287
+15	right path
+TotaoDis=2.64544
+1	5	0	8	9	7	2	6	4	3	
+
+iterations=3000	E=0.233158
+18	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+-----------------u0=0.01	A=B=C=0.15	D=0.1-----------------
+
+iterations=2595	E=0.302867
+1	right path
+TotaoDis=3.46589
+6	2	0	5	1	3	8	9	7	4	
+
+iterations=3000	E=0.323247
+2	right path
+TotaoDis=3.60196
+9	8	0	1	2	5	3	4	6	7	
+
+iterations=3000	E=0.351401
+3	right path
+TotaoDis=3.92325
+0	2	6	3	4	1	5	7	9	8	
+
+iterations=2355	E=0.297394
+4	right path
+TotaoDis=3.43351
+2	6	3	5	1	0	7	9	8	4	
+
+iterations=3000	E=0.336923
+5	right path
+TotaoDis=3.71964
+1	0	5	3	4	2	6	7	8	9	
+
+iterations=3000	E=0.328348
+6	right path
+TotaoDis=3.70944
+8	1	5	3	2	6	4	7	0	9	
+
+iterations=3000	E=0.242776
+10	right path
+TotaoDis=2.61508
+0	1	5	3	4	6	2	7	9	8	
+
+iterations=2495	E=0.320386
+13	right path
+TotaoDis=3.64574
+3	5	0	1	2	6	4	7	9	8	
+
+iterations=2591	E=0.327429
+14	right path
+TotaoDis=3.73818
+0	1	3	5	4	6	7	2	9	8	
+
+iterations=3000	E=0.330507
+16	right path
+TotaoDis=3.63675
+2	6	4	5	0	1	3	8	7	9	
+
+iterations=2102	E=0.257431
+17	right path
+TotaoDis=3.09718
+8	0	1	5	3	6	2	4	7	9	
+
+iterations=3000	E=0.245868
+18	right path
+TotaoDis=2.64544
+8	0	5	1	3	4	6	2	7	9	
+
+iterations=2013	E=0.28725
+19	right path
+TotaoDis=3.39461
+6	2	1	5	0	8	7	9	3	4	
+
+iterations=3000	E=0.336476
+20	right path
+TotaoDis=3.78863
+6	8	0	1	5	3	2	7	9	4	
+-----------------u0=0.01	A=B=C=0.2	D=0.1-----------------
+
+iterations=3000	E=0.327845
+1	right path
+TotaoDis=3.52482
+0	6	4	5	1	3	2	7	9	8	
+
+iterations=3000	E=0.343213
+2	right path
+TotaoDis=3.78046
+0	4	2	6	1	3	5	7	9	8	
+
+iterations=2371	E=0.360845
+3	right path
+TotaoDis=3.87922
+5	0	1	3	2	4	6	7	8	9	
+
+iterations=2750	E=0.428947
+4	right path
+TotaoDis=4.72624
+8	1	5	0	4	3	2	7	9	6	
+
+iterations=2668	E=0.27087
+5	right path
+TotaoDis=2.90264
+9	8	0	5	1	3	6	4	2	7	
+
+iterations=1974	E=0.398566
+6	right path
+TotaoDis=4.578
+3	1	0	5	8	9	6	7	4	2	
+
+iterations=3000	E=0.374676
+7	right path
+TotaoDis=4.19191
+0	5	1	8	3	9	7	2	6	4	
+
+iterations=3000	E=0.430771
+8	right path
+TotaoDis=4.64952
+0	1	3	8	5	4	6	7	2	9	
+
+iterations=1903	E=0.353434
+9	right path
+TotaoDis=3.97024
+0	5	1	6	2	3	4	8	7	9	
+
+iterations=2511	E=0.379738
+10	right path
+TotaoDis=4.23291
+6	2	0	5	1	9	7	8	4	3	
+
+iterations=3000	E=0.361334
+11	right path
+TotaoDis=3.93438
+4	0	1	3	5	2	7	9	8	6	
+
+iterations=1834	E=0.338301
+12	right path
+TotaoDis=3.91385
+4	1	0	5	3	6	2	7	9	8	
+
+iterations=1712	E=0.322553
+14	right path
+TotaoDis=3.77528
+8	4	5	1	3	6	2	7	9	0	
+
+iterations=2172	E=0.426911
+15	right path
+TotaoDis=4.8296
+1	2	0	4	5	3	6	7	9	8	
+
+iterations=2516	E=0.435559
+16	right path
+TotaoDis=4.93833
+2	0	8	5	6	3	1	4	7	9	
+
+iterations=3000	E=0.324412
+17	right path
+TotaoDis=3.52658
+1	5	0	8	4	6	2	7	9	3	
+
+iterations=3000	E=0.340924
+18	right path
+TotaoDis=3.67874
+4	2	8	0	5	1	3	7	9	6	
+
+iterations=2379	E=0.425172
+20	right path
+TotaoDis=4.81098
+8	9	2	1	0	3	5	7	6	4	
+-----------------u0=0.01	A=B=C=0.25	D=0.1-----------------
+
+iterations=1674	E=0.316677
+1	right path
+TotaoDis=3.60143
+0	4	1	5	3	2	6	7	9	8	
+
+iterations=2667	E=0.302797
+2	right path
+TotaoDis=3.24039
+0	5	1	3	4	6	2	9	8	7	
+
+iterations=3000	E=0.548256
+3	right path
+TotaoDis=5.85568
+0	9	3	6	1	8	5	7	2	4	
+
+iterations=2493	E=0.326239
+4	right path
+TotaoDis=3.48592
+0	1	3	4	6	2	5	8	7	9	
+
+iterations=3000	E=0.444839
+5	right path
+TotaoDis=4.85271
+0	1	8	9	5	6	2	7	4	3	
+
+iterations=3000	E=0.386408
+6	right path
+TotaoDis=4.03735
+2	3	0	1	5	4	6	9	7	8	
+
+iterations=3000	E=0.344485
+7	right path
+TotaoDis=3.63067
+0	1	5	3	8	7	9	6	4	2	
+
+iterations=1904	E=0.302111
+8	right path
+TotaoDis=3.33565
+8	0	1	3	5	6	2	4	7	9	
+
+iterations=1858	E=0.353734
+9	right path
+TotaoDis=4.00513
+9	8	0	3	5	1	4	7	2	6	
+
+iterations=2803	E=0.323054
+10	right path
+TotaoDis=3.43056
+5	1	0	6	4	2	7	9	8	3	
+
+iterations=1855	E=0.361363
+11	right path
+TotaoDis=4.07776
+7	0	8	9	1	3	5	6	2	4	
+
+iterations=2070	E=0.451374
+12	right path
+TotaoDis=5.10239
+0	3	5	6	1	2	7	9	4	8	
+
+iterations=1995	E=0.349279
+13	right path
+TotaoDis=3.87242
+8	1	5	6	2	4	3	7	9	0	
+
+iterations=3000	E=0.433505
+14	right path
+TotaoDis=4.61165
+0	2	3	1	4	6	9	8	7	5	
+
+iterations=2301	E=0.389742
+15	right path
+TotaoDis=4.37719
+1	0	2	6	3	8	7	9	4	5	
+
+iterations=2189	E=0.423304
+16	right path
+TotaoDis=4.83305
+0	8	2	5	3	1	6	7	9	4	
+
+iterations=2194	E=0.454695
+17	right path
+TotaoDis=5.14943
+1	8	0	6	4	2	9	5	7	3	
+
+iterations=3000	E=0.372317
+18	right path
+TotaoDis=3.90478
+0	1	2	3	5	4	6	9	7	8	
+
+iterations=2919	E=0.326977
+19	right path
+TotaoDis=3.53159
+5	1	0	8	2	6	4	7	9	3	
+
+iterations=2276	E=0.35929
+20	right path
+TotaoDis=3.98045
+0	2	6	1	5	3	4	7	8	9	
+-----------------u0=0.01	A=B=C=0.3	D=0.1-----------------
+
+iterations=2880	E=0.372063
+1	right path
+TotaoDis=3.97519
+0	1	5	3	6	8	9	7	4	2	
+
+iterations=2182	E=0.292758
+2	right path
+TotaoDis=3.14759
+0	1	5	3	2	6	4	9	7	8	
+
+iterations=2437	E=0.355871
+3	right path
+TotaoDis=3.79276
+0	5	1	2	4	3	6	9	7	8	
+
+iterations=3000	E=0.440985
+4	right path
+TotaoDis=4.64499
+1	0	8	3	4	5	2	6	9	7	
+
+iterations=2749	E=0.33882
+5	right path
+TotaoDis=3.60611
+0	1	3	5	8	2	6	4	7	9	
+
+iterations=3000	E=0.279679
+6	right path
+TotaoDis=2.9247
+0	1	5	3	2	4	6	7	9	8	
+
+iterations=3000	E=0.352276
+7	right path
+TotaoDis=3.65038
+1	0	3	5	6	4	2	7	9	8	
+
+iterations=2478	E=0.313095
+8	right path
+TotaoDis=3.36419
+0	5	1	3	8	9	7	2	6	4	
+
+iterations=2503	E=0.36995
+9	right path
+TotaoDis=3.91747
+1	0	2	5	3	4	6	7	9	8	
+
+iterations=2454	E=0.40965
+10	right path
+TotaoDis=4.48259
+1	3	5	6	2	0	7	8	9	4	
+
+iterations=2401	E=0.412518
+11	right path
+TotaoDis=4.65751
+0	5	1	2	6	3	7	4	9	8	
+
+iterations=2886	E=0.373806
+12	right path
+TotaoDis=3.99378
+0	5	1	8	3	6	2	4	7	9	
+
+iterations=2141	E=0.434982
+13	right path
+TotaoDis=4.74515
+5	0	1	3	2	4	7	6	8	9	
+
+iterations=2495	E=0.355542
+14	right path
+TotaoDis=3.8105
+3	0	1	5	4	6	2	7	8	9	
+
+iterations=2610	E=0.460952
+15	right path
+TotaoDis=4.92277
+6	0	1	2	5	3	4	9	7	8	
+
+iterations=2204	E=0.319141
+16	right path
+TotaoDis=3.41248
+0	1	5	4	3	2	6	7	9	8	
+
+iterations=3000	E=0.347301
+17	right path
+TotaoDis=3.63721
+1	0	5	4	2	6	7	9	8	3	
+
+iterations=2684	E=0.350505
+18	right path
+TotaoDis=3.73818
+0	1	3	5	4	6	7	2	9	8	
+
+iterations=2043	E=0.346021
+19	right path
+TotaoDis=3.73198
+0	3	5	2	6	4	1	9	7	8	
+
+iterations=2751	E=0.398805
+20	right path
+TotaoDis=4.20825
+2	0	1	5	4	3	6	7	9	8	
+**********************************************
+
+
+
+10
+0	0.00125126	0.563585
+1	0.193304	0.808741
+2	0.585009	0.479873
+3	0.350291	0.895962
+4	0.82284	0.746605
+5	0.174108	0.858943
+6	0.710501	0.513535
+7	0.303995	0.0149846
+8	0.0914029	0.364452
+9	0.147313	0.165899
+**********************************************
+-----------------u0=0.03	A=B=C=0.05	D=0.1-----------------
+-----------------u0=0.03	A=B=C=0.1	D=0.1-----------------
+
+iterations=3000	E=0.248121
+1	right path
+TotaoDis=2.64544
+2	6	4	3	1	5	0	8	9	7	
+
+iterations=3000	E=0.248121
+2	right path
+TotaoDis=2.64544
+8	9	7	2	6	4	3	1	5	0	
+
+iterations=3000	E=0.248121
+3	right path
+TotaoDis=2.64544
+4	3	1	5	0	8	9	7	2	6	
+
+iterations=3000	E=0.248121
+4	right path
+TotaoDis=2.64544
+8	0	5	1	3	4	6	2	7	9	
+
+iterations=3000	E=0.266528
+5	right path
+TotaoDis=2.90372
+0	1	3	5	4	6	2	7	9	8	
+
+iterations=3000	E=0.245133
+6	right path
+TotaoDis=2.61508
+6	2	7	9	8	0	1	5	3	4	
+
+iterations=3000	E=0.256813
+7	right path
+TotaoDis=2.81376
+3	4	2	6	7	9	8	0	1	5	
+
+iterations=3000	E=0.248121
+8	right path
+TotaoDis=2.64544
+4	3	1	5	0	8	9	7	2	6	
+
+iterations=3000	E=0.248121
+9	right path
+TotaoDis=2.64544
+5	1	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.245133
+10	right path
+TotaoDis=2.61508
+4	3	5	1	0	8	9	7	2	6	
+
+iterations=3000	E=0.248121
+11	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+
+iterations=3000	E=0.248121
+12	right path
+TotaoDis=2.64544
+5	0	8	9	7	2	6	4	3	1	
+
+iterations=3000	E=0.245133
+13	right path
+TotaoDis=2.61508
+0	1	5	3	4	6	2	7	9	8	
+
+iterations=3000	E=0.245133
+14	right path
+TotaoDis=2.61508
+1	0	8	9	7	2	6	4	3	5	
+
+iterations=3000	E=0.245133
+15	right path
+TotaoDis=2.61508
+9	8	0	1	5	3	4	6	2	7	
+
+iterations=3000	E=0.248121
+16	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+
+iterations=3000	E=0.259969
+17	right path
+TotaoDis=2.84412
+2	4	3	1	5	0	8	9	7	6	
+
+iterations=3000	E=0.248121
+19	right path
+TotaoDis=2.64544
+4	6	2	7	9	8	0	5	1	3	
+
+iterations=3000	E=0.245133
+20	right path
+TotaoDis=2.61508
+2	6	4	3	5	1	0	8	9	7	
+-----------------u0=0.03	A=B=C=0.15	D=0.1-----------------
+
+iterations=3000	E=0.251057
+1	right path
+TotaoDis=2.61508
+5	3	4	6	2	7	9	8	0	1	
+
+iterations=3000	E=0.309924
+2	right path
+TotaoDis=3.42211
+2	0	8	9	7	6	4	3	1	5	
+
+iterations=3000	E=0.300095
+3	right path
+TotaoDis=3.3127
+7	9	0	8	1	5	3	2	6	4	
+
+iterations=3000	E=0.310003
+4	right path
+TotaoDis=3.32375
+4	2	6	9	7	8	0	1	3	5	
+
+iterations=3000	E=0.265344
+5	right path
+TotaoDis=2.81376
+6	7	9	8	0	1	5	3	4	2	
+
+iterations=3000	E=0.254096
+6	right path
+TotaoDis=2.64544
+5	0	8	9	7	2	6	4	3	1	
+
+iterations=3000	E=0.26848
+7	right path
+TotaoDis=2.84412
+1	3	4	2	6	7	9	8	0	5	
+
+iterations=3000	E=0.299803
+8	right path
+TotaoDis=3.24549
+8	6	2	4	3	1	5	0	9	7	
+
+iterations=3000	E=0.298072
+9	right path
+TotaoDis=3.54449
+5	0	8	9	7	1	6	2	4	3	
+
+iterations=3000	E=0.254096
+10	right path
+TotaoDis=2.64544
+5	1	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.307414
+11	right path
+TotaoDis=3.53786
+9	0	5	3	1	2	6	4	7	8	
+
+iterations=3000	E=0.264772
+12	right path
+TotaoDis=2.98127
+9	7	4	6	2	3	1	5	0	8	
+
+iterations=3000	E=0.251057
+13	right path
+TotaoDis=2.61508
+7	9	8	0	1	5	3	4	6	2	
+
+iterations=3000	E=0.328893
+14	right path
+TotaoDis=3.60528
+3	5	1	8	2	6	4	7	9	0	
+
+iterations=3000	E=0.270944
+15	right path
+TotaoDis=2.8133
+0	1	5	3	4	6	2	9	7	8	
+
+iterations=3000	E=0.251057
+16	right path
+TotaoDis=2.61508
+0	1	5	3	4	6	2	7	9	8	
+
+iterations=3000	E=0.251057
+17	right path
+TotaoDis=2.61508
+7	9	8	0	1	5	3	4	6	2	
+
+iterations=3000	E=0.26848
+19	right path
+TotaoDis=2.84412
+7	6	2	4	3	1	5	0	8	9	
+
+iterations=3000	E=0.254096
+20	right path
+TotaoDis=2.64544
+5	0	8	9	7	2	6	4	3	1	
+-----------------u0=0.03	A=B=C=0.2	D=0.1-----------------
+
+iterations=3000	E=0.329413
+1	right path
+TotaoDis=3.48622
+7	9	0	2	6	4	1	5	3	8	
+
+iterations=3000	E=0.322315
+2	right path
+TotaoDis=3.556
+4	6	2	7	9	0	5	3	1	8	
+
+iterations=3000	E=0.327221
+3	right path
+TotaoDis=3.73296
+6	3	5	1	0	8	9	2	7	4	
+
+iterations=3000	E=0.35591
+4	right path
+TotaoDis=3.80083
+8	4	2	6	7	9	5	1	3	0	
+
+iterations=3000	E=0.280284
+5	right path
+TotaoDis=2.9247
+0	1	5	3	2	4	6	7	9	8	
+
+iterations=3000	E=0.269768
+6	right path
+TotaoDis=2.81376
+1	0	8	9	7	6	2	4	3	5	
+
+iterations=3000	E=0.33006
+7	right path
+TotaoDis=3.49526
+3	8	0	5	1	9	7	2	6	4	
+
+iterations=3000	E=0.309218
+8	right path
+TotaoDis=3.18588
+0	5	8	9	7	2	6	4	3	1	
+
+iterations=3000	E=0.298713
+9	right path
+TotaoDis=3.46508
+0	5	3	2	6	4	1	7	9	8	
+
+iterations=3000	E=0.254137
+10	right path
+TotaoDis=2.61508
+5	3	4	6	2	7	9	8	0	1	
+
+iterations=3000	E=0.354571
+11	right path
+TotaoDis=4.3181
+0	9	4	7	2	6	3	5	1	8	
+
+iterations=3000	E=0.318462
+12	right path
+TotaoDis=3.89591
+9	7	2	6	3	5	1	0	8	4	
+
+iterations=3000	E=0.407954
+13	right path
+TotaoDis=4.42481
+8	1	5	3	0	4	6	9	2	7	
+
+iterations=3000	E=0.290034
+14	right path
+TotaoDis=3.33307
+7	3	4	6	2	5	1	0	8	9	
+
+iterations=3000	E=0.311552
+15	right path
+TotaoDis=3.5651
+4	8	3	1	5	0	9	7	2	6	
+
+iterations=3000	E=0.291869
+16	right path
+TotaoDis=3.15808
+8	0	1	3	5	2	6	4	7	9	
+
+iterations=3000	E=0.39604
+17	right path
+TotaoDis=4.45836
+9	8	5	1	0	3	7	6	2	4	
+
+iterations=3000	E=0.287774
+18	right path
+TotaoDis=3.01166
+0	9	8	7	2	6	4	3	5	1	
+
+iterations=3000	E=0.27715
+19	right path
+TotaoDis=2.84365
+6	2	9	7	8	0	5	1	3	4	
+
+iterations=3000	E=0.31497
+20	right path
+TotaoDis=3.43336
+0	9	7	8	4	2	6	3	5	1	
+-----------------u0=0.03	A=B=C=0.25	D=0.1-----------------
+
+iterations=3000	E=0.348693
+1	right path
+TotaoDis=3.72537
+1	0	5	7	8	9	2	6	4	3	
+
+iterations=3000	E=0.328298
+2	right path
+TotaoDis=3.71637
+0	3	1	2	6	4	5	7	9	8	
+
+iterations=3000	E=0.301613
+3	right path
+TotaoDis=3.10194
+8	0	1	3	5	4	6	2	9	7	
+
+iterations=3000	E=0.311171
+4	right path
+TotaoDis=3.24039
+8	7	0	5	1	3	4	6	2	9	
+
+iterations=3000	E=0.313738
+5	right path
+TotaoDis=3.22064
+7	9	0	8	5	1	3	4	2	6	
+
+iterations=3000	E=0.360531
+6	right path
+TotaoDis=4.13836
+1	5	2	6	7	9	8	4	0	3	
+
+iterations=3000	E=0.386573
+7	right path
+TotaoDis=4.08966
+7	9	5	8	0	3	1	2	6	4	
+
+iterations=3000	E=0.255963
+8	right path
+TotaoDis=2.61508
+9	8	0	1	5	3	4	6	2	7	
+
+iterations=3000	E=0.296957
+9	right path
+TotaoDis=3.15808
+8	9	7	4	6	2	5	3	1	0	
+
+iterations=3000	E=0.362888
+10	right path
+TotaoDis=3.78418
+6	1	0	8	7	9	2	5	3	4	
+
+iterations=3000	E=0.371699
+11	right path
+TotaoDis=3.8737
+6	0	8	1	5	3	7	9	2	4	
+
+iterations=3000	E=0.290822
+12	right path
+TotaoDis=3.01166
+7	8	9	0	1	5	3	4	6	2	
+
+iterations=3000	E=0.353122
+13	right path
+TotaoDis=3.92056
+0	4	1	5	3	6	2	8	7	9	
+
+iterations=3000	E=0.286356
+14	right path
+TotaoDis=3.12754
+9	8	0	5	1	3	6	2	4	7	
+
+iterations=3000	E=0.281356
+15	right path
+TotaoDis=2.90372
+2	6	4	5	3	1	0	8	9	7	
+
+iterations=2913	E=0.322927
+16	right path
+TotaoDis=3.7533
+9	4	6	2	7	8	0	1	5	3	
+
+iterations=2914	E=0.30822
+17	right path
+TotaoDis=3.70686
+0	5	1	3	7	4	6	2	9	8	
+
+iterations=3000	E=0.360102
+18	right path
+TotaoDis=3.73096
+0	8	6	4	2	9	7	1	3	5	
+
+iterations=3000	E=0.339971
+19	right path
+TotaoDis=3.63933
+0	4	2	6	3	1	5	8	7	9	
+
+iterations=3000	E=0.418981
+20	right path
+TotaoDis=4.64886
+0	1	5	6	2	4	9	3	7	8	
+-----------------u0=0.03	A=B=C=0.3	D=0.1-----------------
+
+iterations=3000	E=0.344034
+1	right path
+TotaoDis=3.60731
+1	5	3	9	0	8	7	2	6	4	
+
+iterations=3000	E=0.472336
+2	right path
+TotaoDis=4.94899
+5	2	1	6	4	7	9	3	8	0	
+
+iterations=3000	E=0.339058
+3	right path
+TotaoDis=3.52672
+2	4	6	5	1	3	0	7	9	8	
+
+iterations=3000	E=0.465165
+4	right path
+TotaoDis=4.92901
+2	5	0	3	6	1	4	8	9	7	
+
+iterations=3000	E=0.382625
+5	right path
+TotaoDis=4.16476
+6	7	8	0	5	3	1	4	9	2	
+
+iterations=3000	E=0.363503
+6	right path
+TotaoDis=3.77633
+0	2	1	5	3	4	6	8	7	9	
+
+iterations=3000	E=0.378614
+7	right path
+TotaoDis=4.08184
+5	1	3	7	2	6	4	9	0	8	
+
+iterations=3000	E=0.290901
+8	right path
+TotaoDis=3.12754
+8	0	5	1	3	6	2	4	7	9	
+
+iterations=3000	E=0.392019
+9	right path
+TotaoDis=4.26815
+3	1	5	6	4	7	0	9	8	2	
+
+iterations=3000	E=0.445689
+10	right path
+TotaoDis=4.69516
+5	9	8	7	0	2	3	1	6	4	
+
+iterations=3000	E=0.43267
+11	right path
+TotaoDis=4.57752
+8	1	6	2	5	0	3	4	9	7	
+
+iterations=3000	E=0.357468
+12	right path
+TotaoDis=3.72722
+0	1	5	3	2	7	9	8	6	4	
+
+iterations=2589	E=0.474744
+13	right path
+TotaoDis=5.07031
+7	8	6	0	3	2	5	1	4	9	
+
+iterations=3000	E=0.389159
+14	right path
+TotaoDis=4.01041
+9	0	5	8	3	1	6	4	2	7	
+
+iterations=3000	E=0.435947
+15	right path
+TotaoDis=4.61278
+8	0	5	1	6	3	4	9	2	7	
+
+iterations=3000	E=0.386223
+16	right path
+TotaoDis=4.03247
+0	6	2	3	4	5	1	8	7	9	
+
+iterations=3000	E=0.350324
+17	right path
+TotaoDis=3.64574
+5	0	1	2	6	4	7	9	8	3	
+
+iterations=2815	E=0.424366
+18	right path
+TotaoDis=4.71979
+9	6	2	5	3	0	1	8	4	7	
+
+iterations=3000	E=0.349407
+19	right path
+TotaoDis=3.73033
+0	4	6	2	8	9	7	5	1	3	
+
+iterations=3000	E=0.339718
+20	right path
+TotaoDis=3.48454
+8	7	9	0	3	5	1	6	4	2	
+**********************************************
+
+
+
+10
+0	0.00125126	0.563585
+1	0.193304	0.808741
+2	0.585009	0.479873
+3	0.350291	0.895962
+4	0.82284	0.746605
+5	0.174108	0.858943
+6	0.710501	0.513535
+7	0.303995	0.0149846
+8	0.0914029	0.364452
+9	0.147313	0.165899
+**********************************************
+-----------------u0=0.07	A=B=C=0.05	D=0.1-----------------
+-----------------u0=0.07	A=B=C=0.1	D=0.1-----------------
+-----------------u0=0.07	A=B=C=0.15	D=0.1-----------------
+
+iterations=3000	E=0.392922
+1	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.32471
+2	right path
+TotaoDis=2.61508
+2	6	4	3	5	1	0	8	9	7	
+
+iterations=3000	E=0.303421
+3	right path
+TotaoDis=2.61508
+8	9	7	2	6	4	3	5	1	0	
+
+iterations=3000	E=0.360141
+6	right path
+TotaoDis=2.61508
+1	5	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.386314
+8	right path
+TotaoDis=2.61508
+4	3	5	1	0	8	9	7	2	6	
+
+iterations=3000	E=0.358718
+9	right path
+TotaoDis=2.61508
+3	5	1	0	8	9	7	2	6	4	
+
+iterations=3000	E=0.302005
+14	right path
+TotaoDis=2.61508
+6	2	7	9	8	0	1	5	3	4	
+
+iterations=3000	E=0.32706
+15	right path
+TotaoDis=2.61508
+6	4	3	5	1	0	8	9	7	2	
+
+iterations=3000	E=0.310587
+16	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.298836
+17	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.300867
+18	right path
+TotaoDis=2.61508
+3	5	1	0	8	9	7	2	6	4	
+-----------------u0=0.07	A=B=C=0.2	D=0.1-----------------
+
+iterations=3000	E=0.273926
+1	right path
+TotaoDis=2.61508
+2	7	9	8	0	1	5	3	4	6	
+
+iterations=3000	E=0.300989
+2	right path
+TotaoDis=2.90872
+3	5	0	8	9	7	2	6	4	1	
+
+iterations=3000	E=0.276893
+3	right path
+TotaoDis=2.64544
+3	1	5	0	8	9	7	2	6	4	
+
+iterations=3000	E=0.273926
+4	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.276893
+5	right path
+TotaoDis=2.64544
+2	7	9	8	0	5	1	3	4	6	
+
+iterations=3000	E=0.273926
+6	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.299985
+7	right path
+TotaoDis=2.90372
+9	8	0	1	3	5	4	6	2	7	
+
+iterations=3000	E=0.273926
+8	right path
+TotaoDis=2.61508
+1	5	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.273926
+9	right path
+TotaoDis=2.61508
+3	5	1	0	8	9	7	2	6	4	
+
+iterations=3000	E=0.273926
+10	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.273926
+11	right path
+TotaoDis=2.61508
+0	1	5	3	4	6	2	7	9	8	
+
+iterations=3000	E=0.273926
+12	right path
+TotaoDis=2.61508
+5	3	4	6	2	7	9	8	0	1	
+
+iterations=3000	E=0.273926
+13	right path
+TotaoDis=2.61508
+4	6	2	7	9	8	0	1	5	3	
+
+iterations=3000	E=0.334166
+14	right path
+TotaoDis=3.3618
+9	8	0	5	3	4	6	2	1	7	
+
+iterations=3000	E=0.273926
+15	right path
+TotaoDis=2.61508
+0	1	5	3	4	6	2	7	9	8	
+
+iterations=3000	E=0.296971
+16	right path
+TotaoDis=2.87228
+3	5	1	0	8	9	7	2	4	6	
+
+iterations=3000	E=0.273926
+17	right path
+TotaoDis=2.61508
+2	6	4	3	5	1	0	8	9	7	
+
+iterations=3000	E=0.300989
+18	right path
+TotaoDis=2.90872
+7	2	6	4	1	3	5	0	8	9	
+
+iterations=3000	E=0.304203
+19	right path
+TotaoDis=2.95506
+1	3	2	4	6	7	9	8	0	5	
+
+iterations=3000	E=0.276893
+20	right path
+TotaoDis=2.64544
+9	8	0	5	1	3	4	6	2	7	
+-----------------u0=0.07	A=B=C=0.25	D=0.1-----------------
+
+iterations=3000	E=0.271769
+1	right path
+TotaoDis=2.61508
+4	3	5	1	0	8	9	7	2	6	
+
+iterations=3000	E=0.271769
+2	right path
+TotaoDis=2.61508
+1	5	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.27473
+3	right path
+TotaoDis=2.64544
+1	5	0	8	9	7	2	6	4	3	
+
+iterations=3000	E=0.271769
+4	right path
+TotaoDis=2.61508
+9	8	0	1	5	3	4	6	2	7	
+
+iterations=3000	E=0.27473
+5	right path
+TotaoDis=2.64544
+7	9	8	0	5	1	3	4	6	2	
+
+iterations=3000	E=0.310719
+6	right path
+TotaoDis=3.04202
+7	2	6	4	3	1	5	0	9	8	
+
+iterations=3000	E=0.271769
+7	right path
+TotaoDis=2.61508
+8	0	1	5	3	4	6	2	7	9	
+
+iterations=3000	E=0.271769
+8	right path
+TotaoDis=2.61508
+1	5	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.27473
+9	right path
+TotaoDis=2.64544
+8	0	5	1	3	4	6	2	7	9	
+
+iterations=3000	E=0.325933
+10	right path
+TotaoDis=3.1998
+5	1	0	3	4	6	2	7	9	8	
+
+iterations=3000	E=0.390603
+11	right path
+TotaoDis=3.90952
+6	4	1	2	5	3	0	8	9	7	
+
+iterations=3000	E=0.271769
+12	right path
+TotaoDis=2.61508
+5	1	0	8	9	7	2	6	4	3	
+
+iterations=3000	E=0.292084
+13	right path
+TotaoDis=2.84412
+9	7	6	2	4	3	1	5	0	8	
+
+iterations=3000	E=0.294934
+14	right path
+TotaoDis=2.87228
+2	4	6	3	5	1	0	8	9	7	
+
+iterations=3000	E=0.297931
+15	right path
+TotaoDis=2.90372
+9	8	0	1	3	5	4	6	2	7	
+
+iterations=3000	E=0.27473
+16	right path
+TotaoDis=2.64544
+9	8	0	5	1	3	4	6	2	7	
+
+iterations=3000	E=0.27473
+17	right path
+TotaoDis=2.64544
+7	9	8	0	5	1	3	4	6	2	
+
+iterations=3000	E=0.271769
+18	right path
+TotaoDis=2.61508
+0	8	9	7	2	6	4	3	5	1	
+
+iterations=3000	E=0.29904
+19	right path
+TotaoDis=2.98127
+5	1	3	2	6	4	7	9	8	0	
+
+iterations=3000	E=0.27473
+20	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+-----------------u0=0.07	A=B=C=0.3	D=0.1-----------------
+
+iterations=3000	E=0.308978
+1	right path
+TotaoDis=3.01698
+2	6	4	3	1	5	0	9	7	8	
+
+iterations=3000	E=0.329192
+2	right path
+TotaoDis=3.24549
+8	6	2	4	3	1	5	0	9	7	
+
+iterations=3000	E=0.298013
+3	right path
+TotaoDis=2.90372
+4	5	3	1	0	8	9	7	2	6	
+
+iterations=3000	E=0.36302
+4	right path
+TotaoDis=3.65063
+4	2	6	5	9	7	8	0	1	3	
+
+iterations=3000	E=0.389428
+5	right path
+TotaoDis=4.00926
+4	9	1	5	3	0	8	7	6	2	
+
+iterations=3000	E=0.289158
+6	right path
+TotaoDis=2.81376
+2	4	3	5	1	0	8	9	7	6	
+
+iterations=3000	E=0.339048
+7	right path
+TotaoDis=3.34457
+7	2	6	4	5	1	3	0	9	8	
+
+iterations=3000	E=0.296694
+8	right path
+TotaoDis=2.95092
+5	1	0	8	9	7	4	6	2	3	
+
+iterations=3000	E=0.354381
+9	right path
+TotaoDis=3.50893
+2	6	8	9	7	0	5	3	1	4	
+
+iterations=3000	E=0.399432
+10	right path
+TotaoDis=3.99886
+2	9	7	8	6	4	1	5	3	0	
+
+iterations=3000	E=0.310991
+11	right path
+TotaoDis=3.04202
+5	0	9	8	7	2	6	4	3	1	
+
+iterations=3000	E=0.271523
+12	right path
+TotaoDis=2.61508
+2	6	4	3	5	1	0	8	9	7	
+
+iterations=3000	E=0.274498
+13	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+
+iterations=3000	E=0.274498
+14	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+
+iterations=3000	E=0.364614
+15	right path
+TotaoDis=3.89831
+2	6	9	8	0	1	5	3	7	4	
+
+iterations=3000	E=0.30809
+16	right path
+TotaoDis=3.01166
+0	9	8	7	2	6	4	3	5	1	
+
+iterations=3000	E=0.289158
+17	right path
+TotaoDis=2.81376
+3	5	1	0	8	9	7	6	2	4	
+
+iterations=3000	E=0.366801
+18	right path
+TotaoDis=3.64067
+2	1	0	8	9	7	5	3	6	4	
+
+iterations=3000	E=0.337434
+19	right path
+TotaoDis=3.43061
+0	8	9	7	5	2	6	4	3	1	
+
+iterations=3000	E=0.324077
+20	right path
+TotaoDis=3.1764
+9	7	8	0	5	1	3	2	4	6	
+**********************************************
+
+
+
+10
+0	0.00125126	0.563585
+1	0.193304	0.808741
+2	0.585009	0.479873
+3	0.350291	0.895962
+4	0.82284	0.746605
+5	0.174108	0.858943
+6	0.710501	0.513535
+7	0.303995	0.0149846
+8	0.0914029	0.364452
+9	0.147313	0.165899
+**********************************************
+-----------------u0=0.1	A=B=C=0.05	D=0.1-----------------
+-----------------u0=0.1	A=B=C=0.1	D=0.1-----------------
+-----------------u0=0.1	A=B=C=0.15	D=0.1-----------------
+-----------------u0=0.1	A=B=C=0.2	D=0.1-----------------
+-----------------u0=0.1	A=B=C=0.25	D=0.1-----------------
+-----------------u0=0.1	A=B=C=0.3	D=0.1-----------------
+
+iterations=3000	E=0.314598
+1	right path
+TotaoDis=2.90264
+2	7	9	8	0	5	1	3	6	4	
+
+iterations=3000	E=0.383306
+2	right path
+TotaoDis=3.68782
+1	3	6	4	2	5	7	9	8	0	
+
+iterations=3000	E=0.291024
+3	right path
+TotaoDis=2.64544
+1	5	0	8	9	7	2	6	4	3	
+
+iterations=3000	E=0.290803
+4	right path
+TotaoDis=2.64544
+6	4	3	1	5	0	8	9	7	2	
+
+iterations=3000	E=0.370319
+5	right path
+TotaoDis=3.5651
+9	0	5	1	3	8	4	6	2	7	
+
+iterations=3000	E=0.287837
+6	right path
+TotaoDis=2.61508
+2	7	9	8	0	1	5	3	4	6	
+
+iterations=3000	E=0.3161
+7	right path
+TotaoDis=2.9247
+9	7	6	4	2	3	5	1	0	8	
+
+iterations=3000	E=0.353465
+8	right path
+TotaoDis=3.3618
+8	0	5	3	4	6	2	1	7	9	
+
+iterations=3000	E=0.308806
+9	right path
+TotaoDis=2.84412
+6	7	9	8	0	5	1	3	4	2	
+
+iterations=3000	E=0.357484
+10	right path
+TotaoDis=3.37496
+0	2	1	5	3	4	6	7	9	8	
+
+iterations=3000	E=0.287837
+11	right path
+TotaoDis=2.61508
+5	3	4	6	2	7	9	8	0	1	
+
+iterations=3000	E=0.353465
+12	right path
+TotaoDis=3.3618
+5	3	4	6	2	1	7	9	8	0	
+
+iterations=3000	E=0.28784
+13	right path
+TotaoDis=2.61508
+4	6	2	7	9	8	0	1	5	3	
+
+iterations=3000	E=0.287837
+14	right path
+TotaoDis=2.61508
+3	4	6	2	7	9	8	0	1	5	
+
+iterations=3000	E=0.353476
+15	right path
+TotaoDis=3.3618
+3	5	0	8	9	7	1	2	6	4	
+
+iterations=3000	E=0.386274
+16	right path
+TotaoDis=3.713
+7	2	4	3	5	1	0	6	8	9	
+
+iterations=3000	E=0.290799
+17	right path
+TotaoDis=2.64544
+5	1	3	4	6	2	7	9	8	0	
+
+iterations=3000	E=0.340793
+18	right path
+TotaoDis=3.21399
+0	7	9	8	1	5	3	4	6	2	
+
+iterations=3000	E=0.319112
+19	right path
+TotaoDis=2.95506
+8	0	5	1	3	2	4	6	7	9	
+
+iterations=3000	E=0.287838
+20	right path
+TotaoDis=2.61508
+4	3	5	1	0	8	9	7	2	6	
+**********************************************
+
+
+
