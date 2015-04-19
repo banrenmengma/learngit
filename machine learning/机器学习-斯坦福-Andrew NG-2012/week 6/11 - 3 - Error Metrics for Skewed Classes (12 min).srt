@@ -1,0 +1,1292 @@
+
+1
+00:00:00,028 --> 00:00:01,069
+In the previous video, I talked
+
+2
+00:00:02,006 --> 00:00:03,089
+about error analysis and the
+
+3
+00:00:04,034 --> 00:00:06,007
+importance of having error
+
+4
+00:00:06,033 --> 00:00:07,048
+metrics, that is of having
+
+5
+00:00:08,021 --> 00:00:10,019
+a single real number evaluation metric
+
+6
+00:00:11,001 --> 00:00:13,028
+for your learning algorithm to tell how well it's doing.
+
+7
+00:00:14,031 --> 00:00:15,067
+In the context of evaluation
+
+8
+00:00:16,069 --> 00:00:18,032
+and of error metrics, there is
+
+9
+00:00:18,042 --> 00:00:20,028
+one important case, where it's
+
+10
+00:00:20,048 --> 00:00:22,017
+particularly tricky to come
+
+11
+00:00:22,051 --> 00:00:24,042
+up with an appropriate error metric,
+
+12
+00:00:24,092 --> 00:00:26,098
+or evaluation metric, for your learning algorithm.
+
+13
+00:00:28,003 --> 00:00:29,014
+That case is the case
+
+14
+00:00:29,060 --> 00:00:31,030
+of what's called skewed classes.
+
+15
+00:00:32,060 --> 00:00:33,047
+Let me tell you what that means.
+
+16
+00:00:36,017 --> 00:00:37,054
+Consider the problem of cancer
+
+17
+00:00:38,017 --> 00:00:40,003
+classification, where we have
+
+18
+00:00:40,029 --> 00:00:41,096
+features of medical patients and
+
+19
+00:00:42,007 --> 00:00:44,004
+we want to decide whether or not they have cancer.
+
+20
+00:00:44,063 --> 00:00:45,078
+So this is like the malignant
+
+21
+00:00:46,035 --> 00:00:48,028
+versus benign tumor classification
+
+22
+00:00:48,092 --> 00:00:50,007
+example that we had earlier.
+
+23
+00:00:51,014 --> 00:00:52,035
+So let's say y equals 1 if the
+
+24
+00:00:52,054 --> 00:00:53,078
+patient has cancer and y equals 0
+
+25
+00:00:54,028 --> 00:00:56,053
+if they do not.
+
+26
+00:00:56,081 --> 00:00:57,046
+We have trained the progression
+
+27
+00:00:57,093 --> 00:00:59,078
+classifier and let's say
+
+28
+00:01:00,000 --> 00:01:01,052
+we test our classifier on
+
+29
+00:01:01,065 --> 00:01:04,046
+a test set and find that we get 1 percent error.
+
+30
+00:01:04,079 --> 00:01:05,071
+So, we're making 99% correct diagnosis.
+
+31
+00:01:06,053 --> 00:01:09,060
+Seems like a really impressive result, right.
+
+32
+00:01:09,090 --> 00:01:10,092
+We're correct 99% percent of the time.
+
+33
+00:01:12,056 --> 00:01:13,062
+But now, let's say we find
+
+34
+00:01:13,093 --> 00:01:15,065
+out that only 0.5 percent
+
+35
+00:01:16,051 --> 00:01:17,095
+of patients in our
+
+36
+00:01:18,015 --> 00:01:19,059
+training test sets actually have cancer.
+
+37
+00:01:20,040 --> 00:01:21,090
+So only half a
+
+38
+00:01:21,095 --> 00:01:23,045
+percent of the patients that
+
+39
+00:01:23,057 --> 00:01:25,050
+come through our screening process have cancer.
+
+40
+00:01:26,056 --> 00:01:27,096
+In this case, the 1%
+
+41
+00:01:28,026 --> 00:01:30,001
+error no longer looks so impressive.
+
+42
+00:01:31,012 --> 00:01:32,051
+And in particular, here's a piece
+
+43
+00:01:32,067 --> 00:01:33,073
+of code, here's actually a piece
+
+44
+00:01:33,084 --> 00:01:35,073
+of non learning code that takes
+
+45
+00:01:36,007 --> 00:01:38,026
+this input of features x and it ignores it.
+
+46
+00:01:38,048 --> 00:01:39,081
+It just sets y equals 0
+
+47
+00:01:39,095 --> 00:01:41,064
+and always predicts, you
+
+48
+00:01:41,071 --> 00:01:43,092
+know, nobody has cancer and this
+
+49
+00:01:44,017 --> 00:01:45,071
+algorithm would actually get
+
+50
+00:01:46,000 --> 00:01:47,084
+0.5 percent error.
+
+51
+00:01:48,082 --> 00:01:50,028
+So this is even better than
+
+52
+00:01:50,040 --> 00:01:51,014
+the 1% error that we were getting just now
+
+53
+00:01:51,023 --> 00:01:52,095
+and this is a non
+
+54
+00:01:53,015 --> 00:01:54,059
+learning algorithm that you know, it is just
+
+55
+00:01:54,079 --> 00:01:56,095
+predicting y equals 0 all the time.
+
+56
+00:01:57,098 --> 00:01:59,043
+So this setting of when
+
+57
+00:02:00,006 --> 00:02:01,098
+the ratio of positive to
+
+58
+00:02:02,018 --> 00:02:04,012
+negative examples is very close
+
+59
+00:02:04,081 --> 00:02:06,048
+to one of two extremes, where,
+
+60
+00:02:07,004 --> 00:02:08,062
+in this case, the number of
+
+61
+00:02:08,071 --> 00:02:10,005
+positive examples is much,
+
+62
+00:02:10,034 --> 00:02:11,031
+much smaller than the number
+
+63
+00:02:11,062 --> 00:02:13,018
+of negative examples because y
+
+64
+00:02:13,047 --> 00:02:15,050
+equals one so rarely, this
+
+65
+00:02:15,072 --> 00:02:16,084
+is what we call the
+
+66
+00:02:17,000 --> 00:02:18,059
+case of skewed classes.
+
+67
+00:02:20,078 --> 00:02:21,071
+We just have a lot more
+
+68
+00:02:22,000 --> 00:02:23,013
+of examples from one class
+
+69
+00:02:23,056 --> 00:02:25,003
+than from the other class.
+
+70
+00:02:25,021 --> 00:02:26,056
+And by just predicting y equals
+
+71
+00:02:26,091 --> 00:02:28,027
+0 all the time, or maybe
+
+72
+00:02:28,065 --> 00:02:29,065
+our predicting y equals 1
+
+73
+00:02:29,078 --> 00:02:32,008
+all the time, an algorithm can do pretty well.
+
+74
+00:02:32,097 --> 00:02:34,005
+So the problem with using
+
+75
+00:02:34,066 --> 00:02:36,021
+classification error or classification
+
+76
+00:02:36,059 --> 00:02:39,024
+accuracy as our evaluation metric is the following.
+
+77
+00:02:40,043 --> 00:02:41,036
+Let's say you have one joining
+
+78
+00:02:41,069 --> 00:02:43,056
+algorithm that's getting 99.2% accuracy.
+
+79
+00:02:46,053 --> 00:02:47,019
+So, that's a 0.8% error.
+
+80
+00:02:47,033 --> 00:02:50,084
+Let's say you
+
+81
+00:02:51,000 --> 00:02:52,000
+make a change to your algorithm
+
+82
+00:02:52,081 --> 00:02:53,088
+and you now are getting
+
+83
+00:02:54,028 --> 00:02:56,008
+99.5% accuracy.
+
+84
+00:02:59,028 --> 00:03:02,011
+That is 0.5% error.
+
+85
+00:03:04,022 --> 00:03:06,046
+So, is this an improvement to the algorithm or not?
+
+86
+00:03:06,077 --> 00:03:07,093
+One of the nice things
+
+87
+00:03:08,030 --> 00:03:09,099
+about having a single real
+
+88
+00:03:10,012 --> 00:03:11,047
+number evaluation metric is this
+
+89
+00:03:11,065 --> 00:03:13,008
+helps us to quickly decide if
+
+90
+00:03:13,024 --> 00:03:15,053
+we just need a good change to the algorithm or not.
+
+91
+00:03:16,037 --> 00:03:20,015
+By going from 99.2% accuracy to 99.5% accuracy.
+
+92
+00:03:21,043 --> 00:03:22,049
+You know, did we just do something
+
+93
+00:03:22,078 --> 00:03:23,063
+useful or did we
+
+94
+00:03:23,077 --> 00:03:25,015
+just replace our code with
+
+95
+00:03:25,031 --> 00:03:26,068
+something that just predicts y equals
+
+96
+00:03:27,000 --> 00:03:28,083
+zero more often?
+
+97
+00:03:29,030 --> 00:03:30,043
+So, if you have very skewed classes
+
+98
+00:03:31,034 --> 00:03:33,028
+it becomes much harder to use
+
+99
+00:03:33,063 --> 00:03:36,000
+just classification accuracy, because you
+
+100
+00:03:36,012 --> 00:03:37,072
+can get very high classification accuracies
+
+101
+00:03:38,041 --> 00:03:40,094
+or very low errors, and
+
+102
+00:03:41,011 --> 00:03:42,087
+it's not always clear if
+
+103
+00:03:43,006 --> 00:03:44,018
+doing so is really improving
+
+104
+00:03:44,077 --> 00:03:45,078
+the quality of your classifier
+
+105
+00:03:46,040 --> 00:03:48,031
+because predicting y equals 0 all the
+
+106
+00:03:48,037 --> 00:03:50,071
+time doesn't seem like
+
+107
+00:03:51,056 --> 00:03:52,056
+a particularly good classifier.
+
+108
+00:03:53,090 --> 00:03:55,050
+But just predicting y equals 0 more
+
+109
+00:03:55,071 --> 00:03:57,030
+often can bring your error
+
+110
+00:03:57,083 --> 00:03:59,046
+down to, you know, maybe as
+
+111
+00:03:59,065 --> 00:04:01,012
+low as 0.5%.
+
+112
+00:04:01,049 --> 00:04:02,059
+When we're faced with such
+
+113
+00:04:02,077 --> 00:04:04,099
+a skewed classes therefore we
+
+114
+00:04:05,025 --> 00:04:06,034
+would want to come up
+
+115
+00:04:06,046 --> 00:04:07,091
+with a different error metric
+
+116
+00:04:08,031 --> 00:04:09,050
+or a different evaluation metric.
+
+117
+00:04:10,028 --> 00:04:12,036
+One such evaluation metric are
+
+118
+00:04:12,087 --> 00:04:14,024
+what's called precision recall.
+
+119
+00:04:15,043 --> 00:04:16,041
+Let me explain what that is.
+
+120
+00:04:17,051 --> 00:04:19,088
+Let's say we are evaluating a classifier on the test set.
+
+121
+00:04:20,075 --> 00:04:21,080
+For the examples in the
+
+122
+00:04:21,088 --> 00:04:23,088
+test set the actual
+
+123
+00:04:25,044 --> 00:04:26,087
+class of that example
+
+124
+00:04:27,031 --> 00:04:28,043
+in the test set is going to
+
+125
+00:04:28,055 --> 00:04:29,081
+be either one or zero, right,
+
+126
+00:04:30,043 --> 00:04:32,051
+if there is a binary classification problem.
+
+127
+00:04:33,087 --> 00:04:34,095
+And what our learning algorithm
+
+128
+00:04:35,036 --> 00:04:37,006
+will do is it will, you know,
+
+129
+00:04:37,093 --> 00:04:39,026
+predict some value for the
+
+130
+00:04:39,044 --> 00:04:41,016
+class and our learning
+
+131
+00:04:41,056 --> 00:04:43,030
+algorithm will predict the value
+
+132
+00:04:43,075 --> 00:04:44,082
+for each example in my
+
+133
+00:04:44,091 --> 00:04:46,051
+test set and the predicted value
+
+134
+00:04:46,092 --> 00:04:48,056
+will also be either one or zero.
+
+135
+00:04:50,005 --> 00:04:52,006
+So let me draw a two
+
+136
+00:04:52,026 --> 00:04:53,033
+by two table as follows,
+
+137
+00:04:53,091 --> 00:04:55,087
+depending on a full of these entries
+
+138
+00:04:56,031 --> 00:04:57,080
+depending on what was the
+
+139
+00:04:57,095 --> 00:04:59,035
+actual class and what was the predicted class.
+
+140
+00:05:00,022 --> 00:05:01,026
+If we have an
+
+141
+00:05:01,056 --> 00:05:02,088
+example where the actual class is
+
+142
+00:05:02,097 --> 00:05:03,094
+one and the predicted class
+
+143
+00:05:04,024 --> 00:05:06,013
+is one then that's called
+
+144
+00:05:07,062 --> 00:05:08,063
+an example that's a true
+
+145
+00:05:08,093 --> 00:05:10,030
+positive, meaning our algorithm
+
+146
+00:05:10,073 --> 00:05:11,069
+predicted that it's positive
+
+147
+00:05:12,039 --> 00:05:15,077
+and in reality the example is positive.
+
+148
+00:05:16,024 --> 00:05:17,030
+If our learning algorithm predicted that
+
+149
+00:05:17,049 --> 00:05:19,000
+something is negative, class zero,
+
+150
+00:05:19,056 --> 00:05:20,062
+and the actual class is also
+
+151
+00:05:20,097 --> 00:05:23,064
+class zero then that's what's called a true negative.
+
+152
+00:05:24,006 --> 00:05:26,037
+We predicted zero and it actually is zero.
+
+153
+00:05:27,087 --> 00:05:28,074
+To find the other two boxes,
+
+154
+00:05:29,047 --> 00:05:31,012
+if our learning algorithm predicts that
+
+155
+00:05:31,036 --> 00:05:33,020
+the class is one but the
+
+156
+00:05:34,033 --> 00:05:36,037
+actual class is zero, then
+
+157
+00:05:36,067 --> 00:05:37,091
+that's called a false positive.
+
+158
+00:05:39,035 --> 00:05:40,062
+So that means our algorithm for
+
+159
+00:05:40,082 --> 00:05:41,097
+the patient is cancelled out in
+
+160
+00:05:42,018 --> 00:05:43,051
+reality if the patient does not.
+
+161
+00:05:44,073 --> 00:05:47,033
+And finally, the last box is a zero, one.
+
+162
+00:05:48,019 --> 00:05:50,032
+That's called a false negative
+
+163
+00:05:51,018 --> 00:05:52,068
+because our algorithm predicted
+
+164
+00:05:53,044 --> 00:05:56,017
+zero, but the actual class was one.
+
+165
+00:05:57,023 --> 00:05:59,001
+And so, we
+
+166
+00:05:59,014 --> 00:06:00,082
+have this little sort of two by
+
+167
+00:06:00,099 --> 00:06:02,072
+two table based on
+
+168
+00:06:03,025 --> 00:06:05,050
+what was the actual class and what was the predicted class.
+
+169
+00:06:07,007 --> 00:06:08,037
+So here's a different way
+
+170
+00:06:08,068 --> 00:06:10,031
+of evaluating the performance of
+
+171
+00:06:10,042 --> 00:06:11,093
+our algorithm. We're
+
+172
+00:06:12,055 --> 00:06:12,087
+going to compute two numbers.
+
+173
+00:06:13,031 --> 00:06:14,077
+The first is called precision -
+
+174
+00:06:14,093 --> 00:06:16,010
+and what that says is,
+
+175
+00:06:17,017 --> 00:06:18,032
+of all the patients where we've
+
+176
+00:06:18,057 --> 00:06:19,057
+predicted that they have cancer,
+
+177
+00:06:20,063 --> 00:06:23,013
+what fraction of them actually have cancer?
+
+178
+00:06:24,056 --> 00:06:25,031
+So let me write this down,
+
+179
+00:06:26,001 --> 00:06:27,030
+the precision of a classifier
+
+180
+00:06:27,068 --> 00:06:29,006
+is the number of true
+
+181
+00:06:29,031 --> 00:06:31,087
+positives divided by
+
+182
+00:06:32,093 --> 00:06:35,018
+the number that we predicted
+
+183
+00:06:37,013 --> 00:06:37,037
+as positive, right?
+
+184
+00:06:39,014 --> 00:06:40,066
+So of all the patients that
+
+185
+00:06:41,008 --> 00:06:43,058
+we went to those patients and we told them, "We think you have cancer."
+
+186
+00:06:43,088 --> 00:06:45,073
+Of all those patients, what
+
+187
+00:06:45,088 --> 00:06:47,041
+fraction of them actually have cancer?
+
+188
+00:06:47,050 --> 00:06:48,092
+So that's called precision.
+
+189
+00:06:49,080 --> 00:06:50,068
+And another way to write this
+
+190
+00:06:50,094 --> 00:06:54,092
+would be true positives and
+
+191
+00:06:55,000 --> 00:06:56,043
+then in the denominator is the
+
+192
+00:06:56,067 --> 00:06:59,005
+number of predicted positives, and
+
+193
+00:06:59,020 --> 00:07:00,016
+so that would be the
+
+194
+00:07:00,024 --> 00:07:01,073
+sum of the, you know, entries
+
+195
+00:07:02,041 --> 00:07:04,050
+in this first row of the table.
+
+196
+00:07:04,072 --> 00:07:07,075
+So it would be true positives divided by true positives.
+
+197
+00:07:08,067 --> 00:07:10,047
+I'm going to abbreviate positive
+
+198
+00:07:11,022 --> 00:07:12,098
+as POS and then
+
+199
+00:07:13,012 --> 00:07:15,047
+plus false positives, again
+
+200
+00:07:15,088 --> 00:07:18,055
+abbreviating positive using POS.
+
+201
+00:07:20,002 --> 00:07:21,085
+So that's called precision, and as you
+
+202
+00:07:21,092 --> 00:07:23,049
+can tell high precision would be good.
+
+203
+00:07:23,066 --> 00:07:24,068
+That means that all the patients
+
+204
+00:07:25,006 --> 00:07:27,010
+that we went to and we said, "You know, we're very sorry.
+
+205
+00:07:27,050 --> 00:07:28,095
+We think you have cancer," high precision
+
+206
+00:07:29,043 --> 00:07:31,075
+means that of that group
+
+207
+00:07:31,098 --> 00:07:33,016
+of patients most of them
+
+208
+00:07:33,038 --> 00:07:34,045
+we had actually made accurate
+
+209
+00:07:34,081 --> 00:07:36,062
+predictions on them and they do have cancer.
+
+210
+00:07:38,083 --> 00:07:39,087
+The second number we're going to compute
+
+211
+00:07:40,043 --> 00:07:41,073
+is called recall, and what
+
+212
+00:07:42,006 --> 00:07:44,023
+recall say is, if all
+
+213
+00:07:44,048 --> 00:07:46,010
+the patients in, let's say,
+
+214
+00:07:46,018 --> 00:07:47,050
+in the test set or the
+
+215
+00:07:47,062 --> 00:07:48,082
+cross-validation set, but if
+
+216
+00:07:48,095 --> 00:07:49,098
+all the patients in the data
+
+217
+00:07:50,014 --> 00:07:51,055
+set that actually have cancer,
+
+218
+00:07:52,067 --> 00:07:54,024
+what fraction of them that
+
+219
+00:07:54,039 --> 00:07:56,025
+we correctly detect as having cancer.
+
+220
+00:07:56,094 --> 00:07:57,087
+So if all the patients have
+
+221
+00:07:58,008 --> 00:07:59,017
+cancer, how many of them
+
+222
+00:07:59,039 --> 00:08:01,012
+did we actually go to them
+
+223
+00:08:01,031 --> 00:08:03,085
+and you know, correctly told them that we think they need treatment.
+
+224
+00:08:05,086 --> 00:08:07,000
+So, writing this down,
+
+225
+00:08:07,036 --> 00:08:08,097
+recall is defined as the
+
+226
+00:08:09,004 --> 00:08:12,001
+number of positives, the number
+
+227
+00:08:12,047 --> 00:08:14,075
+of true positives,
+
+228
+00:08:15,025 --> 00:08:16,031
+meaning the number of people
+
+229
+00:08:16,051 --> 00:08:17,088
+that have cancer and that
+
+230
+00:08:18,002 --> 00:08:19,027
+we correctly predicted have cancer
+
+231
+00:08:20,031 --> 00:08:21,043
+and we take that and divide
+
+232
+00:08:21,079 --> 00:08:23,050
+that by, divide that by
+
+233
+00:08:23,074 --> 00:08:29,030
+the number of actual positives,
+
+234
+00:08:31,019 --> 00:08:32,007
+so this is the right
+
+235
+00:08:32,050 --> 00:08:35,019
+number of actual positives of all the people that do have cancer.
+
+236
+00:08:35,085 --> 00:08:37,000
+What fraction do we directly
+
+237
+00:08:37,042 --> 00:08:38,095
+flag and you know, send the treatment.
+
+238
+00:08:40,055 --> 00:08:41,077
+So, to rewrite this in
+
+239
+00:08:41,092 --> 00:08:44,005
+a different form, the denominator would
+
+240
+00:08:44,021 --> 00:08:45,015
+be the number of actual
+
+241
+00:08:45,042 --> 00:08:46,099
+positives as you know, is the sum
+
+242
+00:08:47,022 --> 00:08:49,048
+of the entries in this first column over here.
+
+243
+00:08:50,060 --> 00:08:51,065
+And so writing things out differently,
+
+244
+00:08:52,015 --> 00:08:53,047
+this is therefore, the number of
+
+245
+00:08:53,064 --> 00:08:57,012
+true positives, divided by
+
+246
+00:08:59,000 --> 00:09:01,034
+the number of true positives
+
+247
+00:09:02,078 --> 00:09:05,042
+plus the number of
+
+248
+00:09:06,075 --> 00:09:07,069
+false negatives.
+
+249
+00:09:09,057 --> 00:09:12,017
+And so once again, having a high recall would be a good thing.
+
+250
+00:09:14,017 --> 00:09:15,080
+So by computing precision and
+
+251
+00:09:15,092 --> 00:09:17,010
+recall this will usually
+
+252
+00:09:17,034 --> 00:09:18,074
+give us a better sense of
+
+253
+00:09:19,013 --> 00:09:20,055
+how well our classifier is doing.
+
+254
+00:09:21,062 --> 00:09:22,096
+And in particular if we have
+
+255
+00:09:23,033 --> 00:09:24,074
+a learning algorithm that predicts
+
+256
+00:09:25,051 --> 00:09:27,001
+y equals zero all
+
+257
+00:09:27,019 --> 00:09:28,028
+the time, if it predicts no
+
+258
+00:09:28,046 --> 00:09:30,008
+one has cancer, then this
+
+259
+00:09:30,025 --> 00:09:31,087
+classifier will have a
+
+260
+00:09:32,007 --> 00:09:33,082
+recall equal to zero,
+
+261
+00:09:34,037 --> 00:09:35,029
+because there won't be any
+
+262
+00:09:35,057 --> 00:09:36,094
+true positives and so that's
+
+263
+00:09:37,019 --> 00:09:37,092
+a quick way for us to
+
+264
+00:09:38,000 --> 00:09:40,028
+recognize that, you know, a
+
+265
+00:09:40,036 --> 00:09:41,057
+classifier that predicts y equals 0 all the time,
+
+266
+00:09:42,004 --> 00:09:43,035
+just isn't a very good classifier.
+
+267
+00:09:44,000 --> 00:09:46,065
+And more generally,
+
+268
+00:09:47,045 --> 00:09:48,083
+even for settings where we
+
+269
+00:09:48,095 --> 00:09:50,079
+have very skewed classes, it's
+
+270
+00:09:51,004 --> 00:09:53,035
+not possible for an
+
+271
+00:09:53,044 --> 00:09:54,089
+algorithm to sort of "cheat"
+
+272
+00:09:55,045 --> 00:09:56,039
+and somehow get a very
+
+273
+00:09:56,075 --> 00:09:57,092
+high precision and a
+
+274
+00:09:58,000 --> 00:09:59,036
+very high recall by doing
+
+275
+00:09:59,062 --> 00:10:00,079
+some simple thing like predicting
+
+276
+00:10:01,004 --> 00:10:02,067
+y equals 0 all the time or
+
+277
+00:10:02,072 --> 00:10:04,072
+predicting y equals 1 all the time.
+
+278
+00:10:04,096 --> 00:10:06,053
+And so we're much
+
+279
+00:10:06,067 --> 00:10:08,023
+more sure that a classifier
+
+280
+00:10:08,084 --> 00:10:09,077
+of a high precision or high recall
+
+281
+00:10:10,061 --> 00:10:11,054
+actually is a good classifier,
+
+282
+00:10:12,047 --> 00:10:13,094
+and this gives us a
+
+283
+00:10:14,003 --> 00:10:15,065
+more useful evaluation metric that
+
+284
+00:10:15,090 --> 00:10:16,096
+is a more direct way to
+
+285
+00:10:17,023 --> 00:10:20,036
+actually understand whether, you know, our algorithm may be doing well.
+
+286
+00:10:21,067 --> 00:10:23,000
+So one final note in
+
+287
+00:10:23,020 --> 00:10:24,096
+the definition of precision and
+
+288
+00:10:25,014 --> 00:10:26,019
+recall, that we would define
+
+289
+00:10:26,072 --> 00:10:28,072
+precision and recall, usually we
+
+290
+00:10:29,010 --> 00:10:31,097
+use the convention that y is equal to 1, in
+
+291
+00:10:32,009 --> 00:10:33,070
+the presence of the more rare class.
+
+292
+00:10:34,015 --> 00:10:35,040
+So if we are trying to detect.
+
+293
+00:10:35,087 --> 00:10:37,029
+rare conditions such as cancer,
+
+294
+00:10:37,072 --> 00:10:38,061
+hopefully that's a rare condition,
+
+295
+00:10:39,034 --> 00:10:40,095
+precision and recall are
+
+296
+00:10:41,000 --> 00:10:42,044
+defined setting y equals
+
+297
+00:10:42,078 --> 00:10:43,092
+1, rather than y
+
+298
+00:10:44,019 --> 00:10:45,069
+equals 0, to be sort of
+
+299
+00:10:45,082 --> 00:10:47,010
+that the presence of that rare
+
+300
+00:10:47,025 --> 00:10:50,022
+class that we're trying to detect.
+
+301
+00:10:50,045 --> 00:10:51,096
+And by using precision and recall,
+
+302
+00:10:52,088 --> 00:10:54,025
+we find, what happens is
+
+303
+00:10:54,038 --> 00:10:55,039
+that even if we have
+
+304
+00:10:55,061 --> 00:10:57,039
+very skewed classes, it's not
+
+305
+00:10:57,059 --> 00:10:59,008
+possible for an algorithm to
+
+306
+00:10:59,060 --> 00:11:01,005
+you know, "cheat" and predict
+
+307
+00:11:01,037 --> 00:11:02,039
+y equals 1 all the time,
+
+308
+00:11:02,075 --> 00:11:03,087
+or predict y equals 0 all
+
+309
+00:11:03,098 --> 00:11:05,075
+the time, and get high precision and recall.
+
+310
+00:11:06,063 --> 00:11:07,083
+And in particular, if a classifier
+
+311
+00:11:08,048 --> 00:11:09,070
+is getting high precision and high
+
+312
+00:11:09,087 --> 00:11:11,015
+recall, then we are
+
+313
+00:11:11,026 --> 00:11:13,003
+actually confident that the algorithm
+
+314
+00:11:13,059 --> 00:11:15,012
+has to be doing well, even
+
+315
+00:11:15,039 --> 00:11:16,062
+if we have very skewed classes.
+
+316
+00:11:18,002 --> 00:11:20,036
+So for the problem of skewed classes precision
+
+317
+00:11:20,095 --> 00:11:22,055
+recall gives us more
+
+318
+00:11:22,077 --> 00:11:24,066
+direct insight into how
+
+319
+00:11:24,090 --> 00:11:26,000
+the learning algorithm is doing
+
+320
+00:11:26,065 --> 00:11:27,098
+and this is often a much
+
+321
+00:11:28,007 --> 00:11:29,036
+better way to evaluate our learning algorithms,
+
+322
+00:11:30,026 --> 00:11:32,020
+than looking at classification error
+
+323
+00:11:32,050 --> 00:11:35,020
+or classification accuracy, when the classes are very skewed.

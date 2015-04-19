@@ -1,0 +1,1392 @@
+
+1
+00:00:00,009 --> 00:00:01,024
+In the last video, we talked
+
+2
+00:00:01,056 --> 00:00:03,066
+about the Gaussian distribution. In
+
+3
+00:00:03,081 --> 00:00:05,034
+this video lets apply that
+
+4
+00:00:05,044 --> 00:00:07,029
+to develop an anomaly detection algorithm.
+
+5
+00:00:10,035 --> 00:00:11,068
+Let's say that we have an
+
+6
+00:00:11,083 --> 00:00:13,039
+unlabeled training set of M
+
+7
+00:00:13,065 --> 00:00:15,041
+examples, and each of
+
+8
+00:00:15,047 --> 00:00:16,073
+these examples is going to
+
+9
+00:00:16,076 --> 00:00:18,035
+be a feature in Rn so
+
+10
+00:00:18,044 --> 00:00:19,042
+your training set could be,
+
+11
+00:00:20,053 --> 00:00:21,085
+feature vectors from the last
+
+12
+00:00:22,073 --> 00:00:24,014
+M aircraft engines being manufactured.
+
+13
+00:00:24,096 --> 00:00:26,073
+Or it could be features from m
+
+14
+00:00:27,007 --> 00:00:28,028
+users or something else.
+
+15
+00:00:29,032 --> 00:00:30,046
+The way we are going to address
+
+16
+00:00:30,083 --> 00:00:32,031
+anomaly detection, is we are
+
+17
+00:00:32,035 --> 00:00:33,047
+going to model p of x
+
+18
+00:00:33,085 --> 00:00:35,064
+from the data sets.
+
+19
+00:00:36,024 --> 00:00:38,053
+We're going to try to figure out what are high probability features, what
+
+20
+00:00:38,085 --> 00:00:40,061
+are lower probability types of features.
+
+21
+00:00:41,035 --> 00:00:42,081
+So, x is a
+
+22
+00:00:43,009 --> 00:00:44,089
+vector and what we
+
+23
+00:00:45,032 --> 00:00:46,057
+are going to do is model p of
+
+24
+00:00:47,002 --> 00:00:48,086
+x, as probability of x1,
+
+25
+00:00:49,043 --> 00:00:50,039
+that is of the first component
+
+26
+00:00:50,095 --> 00:00:53,017
+of x, times the probability
+
+27
+00:00:53,099 --> 00:00:54,096
+of x2, that is the probability
+
+28
+00:00:55,050 --> 00:00:57,035
+of the second feature, times the
+
+29
+00:00:57,045 --> 00:00:58,085
+probability of the third
+
+30
+00:00:59,009 --> 00:01:01,022
+feature, and so on up
+
+31
+00:01:01,040 --> 00:01:03,028
+to the probability of the final feature
+
+32
+00:01:03,075 --> 00:01:03,092
+of Xn.
+
+33
+00:01:04,020 --> 00:01:06,031
+Now I'm leaving space here cause I'll fill in something in a minute.
+
+34
+00:01:08,078 --> 00:01:09,071
+So, how do we
+
+35
+00:01:09,082 --> 00:01:10,095
+model each of these terms,
+
+36
+00:01:11,045 --> 00:01:13,001
+p of X1, p of X2, and so on.
+
+37
+00:01:14,007 --> 00:01:15,037
+What we're going to do,
+
+38
+00:01:15,068 --> 00:01:16,085
+is assume that the feature,
+
+39
+00:01:17,048 --> 00:01:19,082
+X1, is distributed according
+
+40
+00:01:20,034 --> 00:01:22,095
+to a Gaussian distribution, with
+
+41
+00:01:23,015 --> 00:01:25,014
+some mean, which you
+
+42
+00:01:25,034 --> 00:01:25,084
+want to write as mu1 and
+
+43
+00:01:25,092 --> 00:01:26,090
+some variance, which I'm going
+
+44
+00:01:26,098 --> 00:01:28,056
+to write as sigma squared 1,
+
+45
+00:01:29,089 --> 00:01:30,068
+and so p of X1 is
+
+46
+00:01:30,081 --> 00:01:32,001
+going to be a Gaussian
+
+47
+00:01:32,034 --> 00:01:34,040
+probability distribution, with mean
+
+48
+00:01:34,060 --> 00:01:37,057
+mu1 and variance sigma squared 1.
+
+49
+00:01:38,023 --> 00:01:39,065
+And similarly I'm
+
+50
+00:01:39,071 --> 00:01:40,056
+going to assume that X2
+
+51
+00:01:40,076 --> 00:01:42,021
+is distributed, Gaussian,
+
+52
+00:01:42,087 --> 00:01:44,062
+that's what this little tilda stands for,
+
+53
+00:01:44,079 --> 00:01:47,021
+that means distributed Gaussian
+
+54
+00:01:47,073 --> 00:01:49,048
+with mean mu2 and Sigma
+
+55
+00:01:49,082 --> 00:01:51,078
+squared 2, so it's distributed according
+
+56
+00:01:52,017 --> 00:01:54,023
+to a different Gaussian, which has
+
+57
+00:01:54,045 --> 00:01:58,001
+a different set of parameters, mu2 sigma square 2.
+
+58
+00:01:58,012 --> 00:02:00,015
+And similarly, you know,
+
+59
+00:02:00,035 --> 00:02:04,001
+X3 is yet another
+
+60
+00:02:04,048 --> 00:02:06,059
+Gaussian, so this
+
+61
+00:02:06,078 --> 00:02:09,009
+can have a different mean and
+
+62
+00:02:09,030 --> 00:02:11,062
+a different standard deviation than the
+
+63
+00:02:11,083 --> 00:02:15,037
+other features, and so on, up to XN.
+
+64
+00:02:17,000 --> 00:02:17,074
+And so that's my model.
+
+65
+00:02:19,000 --> 00:02:20,022
+Just as a side comment for
+
+66
+00:02:20,037 --> 00:02:21,049
+those of you that are experts in
+
+67
+00:02:21,088 --> 00:02:22,077
+statistics, it turns out that
+
+68
+00:02:22,099 --> 00:02:23,084
+this equation that I just
+
+69
+00:02:24,025 --> 00:02:25,059
+wrote out actually corresponds to an
+
+70
+00:02:25,075 --> 00:02:27,049
+independence assumption on the
+
+71
+00:02:28,006 --> 00:02:29,055
+values of the features x1 through xn.
+
+72
+00:02:30,028 --> 00:02:31,052
+But in practice it turns out
+
+73
+00:02:32,003 --> 00:02:34,000
+that the algorithm of this fragment, it works just fine,
+
+74
+00:02:34,040 --> 00:02:36,033
+whether or not these features are
+
+75
+00:02:36,061 --> 00:02:37,078
+anywhere close to independent and
+
+76
+00:02:38,028 --> 00:02:39,081
+even if independence assumption doesn't
+
+77
+00:02:40,024 --> 00:02:41,083
+hold true this algorithm works just fine.
+
+78
+00:02:42,065 --> 00:02:45,087
+But in case you don't know
+
+79
+00:02:45,096 --> 00:02:47,037
+those terms I just used independence assumptions and so on,
+
+80
+00:02:47,083 --> 00:02:48,046
+don't worry about it.
+
+81
+00:02:49,016 --> 00:02:50,084
+You'll be able to understand
+
+82
+00:02:51,036 --> 00:02:52,068
+it and implement this algorithm just fine
+
+83
+00:02:53,025 --> 00:02:55,031
+and that comment was really meant only for the experts in statistics.
+
+84
+00:02:57,078 --> 00:02:58,087
+Finally, in order to
+
+85
+00:02:59,021 --> 00:03:00,031
+wrap this up, let me
+
+86
+00:03:00,059 --> 00:03:04,068
+take this expression and write it a little bit more compactly.
+
+87
+00:03:05,012 --> 00:03:06,019
+So, we're going to
+
+88
+00:03:06,031 --> 00:03:07,050
+write this is a product
+
+89
+00:03:07,074 --> 00:03:09,052
+from J equals one
+
+90
+00:03:10,022 --> 00:03:11,084
+through N, of P
+
+91
+00:03:12,013 --> 00:03:15,034
+of XJ parameterized by
+
+92
+00:03:16,002 --> 00:03:17,093
+mu j comma sigma squared
+
+93
+00:03:19,050 --> 00:03:21,050
+j. So this funny
+
+94
+00:03:21,078 --> 00:03:23,033
+symbol here, there is
+
+95
+00:03:23,078 --> 00:03:25,021
+capital Greek alphabet pi,
+
+96
+00:03:25,049 --> 00:03:27,059
+that funny symbol there corresponds to
+
+97
+00:03:28,018 --> 00:03:29,097
+taking the product of a set of values.
+
+98
+00:03:30,059 --> 00:03:32,028
+And so, you're familiar with
+
+99
+00:03:32,040 --> 00:03:33,093
+the summation notation, so the
+
+100
+00:03:34,052 --> 00:03:36,046
+sum from i equals one through
+
+101
+00:03:36,093 --> 00:03:39,006
+n, of i. This
+
+102
+00:03:39,096 --> 00:03:41,081
+means 1 + 2 + 3 plus
+
+103
+00:03:42,022 --> 00:03:43,072
+dot dot dot, up to
+
+104
+00:03:43,090 --> 00:03:45,034
+n. Where as this
+
+105
+00:03:45,065 --> 00:03:46,090
+funny symbol here, this product
+
+106
+00:03:47,038 --> 00:03:48,062
+symbol, right product from i
+
+107
+00:03:48,084 --> 00:03:50,031
+equals 1 through n
+
+108
+00:03:50,062 --> 00:03:52,021
+of i.  Then this
+
+109
+00:03:52,052 --> 00:03:54,053
+means that, it's just like summation except that we're now multiplying.
+
+110
+00:03:55,019 --> 00:03:56,068
+This becomes 1 times
+
+111
+00:03:56,087 --> 00:03:58,069
+2 times 3 times up
+
+112
+00:03:59,090 --> 00:04:01,033
+to N. And so using
+
+113
+00:04:01,086 --> 00:04:03,043
+this product notation, this
+
+114
+00:04:03,056 --> 00:04:05,087
+product from j equals 1 through n of this expression.
+
+115
+00:04:06,062 --> 00:04:08,043
+It's just more compact, it's
+
+116
+00:04:08,081 --> 00:04:09,096
+just shorter way for writing
+
+117
+00:04:10,033 --> 00:04:12,081
+out this product of
+
+118
+00:04:13,012 --> 00:04:14,040
+of all of these terms up there.
+
+119
+00:04:15,019 --> 00:04:16,019
+Since we're are taking these p
+
+120
+00:04:16,043 --> 00:04:17,050
+of x j given mu j
+
+121
+00:04:17,073 --> 00:04:18,074
+comma sigma squared j terms
+
+122
+00:04:19,012 --> 00:04:20,029
+and multiplying them together.
+
+123
+00:04:21,054 --> 00:04:22,082
+And, by the way the problem
+
+124
+00:04:23,025 --> 00:04:25,037
+of estimating this distribution
+
+125
+00:04:25,099 --> 00:04:27,012
+p of x, they're sometimes called
+
+126
+00:04:28,027 --> 00:04:29,054
+the problem of density estimation.
+
+127
+00:04:30,042 --> 00:04:31,026
+Hence the title of the slide.
+
+128
+00:04:33,080 --> 00:04:35,031
+So putting everything together, here
+
+129
+00:04:35,050 --> 00:04:36,092
+is our anomaly detection algorithm.
+
+130
+00:04:38,012 --> 00:04:40,029
+The first step is to choose
+
+131
+00:04:40,064 --> 00:04:41,060
+features, or come up with
+
+132
+00:04:41,069 --> 00:04:42,074
+features xi that we think
+
+133
+00:04:43,004 --> 00:04:45,033
+might be indicative of anomalous examples.
+
+134
+00:04:46,005 --> 00:04:47,001
+So what I mean by that,
+
+135
+00:04:47,024 --> 00:04:48,049
+is, try to come
+
+136
+00:04:48,068 --> 00:04:49,099
+up with features, so that when there's
+
+137
+00:04:50,027 --> 00:04:51,062
+an unusual user in your
+
+138
+00:04:52,018 --> 00:04:53,000
+system that may be doing
+
+139
+00:04:53,018 --> 00:04:54,079
+fraudulent things, or when the
+
+140
+00:04:55,001 --> 00:04:56,067
+aircraft engine examples, you know
+
+141
+00:04:56,075 --> 00:04:59,050
+there's something funny, something strange about one of the aircraft engines.
+
+142
+00:05:00,027 --> 00:05:01,023
+Choose features X I, that
+
+143
+00:05:02,000 --> 00:05:03,032
+you think might take on unusually
+
+144
+00:05:04,041 --> 00:05:05,086
+large values, or unusually
+
+145
+00:05:06,001 --> 00:05:08,075
+small values, for what an
+
+146
+00:05:08,087 --> 00:05:10,016
+anomalous example might look like.
+
+147
+00:05:10,091 --> 00:05:12,043
+But more generally, just try
+
+148
+00:05:12,068 --> 00:05:14,033
+to choose features that describe general
+
+149
+00:05:16,016 --> 00:05:19,037
+properties of the things that you're collecting data on.
+
+150
+00:05:20,002 --> 00:05:21,036
+Next, given a training set,
+
+151
+00:05:22,001 --> 00:05:23,098
+of M, unlabled examples,
+
+152
+00:05:25,000 --> 00:05:26,098
+X1 through X M, we
+
+153
+00:05:27,017 --> 00:05:28,057
+then fit the parameters,
+
+154
+00:05:29,008 --> 00:05:30,017
+mu 1 through mu n, and
+
+155
+00:05:30,033 --> 00:05:31,048
+sigma squared 1 through sigma
+
+156
+00:05:31,068 --> 00:05:33,045
+squared n, and so these
+
+157
+00:05:33,083 --> 00:05:34,081
+were the formulas similar to
+
+158
+00:05:34,083 --> 00:05:36,042
+the formulas we have
+
+159
+00:05:36,068 --> 00:05:37,061
+in the previous video, that we're
+
+160
+00:05:37,074 --> 00:05:39,018
+going to use the estimate
+
+161
+00:05:39,031 --> 00:05:41,012
+each of these parameters, and just to give
+
+162
+00:05:42,002 --> 00:05:43,067
+some interpretation, mu J,
+
+163
+00:05:44,006 --> 00:05:47,082
+that's my average value of the j feature.
+
+164
+00:05:48,072 --> 00:05:51,057
+Mu j goes in this term p of xj.
+
+165
+00:05:52,043 --> 00:05:53,087
+which is parametrized by mu J
+
+166
+00:05:54,022 --> 00:05:55,058
+and sigma squared J. And
+
+167
+00:05:55,092 --> 00:05:57,088
+so this says for the
+
+168
+00:05:58,036 --> 00:05:59,062
+mu J just take the
+
+169
+00:05:59,069 --> 00:06:00,072
+mean over my training
+
+170
+00:06:01,006 --> 00:06:02,093
+set of the values of the j feature.
+
+171
+00:06:03,086 --> 00:06:05,010
+And, just to mention, that you
+
+172
+00:06:05,022 --> 00:06:07,041
+do this, you compute these
+
+173
+00:06:07,062 --> 00:06:08,082
+formulas for j equals
+
+174
+00:06:09,042 --> 00:06:10,036
+one through n. So use
+
+175
+00:06:10,069 --> 00:06:11,095
+these formulas to estimate mu
+
+176
+00:06:12,023 --> 00:06:14,001
+1, to estimate mu
+
+177
+00:06:14,006 --> 00:06:15,062
+2, and so on up to
+
+178
+00:06:16,017 --> 00:06:17,045
+mu n, and similarly for sigma
+
+179
+00:06:17,076 --> 00:06:19,006
+squared, and it's also
+
+180
+00:06:19,038 --> 00:06:21,052
+possible to come up with vectorized versions of these.
+
+181
+00:06:21,082 --> 00:06:22,089
+So if you think of
+
+182
+00:06:23,000 --> 00:06:25,022
+mu as a vector, so mu
+
+183
+00:06:25,092 --> 00:06:27,043
+if is a vector there's mu 1,
+
+184
+00:06:27,075 --> 00:06:29,023
+mu 2, down to mu
+
+185
+00:06:29,056 --> 00:06:31,018
+n, then a vectorized
+
+186
+00:06:31,066 --> 00:06:33,050
+version of that set
+
+187
+00:06:33,091 --> 00:06:35,052
+of parameters can be written
+
+188
+00:06:36,043 --> 00:06:37,082
+like so sum from 1
+
+189
+00:06:37,087 --> 00:06:39,061
+equals one through n xi.
+
+190
+00:06:40,029 --> 00:06:41,029
+So, this formula that I
+
+191
+00:06:41,041 --> 00:06:43,052
+just wrote out estimates this
+
+192
+00:06:43,099 --> 00:06:45,016
+xi as the feature vectors
+
+193
+00:06:45,066 --> 00:06:48,013
+that estimates mu for all the values of n simultaneously.
+
+194
+00:06:49,013 --> 00:06:50,006
+And it's also possible to come
+
+195
+00:06:50,043 --> 00:06:52,012
+up with a vectorized formula for
+
+196
+00:06:52,029 --> 00:06:55,011
+estimating sigma squared j. Finally,
+
+197
+00:06:56,050 --> 00:06:57,088
+when you're given a new example, so
+
+198
+00:06:58,010 --> 00:06:59,026
+when you have a new aircraft engine
+
+199
+00:06:59,074 --> 00:07:01,042
+and you want to know is this aircraft engine anomalous.
+
+200
+00:07:02,047 --> 00:07:03,043
+What we need to do is then
+
+201
+00:07:03,056 --> 00:07:05,061
+compute p of x, what's the probability of this new example?
+
+202
+00:07:06,079 --> 00:07:07,067
+So, p of x is equal
+
+203
+00:07:07,099 --> 00:07:09,099
+to this product, and
+
+204
+00:07:10,010 --> 00:07:11,013
+what you implement, what you compute,
+
+205
+00:07:11,075 --> 00:07:14,004
+is this formula and
+
+206
+00:07:15,000 --> 00:07:16,061
+where over here, this thing
+
+207
+00:07:16,083 --> 00:07:17,089
+here this is just the
+
+208
+00:07:18,025 --> 00:07:19,025
+formula for the Gaussian
+
+209
+00:07:19,080 --> 00:07:21,000
+probability, so you compute
+
+210
+00:07:21,024 --> 00:07:22,087
+this thing, and finally if
+
+211
+00:07:22,093 --> 00:07:24,042
+this probability is very small,
+
+212
+00:07:24,086 --> 00:07:26,037
+then you flag this thing as an anomaly.
+
+213
+00:07:27,056 --> 00:07:29,037
+Here's an example of an application of this method.
+
+214
+00:07:30,087 --> 00:07:31,086
+Let's say we have this data
+
+215
+00:07:32,020 --> 00:07:35,043
+set plotted on the upper left of this slide.
+
+216
+00:07:36,067 --> 00:07:38,086
+if you look at this, well, lets look the feature of x1.
+
+217
+00:07:39,061 --> 00:07:40,063
+If you look at this data set, it
+
+218
+00:07:40,075 --> 00:07:42,060
+looks like on average, the features
+
+219
+00:07:42,094 --> 00:07:44,032
+x1 has a mean of about 5
+
+220
+00:07:45,054 --> 00:07:47,042
+and the standard deviation, if
+
+221
+00:07:47,058 --> 00:07:48,066
+you only look at just the x1
+
+222
+00:07:49,000 --> 00:07:50,002
+values of this data set
+
+223
+00:07:50,031 --> 00:07:51,072
+has the standard deviation of maybe 2.
+
+224
+00:07:52,037 --> 00:07:55,011
+So that sigma 1 and
+
+225
+00:07:55,045 --> 00:07:57,037
+looks like x2 the
+
+226
+00:07:57,067 --> 00:07:59,006
+values of the features as
+
+227
+00:07:59,025 --> 00:08:00,037
+measured on the vertical axis,
+
+228
+00:08:00,083 --> 00:08:01,073
+looks like it has an average
+
+229
+00:08:02,000 --> 00:08:03,011
+value of about 3, and
+
+230
+00:08:03,037 --> 00:08:05,075
+a standard deviation of about 1. So if
+
+231
+00:08:05,087 --> 00:08:06,093
+you take this data set and if
+
+232
+00:08:07,000 --> 00:08:08,068
+you estimate mu1, mu2, sigma1,
+
+233
+00:08:09,002 --> 00:08:11,041
+sigma2, this is what you get.
+
+234
+00:08:11,061 --> 00:08:12,093
+And again, I'm writing sigma here,
+
+235
+00:08:13,013 --> 00:08:14,062
+I'm think about standard deviations, but
+
+236
+00:08:15,010 --> 00:08:16,024
+the formula on the previous 5
+
+237
+00:08:16,027 --> 00:08:17,063
+actually gave the estimates of the squares
+
+238
+00:08:18,012 --> 00:08:20,067
+of theses things, so sigma squared 1 and sigma squared 2.
+
+239
+00:08:20,093 --> 00:08:21,092
+So, just be careful whether
+
+240
+00:08:22,008 --> 00:08:23,025
+you are using sigma 1, sigma
+
+241
+00:08:23,037 --> 00:08:25,049
+2, or sigma squared 1 or sigma squared 2.
+
+242
+00:08:25,095 --> 00:08:26,069
+So, sigma squared 1 of course
+
+243
+00:08:26,081 --> 00:08:28,050
+would be equal to 4, for
+
+244
+00:08:31,012 --> 00:08:32,025
+example, as the square of 2.
+
+245
+00:08:32,030 --> 00:08:34,000
+And in pictures what p of
+
+246
+00:08:34,017 --> 00:08:35,054
+x1 parametrized by mu1 and
+
+247
+00:08:35,065 --> 00:08:36,083
+sigma squared 1 and p
+
+248
+00:08:37,012 --> 00:08:38,012
+of x2, parametrized by mu
+
+249
+00:08:38,023 --> 00:08:39,004
+2 and sigma squared 2, that
+
+250
+00:08:39,019 --> 00:08:41,036
+would look like these two distributions over here.
+
+251
+00:08:42,064 --> 00:08:44,027
+And, turns out that
+
+252
+00:08:44,048 --> 00:08:45,096
+if were to plot of p
+
+253
+00:08:46,021 --> 00:08:47,053
+of x, right, which
+
+254
+00:08:47,071 --> 00:08:49,000
+is the product of these two
+
+255
+00:08:49,021 --> 00:08:50,045
+things, you can actually get
+
+256
+00:08:50,079 --> 00:08:52,076
+a surface plot that looks like this.
+
+257
+00:08:53,036 --> 00:08:54,037
+This is a plot of p
+
+258
+00:08:54,063 --> 00:08:55,091
+of x, where the height
+
+259
+00:08:56,038 --> 00:08:57,073
+above of this, where the
+
+260
+00:08:57,083 --> 00:08:58,095
+height of this surface at
+
+261
+00:08:58,099 --> 00:09:01,036
+a particular point, so given a
+
+262
+00:09:01,047 --> 00:09:03,066
+particular x1 x2
+
+263
+00:09:03,092 --> 00:09:05,063
+values of x2 if
+
+264
+00:09:05,079 --> 00:09:07,083
+x1 equals 2, x equal 2, that's this point.
+
+265
+00:09:08,050 --> 00:09:09,045
+And the height of this 3-D
+
+266
+00:09:09,071 --> 00:09:11,027
+surface here, that's p
+
+267
+00:09:13,001 --> 00:09:14,041
+of x. So p of x, that is the height
+
+268
+00:09:14,071 --> 00:09:16,022
+of this plot, is
+
+269
+00:09:16,034 --> 00:09:17,051
+literally just p of x1
+
+270
+00:09:18,063 --> 00:09:20,000
+parametrized by mu 1 sigma
+
+271
+00:09:20,028 --> 00:09:22,053
+squared 1, times p
+
+272
+00:09:23,020 --> 00:09:25,004
+of x2 parametrized by
+
+273
+00:09:25,012 --> 00:09:27,052
+mu 2 sigma squared 2.
+
+274
+00:09:27,072 --> 00:09:29,017
+Now, so this is
+
+275
+00:09:29,032 --> 00:09:31,039
+how we fit the parameters to this data.
+
+276
+00:09:31,092 --> 00:09:32,095
+Let's see if we have a couple of new examples.
+
+277
+00:09:33,052 --> 00:09:35,009
+Maybe I have a new example there.
+
+278
+00:09:36,070 --> 00:09:38,034
+Is this an anomaly or not?
+
+279
+00:09:38,054 --> 00:09:39,022
+Or, maybe I have a different
+
+280
+00:09:39,057 --> 00:09:41,086
+example, maybe I have a different second example over there.
+
+281
+00:09:42,013 --> 00:09:43,039
+So, is that an anomaly or not?
+
+282
+00:09:44,036 --> 00:09:47,004
+They way we do that is, we
+
+283
+00:09:47,019 --> 00:09:48,047
+would set some value for
+
+284
+00:09:48,062 --> 00:09:49,049
+Epsilon, let's say I've chosen
+
+285
+00:09:50,001 --> 00:09:51,022
+Epsilon equals 0.02.
+
+286
+00:09:51,098 --> 00:09:54,011
+I'll say later how we choose Epsilon.
+
+287
+00:09:55,017 --> 00:09:56,011
+But let's take this first
+
+288
+00:09:56,053 --> 00:09:57,036
+example, let me call this
+
+289
+00:09:57,050 --> 00:09:59,050
+example X1 test.
+
+290
+00:10:00,020 --> 00:10:01,000
+And let me call the second example
+
+291
+00:10:02,079 --> 00:10:03,089
+X2 test.
+
+292
+00:10:04,077 --> 00:10:05,066
+What we do is, we
+
+293
+00:10:05,082 --> 00:10:07,037
+then compute p of
+
+294
+00:10:07,053 --> 00:10:08,074
+X1 test, so we use
+
+295
+00:10:08,099 --> 00:10:10,039
+this formula to compute it and
+
+296
+00:10:11,013 --> 00:10:12,075
+this looks like a pretty large value.
+
+297
+00:10:13,025 --> 00:10:15,055
+In particular, this is greater
+
+298
+00:10:15,091 --> 00:10:18,048
+than, or greater than or equal to epsilon.
+
+299
+00:10:18,066 --> 00:10:19,066
+And so this is a pretty
+
+300
+00:10:19,080 --> 00:10:21,028
+high probability at least bigger
+
+301
+00:10:21,049 --> 00:10:22,050
+than epsilon, so we'll say that
+
+302
+00:10:22,097 --> 00:10:24,049
+X1 test is not an anomaly.
+
+303
+00:10:25,064 --> 00:10:27,037
+Whereas, if you compute p of
+
+304
+00:10:27,044 --> 00:10:29,080
+X2 test, well that is just a much smaller value.
+
+305
+00:10:30,016 --> 00:10:31,034
+So this is less than
+
+306
+00:10:31,049 --> 00:10:32,049
+epsilon and so we'll say
+
+307
+00:10:32,072 --> 00:10:34,039
+that that is indeed an anomaly,
+
+308
+00:10:34,086 --> 00:10:37,035
+because it is much smaller than that epsilon that we then chose.
+
+309
+00:10:38,045 --> 00:10:39,095
+And in fact, I'd improve it here.
+
+310
+00:10:40,046 --> 00:10:43,034
+What this is really saying is that, you look through the 3d surface plot.
+
+311
+00:10:44,065 --> 00:10:46,026
+It's saying that all the
+
+312
+00:10:46,035 --> 00:10:47,094
+values of x1 and x2
+
+313
+00:10:48,021 --> 00:10:50,057
+that have a high height
+
+314
+00:10:50,080 --> 00:10:52,076
+above the surface, corresponds to
+
+315
+00:10:52,090 --> 00:10:55,015
+an a non-anomalous example of an OK or normal example.
+
+316
+00:10:55,097 --> 00:10:57,045
+Whereas all the points far out
+
+317
+00:10:57,063 --> 00:10:58,094
+here, all the points out
+
+318
+00:10:59,014 --> 00:11:00,046
+here, all of those
+
+319
+00:11:00,058 --> 00:11:01,074
+points have very low
+
+320
+00:11:01,090 --> 00:11:02,094
+probability, so we are
+
+321
+00:11:03,001 --> 00:11:04,030
+going to flag those points
+
+322
+00:11:04,062 --> 00:11:06,035
+as anomalous, and so it's gonna define
+
+323
+00:11:06,075 --> 00:11:07,078
+some region, that maybe looks
+
+324
+00:11:08,000 --> 00:11:09,048
+like this, so that everything
+
+325
+00:11:09,080 --> 00:11:12,015
+outside this, it flags
+
+326
+00:11:12,037 --> 00:11:12,058
+as anomalous,
+
+327
+00:11:14,094 --> 00:11:16,025
+whereas the things inside this
+
+328
+00:11:16,076 --> 00:11:18,034
+ellipse I just drew, if it
+
+329
+00:11:18,057 --> 00:11:21,032
+considers okay, or non-anomalous, not anomalous examples.
+
+330
+00:11:22,011 --> 00:11:24,003
+And so this example x2
+
+331
+00:11:24,025 --> 00:11:26,025
+test lies outside
+
+332
+00:11:26,064 --> 00:11:27,050
+that region, and so it
+
+333
+00:11:27,062 --> 00:11:30,027
+has very small probability, and so we consider it an anomalous example.
+
+334
+00:11:31,039 --> 00:11:32,099
+In this video we talked about how to
+
+335
+00:11:33,046 --> 00:11:35,044
+estimate p of x, the probability of
+
+336
+00:11:35,059 --> 00:11:36,084
+x, for the purpose of
+
+337
+00:11:36,092 --> 00:11:38,074
+developing an anomaly detection algorithm.
+
+338
+00:11:39,087 --> 00:11:40,088
+And in this video, we also
+
+339
+00:11:41,025 --> 00:11:42,097
+stepped through an entire process
+
+340
+00:11:43,083 --> 00:11:45,009
+of giving data set, we
+
+341
+00:11:45,034 --> 00:11:47,074
+have, fitting the parameters, doing parameter estimations.
+
+342
+00:11:48,037 --> 00:11:50,057
+We get mu and sigma parameters, and
+
+343
+00:11:50,070 --> 00:11:52,017
+then taking new examples and deciding
+
+344
+00:11:52,074 --> 00:11:54,011
+if the new examples are anomalous or not.
+
+345
+00:11:55,049 --> 00:11:56,079
+In the next few videos we
+
+346
+00:11:56,087 --> 00:11:58,058
+will delve deeper into this algorithm,
+
+347
+00:11:58,098 --> 00:11:59,092
+and talk a bit more
+
+348
+00:12:00,023 --> 00:12:02,030
+about how to actually get this to work well.

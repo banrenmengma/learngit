@@ -1,0 +1,400 @@
+
+1
+00:00:00,009 --> 00:00:02,031
+In this video, I'd like to start to talk about clustering.
+
+2
+00:00:03,041 --> 00:00:04,084
+This will be exciting because this
+
+3
+00:00:04,092 --> 00:00:06,091
+is our first unsupervised learning algorithm
+
+4
+00:00:07,034 --> 00:00:09,008
+where we learn from unlabeled data
+
+5
+00:00:09,083 --> 00:00:10,073
+instead of the label data.
+
+6
+00:00:11,090 --> 00:00:13,030
+So, what is unsupervised learning?
+
+7
+00:00:14,039 --> 00:00:15,063
+I briefly talked about unsupervised
+
+8
+00:00:16,035 --> 00:00:17,046
+learning at the beginning of
+
+9
+00:00:17,055 --> 00:00:18,055
+the class but it's useful
+
+10
+00:00:19,003 --> 00:00:20,032
+to contrast it with supervised learning. So, here's
+
+11
+00:00:21,076 --> 00:00:23,075
+a typical supervisory problem where
+
+12
+00:00:24,003 --> 00:00:25,046
+we are given a label training sets
+
+13
+00:00:25,076 --> 00:00:27,046
+and the goal is to find
+
+14
+00:00:27,098 --> 00:00:29,042
+the decision boundary that separates the
+
+15
+00:00:29,053 --> 00:00:31,030
+positive label examples and the negative label examples.
+
+16
+00:00:33,010 --> 00:00:34,039
+The supervised learning problem in
+
+17
+00:00:34,046 --> 00:00:35,071
+this case is given a
+
+18
+00:00:35,085 --> 00:00:38,027
+set of labels to fit a hypothesis to it.
+
+19
+00:00:39,015 --> 00:00:40,056
+In contrast, in the unsupervised
+
+20
+00:00:41,007 --> 00:00:42,042
+learning problem, we're given
+
+21
+00:00:42,071 --> 00:00:43,074
+data that does not have
+
+22
+00:00:43,089 --> 00:00:45,027
+any labels associated with it.
+
+23
+00:00:46,072 --> 00:00:47,093
+So we're given data that looks
+
+24
+00:00:48,010 --> 00:00:49,009
+like this, here's a set
+
+25
+00:00:49,017 --> 00:00:50,046
+of points and then no labels.
+
+26
+00:00:51,079 --> 00:00:52,085
+And so our training set is written
+
+27
+00:00:53,021 --> 00:00:54,071
+just x1, x2 and
+
+28
+00:00:55,021 --> 00:00:56,089
+so on up to x(m)
+
+29
+00:00:57,045 --> 00:00:58,071
+and we don't get any labels y.
+
+30
+00:00:59,053 --> 00:01:00,079
+And that's why the points plotted
+
+31
+00:01:01,015 --> 00:01:02,029
+up on the figure don't have
+
+32
+00:01:02,042 --> 00:01:04,032
+any labels on them.
+
+33
+00:01:04,048 --> 00:01:05,051
+So in unsupervised learning, what
+
+34
+00:01:05,070 --> 00:01:06,085
+we do is, we give this sort of
+
+35
+00:01:07,028 --> 00:01:09,015
+unlabeled training set to
+
+36
+00:01:09,025 --> 00:01:10,051
+an algorithm and we just
+
+37
+00:01:10,059 --> 00:01:12,021
+ask the algorithm: find some
+
+38
+00:01:12,043 --> 00:01:14,012
+structure in the data for us.
+
+39
+00:01:15,042 --> 00:01:16,048
+Given this data set, one
+
+40
+00:01:16,065 --> 00:01:17,081
+type of structure we might
+
+41
+00:01:18,001 --> 00:01:19,054
+have an algorithm find, is that
+
+42
+00:01:19,081 --> 00:01:21,043
+it looks like this data set has
+
+43
+00:01:21,062 --> 00:01:23,073
+points grouped into two
+
+44
+00:01:24,003 --> 00:01:25,050
+separate clusters and so
+
+45
+00:01:25,079 --> 00:01:28,023
+an algorithm that finds that
+
+46
+00:01:28,035 --> 00:01:29,023
+clusters like the ones I just
+
+47
+00:01:29,045 --> 00:01:30,060
+circled, is called a clustering
+
+48
+00:01:32,043 --> 00:01:32,043
+algorithm.
+
+49
+00:01:33,015 --> 00:01:34,062
+And this will be our first type of
+
+50
+00:01:34,071 --> 00:01:36,059
+unsupervised learning, although there
+
+51
+00:01:36,079 --> 00:01:38,031
+will be other types of unsupervised
+
+52
+00:01:39,001 --> 00:01:40,020
+learning algorithms that we'll talk
+
+53
+00:01:40,031 --> 00:01:41,070
+about later that finds other
+
+54
+00:01:42,012 --> 00:01:43,070
+types of structure or other
+
+55
+00:01:43,092 --> 00:01:46,000
+types of patterns in the data other than clusters.
+
+56
+00:01:46,090 --> 00:01:48,035
+We'll talk about this afterwards, we will talk about clustering.
+
+57
+00:01:50,001 --> 00:01:51,020
+So what is clustering good for?
+
+58
+00:01:51,037 --> 00:01:54,034
+Early in this class I had already mentioned a few applications.
+
+59
+00:01:54,095 --> 00:01:56,054
+One is market segmentation, where
+
+60
+00:01:56,067 --> 00:01:57,068
+you may have a database of
+
+61
+00:01:57,076 --> 00:01:58,084
+customers and want to group
+
+62
+00:01:59,006 --> 00:02:00,037
+them into different market segments.
+
+63
+00:02:00,095 --> 00:02:02,059
+So, you can sell to
+
+64
+00:02:02,071 --> 00:02:05,056
+them separately or serve your different market segments better.
+
+65
+00:02:06,073 --> 00:02:08,037
+Social network analysis, there are
+
+66
+00:02:08,058 --> 00:02:10,009
+actually, you know, groups that have done
+
+67
+00:02:10,031 --> 00:02:12,059
+this, things like looking at a
+
+68
+00:02:12,072 --> 00:02:14,053
+group of people, social networks,
+
+69
+00:02:15,006 --> 00:02:16,038
+so things like Facebook, Google plus
+
+70
+00:02:16,071 --> 00:02:18,025
+or maybe information about who
+
+71
+00:02:18,043 --> 00:02:19,071
+are the people that you
+
+72
+00:02:20,003 --> 00:02:21,011
+email the most frequently and who
+
+73
+00:02:21,022 --> 00:02:22,016
+are the people that they email
+
+74
+00:02:22,031 --> 00:02:23,059
+the most frequently, and
+
+75
+00:02:23,075 --> 00:02:25,040
+to find coherent groups of people.
+
+76
+00:02:26,050 --> 00:02:27,059
+So, this would be another maybe
+
+77
+00:02:28,018 --> 00:02:28,084
+clustering algorithm where, you know, you'd want
+
+78
+00:02:29,008 --> 00:02:32,019
+to find who other coherent groups of friends in a social network.
+
+79
+00:02:33,013 --> 00:02:33,099
+Here's something that one of my
+
+80
+00:02:34,013 --> 00:02:35,016
+friends actually worked on, which is,
+
+81
+00:02:35,091 --> 00:02:37,019
+use clustering to organize compute
+
+82
+00:02:37,066 --> 00:02:39,021
+clusters or to organize data
+
+83
+00:02:39,043 --> 00:02:40,059
+centers better because, if you
+
+84
+00:02:40,080 --> 00:02:42,044
+know which computers in the
+
+85
+00:02:42,052 --> 00:02:44,099
+data center are in the cluster there tend to work together.
+
+86
+00:02:45,040 --> 00:02:46,027
+You can use that to reorganize
+
+87
+00:02:46,094 --> 00:02:48,038
+your resources and how you
+
+88
+00:02:48,056 --> 00:02:50,012
+lay out its network and
+
+89
+00:02:50,025 --> 00:02:52,003
+how design your data center and communications.
+
+90
+00:02:53,013 --> 00:02:54,053
+And lastly something that, actually
+
+91
+00:02:54,084 --> 00:02:55,090
+another thing I worked on, using
+
+92
+00:02:56,012 --> 00:02:57,081
+clustering algorithms to understand
+
+93
+00:02:58,040 --> 00:03:00,003
+galaxy formation and using
+
+94
+00:03:00,028 --> 00:03:02,025
+that to understand how, to
+
+95
+00:03:02,059 --> 00:03:03,086
+understand astronomical detail.
+
+96
+00:03:06,055 --> 00:03:08,058
+So, that's clustering which
+
+97
+00:03:08,088 --> 00:03:10,044
+is our first example of
+
+98
+00:03:10,053 --> 00:03:12,065
+an unsupervised learning algorithm.
+
+99
+00:03:13,009 --> 00:03:14,019
+In the next video, we'll start to
+
+100
+00:03:14,037 --> 00:03:16,025
+talk about a specific clustering algorithm.

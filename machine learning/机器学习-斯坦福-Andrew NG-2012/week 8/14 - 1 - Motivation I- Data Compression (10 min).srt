@@ -1,0 +1,1188 @@
+
+1
+00:00:00,009 --> 00:00:01,033
+In this video, I'd like to
+
+2
+00:00:01,050 --> 00:00:02,056
+start talking about a second
+
+3
+00:00:03,002 --> 00:00:04,062
+type of unsupervised learning problem
+
+4
+00:00:04,095 --> 00:00:06,032
+called dimensionality reduction.
+
+5
+00:00:07,059 --> 00:00:08,046
+There are a couple of different
+
+6
+00:00:08,066 --> 00:00:09,071
+reasons why one might
+
+7
+00:00:09,089 --> 00:00:11,026
+want to do dimensionality reduction.
+
+8
+00:00:12,022 --> 00:00:14,041
+One is data compression, and as
+
+9
+00:00:14,059 --> 00:00:15,085
+we'll see later, a few videos
+
+10
+00:00:16,057 --> 00:00:18,019
+later, data compression not only
+
+11
+00:00:18,048 --> 00:00:19,066
+allows us to compress the
+
+12
+00:00:19,096 --> 00:00:20,094
+data and have it therefore
+
+13
+00:00:21,032 --> 00:00:22,067
+use up less computer memory
+
+14
+00:00:23,005 --> 00:00:24,041
+or disk space, but it will
+
+15
+00:00:24,073 --> 00:00:26,096
+also allow us to speed up our learning algorithms.
+
+16
+00:00:27,098 --> 00:00:29,048
+But first, let's start by
+
+17
+00:00:29,062 --> 00:00:31,083
+talking about what is dimensionality reduction.
+
+18
+00:00:33,049 --> 00:00:35,079
+As a motivating example, let's say
+
+19
+00:00:35,099 --> 00:00:37,043
+that we've collected a data set
+
+20
+00:00:37,067 --> 00:00:38,070
+with many, many, many features,
+
+21
+00:00:39,028 --> 00:00:40,060
+and I've plotted just two of them here.
+
+22
+00:00:41,060 --> 00:00:42,077
+And let's say that unknown to
+
+23
+00:00:42,089 --> 00:00:44,000
+us two of the
+
+24
+00:00:44,007 --> 00:00:45,072
+features were actually the length
+
+25
+00:00:45,085 --> 00:00:47,014
+of something in centimeters, and
+
+26
+00:00:47,054 --> 00:00:48,092
+a different feature, x2, is
+
+27
+00:00:49,046 --> 00:00:51,014
+the length of the same thing in inches.
+
+28
+00:00:52,025 --> 00:00:53,003
+So, this gives us a highly
+
+29
+00:00:53,050 --> 00:00:55,090
+redundant representation and maybe
+
+30
+00:00:56,017 --> 00:00:57,092
+instead of having two separate features x1
+
+31
+00:00:58,042 --> 00:00:58,082
+then x2,
+
+32
+00:00:59,009 --> 00:01:00,024
+both of which basically measure the
+
+33
+00:01:00,036 --> 00:01:01,049
+length, maybe what we
+
+34
+00:01:01,064 --> 00:01:03,034
+want to do is reduce the
+
+35
+00:01:03,042 --> 00:01:06,079
+data to one-dimensional and
+
+36
+00:01:06,092 --> 00:01:08,084
+just have one number measuring this length.
+
+37
+00:01:09,062 --> 00:01:11,007
+In case this example seems a
+
+38
+00:01:11,015 --> 00:01:13,092
+bit contrived, this centimeter and
+
+39
+00:01:14,003 --> 00:01:15,084
+inches example is actually not that
+
+40
+00:01:16,021 --> 00:01:17,014
+unrealistic, and not that different
+
+41
+00:01:17,051 --> 00:01:18,087
+from things that I see happening in industry.
+
+42
+00:01:19,096 --> 00:01:21,031
+If you have hundreds
+
+43
+00:01:21,079 --> 00:01:23,015
+or thousands of features, it is
+
+44
+00:01:23,023 --> 00:01:24,045
+often this easy to
+
+45
+00:01:24,068 --> 00:01:26,057
+lose track of exactly what features you have.
+
+46
+00:01:26,093 --> 00:01:28,018
+And sometimes may have
+
+47
+00:01:28,042 --> 00:01:29,065
+a few different engineering teams, maybe
+
+48
+00:01:30,010 --> 00:01:31,009
+one engineering team gives you
+
+49
+00:01:31,020 --> 00:01:32,050
+two hundred features, a second
+
+50
+00:01:32,076 --> 00:01:34,000
+engineering team gives you another
+
+51
+00:01:34,034 --> 00:01:35,042
+three hundred features, and a
+
+52
+00:01:35,054 --> 00:01:36,064
+third engineering team gives you five
+
+53
+00:01:36,093 --> 00:01:38,015
+hundred features so you have
+
+54
+00:01:38,029 --> 00:01:39,021
+a thousand features all together,
+
+55
+00:01:39,093 --> 00:01:40,090
+and it actually becomes hard to
+
+56
+00:01:41,004 --> 00:01:42,081
+keep track of you know, exactly which features
+
+57
+00:01:43,020 --> 00:01:44,054
+you got from which team, and
+
+58
+00:01:44,085 --> 00:01:47,031
+it's actually not that want to have highly redundant features like these.
+
+59
+00:01:47,053 --> 00:01:49,043
+And so if the
+
+60
+00:01:50,009 --> 00:01:51,051
+length in centimeters were rounded
+
+61
+00:01:51,093 --> 00:01:53,092
+off to the nearest centimeter and
+
+62
+00:01:54,006 --> 00:01:56,048
+lengthened inches was rounded off to the nearest inch.
+
+63
+00:01:57,006 --> 00:01:58,004
+Then, that's why these examples
+
+64
+00:01:58,071 --> 00:01:59,090
+don't lie perfectly on a
+
+65
+00:02:00,009 --> 00:02:01,026
+straight line, because of, you know, round-off
+
+66
+00:02:01,073 --> 00:02:03,042
+error to the nearest centimeter or the nearest inch.
+
+67
+00:02:04,026 --> 00:02:05,015
+And if we can reduce
+
+68
+00:02:05,060 --> 00:02:06,068
+the data to one dimension
+
+69
+00:02:07,012 --> 00:02:10,031
+instead of two dimensions, that reduces the redundancy.
+
+70
+00:02:11,059 --> 00:02:14,003
+For a different example, again maybe when there seems fairly less contrives.
+
+71
+00:02:14,059 --> 00:02:16,056
+For may years I've
+
+72
+00:02:16,091 --> 00:02:19,091
+been working with autonomous helicopter pilots.
+
+73
+00:02:20,099 --> 00:02:22,061
+Or I've been working with pilots that fly helicopters.
+
+74
+00:02:23,094 --> 00:02:24,003
+And so.
+
+75
+00:02:25,008 --> 00:02:28,009
+If you were to measure--if you
+
+76
+00:02:28,025 --> 00:02:29,009
+were to, you know, do a survey
+
+77
+00:02:29,059 --> 00:02:30,050
+or do a test of these different
+
+78
+00:02:30,077 --> 00:02:32,019
+pilots--you might have one
+
+79
+00:02:32,043 --> 00:02:33,078
+feature, x1, which is maybe
+
+80
+00:02:34,005 --> 00:02:35,059
+the skill of these
+
+81
+00:02:35,081 --> 00:02:38,018
+helicopter pilots, and maybe
+
+82
+00:02:38,046 --> 00:02:41,081
+"x2" could be the pilot enjoyment.
+
+83
+00:02:42,069 --> 00:02:43,077
+That is, you know, how
+
+84
+00:02:43,087 --> 00:02:45,005
+much they enjoy flying, and maybe
+
+85
+00:02:45,028 --> 00:02:46,081
+these two features will be highly correlated. And
+
+86
+00:02:48,031 --> 00:02:49,072
+what you really care about might
+
+87
+00:02:49,093 --> 00:02:52,053
+be this sort of
+
+88
+00:02:53,061 --> 00:02:55,012
+this sort of, this direction, a different feature that really
+
+89
+00:02:55,037 --> 00:02:57,018
+measures pilot aptitude.
+
+90
+00:03:00,044 --> 00:03:01,024
+And I'm making up the name
+
+91
+00:03:01,059 --> 00:03:03,021
+aptitude of course, but again, if
+
+92
+00:03:03,031 --> 00:03:04,078
+you highly correlated features, maybe
+
+93
+00:03:04,099 --> 00:03:06,050
+you really want to reduce the dimension.
+
+94
+00:03:07,056 --> 00:03:08,075
+So, let me say a
+
+95
+00:03:09,003 --> 00:03:09,094
+little bit more about what it
+
+96
+00:03:10,006 --> 00:03:11,038
+really means to reduce the
+
+97
+00:03:11,052 --> 00:03:12,094
+dimension of the data from
+
+98
+00:03:13,015 --> 00:03:14,040
+2 dimensions down from 2D
+
+99
+00:03:14,059 --> 00:03:16,030
+to 1 dimensional or to 1D.
+
+100
+00:03:16,084 --> 00:03:18,065
+Let me color in
+
+101
+00:03:18,083 --> 00:03:19,093
+these examples by using different
+
+102
+00:03:21,059 --> 00:03:21,059
+colors.
+
+103
+00:03:21,072 --> 00:03:22,088
+And in this case
+
+104
+00:03:23,037 --> 00:03:24,074
+by reducing the dimension what
+
+105
+00:03:25,000 --> 00:03:26,031
+I mean is that I would
+
+106
+00:03:26,053 --> 00:03:28,040
+like to find maybe this
+
+107
+00:03:28,065 --> 00:03:30,056
+line, this, you know, direction on
+
+108
+00:03:30,071 --> 00:03:31,069
+which most of the data seems
+
+109
+00:03:31,090 --> 00:03:33,015
+to lie and project all
+
+110
+00:03:33,037 --> 00:03:34,074
+the data onto that line which
+
+111
+00:03:34,090 --> 00:03:36,022
+is true, and by doing
+
+112
+00:03:36,050 --> 00:03:37,043
+so, what I can do
+
+113
+00:03:37,096 --> 00:03:39,041
+is just measure the
+
+114
+00:03:39,058 --> 00:03:41,047
+position of each of the examples on that line.
+
+115
+00:03:42,000 --> 00:03:42,081
+And what I can do is come
+
+116
+00:03:43,009 --> 00:03:45,008
+up with a new feature, z1,
+
+117
+00:03:46,083 --> 00:03:48,019
+and to specify the position
+
+118
+00:03:48,072 --> 00:03:49,053
+on the line I need only
+
+119
+00:03:49,088 --> 00:03:50,093
+one number, so it says
+
+120
+00:03:51,019 --> 00:03:51,097
+z1 is a new feature
+
+121
+00:03:52,075 --> 00:03:54,062
+that specifies the location of
+
+122
+00:03:54,083 --> 00:03:57,061
+each of those points on this green line.
+
+123
+00:03:58,006 --> 00:03:59,030
+And what this means, is
+
+124
+00:03:59,040 --> 00:04:00,068
+that where as previously if i
+
+125
+00:04:00,093 --> 00:04:02,053
+had an example x1, maybe
+
+126
+00:04:03,043 --> 00:04:04,074
+this was my first example, x1.
+
+127
+00:04:05,003 --> 00:04:06,047
+So in order to
+
+128
+00:04:06,081 --> 00:04:08,055
+represent x1 originally x1.
+
+129
+00:04:09,062 --> 00:04:10,075
+I needed a two dimensional number,
+
+130
+00:04:11,056 --> 00:04:12,080
+or a two dimensional feature vector.
+
+131
+00:04:13,069 --> 00:04:14,091
+Instead now I can represent
+
+132
+00:04:18,012 --> 00:04:20,032
+z1. I could
+
+133
+00:04:20,051 --> 00:04:22,017
+use just z1 to represent my first
+
+134
+00:04:23,026 --> 00:04:25,037
+example, and that's going to be a real number.
+
+135
+00:04:25,093 --> 00:04:29,025
+And similarly x2 you know, if x2
+
+136
+00:04:29,058 --> 00:04:31,039
+is my second example there,
+
+137
+00:04:32,068 --> 00:04:35,011
+then previously, whereas this required
+
+138
+00:04:35,082 --> 00:04:37,051
+two numbers to represent if I
+
+139
+00:04:37,072 --> 00:04:39,093
+instead compute the projection
+
+140
+00:04:40,093 --> 00:04:42,073
+of that black cross
+
+141
+00:04:43,012 --> 00:04:44,025
+onto the line.
+
+142
+00:04:44,069 --> 00:04:45,098
+And now I only need one
+
+143
+00:04:46,020 --> 00:04:47,035
+real number which is
+
+144
+00:04:47,055 --> 00:04:49,057
+z2 to represent the
+
+145
+00:04:49,062 --> 00:04:51,023
+location of this point
+
+146
+00:04:51,079 --> 00:04:53,006
+z2 on the line.
+
+147
+00:04:54,030 --> 00:04:56,073
+And so on through my M examples.
+
+148
+00:04:57,079 --> 00:04:59,056
+So, just to summarize, if
+
+149
+00:04:59,081 --> 00:05:01,031
+we allow ourselves to approximate
+
+150
+00:05:02,033 --> 00:05:03,080
+the original data set by
+
+151
+00:05:04,000 --> 00:05:05,026
+projecting all of my
+
+152
+00:05:05,058 --> 00:05:07,068
+original examples onto this green
+
+153
+00:05:07,087 --> 00:05:10,025
+line over here, then I
+
+154
+00:05:10,036 --> 00:05:12,008
+need only one number, I
+
+155
+00:05:12,017 --> 00:05:13,069
+need only real number to
+
+156
+00:05:13,081 --> 00:05:15,026
+specify the position of
+
+157
+00:05:15,037 --> 00:05:16,070
+a point on the line,
+
+158
+00:05:17,007 --> 00:05:18,022
+and so what I can
+
+159
+00:05:18,030 --> 00:05:19,073
+do is therefore use just
+
+160
+00:05:20,006 --> 00:05:21,085
+one number to represent the
+
+161
+00:05:21,093 --> 00:05:23,017
+location of each of
+
+162
+00:05:23,027 --> 00:05:26,051
+my training examples after they've been projected onto that green line.
+
+163
+00:05:27,056 --> 00:05:29,006
+So this is an approximation to
+
+164
+00:05:29,020 --> 00:05:30,030
+the original training self because
+
+165
+00:05:30,056 --> 00:05:32,076
+I have projected all of my training examples onto a line.
+
+166
+00:05:33,062 --> 00:05:34,079
+But
+
+167
+00:05:35,012 --> 00:05:36,013
+now, I need to keep around
+
+168
+00:05:36,052 --> 00:05:39,080
+only one number for each of my examples.
+
+169
+00:05:41,022 --> 00:05:42,095
+And so this halves the memory
+
+170
+00:05:43,033 --> 00:05:44,063
+requirement, or a space requirement,
+
+171
+00:05:45,008 --> 00:05:47,075
+or what have you, for how to store my data.
+
+172
+00:05:49,010 --> 00:05:50,052
+And perhaps more interestingly, more
+
+173
+00:05:50,069 --> 00:05:51,093
+importantly, what we'll see
+
+174
+00:05:52,019 --> 00:05:53,051
+later, in the later
+
+175
+00:05:53,077 --> 00:05:55,073
+video as well is that this
+
+176
+00:05:55,093 --> 00:05:56,093
+will allow us to make
+
+177
+00:05:57,019 --> 00:05:59,017
+our learning algorithms run more quickly as well.
+
+178
+00:05:59,048 --> 00:06:00,060
+And that is actually,
+
+179
+00:06:00,092 --> 00:06:02,006
+perhaps, even the more interesting
+
+180
+00:06:02,013 --> 00:06:03,080
+application of this data compression
+
+181
+00:06:04,057 --> 00:06:06,022
+rather than reducing the memory
+
+182
+00:06:06,068 --> 00:06:08,062
+or disk space requirement for storing the data.
+
+183
+00:06:10,025 --> 00:06:11,049
+On the previous slide we
+
+184
+00:06:11,057 --> 00:06:13,013
+showed an example of reducing
+
+185
+00:06:13,062 --> 00:06:15,006
+data from 2D to 1D.
+
+186
+00:06:15,020 --> 00:06:16,029
+On this slide, I'm going
+
+187
+00:06:16,066 --> 00:06:18,000
+to show another example of reducing
+
+188
+00:06:18,044 --> 00:06:21,007
+data from three dimensional 3D to two dimensional 2D.
+
+189
+00:06:22,058 --> 00:06:23,036
+By the way, in the more typical
+
+190
+00:06:23,075 --> 00:06:25,056
+example of dimensionality reduction
+
+191
+00:06:26,038 --> 00:06:27,079
+we might have a thousand dimensional
+
+192
+00:06:28,023 --> 00:06:30,032
+data or 1000D data that
+
+193
+00:06:30,072 --> 00:06:31,087
+we might want to reduce to
+
+194
+00:06:32,014 --> 00:06:34,007
+let's say a hundred dimensional or
+
+195
+00:06:34,011 --> 00:06:35,058
+100D, but because of
+
+196
+00:06:35,069 --> 00:06:37,075
+the limitations of what I can plot on the slide.
+
+197
+00:06:38,045 --> 00:06:41,051
+I'm going to use examples of 3D to 2D, or 2D to 1D.
+
+198
+00:06:43,016 --> 00:06:45,082
+So, let's have a data set like that shown here.
+
+199
+00:06:46,005 --> 00:06:47,042
+And so, I would have a set of examples
+
+200
+00:06:48,011 --> 00:06:49,043
+x(i) which are points
+
+201
+00:06:49,080 --> 00:06:51,079
+in r3. So, I have three dimension examples.
+
+202
+00:06:52,074 --> 00:06:53,030
+I know it might be a little
+
+203
+00:06:53,068 --> 00:06:54,061
+bit hard to see this on the slide,
+
+204
+00:06:54,092 --> 00:06:55,098
+but I'll show a 3D point
+
+205
+00:06:56,031 --> 00:06:58,018
+cloud in a little bit.
+
+206
+00:06:59,005 --> 00:07:00,027
+And it might be hard to see
+
+207
+00:07:00,037 --> 00:07:01,097
+here, but all of this
+
+208
+00:07:02,023 --> 00:07:04,001
+data maybe lies roughly on
+
+209
+00:07:04,012 --> 00:07:05,069
+the plane, like so.
+
+210
+00:07:07,011 --> 00:07:08,012
+And so what we can do
+
+211
+00:07:08,037 --> 00:07:09,097
+with dimensionality reduction, is take
+
+212
+00:07:10,020 --> 00:07:11,095
+all of this data and
+
+213
+00:07:12,011 --> 00:07:13,080
+project the data down onto
+
+214
+00:07:14,062 --> 00:07:15,035
+a two dimensional plane.
+
+215
+00:07:15,069 --> 00:07:16,067
+So, here what I've done is,
+
+216
+00:07:16,073 --> 00:07:18,006
+I've taken all the data and I've
+
+217
+00:07:18,030 --> 00:07:19,025
+projected all of the data,
+
+218
+00:07:19,076 --> 00:07:21,038
+so that it all lies on the plane.
+
+219
+00:07:22,058 --> 00:07:23,091
+Now, finally, in order to
+
+220
+00:07:24,004 --> 00:07:25,057
+specify the location of a
+
+221
+00:07:25,075 --> 00:07:27,081
+point within a plane, we need two numbers, right?
+
+222
+00:07:28,000 --> 00:07:29,014
+We need to, maybe, specify the
+
+223
+00:07:29,029 --> 00:07:30,066
+location of a point along
+
+224
+00:07:30,097 --> 00:07:32,037
+this axis, and then also
+
+225
+00:07:32,064 --> 00:07:35,008
+specify it's location along that axis.
+
+226
+00:07:35,073 --> 00:07:37,047
+So, we need two numbers, maybe called
+
+227
+00:07:37,085 --> 00:07:39,089
+z1 and z2 to specify
+
+228
+00:07:40,060 --> 00:07:42,044
+the location of a point within a plane.
+
+229
+00:07:43,029 --> 00:07:44,073
+And so, what that means,
+
+230
+00:07:44,088 --> 00:07:45,091
+is that we can now represent
+
+231
+00:07:46,068 --> 00:07:48,031
+each example, each training example,
+
+232
+00:07:48,074 --> 00:07:50,031
+using two numbers that
+
+233
+00:07:50,062 --> 00:07:52,094
+I've drawn here, z1, and z2.
+
+234
+00:07:53,099 --> 00:07:55,088
+So, our data can be represented
+
+235
+00:07:56,061 --> 00:07:59,012
+using vector z which are in r2.
+
+236
+00:08:00,057 --> 00:08:02,011
+And these subscript, z subscript
+
+237
+00:08:02,035 --> 00:08:03,099
+1, z subscript 2, what
+
+238
+00:08:04,056 --> 00:08:05,043
+I just mean by that is that my
+
+239
+00:08:05,050 --> 00:08:07,051
+vectors here, z, you know, are two
+
+240
+00:08:07,075 --> 00:08:09,068
+dimensional vectors, z1, z2.
+
+241
+00:08:10,060 --> 00:08:11,057
+And so if I have some
+
+242
+00:08:11,079 --> 00:08:13,068
+particular examples, z(i), or
+
+243
+00:08:13,075 --> 00:08:15,069
+that's the two dimensional vector, z(i)1,
+
+244
+00:08:16,035 --> 00:08:19,011
+z(i)2.
+
+245
+00:08:20,057 --> 00:08:21,099
+And on the previous slide when
+
+246
+00:08:22,023 --> 00:08:23,075
+I was reducing data to one
+
+247
+00:08:23,094 --> 00:08:25,026
+dimensional data then I
+
+248
+00:08:25,036 --> 00:08:27,050
+had only z1, right?
+
+249
+00:08:27,075 --> 00:08:28,061
+And that is what a z1 subscript 1
+
+250
+00:08:28,069 --> 00:08:29,082
+on the previous slide was,
+
+251
+00:08:30,055 --> 00:08:31,072
+but here I have two dimensional data,
+
+252
+00:08:32,010 --> 00:08:32,073
+so I have z1 and z2 as
+
+253
+00:08:33,003 --> 00:08:34,094
+the two components of the data.
+
+254
+00:08:36,069 --> 00:08:37,083
+Now, let me just make sure
+
+255
+00:08:38,001 --> 00:08:39,020
+that these figures make sense. So
+
+256
+00:08:39,028 --> 00:08:40,078
+let me just reshow these exact
+
+257
+00:08:41,060 --> 00:08:45,008
+three figures again but with 3D plots.
+
+258
+00:08:45,053 --> 00:08:46,057
+So the process we went through was that
+
+259
+00:08:47,003 --> 00:08:48,011
+shown in the lab is the optimal
+
+260
+00:08:48,048 --> 00:08:49,051
+data set, in the middle the
+
+261
+00:08:49,059 --> 00:08:50,053
+data set projects on the 2D,
+
+262
+00:08:51,003 --> 00:08:52,013
+and on the right the 2D
+
+263
+00:08:52,082 --> 00:08:54,089
+data sets with z1 and z2 as the axis.
+
+264
+00:08:55,077 --> 00:08:56,061
+Let's look at them a little
+
+265
+00:08:56,082 --> 00:08:57,096
+bit further. Here's my original
+
+266
+00:08:58,026 --> 00:08:59,021
+data set, shown on the
+
+267
+00:08:59,040 --> 00:09:00,067
+left, and so I had started
+
+268
+00:09:01,037 --> 00:09:02,041
+off with a 3D point
+
+269
+00:09:02,065 --> 00:09:04,000
+cloud like so, where the
+
+270
+00:09:04,036 --> 00:09:05,038
+axis are labeled x1,
+
+271
+00:09:05,057 --> 00:09:07,040
+x2, x3, and so there's a 3D
+
+272
+00:09:07,096 --> 00:09:08,097
+point but most of the data,
+
+273
+00:09:09,050 --> 00:09:10,075
+maybe roughly lies on some,
+
+274
+00:09:10,085 --> 00:09:12,079
+you know, not too far from some 2D plain.
+
+275
+00:09:13,092 --> 00:09:14,095
+So, what we can
+
+276
+00:09:15,003 --> 00:09:17,046
+do is take this data and here's my middle figure.
+
+277
+00:09:17,079 --> 00:09:19,011
+I'm going to project it onto 2D.
+
+278
+00:09:19,037 --> 00:09:20,078
+So, I've projected this data so
+
+279
+00:09:20,089 --> 00:09:23,022
+that all of it now lies on this 2D surface.
+
+280
+00:09:23,075 --> 00:09:25,033
+As you can see all the data
+
+281
+00:09:26,019 --> 00:09:27,047
+lies on a plane, 'cause we've
+
+282
+00:09:27,070 --> 00:09:30,051
+projected everything onto a
+
+283
+00:09:30,057 --> 00:09:31,049
+plane, and so what this means is that
+
+284
+00:09:31,079 --> 00:09:33,019
+now I need only two numbers,
+
+285
+00:09:33,082 --> 00:09:35,009
+z1 and z2, to represent
+
+286
+00:09:35,062 --> 00:09:37,047
+the location of point on the plane.
+
+287
+00:09:40,052 --> 00:09:41,048
+And so that's the process that
+
+288
+00:09:41,080 --> 00:09:42,099
+we can go through to reduce our
+
+289
+00:09:43,050 --> 00:09:45,017
+data from three dimensional to
+
+290
+00:09:45,034 --> 00:09:48,051
+two dimensional. So that's
+
+291
+00:09:49,023 --> 00:09:50,085
+dimensionality reduction and how
+
+292
+00:09:51,007 --> 00:09:52,074
+we can use it to compress our data.
+
+293
+00:09:54,000 --> 00:09:55,039
+And as we'll see
+
+294
+00:09:55,058 --> 00:09:56,097
+later this will allow us to
+
+295
+00:09:57,011 --> 00:09:58,001
+make some of our learning algorithms
+
+296
+00:09:58,058 --> 00:09:59,066
+run much later as well, but
+
+297
+00:09:59,074 --> 00:10:01,021
+we'll get to that only in a later video.

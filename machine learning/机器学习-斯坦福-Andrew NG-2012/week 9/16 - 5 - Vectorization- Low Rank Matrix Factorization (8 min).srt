@@ -1,0 +1,952 @@
+
+1
+00:00:00,053 --> 00:00:01,064
+In the last few videos, we
+
+2
+00:00:01,073 --> 00:00:03,089
+talked about a collaborative filtering algorithm.
+
+3
+00:00:04,083 --> 00:00:05,088
+In this video I'm going to
+
+4
+00:00:05,096 --> 00:00:07,012
+say a little bit about the
+
+5
+00:00:07,049 --> 00:00:09,008
+vectorization implementation of this algorithm.
+
+6
+00:00:09,098 --> 00:00:12,067
+And also talk a little bit about other things you can do with this algorithm.
+
+7
+00:00:13,033 --> 00:00:14,051
+For example, one of the
+
+8
+00:00:14,059 --> 00:00:15,083
+things you can do is, given
+
+9
+00:00:16,017 --> 00:00:17,039
+one product can you find
+
+10
+00:00:17,076 --> 00:00:19,016
+other products that are related
+
+11
+00:00:19,026 --> 00:00:20,021
+to this so that for
+
+12
+00:00:20,048 --> 00:00:23,014
+example, a user has recently been looking at one product.
+
+13
+00:00:23,064 --> 00:00:24,098
+Are there other related products
+
+14
+00:00:25,051 --> 00:00:27,017
+that you could recommend to this user?
+
+15
+00:00:27,062 --> 00:00:28,098
+So let's see what we could do about that.
+
+16
+00:00:30,017 --> 00:00:31,019
+What I'd like to do is work
+
+17
+00:00:31,055 --> 00:00:33,052
+out an alternative way of
+
+18
+00:00:33,074 --> 00:00:35,071
+writing out the predictions of the collaborative filtering algorithm.
+
+19
+00:00:37,036 --> 00:00:38,059
+To start, here is our
+
+20
+00:00:38,096 --> 00:00:40,043
+data set with our
+
+21
+00:00:40,075 --> 00:00:41,088
+five movies and what I'm
+
+22
+00:00:42,015 --> 00:00:43,014
+going to do is take
+
+23
+00:00:43,039 --> 00:00:44,052
+all the ratings by all the
+
+24
+00:00:44,085 --> 00:00:46,050
+users and group them into
+
+25
+00:00:47,007 --> 00:00:48,079
+a matrix. So, here we have
+
+26
+00:00:49,020 --> 00:00:51,039
+five movies and four
+
+27
+00:00:51,067 --> 00:00:53,039
+users, and so this
+
+28
+00:00:53,067 --> 00:00:54,054
+matrix y is going to be
+
+29
+00:00:54,090 --> 00:00:57,010
+a 5 by 4 matrix. It's just you know, taking all
+
+30
+00:00:57,034 --> 00:00:58,077
+of the elements, all of this data.
+
+31
+00:00:59,082 --> 00:01:02,039
+Including question marks, and grouping them into this matrix.
+
+32
+00:01:03,028 --> 00:01:04,046
+And of course the elements of this
+
+33
+00:01:04,065 --> 00:01:06,040
+matrix of the (i, j) element of
+
+34
+00:01:06,050 --> 00:01:07,085
+this matrix is really what
+
+35
+00:01:08,006 --> 00:01:09,070
+we were previously writing as y
+
+36
+00:01:10,051 --> 00:01:12,009
+superscript i, j. It's
+
+37
+00:01:12,021 --> 00:01:13,048
+the rating given to movie i
+
+38
+00:01:14,014 --> 00:01:15,064
+by user j. Given this
+
+39
+00:01:16,006 --> 00:01:17,029
+matrix y of all the
+
+40
+00:01:17,043 --> 00:01:18,051
+ratings that we have, there's
+
+41
+00:01:18,070 --> 00:01:20,050
+an alternative way of writing
+
+42
+00:01:20,087 --> 00:01:23,034
+out all the predictive ratings of the algorithm.
+
+43
+00:01:24,031 --> 00:01:26,020
+And, in particular if you
+
+44
+00:01:26,043 --> 00:01:27,054
+look at what a certain
+
+45
+00:01:27,092 --> 00:01:29,048
+user predicts on a
+
+46
+00:01:29,068 --> 00:01:31,025
+certain movie, what user j
+
+47
+00:01:31,095 --> 00:01:35,054
+predicts on movie i is given by this formula.
+
+48
+00:01:37,001 --> 00:01:38,056
+And so, if you have
+
+49
+00:01:39,043 --> 00:01:40,032
+a matrix of the predicted
+
+50
+00:01:40,090 --> 00:01:42,000
+ratings, what you would
+
+51
+00:01:42,018 --> 00:01:43,059
+have is the following
+
+52
+00:01:45,003 --> 00:01:48,014
+matrix where the i, j entry.
+
+53
+00:01:49,065 --> 00:01:51,043
+So this corresponds to the rating
+
+54
+00:01:52,000 --> 00:01:54,001
+that we predict using j
+
+55
+00:01:54,045 --> 00:01:55,068
+will give to movie i
+
+56
+00:01:57,012 --> 00:01:58,043
+is exactly equal to that
+
+57
+00:01:58,079 --> 00:02:00,068
+theta j transpose
+
+58
+00:02:00,090 --> 00:02:01,093
+XI, and so, you know, this is a matrix
+
+59
+00:02:02,051 --> 00:02:04,031
+where this first element
+
+60
+00:02:04,075 --> 00:02:05,093
+the one-one element is a
+
+61
+00:02:06,021 --> 00:02:07,045
+predictive rating of user one
+
+62
+00:02:07,076 --> 00:02:09,036
+or movie one and this
+
+63
+00:02:09,056 --> 00:02:11,006
+element, this is the one-two
+
+64
+00:02:11,043 --> 00:02:12,068
+element is the predicted rating
+
+65
+00:02:13,046 --> 00:02:14,063
+of user two on movie
+
+66
+00:02:14,093 --> 00:02:16,006
+one, and so on,
+
+67
+00:02:16,062 --> 00:02:18,066
+and this is the
+
+68
+00:02:19,000 --> 00:02:20,012
+predicted rating of user one
+
+69
+00:02:20,093 --> 00:02:23,037
+on the last movie and
+
+70
+00:02:23,063 --> 00:02:25,009
+if you want, you know,
+
+71
+00:02:25,040 --> 00:02:26,087
+this rating is what we
+
+72
+00:02:27,002 --> 00:02:28,005
+would have predicted for this value
+
+73
+00:02:29,005 --> 00:02:32,046
+and this rating is
+
+74
+00:02:32,065 --> 00:02:33,056
+what we would have predicted for that
+
+75
+00:02:33,090 --> 00:02:35,008
+value, and so on.
+
+76
+00:02:36,018 --> 00:02:37,047
+Now, given this matrix of
+
+77
+00:02:37,056 --> 00:02:39,028
+predictive ratings there is then
+
+78
+00:02:39,061 --> 00:02:42,066
+a simpler or vectorized way of writing these out.
+
+79
+00:02:43,063 --> 00:02:44,063
+In particular if I define
+
+80
+00:02:45,012 --> 00:02:46,084
+the matrix x, and this
+
+81
+00:02:46,096 --> 00:02:48,009
+is going to be just
+
+82
+00:02:48,037 --> 00:02:50,097
+like the matrix we had earlier for linear regression to be
+
+83
+00:02:52,006 --> 00:02:53,081
+sort of x1 transpose x2
+
+84
+00:02:55,005 --> 00:02:57,006
+transpose down to
+
+85
+00:02:58,053 --> 00:03:01,074
+x of nm transpose.
+
+86
+00:03:02,041 --> 00:03:03,031
+So I'm take all the features
+
+87
+00:03:04,021 --> 00:03:05,066
+for my movies and stack
+
+88
+00:03:06,013 --> 00:03:07,025
+them in rows.
+
+89
+00:03:07,094 --> 00:03:08,086
+So if you think of
+
+90
+00:03:08,097 --> 00:03:09,081
+each movie as one example
+
+91
+00:03:10,034 --> 00:03:11,019
+and stack all of the features
+
+92
+00:03:11,066 --> 00:03:13,046
+of the different movies and rows.
+
+93
+00:03:14,028 --> 00:03:16,015
+And if we also to
+
+94
+00:03:16,028 --> 00:03:18,055
+find a matrix capital theta,
+
+95
+00:03:19,087 --> 00:03:20,084
+and what I'm going to
+
+96
+00:03:21,018 --> 00:03:22,049
+do is take each of
+
+97
+00:03:22,075 --> 00:03:25,078
+the per user parameter
+
+98
+00:03:26,028 --> 00:03:28,052
+vectors, and stack them in rows, like so.
+
+99
+00:03:28,078 --> 00:03:29,068
+So that's theta 1, which
+
+100
+00:03:30,021 --> 00:03:31,087
+is the parameter vector for the first user.
+
+101
+00:03:33,043 --> 00:03:36,009
+And, you know, theta 2, and
+
+102
+00:03:37,003 --> 00:03:38,009
+so, you must stack
+
+103
+00:03:38,036 --> 00:03:39,046
+them in rows like this to
+
+104
+00:03:39,065 --> 00:03:41,053
+define a matrix capital
+
+105
+00:03:42,006 --> 00:03:43,083
+theta and so I have
+
+106
+00:03:45,087 --> 00:03:48,040
+nu parameter vectors all stacked in rows like this.
+
+107
+00:03:50,000 --> 00:03:51,038
+Now given this definition
+
+108
+00:03:52,008 --> 00:03:53,040
+for the matrix x and this
+
+109
+00:03:53,059 --> 00:03:54,087
+definition for the matrix theta
+
+110
+00:03:55,081 --> 00:03:56,096
+in order to have a
+
+111
+00:03:57,028 --> 00:03:59,033
+vectorized way of computing the
+
+112
+00:03:59,041 --> 00:04:00,033
+matrix of all the predictions
+
+113
+00:04:01,006 --> 00:04:03,056
+you can just compute x times
+
+114
+00:04:04,071 --> 00:04:07,005
+the matrix theta transpose, and
+
+115
+00:04:07,015 --> 00:04:08,037
+that gives you a vectorized way
+
+116
+00:04:08,056 --> 00:04:10,053
+of computing this matrix over here.
+
+117
+00:04:11,068 --> 00:04:12,046
+To give the collaborative filtering
+
+118
+00:04:12,047 --> 00:04:15,021
+algorithm that you've been using another name.
+
+119
+00:04:16,006 --> 00:04:17,018
+The algorithm that we're using
+
+120
+00:04:17,066 --> 00:04:19,083
+is also called low rank
+
+121
+00:04:21,024 --> 00:04:22,054
+matrix factorization.
+
+122
+00:04:24,027 --> 00:04:25,041
+And so if you hear
+
+123
+00:04:25,062 --> 00:04:26,075
+people talk about low rank matrix
+
+124
+00:04:27,020 --> 00:04:29,049
+factorization that's essentially exactly
+
+125
+00:04:30,038 --> 00:04:32,010
+the algorithm that we have been talking about.
+
+126
+00:04:32,058 --> 00:04:33,089
+And this term comes from the
+
+127
+00:04:33,099 --> 00:04:36,010
+property that this matrix
+
+128
+00:04:36,076 --> 00:04:38,087
+x times theta transpose has a
+
+129
+00:04:39,011 --> 00:04:40,077
+mathematical property in linear
+
+130
+00:04:41,002 --> 00:04:42,041
+algebra called that this
+
+131
+00:04:42,067 --> 00:04:43,081
+is a low rank matrix and
+
+132
+00:04:44,072 --> 00:04:45,080
+so that's what gives
+
+133
+00:04:46,006 --> 00:04:47,018
+rise to this name low
+
+134
+00:04:47,033 --> 00:04:48,056
+rank matrix factorization for these
+
+135
+00:04:48,093 --> 00:04:50,024
+algorithms, because of this low
+
+136
+00:04:50,041 --> 00:04:53,057
+rank property of this matrix x theta transpose.
+
+137
+00:04:54,082 --> 00:04:55,063
+In case you don't know what
+
+138
+00:04:55,091 --> 00:04:57,031
+low rank means or in case you don't
+
+139
+00:04:57,062 --> 00:04:59,076
+know what a low rank matrix is, don't worry about it.
+
+140
+00:04:59,097 --> 00:05:02,081
+You really don't need to know that in order to use this algorithm.
+
+141
+00:05:03,074 --> 00:05:04,079
+But if you're an expert in
+
+142
+00:05:04,088 --> 00:05:06,011
+linear algebra, that's what gives
+
+143
+00:05:06,031 --> 00:05:07,057
+this algorithm, this other name
+
+144
+00:05:07,085 --> 00:05:12,037
+of low rank matrix factorization.
+
+145
+00:05:12,062 --> 00:05:14,008
+Finally, having run the
+
+146
+00:05:14,030 --> 00:05:16,035
+collaborative filtering algorithm here's
+
+147
+00:05:17,031 --> 00:05:18,016
+something else that you can do
+
+148
+00:05:18,052 --> 00:05:20,006
+which is use the learned
+
+149
+00:05:20,031 --> 00:05:23,050
+features in order to find related movies.
+
+150
+00:05:25,006 --> 00:05:26,081
+Specifically for each product i
+
+151
+00:05:27,005 --> 00:05:27,081
+really for each movie i, we've
+
+152
+00:05:28,081 --> 00:05:30,097
+learned a feature vector xi.
+
+153
+00:05:31,074 --> 00:05:32,087
+So, you know, when you learn a
+
+154
+00:05:32,093 --> 00:05:34,022
+certain features without really know
+
+155
+00:05:34,058 --> 00:05:35,042
+that can the advance what the
+
+156
+00:05:35,061 --> 00:05:37,085
+different features are going to be, but if you
+
+157
+00:05:37,093 --> 00:05:39,055
+run the algorithm and perfectly the features
+
+158
+00:05:39,099 --> 00:05:41,068
+will tend to capture what are
+
+159
+00:05:41,093 --> 00:05:43,049
+the important aspects of these
+
+160
+00:05:43,073 --> 00:05:45,033
+different movies or different products or what have you.
+
+161
+00:05:45,048 --> 00:05:47,012
+What are the important aspects that cause
+
+162
+00:05:47,061 --> 00:05:48,060
+some users to like certain
+
+163
+00:05:48,093 --> 00:05:49,082
+movies and cause some users
+
+164
+00:05:50,020 --> 00:05:51,067
+to like different sets of movies.
+
+165
+00:05:52,047 --> 00:05:53,037
+So maybe you end up
+
+166
+00:05:53,054 --> 00:05:55,005
+learning a feature, you know, where x1
+
+167
+00:05:55,025 --> 00:05:56,055
+equals romance, x2 equals
+
+168
+00:05:57,006 --> 00:05:59,018
+action similar to
+
+169
+00:05:59,045 --> 00:06:00,058
+an earlier video and maybe you
+
+170
+00:06:00,070 --> 00:06:02,010
+learned a different feature x3 which
+
+171
+00:06:02,020 --> 00:06:04,051
+is a degree to which this is a comedy.
+
+172
+00:06:05,032 --> 00:06:07,000
+Then some feature x4 which is, you know, some other thing.
+
+173
+00:06:07,026 --> 00:06:09,075
+And you have N
+
+174
+00:06:09,093 --> 00:06:11,060
+features all together and after
+
+175
+00:06:12,061 --> 00:06:14,042
+you have learned features it's actually often
+
+176
+00:06:14,075 --> 00:06:16,002
+pretty difficult to go in
+
+177
+00:06:16,042 --> 00:06:18,012
+to the learned features and come
+
+178
+00:06:18,038 --> 00:06:19,098
+up with a human understandable
+
+179
+00:06:20,081 --> 00:06:22,085
+interpretation of what these features really are.
+
+180
+00:06:22,094 --> 00:06:24,054
+But in practice, you know, the
+
+181
+00:06:24,062 --> 00:06:27,048
+features even though these features can be hard to visualize.
+
+182
+00:06:28,010 --> 00:06:29,056
+It can be hard to figure out just what these features are.
+
+183
+00:06:31,006 --> 00:06:32,016
+Usually, it will learn
+
+184
+00:06:32,041 --> 00:06:33,039
+features that are very meaningful
+
+185
+00:06:33,095 --> 00:06:35,025
+for capturing whatever are the
+
+186
+00:06:35,087 --> 00:06:37,012
+most important or the most salient
+
+187
+00:06:37,087 --> 00:06:39,030
+properties of a movie
+
+188
+00:06:39,070 --> 00:06:41,080
+that causes you to like or dislike it.
+
+189
+00:06:41,086 --> 00:06:44,094
+And so now let's say we want to address the following problem.
+
+190
+00:06:45,097 --> 00:06:47,041
+Say you have some specific movie
+
+191
+00:06:47,079 --> 00:06:48,098
+i and you want
+
+192
+00:06:49,012 --> 00:06:50,075
+to find other movies j
+
+193
+00:06:51,062 --> 00:06:52,068
+that are related to that movie.
+
+194
+00:06:53,014 --> 00:06:54,076
+And so well, why would you want to do this?
+
+195
+00:06:54,092 --> 00:06:56,012
+Right, maybe you have a
+
+196
+00:06:56,031 --> 00:06:57,083
+user that's browsing movies, and they're
+
+197
+00:06:58,036 --> 00:07:00,020
+currently watching movie j, than
+
+198
+00:07:00,055 --> 00:07:01,081
+what's a reasonable movie to recommend
+
+199
+00:07:02,035 --> 00:07:04,011
+to them to watch after they're done with movie j?
+
+200
+00:07:04,052 --> 00:07:06,004
+Or if someone's recently purchased movie
+
+201
+00:07:06,032 --> 00:07:07,047
+j, well, what's a different
+
+202
+00:07:07,073 --> 00:07:11,000
+movie that would be reasonable to recommend to them for them to consider purchasing.
+
+203
+00:07:12,018 --> 00:07:13,000
+So, now that you have
+
+204
+00:07:13,007 --> 00:07:14,054
+learned these feature vectors, this gives
+
+205
+00:07:14,063 --> 00:07:16,007
+us a very convenient way to
+
+206
+00:07:16,025 --> 00:07:17,093
+measure how similar two movies are.
+
+207
+00:07:18,067 --> 00:07:20,052
+In particular, movie i
+
+208
+00:07:21,045 --> 00:07:22,033
+has a feature vector xi.
+
+209
+00:07:23,029 --> 00:07:24,019
+and so if you can find
+
+210
+00:07:24,063 --> 00:07:27,050
+a different movie, j, so
+
+211
+00:07:27,070 --> 00:07:29,030
+that the distance between
+
+212
+00:07:29,077 --> 00:07:30,080
+xi and xj is small,
+
+213
+00:07:33,007 --> 00:07:34,000
+then this is a pretty
+
+214
+00:07:34,043 --> 00:07:36,098
+strong indication that, you know, movies
+
+215
+00:07:37,082 --> 00:07:41,036
+j and i are somehow similar.
+
+216
+00:07:42,031 --> 00:07:44,007
+At least in the sense that some of them
+
+217
+00:07:44,019 --> 00:07:46,094
+likes movie i, maybe more likely to like movie j as well.
+
+218
+00:07:47,075 --> 00:07:49,093
+So, just to recap, if
+
+219
+00:07:50,058 --> 00:07:52,012
+your user is looking
+
+220
+00:07:52,050 --> 00:07:53,070
+at some movie i and if
+
+221
+00:07:54,014 --> 00:07:55,006
+you want to find the 5
+
+222
+00:07:55,031 --> 00:07:56,063
+most similar movies to that
+
+223
+00:07:56,089 --> 00:07:57,086
+movie in order to recommend
+
+224
+00:07:58,023 --> 00:07:59,058
+5 new movies to them, what
+
+225
+00:07:59,068 --> 00:08:00,064
+you do is find the five
+
+226
+00:08:00,097 --> 00:08:02,025
+movies j, with the
+
+227
+00:08:02,033 --> 00:08:03,087
+smallest distance between the
+
+228
+00:08:04,018 --> 00:08:05,068
+features between these different movies.
+
+229
+00:08:06,055 --> 00:08:09,022
+And this could give you a few different movies to recommend to your user.
+
+230
+00:08:10,000 --> 00:08:11,050
+So with that, hopefully, you
+
+231
+00:08:11,068 --> 00:08:13,035
+now know how to use
+
+232
+00:08:13,069 --> 00:08:15,093
+a vectorized implementation to compute
+
+233
+00:08:16,056 --> 00:08:18,012
+all the predicted ratings of
+
+234
+00:08:18,020 --> 00:08:20,027
+all the users and all the
+
+235
+00:08:20,038 --> 00:08:21,072
+movies, and also how to do
+
+236
+00:08:21,092 --> 00:08:23,030
+things like use learned features
+
+237
+00:08:23,093 --> 00:08:25,036
+to find what might be movies
+
+238
+00:08:25,048 --> 00:08:27,049
+and what might be products that aren't related to each other.

@@ -1,0 +1,932 @@
+
+1
+00:00:00,017 --> 00:00:01,018
+In this next set of videos,
+
+2
+00:00:01,072 --> 00:00:02,068
+I'd like to tell you about
+
+3
+00:00:03,004 --> 00:00:04,055
+a problem called Anomaly Detection.
+
+4
+00:00:05,071 --> 00:00:07,021
+This is a reasonably commonly
+
+5
+00:00:07,087 --> 00:00:08,074
+use you type machine learning.
+
+6
+00:00:09,058 --> 00:00:10,099
+And one of the interesting aspects
+
+7
+00:00:11,058 --> 00:00:13,025
+is that it's mainly for
+
+8
+00:00:14,001 --> 00:00:15,085
+unsupervised problem, that there's some
+
+9
+00:00:16,032 --> 00:00:17,023
+aspects of it that are
+
+10
+00:00:17,051 --> 00:00:20,000
+also very similar to sort of the supervised learning problem.
+
+11
+00:00:21,016 --> 00:00:22,044
+So, what is anomaly detection?
+
+12
+00:00:23,037 --> 00:00:25,000
+To explain it. Let me use
+
+13
+00:00:25,023 --> 00:00:27,078
+the motivating example of: Imagine
+
+14
+00:00:28,044 --> 00:00:30,003
+that you're a manufacturer of
+
+15
+00:00:30,032 --> 00:00:32,036
+aircraft engines, and let's
+
+16
+00:00:32,060 --> 00:00:33,085
+say that as your aircraft
+
+17
+00:00:34,028 --> 00:00:35,032
+engines roll off the assembly
+
+18
+00:00:35,061 --> 00:00:37,057
+line, you're doing, you know, QA or
+
+19
+00:00:37,082 --> 00:00:39,085
+quality assurance testing, and as
+
+20
+00:00:40,003 --> 00:00:41,034
+part of that testing you
+
+21
+00:00:41,040 --> 00:00:43,014
+measure features of your
+
+22
+00:00:43,050 --> 00:00:44,089
+aircraft engine, like maybe, you measure
+
+23
+00:00:45,017 --> 00:00:46,082
+the heat generated, things like
+
+24
+00:00:46,085 --> 00:00:48,034
+the vibrations and so on.
+
+25
+00:00:48,063 --> 00:00:49,057
+I share some friends that worked
+
+26
+00:00:49,085 --> 00:00:50,093
+on this problem a long time
+
+27
+00:00:51,000 --> 00:00:52,060
+ago, and these were actually the
+
+28
+00:00:52,071 --> 00:00:53,096
+sorts of features that they were
+
+29
+00:00:54,046 --> 00:00:55,090
+collecting off actual aircraft
+
+30
+00:00:56,028 --> 00:00:58,053
+engines so you
+
+31
+00:00:58,063 --> 00:00:59,057
+now have a data set of
+
+32
+00:00:59,070 --> 00:01:01,000
+X1 through Xm, if you have
+
+33
+00:01:01,075 --> 00:01:04,048
+manufactured m aircraft engines,
+
+34
+00:01:05,003 --> 00:01:06,073
+and if you plot your data, maybe it looks like this.
+
+35
+00:01:07,012 --> 00:01:08,064
+So, each point here, each cross
+
+36
+00:01:08,076 --> 00:01:10,057
+here as one of your unlabeled examples.
+
+37
+00:01:11,098 --> 00:01:15,021
+So, the anomaly detection problem is the following.
+
+38
+00:01:16,045 --> 00:01:17,076
+Let's say that on, you
+
+39
+00:01:17,087 --> 00:01:18,096
+know, the next day, you
+
+40
+00:01:19,014 --> 00:01:20,039
+have a new aircraft engine
+
+41
+00:01:20,081 --> 00:01:21,085
+that rolls off the assembly line
+
+42
+00:01:22,031 --> 00:01:23,089
+and your new aircraft engine has
+
+43
+00:01:24,015 --> 00:01:25,043
+some set of features x-test.
+
+44
+00:01:26,029 --> 00:01:27,068
+What the anomaly detection problem is,
+
+45
+00:01:27,093 --> 00:01:29,006
+we want to know if this
+
+46
+00:01:29,042 --> 00:01:31,031
+aircraft engine is anomalous in
+
+47
+00:01:31,051 --> 00:01:32,048
+any way, in other words, we want
+
+48
+00:01:32,073 --> 00:01:34,010
+to know if, maybe, this engine
+
+49
+00:01:34,056 --> 00:01:36,029
+should undergo further testing
+
+50
+00:01:37,032 --> 00:01:38,037
+because, or if it looks
+
+51
+00:01:38,070 --> 00:01:40,056
+like an okay engine, and
+
+52
+00:01:40,073 --> 00:01:41,070
+so it's okay to just ship
+
+53
+00:01:41,087 --> 00:01:43,026
+it to a customer without further testing.
+
+54
+00:01:44,056 --> 00:01:45,067
+So, if your new
+
+55
+00:01:45,084 --> 00:01:47,032
+aircraft engine looks like
+
+56
+00:01:47,054 --> 00:01:49,015
+a point over there, well, you
+
+57
+00:01:49,026 --> 00:01:50,020
+know, that looks a lot
+
+58
+00:01:50,035 --> 00:01:51,043
+like the aircraft engines we've seen
+
+59
+00:01:51,065 --> 00:01:53,085
+before, and so maybe we'll say that it looks okay.
+
+60
+00:01:54,075 --> 00:01:55,073
+Whereas, if your new aircraft
+
+61
+00:01:56,020 --> 00:01:59,039
+engine, if x-test, you know, were
+
+62
+00:01:59,062 --> 00:02:00,043
+a point that were out here,
+
+63
+00:02:00,090 --> 00:02:02,026
+so that if X1 and
+
+64
+00:02:02,040 --> 00:02:04,079
+X2 are the features of this new example.
+
+65
+00:02:05,035 --> 00:02:06,053
+If x-tests were all the
+
+66
+00:02:06,059 --> 00:02:08,093
+way out there, then we would call that an anomaly.
+
+67
+00:02:10,041 --> 00:02:11,063
+and maybe send that aircraft engine
+
+68
+00:02:12,006 --> 00:02:13,071
+for further testing before we
+
+69
+00:02:13,087 --> 00:02:15,012
+ship it to a customer, since
+
+70
+00:02:16,000 --> 00:02:18,034
+it looks very different than
+
+71
+00:02:18,059 --> 00:02:20,034
+the rest of the aircraft engines we've seen before.
+
+72
+00:02:21,000 --> 00:02:22,056
+More formally in the anomaly
+
+73
+00:02:22,096 --> 00:02:24,022
+detection problem, we're give
+
+74
+00:02:24,090 --> 00:02:26,015
+some data sets, x1 through
+
+75
+00:02:26,028 --> 00:02:28,034
+Xm of examples, and we
+
+76
+00:02:28,046 --> 00:02:29,071
+usually assume that these end
+
+77
+00:02:29,087 --> 00:02:32,025
+examples are normal or
+
+78
+00:02:33,012 --> 00:02:34,090
+non-anomalous examples, and we
+
+79
+00:02:34,097 --> 00:02:36,009
+want an algorithm to tell us
+
+80
+00:02:36,028 --> 00:02:38,030
+if some new example x-test is anomalous.
+
+81
+00:02:38,084 --> 00:02:40,008
+The approach that we're going
+
+82
+00:02:40,012 --> 00:02:41,066
+to take is that given this training
+
+83
+00:02:42,006 --> 00:02:43,030
+set, given the unlabeled training
+
+84
+00:02:43,068 --> 00:02:45,028
+set, we're going to
+
+85
+00:02:45,041 --> 00:02:46,091
+build a model for p of
+
+86
+00:02:47,002 --> 00:02:48,006
+x. In other words, we're
+
+87
+00:02:48,013 --> 00:02:49,031
+going to build a model for the
+
+88
+00:02:49,052 --> 00:02:51,022
+probability of x, where
+
+89
+00:02:51,038 --> 00:02:53,033
+x are these features of, say, aircraft engines.
+
+90
+00:02:54,062 --> 00:02:56,028
+And so, having built a
+
+91
+00:02:56,053 --> 00:02:57,034
+model of the probability of x
+
+92
+00:02:58,006 --> 00:02:59,022
+we're then going to say that
+
+93
+00:02:59,081 --> 00:03:01,028
+for the new aircraft engine, if
+
+94
+00:03:01,052 --> 00:03:04,066
+p of x-test is less
+
+95
+00:03:04,091 --> 00:03:07,018
+than some epsilon then
+
+96
+00:03:07,093 --> 00:03:09,016
+we flag this as an anomaly.
+
+97
+00:03:11,040 --> 00:03:12,025
+So we see a new engine
+
+98
+00:03:12,065 --> 00:03:13,096
+that, you know, has very low probability
+
+99
+00:03:14,084 --> 00:03:15,090
+under a model p of
+
+100
+00:03:16,002 --> 00:03:17,012
+x that we estimate from the data,
+
+101
+00:03:17,078 --> 00:03:19,037
+then we flag this anomaly, whereas
+
+102
+00:03:19,072 --> 00:03:21,087
+if p of x-test is, say,
+
+103
+00:03:22,031 --> 00:03:24,011
+greater than or equal to some small threshold.
+
+104
+00:03:25,012 --> 00:03:26,062
+Then we say that, you know, okay, it looks okay.
+
+105
+00:03:27,078 --> 00:03:28,074
+And so, given the training set,
+
+106
+00:03:28,097 --> 00:03:30,088
+like that plotted here, if
+
+107
+00:03:31,006 --> 00:03:31,093
+you build a model, hopefully
+
+108
+00:03:32,056 --> 00:03:34,002
+you will find that aircraft engines,
+
+109
+00:03:34,046 --> 00:03:35,050
+or hopefully the model p of
+
+110
+00:03:35,056 --> 00:03:37,006
+x will say that points that
+
+111
+00:03:37,025 --> 00:03:38,053
+lie, you know, somewhere in the
+
+112
+00:03:38,058 --> 00:03:39,055
+middle, that's pretty high probability,
+
+113
+00:03:40,071 --> 00:03:42,083
+whereas points a little bit further out have lower probability.
+
+114
+00:03:43,084 --> 00:03:45,005
+Points that are even further out
+
+115
+00:03:45,053 --> 00:03:47,021
+have somewhat lower probability, and the
+
+116
+00:03:47,047 --> 00:03:48,041
+point that's way out here,
+
+117
+00:03:49,008 --> 00:03:50,040
+the point that's way
+
+118
+00:03:50,052 --> 00:03:52,009
+out there, would be an anomaly.
+
+119
+00:03:54,015 --> 00:03:55,028
+Whereas the point that's way in
+
+120
+00:03:55,046 --> 00:03:56,046
+there, right in the
+
+121
+00:03:56,052 --> 00:03:57,071
+middle, this would be
+
+122
+00:03:57,083 --> 00:03:59,008
+okay because p of x
+
+123
+00:03:59,037 --> 00:04:00,030
+right in the middle of that
+
+124
+00:04:00,046 --> 00:04:01,031
+would be very high cause we've
+
+125
+00:04:01,052 --> 00:04:03,031
+seen a lot of points in that region.
+
+126
+00:04:04,062 --> 00:04:07,058
+Here are some examples of applications of anomaly detection.
+
+127
+00:04:08,044 --> 00:04:09,099
+Perhaps the most common application of
+
+128
+00:04:10,008 --> 00:04:11,041
+anomaly detection is actually
+
+129
+00:04:11,056 --> 00:04:13,025
+for detection if you
+
+130
+00:04:13,036 --> 00:04:14,081
+have many users, and if
+
+131
+00:04:15,006 --> 00:04:16,036
+each of your users take different
+
+132
+00:04:16,067 --> 00:04:17,074
+activities, you know maybe
+
+133
+00:04:17,092 --> 00:04:18,056
+on your website or in the
+
+134
+00:04:18,062 --> 00:04:20,018
+physical plant or something, you
+
+135
+00:04:20,030 --> 00:04:23,067
+can compute features of the different users activities.
+
+136
+00:04:24,082 --> 00:04:25,073
+And what you can do is build
+
+137
+00:04:25,093 --> 00:04:27,024
+a model to say, you know,
+
+138
+00:04:27,031 --> 00:04:28,095
+what is the probability of different
+
+139
+00:04:29,017 --> 00:04:30,073
+users behaving different ways.
+
+140
+00:04:30,088 --> 00:04:32,027
+What is the probability of a particular vector
+
+141
+00:04:32,045 --> 00:04:34,058
+of features of a
+
+142
+00:04:34,083 --> 00:04:36,075
+users behavior so you
+
+143
+00:04:36,089 --> 00:04:38,036
+know examples of features of
+
+144
+00:04:38,044 --> 00:04:40,048
+a users activity may be on
+
+145
+00:04:40,064 --> 00:04:41,064
+the website it'd be things like,
+
+146
+00:04:42,070 --> 00:04:44,035
+maybe x1 is how often does
+
+147
+00:04:44,083 --> 00:04:46,045
+this user log in, x2, you know, maybe
+
+148
+00:04:46,085 --> 00:04:47,092
+the number of what
+
+149
+00:04:48,012 --> 00:04:49,032
+pages visited, or the
+
+150
+00:04:49,073 --> 00:04:51,042
+number of transactions, maybe x3
+
+151
+00:04:51,043 --> 00:04:52,081
+is, you know, the number of
+
+152
+00:04:53,012 --> 00:04:53,099
+posts of the users on the
+
+153
+00:04:54,012 --> 00:04:55,085
+forum, feature x4 could
+
+154
+00:04:56,000 --> 00:04:56,091
+be what is the typing
+
+155
+00:04:57,043 --> 00:04:58,066
+speed of the user and some
+
+156
+00:04:58,092 --> 00:04:59,098
+websites can actually track that
+
+157
+00:05:00,027 --> 00:05:01,041
+was the typing speed of this
+
+158
+00:05:01,060 --> 00:05:03,000
+user in characters per second.
+
+159
+00:05:03,073 --> 00:05:06,061
+And so you can model p of x based on this sort of data.
+
+160
+00:05:08,014 --> 00:05:09,013
+And finally having your model
+
+161
+00:05:09,026 --> 00:05:10,052
+p of x, you can
+
+162
+00:05:10,079 --> 00:05:12,056
+try to identify users that
+
+163
+00:05:12,075 --> 00:05:14,020
+are behaving very strangely on your
+
+164
+00:05:14,035 --> 00:05:15,058
+website by checking which ones have
+
+165
+00:05:16,031 --> 00:05:18,010
+probably effects less than epsilon and
+
+166
+00:05:18,024 --> 00:05:21,013
+maybe send the profiles of those users for further review.
+
+167
+00:05:22,032 --> 00:05:24,056
+Or demand additional identification from
+
+168
+00:05:24,074 --> 00:05:26,018
+those users, or some such
+
+169
+00:05:26,064 --> 00:05:28,037
+to guard against you know,
+
+170
+00:05:29,019 --> 00:05:31,064
+strange behavior or fraudulent behavior on your website.
+
+171
+00:05:33,002 --> 00:05:34,095
+This sort of technique will tend
+
+172
+00:05:35,016 --> 00:05:36,047
+of flag the users that are
+
+173
+00:05:36,072 --> 00:05:38,025
+behaving unusually, not just
+
+174
+00:05:39,048 --> 00:05:41,042
+users that maybe behaving fraudulently.
+
+175
+00:05:42,018 --> 00:05:44,002
+So not just constantly having
+
+176
+00:05:44,037 --> 00:05:45,067
+stolen or users that are
+
+177
+00:05:45,077 --> 00:05:47,077
+trying to do funny things, or just find unusual users.
+
+178
+00:05:48,056 --> 00:05:49,076
+But this is actually the technique
+
+179
+00:05:50,004 --> 00:05:51,043
+that is used by many online
+
+180
+00:05:52,050 --> 00:05:53,056
+websites that sell things to
+
+181
+00:05:53,075 --> 00:05:55,086
+try identify users behaving
+
+182
+00:05:56,024 --> 00:05:57,089
+strangely that might be
+
+183
+00:05:58,004 --> 00:05:59,016
+indicative of either fraudulent
+
+184
+00:05:59,075 --> 00:06:02,042
+behavior or of computer accounts that have been stolen.
+
+185
+00:06:03,057 --> 00:06:06,041
+Another example of anomaly detection is manufacturing.
+
+186
+00:06:07,018 --> 00:06:08,047
+So, already talked about the
+
+187
+00:06:08,052 --> 00:06:09,076
+aircraft engine thing where you can
+
+188
+00:06:10,002 --> 00:06:11,045
+find unusual, say, aircraft
+
+189
+00:06:11,089 --> 00:06:13,060
+engines and send those for further review.
+
+190
+00:06:15,043 --> 00:06:16,074
+A third application would be
+
+191
+00:06:17,006 --> 00:06:19,020
+monitoring computers in a data center.
+
+192
+00:06:19,038 --> 00:06:20,041
+I actually have some friends who work on this too.
+
+193
+00:06:21,025 --> 00:06:22,027
+So if you have a lot
+
+194
+00:06:22,057 --> 00:06:23,055
+of machines in a computer
+
+195
+00:06:23,073 --> 00:06:24,068
+cluster or in a
+
+196
+00:06:24,077 --> 00:06:25,070
+data center, we can do
+
+197
+00:06:25,092 --> 00:06:28,056
+things like compute features at each machine.
+
+198
+00:06:29,001 --> 00:06:30,064
+So maybe some features capturing
+
+199
+00:06:31,017 --> 00:06:32,073
+you know, how much memory used, number of
+
+200
+00:06:32,087 --> 00:06:34,027
+disc accesses, CPU load.
+
+201
+00:06:35,006 --> 00:06:36,005
+As well as more complex features
+
+202
+00:06:36,043 --> 00:06:37,044
+like what is the CPU
+
+203
+00:06:37,082 --> 00:06:39,064
+load on this machine divided by
+
+204
+00:06:39,095 --> 00:06:41,033
+the amount of network traffic
+
+205
+00:06:41,094 --> 00:06:43,005
+on this machine?
+
+206
+00:06:43,033 --> 00:06:44,057
+Then given the dataset of how
+
+207
+00:06:44,081 --> 00:06:45,077
+your computers in your data
+
+208
+00:06:46,006 --> 00:06:47,023
+center usually behave, you can
+
+209
+00:06:47,038 --> 00:06:48,045
+model the probability of x,
+
+210
+00:06:48,058 --> 00:06:49,073
+so you can model the probability
+
+211
+00:06:50,035 --> 00:06:51,083
+of these machines having
+
+212
+00:06:52,083 --> 00:06:53,079
+different amounts of memory use
+
+213
+00:06:54,006 --> 00:06:55,019
+or probability of these machines having
+
+214
+00:06:55,092 --> 00:06:57,016
+different numbers of disc accesses
+
+215
+00:06:57,077 --> 00:06:59,087
+or different CPU loads and so on.
+
+216
+00:07:00,002 --> 00:07:01,010
+And if you ever have a machine
+
+217
+00:07:02,002 --> 00:07:03,052
+whose probability of x,
+
+218
+00:07:03,080 --> 00:07:05,032
+p of x, is very small then you
+
+219
+00:07:05,043 --> 00:07:06,087
+know that machine is behaving unusually
+
+220
+00:07:07,097 --> 00:07:08,094
+and maybe that machine is
+
+221
+00:07:09,005 --> 00:07:11,062
+about to go down, and you
+
+222
+00:07:11,069 --> 00:07:13,062
+can flag that for review by a system administrator.
+
+223
+00:07:14,068 --> 00:07:15,088
+And this is actually being used
+
+224
+00:07:16,006 --> 00:07:17,080
+today by various data
+
+225
+00:07:18,001 --> 00:07:19,055
+centers to watch out for unusual
+
+226
+00:07:20,004 --> 00:07:21,043
+things happening on their machines.
+
+227
+00:07:22,092 --> 00:07:24,042
+So, that's anomaly detection.
+
+228
+00:07:25,054 --> 00:07:26,087
+In the next video, I'll
+
+229
+00:07:27,012 --> 00:07:29,039
+talk a bit about the Gaussian distribution and
+
+230
+00:07:29,057 --> 00:07:31,002
+review properties of the Gaussian
+
+231
+00:07:31,057 --> 00:07:33,054
+probability distribution, and in
+
+232
+00:07:33,068 --> 00:07:34,064
+videos after that, we will
+
+233
+00:07:34,079 --> 00:07:37,038
+apply it to develop an anomaly detection algorithm.

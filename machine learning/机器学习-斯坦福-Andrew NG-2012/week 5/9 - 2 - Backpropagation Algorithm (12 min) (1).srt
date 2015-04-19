@@ -1,0 +1,1353 @@
+
+1
+00:00:00,009 --> 00:00:01,026
+In the previous video, we talked
+
+2
+00:00:01,058 --> 00:00:03,035
+about a cost function for the neural network.
+
+3
+00:00:04,037 --> 00:00:05,071
+In this video, let's start to
+
+4
+00:00:06,000 --> 00:00:08,040
+talk about an algorithm, for trying to minimize the cost function.
+
+5
+00:00:09,024 --> 00:00:11,072
+In particular, we'll talk about the back propagation algorithm.
+
+6
+00:00:14,008 --> 00:00:15,038
+Here's the cost function that we
+
+7
+00:00:15,051 --> 00:00:17,012
+wrote down in the previous video.
+
+8
+00:00:17,051 --> 00:00:18,089
+What we'd like to do
+
+9
+00:00:19,012 --> 00:00:19,092
+is try to find parameters theta
+
+10
+00:00:20,000 --> 00:00:22,023
+to try to minimize j of theta.
+
+11
+00:00:23,053 --> 00:00:24,071
+In order to use either gradient
+
+12
+00:00:25,017 --> 00:00:27,071
+descent or one of the advance optimization algorithms.
+
+13
+00:00:28,033 --> 00:00:29,035
+What we need to do
+
+14
+00:00:29,042 --> 00:00:30,085
+therefore is to write code
+
+15
+00:00:31,028 --> 00:00:32,081
+that takes this input the parameters theta
+
+16
+00:00:33,053 --> 00:00:34,054
+and computes j of theta
+
+17
+00:00:35,021 --> 00:00:36,021
+and these partial derivative terms.
+
+18
+00:00:36,040 --> 00:00:38,043
+Remember, that the parameters
+
+19
+00:00:38,059 --> 00:00:39,090
+in the the neural network of these
+
+20
+00:00:40,015 --> 00:00:42,025
+things, theta superscript l subscript
+
+21
+00:00:42,082 --> 00:00:43,085
+ij, that's the real
+
+22
+00:00:44,004 --> 00:00:45,060
+number and so, these
+
+23
+00:00:45,088 --> 00:00:47,050
+are the partial derivative terms we need to compute.
+
+24
+00:00:48,092 --> 00:00:50,000
+In order to compute the cost
+
+25
+00:00:50,032 --> 00:00:51,084
+function j of theta, we
+
+26
+00:00:51,096 --> 00:00:53,014
+just use this formula up
+
+27
+00:00:53,035 --> 00:00:54,074
+here and so, what
+
+28
+00:00:55,003 --> 00:00:55,085
+I want to do for the most
+
+29
+00:00:56,002 --> 00:00:57,038
+of this video is focus on
+
+30
+00:00:57,099 --> 00:00:58,093
+talking about how we can
+
+31
+00:00:59,021 --> 00:01:00,084
+compute these partial derivative terms.
+
+32
+00:01:02,020 --> 00:01:03,085
+Let's start by talking about the case
+
+33
+00:01:04,031 --> 00:01:05,045
+of when we have only one
+
+34
+00:01:05,070 --> 00:01:07,006
+training example, so imagine
+
+35
+00:01:07,057 --> 00:01:08,096
+if you will that our entire
+
+36
+00:01:09,035 --> 00:01:11,006
+training set comprises only one
+
+37
+00:01:11,031 --> 00:01:12,076
+training example which is
+
+38
+00:01:12,087 --> 00:01:14,035
+a pair xy. I'm not going to
+
+39
+00:01:14,045 --> 00:01:15,090
+write x1y1 just write this.
+
+40
+00:01:16,040 --> 00:01:17,068
+Write a one training example as
+
+41
+00:01:17,081 --> 00:01:19,037
+xy and let's tap
+
+42
+00:01:19,059 --> 00:01:20,062
+through the sequence of calculations
+
+43
+00:01:21,037 --> 00:01:23,004
+we would do with this one training example.
+
+44
+00:01:25,079 --> 00:01:26,076
+The first thing we do is
+
+45
+00:01:27,009 --> 00:01:28,098
+we apply four propagation in
+
+46
+00:01:29,015 --> 00:01:30,084
+order to compute whether a
+
+47
+00:01:31,029 --> 00:01:33,032
+hypotheses actually outputs given the input.
+
+48
+00:01:34,040 --> 00:01:36,057
+Concretely, the called the
+
+49
+00:01:36,059 --> 00:01:38,023
+a1 is the activation values
+
+50
+00:01:38,084 --> 00:01:41,031
+of this first layer that was the input there.
+
+51
+00:01:41,059 --> 00:01:42,056
+So, I'm going to set that to x
+
+52
+00:01:43,051 --> 00:01:44,093
+and then we're going to compute
+
+53
+00:01:45,062 --> 00:01:48,020
+z2 equals theta 1
+
+54
+00:01:48,026 --> 00:01:49,054
+a1 and a2 equals g, the sigmoid
+
+55
+00:01:49,098 --> 00:01:52,004
+activation function applied to z2
+
+56
+00:01:52,031 --> 00:01:53,043
+and this would give us our
+
+57
+00:01:53,059 --> 00:01:55,093
+activations for the first middle layer.
+
+58
+00:01:56,009 --> 00:01:57,009
+That is for layer two of
+
+59
+00:01:57,020 --> 00:01:59,068
+the network and we also add those bias terms.
+
+60
+00:02:01,032 --> 00:02:02,064
+Next we apply 2 more steps
+
+61
+00:02:03,012 --> 00:02:04,092
+of this four and propagation to
+
+62
+00:02:05,009 --> 00:02:07,042
+compute a3 and a4
+
+63
+00:02:08,056 --> 00:02:10,031
+which is also the
+
+64
+00:02:10,088 --> 00:02:12,052
+upwards of a hypotheses h
+
+65
+00:02:12,068 --> 00:02:15,006
+of x. So this
+
+66
+00:02:15,036 --> 00:02:17,049
+is our vectorized implementation of
+
+67
+00:02:18,003 --> 00:02:19,058
+forward propagation and it allows
+
+68
+00:02:19,080 --> 00:02:21,028
+us to compute the activation
+
+69
+00:02:21,072 --> 00:02:23,000
+values for all of the
+
+70
+00:02:23,050 --> 00:02:24,066
+neurons in our neural network.
+
+71
+00:02:27,097 --> 00:02:29,009
+Next, in order to compute
+
+72
+00:02:29,044 --> 00:02:30,049
+the derivatives, we're going to
+
+73
+00:02:30,058 --> 00:02:32,041
+use an algorithm called back propagation.
+
+74
+00:02:34,094 --> 00:02:36,015
+The intuition of the back
+
+75
+00:02:36,053 --> 00:02:38,000
+propagation algorithm is that
+
+76
+00:02:38,024 --> 00:02:39,047
+for each note we're going
+
+77
+00:02:39,068 --> 00:02:41,063
+to compute the term delta superscript
+
+78
+00:02:42,022 --> 00:02:44,008
+l subscript j that's going
+
+79
+00:02:44,034 --> 00:02:45,090
+to somehow represent the error
+
+80
+00:02:46,033 --> 00:02:47,028
+of note j in the
+
+81
+00:02:47,046 --> 00:02:49,038
+layer l. So, recall that
+
+82
+00:02:49,066 --> 00:02:51,078
+a superscript l subscript j
+
+83
+00:02:52,056 --> 00:02:54,000
+that does the activation of
+
+84
+00:02:54,012 --> 00:02:55,049
+the j of unit in layer
+
+85
+00:02:55,066 --> 00:02:56,096
+l and so, this
+
+86
+00:02:57,025 --> 00:02:58,038
+delta term is in some
+
+87
+00:02:58,059 --> 00:03:00,043
+sense going to capture our error
+
+88
+00:03:00,094 --> 00:03:02,087
+in the activation of that neural duo.
+
+89
+00:03:03,065 --> 00:03:05,009
+So, how we might wish the activation
+
+90
+00:03:05,069 --> 00:03:06,096
+of that note is slightly different.
+
+91
+00:03:08,016 --> 00:03:09,066
+Concretely, taking the example
+
+92
+00:03:10,027 --> 00:03:11,009
+neural network that we have
+
+93
+00:03:11,036 --> 00:03:12,069
+on the right which has four layers.
+
+94
+00:03:13,043 --> 00:03:15,071
+And so capital L is equal to 4.
+
+95
+00:03:16,006 --> 00:03:17,012
+For each output unit, we're going
+
+96
+00:03:17,040 --> 00:03:19,012
+to compute this delta term. So, delta for the j of unit in the fourth layer is equal to
+
+97
+00:03:23,037 --> 00:03:24,049
+just the activation of that
+
+98
+00:03:24,071 --> 00:03:26,034
+unit minus what was
+
+99
+00:03:26,049 --> 00:03:28,065
+the actual value of 0 in our training example.
+
+100
+00:03:29,090 --> 00:03:32,041
+So, this term here can
+
+101
+00:03:32,058 --> 00:03:34,050
+also be written h of
+
+102
+00:03:34,071 --> 00:03:38,003
+x subscript j, right.
+
+103
+00:03:38,033 --> 00:03:39,063
+So this delta term is just
+
+104
+00:03:39,093 --> 00:03:40,090
+the difference between when a
+
+105
+00:03:41,028 --> 00:03:43,019
+hypotheses output and what
+
+106
+00:03:43,037 --> 00:03:44,087
+was the value of y
+
+107
+00:03:45,056 --> 00:03:46,090
+in our training set whereas
+
+108
+00:03:47,006 --> 00:03:48,061
+y subscript j is
+
+109
+00:03:48,075 --> 00:03:49,090
+the j of element of the
+
+110
+00:03:50,009 --> 00:03:53,034
+vector value y in our labeled training set.
+
+111
+00:03:56,019 --> 00:03:57,078
+And by the way, if you
+
+112
+00:03:57,096 --> 00:04:00,046
+think of delta a and
+
+113
+00:04:01,000 --> 00:04:02,034
+y as vectors then you can
+
+114
+00:04:02,052 --> 00:04:03,075
+also take those and come
+
+115
+00:04:04,003 --> 00:04:05,088
+up with a vectorized implementation of
+
+116
+00:04:06,000 --> 00:04:07,031
+it, which is just
+
+117
+00:04:07,068 --> 00:04:09,084
+delta 4 gets set as
+
+118
+00:04:10,069 --> 00:04:14,033
+a4 minus y. Where
+
+119
+00:04:14,056 --> 00:04:15,081
+here, each of these delta
+
+120
+00:04:16,054 --> 00:04:18,007
+4 a4 and y, each of
+
+121
+00:04:18,018 --> 00:04:19,086
+these is a vector whose
+
+122
+00:04:20,063 --> 00:04:22,004
+dimension is equal to
+
+123
+00:04:22,025 --> 00:04:24,014
+the number of output units in our network.
+
+124
+00:04:25,020 --> 00:04:26,087
+So we've now computed the
+
+125
+00:04:27,031 --> 00:04:28,067
+era term's delta
+
+126
+00:04:29,001 --> 00:04:30,017
+4 for our network.
+
+127
+00:04:31,043 --> 00:04:32,094
+What we do next is compute
+
+128
+00:04:33,062 --> 00:04:36,027
+the delta terms for the earlier layers in our network.
+
+129
+00:04:37,020 --> 00:04:38,068
+Here's a formula for computing delta
+
+130
+00:04:39,000 --> 00:04:39,082
+3 is delta 3 is equal
+
+131
+00:04:40,031 --> 00:04:42,005
+to theta 3 transpose times delta 4.
+
+132
+00:04:42,056 --> 00:04:44,018
+And this dot times, this
+
+133
+00:04:44,038 --> 00:04:46,038
+is the element y's multiplication operation
+
+134
+00:04:47,057 --> 00:04:48,037
+that we know from MATLAB.
+
+135
+00:04:49,016 --> 00:04:50,075
+So delta 3 transpose delta
+
+136
+00:04:51,001 --> 00:04:52,086
+4, that's a vector; g prime
+
+137
+00:04:53,048 --> 00:04:55,007
+z3 that's also a vector
+
+138
+00:04:55,080 --> 00:04:57,037
+and so dot times is
+
+139
+00:04:57,052 --> 00:04:59,067
+in element y's multiplication between these two vectors.
+
+140
+00:05:01,045 --> 00:05:02,064
+This term g prime of
+
+141
+00:05:02,074 --> 00:05:04,056
+z3, that formally is actually
+
+142
+00:05:04,094 --> 00:05:06,042
+the derivative of the activation
+
+143
+00:05:06,072 --> 00:05:08,074
+function g evaluated at
+
+144
+00:05:08,088 --> 00:05:10,062
+the input values given by z3.
+
+145
+00:05:10,075 --> 00:05:12,062
+If you know calculus, you
+
+146
+00:05:12,070 --> 00:05:13,047
+can try to work it out yourself
+
+147
+00:05:13,085 --> 00:05:16,010
+and see that you can simplify it to the same answer that I get.
+
+148
+00:05:16,086 --> 00:05:19,068
+But I'll just tell you pragmatically what that means.
+
+149
+00:05:20,000 --> 00:05:21,025
+What you do to compute this g
+
+150
+00:05:21,045 --> 00:05:23,031
+prime, these derivative terms is
+
+151
+00:05:23,050 --> 00:05:25,066
+just a3 dot times1
+
+152
+00:05:26,000 --> 00:05:27,089
+minus A3 where A3
+
+153
+00:05:28,016 --> 00:05:29,042
+is the vector of activations.
+
+154
+00:05:30,014 --> 00:05:31,043
+1 is the vector of
+
+155
+00:05:31,060 --> 00:05:33,024
+ones and A3 is
+
+156
+00:05:34,001 --> 00:05:35,097
+again the activation
+
+157
+00:05:36,029 --> 00:05:38,085
+the vector of activation values for that layer.
+
+158
+00:05:39,017 --> 00:05:40,020
+Next you apply a similar
+
+159
+00:05:40,054 --> 00:05:42,085
+formula to compute delta 2
+
+160
+00:05:43,022 --> 00:05:45,023
+where again that can be
+
+161
+00:05:45,067 --> 00:05:47,041
+computed using a similar formula.
+
+162
+00:05:48,044 --> 00:05:49,094
+Only now it is a2
+
+163
+00:05:50,012 --> 00:05:53,085
+like so and I
+
+164
+00:05:53,095 --> 00:05:55,001
+then prove it here but you
+
+165
+00:05:55,011 --> 00:05:56,039
+can actually, it's possible to
+
+166
+00:05:56,049 --> 00:05:57,051
+prove it if you know calculus
+
+167
+00:05:58,024 --> 00:05:59,051
+that this expression is equal
+
+168
+00:05:59,086 --> 00:06:02,000
+to mathematically, the derivative of
+
+169
+00:06:02,018 --> 00:06:03,056
+the g function of the activation
+
+170
+00:06:04,004 --> 00:06:05,045
+function, which I'm denoting
+
+171
+00:06:05,091 --> 00:06:08,054
+by g prime. And finally,
+
+172
+00:06:09,026 --> 00:06:10,068
+that's it and there is
+
+173
+00:06:10,086 --> 00:06:13,064
+no delta1 term, because the
+
+174
+00:06:13,072 --> 00:06:15,058
+first layer corresponds to the
+
+175
+00:06:15,062 --> 00:06:16,093
+input layer and that's just the
+
+176
+00:06:17,000 --> 00:06:18,019
+feature we observed in our
+
+177
+00:06:18,030 --> 00:06:20,037
+training sets, so that doesn't have any error associated with that.
+
+178
+00:06:20,060 --> 00:06:22,007
+It's not like, you know,
+
+179
+00:06:22,012 --> 00:06:23,068
+we don't really want to try to change those values.
+
+180
+00:06:24,031 --> 00:06:25,024
+And so we have delta
+
+181
+00:06:25,050 --> 00:06:28,008
+terms only for layers 2, 3 and for this example.
+
+182
+00:06:30,017 --> 00:06:32,012
+The name back propagation comes from
+
+183
+00:06:32,017 --> 00:06:33,025
+the fact that we start by
+
+184
+00:06:33,035 --> 00:06:34,072
+computing the delta term for
+
+185
+00:06:34,074 --> 00:06:36,018
+the output layer and then
+
+186
+00:06:36,037 --> 00:06:37,048
+we go back a layer and
+
+187
+00:06:37,087 --> 00:06:39,067
+compute the delta terms for the
+
+188
+00:06:39,085 --> 00:06:41,005
+third hidden layer and then we
+
+189
+00:06:41,018 --> 00:06:42,054
+go back another step to compute
+
+190
+00:06:42,076 --> 00:06:44,006
+delta 2 and so, we're sort of
+
+191
+00:06:44,066 --> 00:06:46,006
+back propagating the errors from
+
+192
+00:06:46,027 --> 00:06:47,026
+the output layer to layer 3
+
+193
+00:06:47,064 --> 00:06:50,018
+to their to hence the name back complication.
+
+194
+00:06:51,026 --> 00:06:53,012
+Finally, the derivation is
+
+195
+00:06:53,033 --> 00:06:56,050
+surprisingly complicated, surprisingly involved but
+
+196
+00:06:56,081 --> 00:06:58,010
+if you just do this few steps
+
+197
+00:06:58,027 --> 00:07:00,012
+steps of computation it is possible
+
+198
+00:07:00,068 --> 00:07:02,054
+to prove viral frankly some
+
+199
+00:07:02,081 --> 00:07:04,043
+what complicated mathematical proof.
+
+200
+00:07:05,019 --> 00:07:07,041
+It's possible to prove that if
+
+201
+00:07:07,056 --> 00:07:09,068
+you ignore authorization then the
+
+202
+00:07:09,080 --> 00:07:11,007
+partial derivative terms you want
+
+203
+00:07:12,022 --> 00:07:14,064
+are exactly given by the
+
+204
+00:07:14,077 --> 00:07:17,068
+activations and these delta terms.
+
+205
+00:07:17,087 --> 00:07:20,062
+This is ignoring lambda or
+
+206
+00:07:20,077 --> 00:07:22,073
+alternatively the regularization
+
+207
+00:07:23,076 --> 00:07:24,062
+term lambda will
+
+208
+00:07:25,000 --> 00:07:25,017
+equal to 0.
+
+209
+00:07:25,068 --> 00:07:27,012
+We'll fix this detail later
+
+210
+00:07:27,047 --> 00:07:29,043
+about the regularization term, but
+
+211
+00:07:29,062 --> 00:07:30,074
+so by performing back propagation
+
+212
+00:07:31,061 --> 00:07:32,081
+and computing these delta terms,
+
+213
+00:07:33,018 --> 00:07:34,024
+you can, you know, pretty
+
+214
+00:07:34,052 --> 00:07:36,031
+quickly compute these partial
+
+215
+00:07:36,037 --> 00:07:38,014
+derivative terms for all of your parameters.
+
+216
+00:07:38,092 --> 00:07:40,001
+So this is a lot of detail.
+
+217
+00:07:40,056 --> 00:07:41,089
+Let's take everything and put
+
+218
+00:07:42,031 --> 00:07:43,066
+it all together to talk about
+
+219
+00:07:44,012 --> 00:07:45,049
+how to implement back propagation
+
+220
+00:07:46,056 --> 00:07:48,058
+to compute derivatives with respect to your parameters.
+
+221
+00:07:49,079 --> 00:07:50,076
+And for the case of when
+
+222
+00:07:51,000 --> 00:07:52,045
+we have a large training
+
+223
+00:07:52,082 --> 00:07:53,085
+set, not just a training
+
+224
+00:07:54,010 --> 00:07:56,031
+set of one example, here's what we do.
+
+225
+00:07:57,029 --> 00:07:58,013
+Suppose we have a training
+
+226
+00:07:58,026 --> 00:07:59,075
+set of m examples like
+
+227
+00:07:59,089 --> 00:08:01,061
+that shown here.
+
+228
+00:08:01,085 --> 00:08:02,060
+The first thing we're going to do is
+
+229
+00:08:03,022 --> 00:08:04,056
+we're going to set these delta
+
+230
+00:08:05,010 --> 00:08:07,026
+l subscript i j. So this triangular symbol?
+
+231
+00:08:08,008 --> 00:08:09,099
+That's actually the capital Greek
+
+232
+00:08:10,031 --> 00:08:11,098
+alphabet delta .
+
+233
+00:08:12,005 --> 00:08:14,007
+The symbol we had on the previous slide was the lower case delta.
+
+234
+00:08:14,038 --> 00:08:16,081
+So the triangle is capital delta.
+
+235
+00:08:17,043 --> 00:08:18,049
+We're gonna set this equal to zero
+
+236
+00:08:18,068 --> 00:08:21,093
+for all values of l i j.
+
+237
+00:08:22,011 --> 00:08:23,085
+Eventually, this capital delta
+
+238
+00:08:24,052 --> 00:08:25,082
+l i j will be used
+
+239
+00:08:26,086 --> 00:08:29,092
+to compute the partial
+
+240
+00:08:30,029 --> 00:08:31,056
+derivative term, partial derivative
+
+241
+00:08:32,037 --> 00:08:35,024
+respect to theta l i j of
+
+242
+00:08:35,042 --> 00:08:37,019
+J of theta.
+
+243
+00:08:39,003 --> 00:08:40,021
+So as we'll see in
+
+244
+00:08:40,048 --> 00:08:41,054
+a second, these deltas are going
+
+245
+00:08:41,066 --> 00:08:43,070
+to be used as accumulators that
+
+246
+00:08:43,095 --> 00:08:45,036
+will slowly add things in
+
+247
+00:08:45,070 --> 00:08:47,012
+order to compute these partial derivatives.
+
+248
+00:08:49,057 --> 00:08:51,091
+Next, we're going to loop through our training set.
+
+249
+00:08:52,014 --> 00:08:53,026
+So, we'll say for i equals
+
+250
+00:08:53,061 --> 00:08:55,039
+1 through m and so
+
+251
+00:08:55,062 --> 00:08:57,026
+for the i iteration, we're
+
+252
+00:08:57,040 --> 00:08:59,017
+going to working with the training example xi, yi.
+
+253
+00:09:00,048 --> 00:09:03,022
+So
+
+254
+00:09:03,072 --> 00:09:04,059
+the first thing we're going to do
+
+255
+00:09:04,069 --> 00:09:06,012
+is set a1 which is the
+
+256
+00:09:06,057 --> 00:09:07,083
+activations of the input layer,
+
+257
+00:09:08,019 --> 00:09:09,002
+set that to be equal to
+
+258
+00:09:09,095 --> 00:09:11,079
+xi is the inputs for our
+
+259
+00:09:12,066 --> 00:09:15,007
+i training example, and then
+
+260
+00:09:15,034 --> 00:09:17,059
+we're going to perform forward propagation to
+
+261
+00:09:17,073 --> 00:09:19,039
+compute the activations for
+
+262
+00:09:19,078 --> 00:09:20,089
+layer two, layer three and so
+
+263
+00:09:21,016 --> 00:09:22,004
+on up to the final
+
+264
+00:09:22,050 --> 00:09:25,019
+layer, layer capital L. Next,
+
+265
+00:09:25,057 --> 00:09:26,097
+we're going to use the output
+
+266
+00:09:27,027 --> 00:09:28,052
+label yi from this
+
+267
+00:09:28,067 --> 00:09:29,087
+specific example we're looking
+
+268
+00:09:30,034 --> 00:09:31,064
+at to compute the error
+
+269
+00:09:31,095 --> 00:09:34,013
+term for delta L for the output there.
+
+270
+00:09:34,048 --> 00:09:35,073
+So delta L is what
+
+271
+00:09:35,087 --> 00:09:38,019
+a hypotheses output minus what
+
+272
+00:09:38,065 --> 00:09:39,087
+the target label was?
+
+273
+00:09:41,084 --> 00:09:42,055
+And then we're going to use
+
+274
+00:09:42,085 --> 00:09:44,054
+the back propagation algorithm to
+
+275
+00:09:44,074 --> 00:09:46,001
+compute delta L minus 1,
+
+276
+00:09:46,022 --> 00:09:47,025
+delta L minus 2, and
+
+277
+00:09:47,035 --> 00:09:49,087
+so on down to delta 2 and once again
+
+278
+00:09:50,026 --> 00:09:51,037
+there is now delta 1 because
+
+279
+00:09:51,046 --> 00:09:54,037
+we don't associate an error term with the input layer.
+
+280
+00:09:57,000 --> 00:09:58,015
+And finally, we're going to
+
+281
+00:09:58,034 --> 00:10:00,064
+use these capital delta terms
+
+282
+00:10:01,019 --> 00:10:02,079
+to accumulate these partial derivative
+
+283
+00:10:03,039 --> 00:10:05,066
+terms that we wrote down on the previous line.
+
+284
+00:10:06,087 --> 00:10:07,087
+And by the way, if you
+
+285
+00:10:07,096 --> 00:10:11,034
+look at this expression, it's possible to vectorize this too.
+
+286
+00:10:12,001 --> 00:10:13,003
+Concretely, if you think
+
+287
+00:10:13,030 --> 00:10:14,086
+of delta ij as
+
+288
+00:10:15,000 --> 00:10:18,009
+a matrix, indexed by subscript ij.
+
+289
+00:10:19,022 --> 00:10:20,059
+Then, if delta L is
+
+290
+00:10:20,077 --> 00:10:22,003
+a matrix we can rewrite
+
+291
+00:10:22,012 --> 00:10:24,010
+this as delta L, gets
+
+292
+00:10:24,035 --> 00:10:26,071
+updated as delta L plus
+
+293
+00:10:27,083 --> 00:10:29,037
+lower case delta L plus
+
+294
+00:10:29,063 --> 00:10:32,077
+one times aL transpose.
+
+295
+00:10:33,057 --> 00:10:35,037
+So that's a vectorized implementation of
+
+296
+00:10:35,051 --> 00:10:37,014
+this that automatically does
+
+297
+00:10:37,059 --> 00:10:38,085
+an update for all values of
+
+298
+00:10:39,000 --> 00:10:41,025
+i and j.
+Finally, after
+
+299
+00:10:41,050 --> 00:10:43,048
+executing the body of
+
+300
+00:10:43,058 --> 00:10:45,035
+the four-loop we then go outside the four-loop
+
+301
+00:10:46,033 --> 00:10:47,000
+and we compute the following.
+
+302
+00:10:47,044 --> 00:10:49,069
+We compute capital D as
+
+303
+00:10:50,001 --> 00:10:51,039
+follows and we have
+
+304
+00:10:51,050 --> 00:10:52,075
+two separate cases for j
+
+305
+00:10:52,098 --> 00:10:54,088
+equals zero and j not equals zero.
+
+306
+00:10:56,008 --> 00:10:57,025
+The case of j equals zero
+
+307
+00:10:57,067 --> 00:10:58,073
+corresponds to the bias
+
+308
+00:10:59,014 --> 00:11:00,002
+term so when j equals
+
+309
+00:11:00,038 --> 00:11:01,032
+zero that's why we're missing
+
+310
+00:11:01,079 --> 00:11:03,032
+is an extra regularization term.
+
+311
+00:11:05,047 --> 00:11:06,085
+Finally, while the formal proof
+
+312
+00:11:07,017 --> 00:11:08,097
+is pretty complicated what you
+
+313
+00:11:09,002 --> 00:11:10,040
+can show is that once
+
+314
+00:11:10,063 --> 00:11:12,052
+you've computed these D terms,
+
+315
+00:11:13,050 --> 00:11:15,023
+that is exactly the partial
+
+316
+00:11:15,063 --> 00:11:17,061
+derivative of the cost
+
+317
+00:11:17,091 --> 00:11:19,023
+function with respect to each
+
+318
+00:11:19,047 --> 00:11:20,088
+of your perimeters and so you
+
+319
+00:11:21,003 --> 00:11:22,047
+can use those in either gradient
+
+320
+00:11:22,061 --> 00:11:23,052
+descent or in one of the advanced authorization
+
+321
+00:11:25,045 --> 00:11:25,045
+algorithms.
+
+322
+00:11:28,030 --> 00:11:29,036
+So that's the back propagation
+
+323
+00:11:29,099 --> 00:11:31,011
+algorithm and how you compute
+
+324
+00:11:31,047 --> 00:11:33,008
+derivatives of your cost
+
+325
+00:11:33,034 --> 00:11:34,071
+function for a neural network.
+
+326
+00:11:35,047 --> 00:11:36,033
+I know this looks like this
+
+327
+00:11:36,047 --> 00:11:38,080
+was a lot of details and this was a lot of steps strung together.
+
+328
+00:11:39,046 --> 00:11:40,076
+But both in the programming
+
+329
+00:11:41,010 --> 00:11:43,000
+assignments write out and later
+
+330
+00:11:43,011 --> 00:11:44,058
+in this video, we'll give
+
+331
+00:11:44,072 --> 00:11:45,089
+you a summary of this so
+
+332
+00:11:46,004 --> 00:11:46,083
+we can have all the pieces
+
+333
+00:11:47,025 --> 00:11:48,077
+of the algorithm together so that
+
+334
+00:11:48,091 --> 00:11:50,054
+you know exactly what you need
+
+335
+00:11:50,061 --> 00:11:51,075
+to implement if you want
+
+336
+00:11:51,094 --> 00:11:53,046
+to implement back propagation to compute
+
+337
+00:11:53,088 --> 00:11:55,057
+the derivatives of your neural network's
+
+338
+00:11:56,041 --> 00:11:58,021
+cost function with respect to those parameters.

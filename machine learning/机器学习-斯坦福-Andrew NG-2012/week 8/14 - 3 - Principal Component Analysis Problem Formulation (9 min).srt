@@ -1,0 +1,1076 @@
+
+1
+00:00:00,009 --> 00:00:01,001
+For the problem of dimensionality
+
+2
+00:00:01,092 --> 00:00:03,041
+reduction, by far the
+
+3
+00:00:03,049 --> 00:00:04,062
+most popular, by far the
+
+4
+00:00:04,069 --> 00:00:06,017
+most commonly used algorithm is
+
+5
+00:00:06,038 --> 00:00:08,046
+something called principal components analysis or PCA.
+
+6
+00:00:10,019 --> 00:00:11,016
+It In this video, I would
+
+7
+00:00:11,022 --> 00:00:12,060
+like to start talking about the
+
+8
+00:00:12,074 --> 00:00:14,024
+problem formulation for PCA,
+
+9
+00:00:14,091 --> 00:00:16,008
+in other words let us try
+
+10
+00:00:16,026 --> 00:00:18,062
+to formulate precisely exactly what
+
+11
+00:00:18,089 --> 00:00:19,098
+we would like PCA to do.
+
+12
+00:00:20,067 --> 00:00:21,082
+Let's say we have a dataset like
+
+13
+00:00:22,001 --> 00:00:23,005
+this, so this is a dataset
+
+14
+00:00:23,035 --> 00:00:24,071
+of example X in R2,
+
+15
+00:00:25,003 --> 00:00:26,014
+and let's say I want
+
+16
+00:00:26,046 --> 00:00:27,064
+to reduce the dimension of the
+
+17
+00:00:27,080 --> 00:00:29,085
+data from two dimensional to one dimensional.
+
+18
+00:00:31,017 --> 00:00:32,013
+In other words I would like to find
+
+19
+00:00:32,068 --> 00:00:34,039
+a line onto which to project the data.
+
+20
+00:00:35,014 --> 00:00:37,067
+So what seems like a good line onto which to project the data?
+
+21
+00:00:38,072 --> 00:00:40,075
+A line like this might be a pretty good choice.
+
+22
+00:00:41,050 --> 00:00:42,078
+And the reason you think
+
+23
+00:00:43,002 --> 00:00:43,099
+this might be a good choice is
+
+24
+00:00:44,014 --> 00:00:45,042
+that if you look at
+
+25
+00:00:46,002 --> 00:00:48,022
+where the projected versions of the points goes.
+
+26
+00:00:48,053 --> 00:00:51,017
+I'm gonna take this point and project it down here and get that.
+
+27
+00:00:51,064 --> 00:00:53,050
+This point gets projected here, to
+
+28
+00:00:53,064 --> 00:00:55,021
+here, to here, to here
+
+29
+00:00:56,011 --> 00:00:57,035
+what we find is that the
+
+30
+00:00:57,042 --> 00:00:58,085
+distance between each point
+
+31
+00:00:59,046 --> 00:01:02,052
+and the projected version is pretty small.
+
+32
+00:01:03,078 --> 00:01:06,048
+That is, these blue
+
+33
+00:01:06,068 --> 00:01:08,020
+line segments are pretty short.
+
+34
+00:01:09,026 --> 00:01:10,026
+So what PCA
+
+35
+00:01:10,043 --> 00:01:11,073
+does, formally, is it tries
+
+36
+00:01:12,018 --> 00:01:14,031
+to find a lower-dimensional surface
+
+37
+00:01:14,034 --> 00:01:15,025
+really a line in
+
+38
+00:01:15,032 --> 00:01:16,065
+this case, onto which to
+
+39
+00:01:16,073 --> 00:01:18,026
+project the data, so that
+
+40
+00:01:18,051 --> 00:01:20,012
+the sum of squares of these
+
+41
+00:01:20,035 --> 00:01:22,056
+little blue line segments is minimized.
+
+42
+00:01:23,054 --> 00:01:24,078
+The length of those blue line
+
+43
+00:01:25,001 --> 00:01:26,053
+segments, that's sometimes also called
+
+44
+00:01:27,009 --> 00:01:29,070
+the projection error, and so what PCA
+
+45
+00:01:29,075 --> 00:01:30,048
+does is it tries to find
+
+46
+00:01:30,076 --> 00:01:31,084
+the surface onto which to
+
+47
+00:01:32,001 --> 00:01:33,034
+project the data so as to
+
+48
+00:01:33,048 --> 00:01:35,004
+minimize that. As an a
+
+49
+00:01:35,009 --> 00:01:37,045
+side, before applying PCA
+
+50
+00:01:37,095 --> 00:01:39,075
+it's standard practice to
+
+51
+00:01:39,095 --> 00:01:41,029
+first perform mean normalization and
+
+52
+00:01:41,081 --> 00:01:43,018
+feature scaling so that the
+
+53
+00:01:43,056 --> 00:01:44,076
+features, X1 and X2,
+
+54
+00:01:44,087 --> 00:01:46,076
+should have zero mean and
+
+55
+00:01:46,087 --> 00:01:48,073
+should have comparable ranges of values.
+
+56
+00:01:49,010 --> 00:01:50,031
+I've already done this for this
+
+57
+00:01:50,048 --> 00:01:51,059
+example, but I'll come
+
+58
+00:01:51,068 --> 00:01:52,098
+back to this later and talk more
+
+59
+00:01:53,018 --> 00:01:54,095
+about feature scaling and mean normalization in the context of PCA later.
+
+60
+00:01:58,059 --> 00:01:59,042
+Coming back to this example,
+
+61
+00:02:00,026 --> 00:02:01,046
+in contrast to the red
+
+62
+00:02:01,070 --> 00:02:03,029
+lines that I just drew here's
+
+63
+00:02:03,053 --> 00:02:05,096
+a different line onto which I could project my data.
+
+64
+00:02:06,081 --> 00:02:08,025
+This magenta line.
+
+65
+00:02:08,052 --> 00:02:09,025
+And as you can see, you
+
+66
+00:02:09,037 --> 00:02:10,065
+know, this magenta line is a
+
+67
+00:02:10,081 --> 00:02:13,091
+much worse direction onto which to project my data, right?
+
+68
+00:02:14,009 --> 00:02:15,002
+So if I were to project my
+
+69
+00:02:15,012 --> 00:02:16,043
+data onto the magenta
+
+70
+00:02:16,072 --> 00:02:18,005
+line, like the other set of points like that.
+
+71
+00:02:19,013 --> 00:02:21,024
+And the projection errors, that
+
+72
+00:02:21,041 --> 00:02:24,046
+is these blue line segments would be huge.
+
+73
+00:02:24,090 --> 00:02:25,093
+So these points have to
+
+74
+00:02:26,000 --> 00:02:28,016
+move a huge distance in
+
+75
+00:02:28,031 --> 00:02:29,084
+order to get onto
+
+76
+00:02:30,036 --> 00:02:31,075
+the, in order to
+
+77
+00:02:31,093 --> 00:02:33,043
+get projected onto the magenta line.
+
+78
+00:02:33,074 --> 00:02:35,038
+And so that's why PCA
+
+79
+00:02:36,000 --> 00:02:37,053
+principle component analysis would choose
+
+80
+00:02:37,086 --> 00:02:38,084
+something like the red line
+
+81
+00:02:39,022 --> 00:02:41,040
+rather than like the magenta line down here.
+
+82
+00:02:42,087 --> 00:02:45,028
+Let's write out the PCA problem a little more formally.
+
+83
+00:02:46,013 --> 00:02:47,065
+The goal of PCA if we
+
+84
+00:02:47,081 --> 00:02:49,015
+want to reduce data from two-
+
+85
+00:02:49,036 --> 00:02:50,058
+dimensional to one-dimensional is
+
+86
+00:02:51,044 --> 00:02:52,015
+we're going to try to find
+
+87
+00:02:52,063 --> 00:02:54,059
+a vector, that is
+
+88
+00:02:54,096 --> 00:02:56,015
+a vector Ui
+
+89
+00:02:57,015 --> 00:02:58,025
+which is going to be in Rn,
+
+90
+00:02:58,078 --> 00:03:00,016
+so that would be in R2 in this case,
+
+91
+00:03:01,012 --> 00:03:02,030
+going to find direction onto
+
+92
+00:03:02,059 --> 00:03:04,099
+which to project the data so as to minimize the projection error.
+
+93
+00:03:05,040 --> 00:03:06,071
+So in this example I'm
+
+94
+00:03:07,018 --> 00:03:09,018
+hoping that PCA will find this
+
+95
+00:03:09,037 --> 00:03:10,059
+vector, which I'm going
+
+96
+00:03:10,071 --> 00:03:12,096
+to call U1, so that
+
+97
+00:03:13,012 --> 00:03:14,034
+when I project the data onto
+
+98
+00:03:15,059 --> 00:03:17,062
+the line that I defined
+
+99
+00:03:18,016 --> 00:03:19,084
+by extending out this vector,
+
+100
+00:03:20,037 --> 00:03:21,065
+I end up with pretty small
+
+101
+00:03:22,009 --> 00:03:23,040
+reconstruction errors and reference
+
+102
+00:03:24,031 --> 00:03:25,021
+data looks like this.
+
+103
+00:03:26,018 --> 00:03:26,063
+And by the way,
+
+104
+00:03:26,084 --> 00:03:28,031
+I should mention that whether PCA
+
+105
+00:03:28,091 --> 00:03:32,015
+gives me U1 or negative U1, it doesn't matter.
+
+106
+00:03:32,065 --> 00:03:33,062
+So if it gives me a positive
+
+107
+00:03:33,088 --> 00:03:35,053
+vector in this direction that's fine, if it gives me,
+
+108
+00:03:35,094 --> 00:03:37,090
+sort of the opposite vector facing
+
+109
+00:03:38,033 --> 00:03:40,015
+in the opposite direction, so that
+
+110
+00:03:40,071 --> 00:03:43,015
+would be -U1, draw that in
+
+111
+00:03:43,030 --> 00:03:44,040
+blue instead, whether it gives me positive
+
+112
+00:03:45,012 --> 00:03:46,031
+U1 negative U1,
+
+113
+00:03:46,043 --> 00:03:48,012
+it doesn't matter, because each of
+
+114
+00:03:48,022 --> 00:03:50,003
+these vectors defines the
+
+115
+00:03:50,011 --> 00:03:51,065
+same red line onto which
+
+116
+00:03:51,087 --> 00:03:54,043
+I'm projecting my data. So this
+
+117
+00:03:54,061 --> 00:03:56,030
+is a case of reducing data
+
+118
+00:03:56,068 --> 00:03:58,012
+from 2 dimensional to 1 dimensional.
+
+119
+00:03:58,091 --> 00:04:00,021
+In the more general case we
+
+120
+00:04:00,034 --> 00:04:01,068
+have N dimensional data and
+
+121
+00:04:01,084 --> 00:04:03,078
+we want to reduce it K dimensions.
+
+122
+00:04:04,096 --> 00:04:06,000
+In that case, we want to
+
+123
+00:04:06,015 --> 00:04:07,044
+find not just a single vector
+
+124
+00:04:07,093 --> 00:04:09,002
+onto which to project the data
+
+125
+00:04:09,031 --> 00:04:10,065
+but we want to find K dimensions
+
+126
+00:04:11,052 --> 00:04:12,041
+onto which to project the data.
+
+127
+00:04:13,028 --> 00:04:15,068
+So as to minimize this projection error.
+
+128
+00:04:16,043 --> 00:04:17,010
+So here's an example.
+
+129
+00:04:17,048 --> 00:04:19,010
+If I have a 3D point
+
+130
+00:04:19,038 --> 00:04:21,002
+cloud like this then maybe
+
+131
+00:04:21,029 --> 00:04:22,062
+what I want to do is find
+
+132
+00:04:23,087 --> 00:04:26,012
+vectors, sorry find a pair of vectors,
+
+133
+00:04:27,001 --> 00:04:28,018
+and I'm gonna call these vectors
+
+134
+00:04:29,007 --> 00:04:30,052
+lets draw these in red, I'm going
+
+135
+00:04:30,070 --> 00:04:32,020
+to find a pair of vectors,
+
+136
+00:04:32,057 --> 00:04:33,057
+extending for the origin here's
+
+137
+00:04:34,049 --> 00:04:37,027
+U1, and here's
+
+138
+00:04:37,057 --> 00:04:39,080
+my second vector U2,
+
+139
+00:04:40,018 --> 00:04:42,011
+and together these two
+
+140
+00:04:42,031 --> 00:04:43,085
+vectors define a plane,
+
+141
+00:04:44,039 --> 00:04:45,058
+or they define a 2D surface,
+
+142
+00:04:46,079 --> 00:04:47,089
+kind of like this, sort of,
+
+143
+00:04:48,026 --> 00:04:51,013
+2D surface, onto which I'm going to project my data.
+
+144
+00:04:52,005 --> 00:04:52,089
+For those of you that are
+
+145
+00:04:53,007 --> 00:04:54,098
+familiar with linear algebra, for
+
+146
+00:04:55,017 --> 00:04:56,000
+those of you that are really experts
+
+147
+00:04:56,023 --> 00:04:57,037
+in linear algebra, the formal
+
+148
+00:04:57,077 --> 00:04:58,081
+definition of this is that
+
+149
+00:04:59,023 --> 00:05:00,050
+we're going to find a set of
+
+150
+00:05:00,061 --> 00:05:01,068
+vectors, U1 U2 maybe up
+
+151
+00:05:01,080 --> 00:05:03,037
+to Uk, and what
+
+152
+00:05:03,045 --> 00:05:04,049
+we're going to do is project
+
+153
+00:05:04,098 --> 00:05:06,060
+the data onto the linear
+
+154
+00:05:06,082 --> 00:05:09,051
+subspace spanned by this set of k vectors.
+
+155
+00:05:10,051 --> 00:05:11,056
+But if you are not familiar
+
+156
+00:05:12,006 --> 00:05:13,019
+with linear algebra, just think
+
+157
+00:05:13,039 --> 00:05:14,079
+of it as finding k directions
+
+158
+00:05:15,050 --> 00:05:18,037
+instead of just one direction, onto which to project the data.
+
+159
+00:05:18,074 --> 00:05:19,094
+So, finding a k-dimensional surface,
+
+160
+00:05:20,061 --> 00:05:21,056
+really finding a 2D plane
+
+161
+00:05:22,037 --> 00:05:23,087
+in this case, shown in this
+
+162
+00:05:24,004 --> 00:05:25,033
+figure, where we can
+
+163
+00:05:26,080 --> 00:05:29,069
+define the position of the points in the plane using k directions.
+
+164
+00:05:30,041 --> 00:05:31,068
+That's why for PCA, we
+
+165
+00:05:31,094 --> 00:05:34,043
+want to find k vectors onto which to project the data.
+
+166
+00:05:35,002 --> 00:05:36,092
+And so, more formally, in
+
+167
+00:05:37,005 --> 00:05:38,043
+PCA what we want
+
+168
+00:05:38,069 --> 00:05:40,039
+to do is find this way
+
+169
+00:05:40,058 --> 00:05:41,093
+to project the data so as
+
+170
+00:05:42,004 --> 00:05:43,056
+to minimize the, sort of,
+
+171
+00:05:43,085 --> 00:05:46,020
+projection distance, which is distance between points and projections.
+
+172
+00:05:47,006 --> 00:05:48,006
+In this so 3D example,
+
+173
+00:05:48,056 --> 00:05:50,010
+too, given a point we
+
+174
+00:05:50,027 --> 00:05:51,044
+would take the point and project
+
+175
+00:05:51,098 --> 00:05:53,094
+it onto this 2D surface.
+
+176
+00:05:55,056 --> 00:05:56,057
+When you're done with that,
+
+177
+00:05:57,027 --> 00:05:58,068
+and so the projection error would
+
+178
+00:05:58,087 --> 00:06:00,082
+be, you know, the distance between the
+
+179
+00:06:01,043 --> 00:06:03,016
+point and where it gets projected down.
+
+180
+00:06:03,097 --> 00:06:05,036
+to my 2D surface,
+
+181
+00:06:05,087 --> 00:06:06,099
+and so what PCA does is it'll
+
+182
+00:06:07,006 --> 00:06:08,048
+try to find a line or
+
+183
+00:06:08,062 --> 00:06:10,043
+plane or whatever onto which
+
+184
+00:06:10,066 --> 00:06:11,081
+to project the data, to try
+
+185
+00:06:12,000 --> 00:06:14,016
+to minimize that squared projection,
+
+186
+00:06:15,010 --> 00:06:17,043
+that 90 degree, or that orthogonal projection error.
+
+187
+00:06:18,010 --> 00:06:19,024
+Finally, one question that I
+
+188
+00:06:19,027 --> 00:06:20,006
+sometimes get asked is how
+
+189
+00:06:20,027 --> 00:06:22,010
+does PCA relate to
+
+190
+00:06:22,035 --> 00:06:24,018
+linear regression, because when explaining
+
+191
+00:06:24,060 --> 00:06:25,077
+PCA I sometimes end up
+
+192
+00:06:26,018 --> 00:06:28,072
+drawing diagrams like these and that looks a little bit like linear regression.
+
+193
+00:06:30,079 --> 00:06:32,012
+It turns out PCA is not
+
+194
+00:06:32,037 --> 00:06:33,094
+linear regression, and despite
+
+195
+00:06:34,035 --> 00:06:37,056
+some cosmetic similarity these are actually totally different algorithms.
+
+196
+00:06:38,068 --> 00:06:39,068
+If we were doing linear regression
+
+197
+00:06:40,076 --> 00:06:42,017
+what we would do would be, on
+
+198
+00:06:42,026 --> 00:06:42,093
+the left we would be trying
+
+199
+00:06:43,023 --> 00:06:44,039
+to predict the value of some
+
+200
+00:06:44,054 --> 00:06:45,082
+variable y given some input
+
+201
+00:06:46,012 --> 00:06:47,032
+features x. And so linear
+
+202
+00:06:47,056 --> 00:06:48,075
+regression, what we're doing
+
+203
+00:06:49,014 --> 00:06:50,035
+is we're fitting a straight line
+
+204
+00:06:51,089 --> 00:06:52,097
+so as to minimize the squared
+
+205
+00:06:53,038 --> 00:06:56,016
+error between a point and the straight line.
+
+206
+00:06:56,036 --> 00:06:57,026
+And so what we'd be minimizing
+
+207
+00:06:57,089 --> 00:07:00,031
+would be the squared magnitude of these blue lines.
+
+208
+00:07:00,079 --> 00:07:02,024
+And notice I'm drawing these
+
+209
+00:07:02,055 --> 00:07:04,064
+blue lines vertically, that they
+
+210
+00:07:05,014 --> 00:07:06,050
+are the vertical distance between
+
+211
+00:07:06,051 --> 00:07:07,069
+a point and the value
+
+212
+00:07:08,008 --> 00:07:10,047
+predicted by the hypothesis, whereas in
+
+213
+00:07:10,050 --> 00:07:13,010
+contrast, in PCA, what it
+
+214
+00:07:13,018 --> 00:07:14,017
+does is it tries to
+
+215
+00:07:14,031 --> 00:07:16,088
+minimize the magnitude of these blue lines,
+
+216
+00:07:17,045 --> 00:07:19,055
+which are drawn at an angle,
+
+217
+00:07:19,098 --> 00:07:21,058
+these are really the shortest orthogonal
+
+218
+00:07:22,008 --> 00:07:23,089
+distances, the shortest distance between
+
+219
+00:07:24,005 --> 00:07:26,062
+the point X and this
+
+220
+00:07:27,000 --> 00:07:28,031
+red line, and this
+
+221
+00:07:28,052 --> 00:07:29,087
+gives very different effects, depending
+
+222
+00:07:30,060 --> 00:07:32,005
+on the data set.
+
+223
+00:07:32,039 --> 00:07:34,061
+And more generally generally and
+
+224
+00:07:34,075 --> 00:07:35,088
+more generally when you're doing
+
+225
+00:07:36,014 --> 00:07:37,074
+linear regression there is this
+
+226
+00:07:38,016 --> 00:07:39,081
+distinguished variable y that
+
+227
+00:07:40,000 --> 00:07:41,012
+we're trying to predict, all that
+
+228
+00:07:41,056 --> 00:07:43,061
+linear regression is about is taking all the values
+
+229
+00:07:44,006 --> 00:07:45,006
+of X and try to use
+
+230
+00:07:45,025 --> 00:07:46,093
+that to predict Y. Whereas
+
+231
+00:07:47,020 --> 00:07:48,092
+in PCA, there is no
+
+232
+00:07:49,023 --> 00:07:50,019
+distinguished or there is
+
+233
+00:07:50,039 --> 00:07:51,089
+no special variable Y that
+
+234
+00:07:52,004 --> 00:07:52,076
+we're trying to predict, and instead
+
+235
+00:07:53,023 --> 00:07:54,010
+we have a list of features
+
+236
+00:07:54,074 --> 00:07:56,012
+x1, x2, and so on
+
+237
+00:07:56,027 --> 00:07:57,082
+up to xN, and all of
+
+238
+00:07:57,093 --> 00:07:59,045
+these features are treated equally.
+
+239
+00:08:00,036 --> 00:08:01,056
+So, no one of them is special.
+
+240
+00:08:02,098 --> 00:08:05,018
+As one last example, if I
+
+241
+00:08:05,039 --> 00:08:07,022
+have three-dimensional data, and
+
+242
+00:08:07,038 --> 00:08:08,066
+I want to reduce data from
+
+243
+00:08:08,081 --> 00:08:10,011
+3D to 2D, so maybe
+
+244
+00:08:10,037 --> 00:08:11,062
+I want to find two directions,
+
+245
+00:08:12,077 --> 00:08:14,011
+you know, u1, and u2,
+
+246
+00:08:14,092 --> 00:08:16,002
+onto which to project my data,
+
+247
+00:08:16,095 --> 00:08:17,083
+then what I have is I
+
+248
+00:08:18,038 --> 00:08:20,018
+have three features, x1, x2,
+
+249
+00:08:20,086 --> 00:08:22,041
+x3, and all of these are treated alike.
+
+250
+00:08:22,077 --> 00:08:24,010
+All of these are treated symmetrically
+
+251
+00:08:25,001 --> 00:08:26,024
+and there is no special variable
+
+252
+00:08:26,074 --> 00:08:27,074
+y that I'm trying to predict.
+
+253
+00:08:28,087 --> 00:08:30,031
+And so PCA is not
+
+254
+00:08:30,064 --> 00:08:33,021
+linear regression, and even
+
+255
+00:08:34,001 --> 00:08:35,087
+though at some cosmetic level they
+
+256
+00:08:36,003 --> 00:08:37,025
+might look related, these are
+
+257
+00:08:37,060 --> 00:08:41,058
+actually very different algorithms. So,
+
+258
+00:08:41,080 --> 00:08:43,036
+hopefully you now understand what
+
+259
+00:08:43,062 --> 00:08:44,096
+PCA is doing: it's trying
+
+260
+00:08:45,022 --> 00:08:46,051
+to find a lower dimensional
+
+261
+00:08:47,012 --> 00:08:48,028
+surface onto which to project
+
+262
+00:08:48,067 --> 00:08:50,023
+the data so as to
+
+263
+00:08:50,045 --> 00:08:52,041
+minimize this squared projection error,
+
+264
+00:08:52,064 --> 00:08:54,013
+to minimize the squared distance between
+
+265
+00:08:54,038 --> 00:08:56,065
+each point and the location of where it gets projected.
+
+266
+00:08:57,079 --> 00:08:59,003
+In the next video we'll start
+
+267
+00:08:59,034 --> 00:09:00,049
+to talk about how to actually
+
+268
+00:09:00,089 --> 00:09:02,035
+find this lower dimensional surface
+
+269
+00:09:03,021 --> 00:09:04,047
+onto which to project the data.

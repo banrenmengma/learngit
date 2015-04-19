@@ -1,0 +1,2039 @@
+1
+00:00:00,090 --> 00:00:01,270
+I've seen over and over that
+
+2
+00:00:01,570 --> 00:00:03,160
+one of the most reliable ways to
+
+3
+00:00:03,300 --> 00:00:04,800
+get a high performance machine learning
+
+4
+00:00:05,040 --> 00:00:06,170
+system is to take
+
+5
+00:00:06,550 --> 00:00:07,860
+a low bias learning algorithm
+
+6
+00:00:08,750 --> 00:00:10,220
+and to train it on a massive training set.
+
+7
+00:00:11,230 --> 00:00:12,830
+But where did you get so much training data from?
+
+8
+00:00:13,510 --> 00:00:14,440
+Turns out that the machine earnings
+
+9
+00:00:14,820 --> 00:00:16,520
+there's a fascinating idea called artificial
+
+10
+00:00:17,220 --> 00:00:19,000
+data synthesis, this doesn't
+
+11
+00:00:19,370 --> 00:00:20,740
+apply to every single problem, and
+
+12
+00:00:20,980 --> 00:00:22,120
+to apply to a specific
+
+13
+00:00:22,360 --> 00:00:25,060
+problem, often takes some thought and innovation and insight.
+
+14
+00:00:25,780 --> 00:00:27,170
+But if this idea applies
+
+15
+00:00:27,580 --> 00:00:29,120
+to your machine, only problem, it
+
+16
+00:00:29,230 --> 00:00:30,270
+can sometimes be a an
+
+17
+00:00:30,510 --> 00:00:31,600
+easy way to get a
+
+18
+00:00:31,680 --> 00:00:33,470
+huge training set to give to your learning algorithm.
+
+19
+00:00:33,900 --> 00:00:35,520
+The idea of artificial
+
+20
+00:00:36,230 --> 00:00:38,410
+data synthesis comprises of two
+
+21
+00:00:38,590 --> 00:00:40,210
+variations, main the first
+
+22
+00:00:40,650 --> 00:00:41,940
+is if we are essentially creating
+
+23
+00:00:42,520 --> 00:00:44,940
+data from [xx], creating new data from scratch.
+
+24
+00:00:45,380 --> 00:00:46,700
+And the second is if
+
+25
+00:00:46,930 --> 00:00:48,350
+we already have it's small
+
+26
+00:00:48,590 --> 00:00:49,970
+label training set and we
+
+27
+00:00:50,210 --> 00:00:51,490
+somehow have amplify that training
+
+28
+00:00:51,840 --> 00:00:52,680
+set or use a small training
+
+29
+00:00:52,980 --> 00:00:54,390
+set to turn that into
+
+30
+00:00:54,660 --> 00:00:56,290
+a larger training set and in
+
+31
+00:00:56,450 --> 00:00:58,120
+this video we'll go over both those ideas.
+
+32
+00:01:00,350 --> 00:01:02,220
+To talk about the artificial data
+
+33
+00:01:02,440 --> 00:01:04,030
+synthesis idea, let's use
+
+34
+00:01:04,330 --> 00:01:06,930
+the character portion of
+
+35
+00:01:07,090 --> 00:01:08,470
+the photo OCR pipeline, we
+
+36
+00:01:08,690 --> 00:01:09,710
+want to take it's input image
+
+37
+00:01:10,060 --> 00:01:11,370
+and recognize what character it is.
+
+38
+00:01:13,330 --> 00:01:14,690
+If we go out and collect
+
+39
+00:01:14,880 --> 00:01:16,270
+a large label data set,
+
+40
+00:01:16,890 --> 00:01:17,980
+here's what it is and what it look like.
+
+41
+00:01:18,580 --> 00:01:21,770
+For this particular example, I've chosen a square aspect ratio.
+
+42
+00:01:22,130 --> 00:01:23,250
+So we're taking square image patches.
+
+43
+00:01:24,180 --> 00:01:25,110
+And the goal is to take
+
+44
+00:01:25,770 --> 00:01:27,420
+an image patch and recognize the
+
+45
+00:01:27,530 --> 00:01:29,270
+character in the middle of that image patch.
+
+46
+00:01:31,090 --> 00:01:31,990
+And for the sake of simplicity,
+
+47
+00:01:32,660 --> 00:01:33,740
+I'm going to treat these images
+
+48
+00:01:34,240 --> 00:01:36,380
+as grey scale images, rather than color images.
+
+49
+00:01:36,870 --> 00:01:38,550
+It turns out that using color
+
+50
+00:01:38,930 --> 00:01:41,180
+doesn't seem to help that much for this particular problem.
+
+51
+00:01:42,190 --> 00:01:43,530
+So given this image patch, we'd
+
+52
+00:01:43,660 --> 00:01:44,890
+like to recognize that that's a
+
+53
+00:01:45,010 --> 00:01:46,230
+T. Given this image patch,
+
+54
+00:01:46,550 --> 00:01:47,920
+we'd like to recognize that it's an 'S'.
+
+55
+00:01:49,540 --> 00:01:50,740
+Given that image patch we
+
+56
+00:01:50,850 --> 00:01:52,950
+would like to recognize that as an 'I' and so on.
+
+57
+00:01:54,110 --> 00:01:55,310
+So all of these, our
+
+58
+00:01:55,450 --> 00:01:57,240
+examples of row images, how
+
+59
+00:01:57,380 --> 00:01:59,460
+can we come up with a much larger training set?
+
+60
+00:02:00,000 --> 00:02:01,580
+Modern computers often have a
+
+61
+00:02:01,640 --> 00:02:03,700
+huge font library and
+
+62
+00:02:03,890 --> 00:02:05,330
+if you use a word processing
+
+63
+00:02:05,950 --> 00:02:07,090
+software, depending on what word
+
+64
+00:02:07,240 --> 00:02:08,580
+processor you use, you might
+
+65
+00:02:08,800 --> 00:02:09,980
+have all of these fonts and
+
+66
+00:02:10,120 --> 00:02:12,490
+many, many more Already stored inside.
+
+67
+00:02:12,950 --> 00:02:14,350
+And, in fact, if you go different websites, there
+
+68
+00:02:14,680 --> 00:02:16,280
+are, again, huge, free font
+
+69
+00:02:16,690 --> 00:02:18,200
+libraries on the internet we
+
+70
+00:02:18,370 --> 00:02:19,960
+can download many, many different
+
+71
+00:02:20,250 --> 00:02:22,580
+types of fonts, hundreds or perhaps thousands of different fonts.
+
+72
+00:02:23,960 --> 00:02:25,180
+So if you want more
+
+73
+00:02:25,570 --> 00:02:27,020
+training examples, one thing you
+
+74
+00:02:27,100 --> 00:02:28,340
+can do is just take
+
+75
+00:02:28,870 --> 00:02:30,220
+characters from different fonts
+
+76
+00:02:31,240 --> 00:02:32,870
+and paste these characters against
+
+77
+00:02:33,290 --> 00:02:35,890
+different random backgrounds.
+
+78
+00:02:36,730 --> 00:02:39,500
+So you might take this ----  and paste that c against a random background.
+
+79
+00:02:40,680 --> 00:02:41,640
+If you do that you now have
+
+80
+00:02:42,060 --> 00:02:43,830
+a training example of an
+
+81
+00:02:44,080 --> 00:02:45,260
+image of the character C.
+
+82
+00:02:46,360 --> 00:02:47,500
+So after some amount of
+
+83
+00:02:47,570 --> 00:02:48,920
+work, you know this,
+
+84
+00:02:48,980 --> 00:02:49,710
+and it is a little bit of
+
+85
+00:02:49,830 --> 00:02:51,760
+work to synthisize realistic looking data.
+
+86
+00:02:52,180 --> 00:02:53,080
+But after some amount of work,
+
+87
+00:02:53,700 --> 00:02:56,130
+you can get a synthetic training set like that.
+
+88
+00:02:57,180 --> 00:02:59,910
+Every image shown on the right was actually a synthesized image.
+
+89
+00:03:00,360 --> 00:03:02,080
+Where you take a font,
+
+90
+00:03:02,810 --> 00:03:04,240
+maybe a random font downloaded off
+
+91
+00:03:04,400 --> 00:03:05,680
+the web and you paste
+
+92
+00:03:06,160 --> 00:03:07,320
+an image of one character
+
+93
+00:03:07,800 --> 00:03:08,870
+or a few characters from that font
+
+94
+00:03:09,570 --> 00:03:11,440
+against this other random background image.
+
+95
+00:03:12,140 --> 00:03:12,840
+And then apply maybe a little
+
+96
+00:03:13,540 --> 00:03:15,160
+blurring operators  -----of app
+
+97
+00:03:15,680 --> 00:03:17,380
+finder, distortions that app
+
+98
+00:03:17,620 --> 00:03:18,650
+finder, meaning just the sharing
+
+99
+00:03:19,350 --> 00:03:20,740
+and scaling and little rotation
+
+100
+00:03:21,000 --> 00:03:22,260
+operations and if you
+
+101
+00:03:22,370 --> 00:03:23,330
+do that you get a synthetic
+
+102
+00:03:23,580 --> 00:03:25,520
+training set, on what the one shown here.
+
+103
+00:03:26,510 --> 00:03:28,050
+And this is work,
+
+104
+00:03:28,530 --> 00:03:29,640
+grade, it is, it takes
+
+105
+00:03:29,970 --> 00:03:31,460
+thought at work, in order to
+
+106
+00:03:31,700 --> 00:03:33,250
+make the synthetic data look realistic,
+
+107
+00:03:34,020 --> 00:03:34,710
+and if you do a sloppy
+
+108
+00:03:35,120 --> 00:03:36,200
+job in terms of how
+
+109
+00:03:36,250 --> 00:03:38,910
+you create the synthetic data then it actually won't work well.
+
+110
+00:03:39,620 --> 00:03:40,600
+But if you look at
+
+111
+00:03:40,790 --> 00:03:43,940
+the synthetic data looks remarkably similar to the real data.
+
+112
+00:03:45,120 --> 00:03:46,850
+And so by using synthetic data
+
+113
+00:03:47,340 --> 00:03:48,550
+you have essentially an unlimited
+
+114
+00:03:48,990 --> 00:03:50,970
+supply of training examples for
+
+115
+00:03:51,310 --> 00:03:53,060
+artificial training synthesis And
+
+116
+00:03:53,150 --> 00:03:54,110
+so, if you use this
+
+117
+00:03:54,330 --> 00:03:55,820
+source synthetic data, you have
+
+118
+00:03:56,150 --> 00:03:58,100
+essentially unlimited supply of
+
+119
+00:03:58,560 --> 00:04:00,000
+label data to create
+
+120
+00:04:00,140 --> 00:04:01,610
+a improvised learning algorithm
+
+121
+00:04:02,300 --> 00:04:03,990
+for the character recognition problem.
+
+122
+00:04:05,120 --> 00:04:06,540
+So this is an example of
+
+123
+00:04:07,000 --> 00:04:08,500
+artificial data synthesis where youre
+
+124
+00:04:09,040 --> 00:04:10,870
+basically creating new data from
+
+125
+00:04:11,080 --> 00:04:13,780
+scratch, you just generating brand new images from scratch.
+
+126
+00:04:14,880 --> 00:04:16,450
+The other main approach to artificial data
+
+127
+00:04:16,710 --> 00:04:18,210
+synthesis is where you
+
+128
+00:04:18,370 --> 00:04:19,610
+take a examples that you
+
+129
+00:04:19,740 --> 00:04:20,780
+currently have, that we take
+
+130
+00:04:21,020 --> 00:04:22,430
+a real example, maybe from
+
+131
+00:04:22,700 --> 00:04:24,130
+real image, and you create
+
+132
+00:04:24,770 --> 00:04:26,130
+additional data, so as to
+
+133
+00:04:26,380 --> 00:04:27,900
+amplify your training set.
+
+134
+00:04:28,070 --> 00:04:28,810
+So here is an image of a compared
+
+135
+00:04:28,910 --> 00:04:30,490
+to a from a real image,
+
+136
+00:04:31,410 --> 00:04:32,550
+not a synthesized image, and
+
+137
+00:04:32,630 --> 00:04:33,790
+I have overlayed this with
+
+138
+00:04:33,880 --> 00:04:35,750
+the grid lines just for the purpose of illustration.
+
+139
+00:04:36,430 --> 00:04:36,880
+Actually have these ----.
+
+140
+00:04:36,970 --> 00:04:39,030
+So what you
+
+141
+00:04:39,100 --> 00:04:40,110
+can do is then take this
+
+142
+00:04:40,480 --> 00:04:41,500
+alphabet here, take this image
+
+143
+00:04:42,240 --> 00:04:43,760
+and introduce artificial warpings[sp?]
+
+144
+00:04:44,290 --> 00:04:45,810
+or artificial distortions into the
+
+145
+00:04:46,040 --> 00:04:47,030
+image so they can
+
+146
+00:04:47,220 --> 00:04:48,240
+take the image a and turn
+
+147
+00:04:48,430 --> 00:04:50,060
+that into 16 new examples.
+
+148
+00:04:51,110 --> 00:04:52,000
+So in this way you can
+
+149
+00:04:52,450 --> 00:04:53,740
+take a small label training set
+
+150
+00:04:54,090 --> 00:04:55,360
+and amplify your training set
+
+151
+00:04:56,180 --> 00:04:57,190
+to suddenly get a lot
+
+152
+00:04:57,300 --> 00:05:00,020
+more examples, all of it.
+
+153
+00:05:01,210 --> 00:05:02,360
+Again, in order to do
+
+154
+00:05:02,560 --> 00:05:03,940
+this for application, it does
+
+155
+00:05:04,120 --> 00:05:05,060
+take thought and it does
+
+156
+00:05:05,140 --> 00:05:06,270
+take insight to figure out
+
+157
+00:05:06,430 --> 00:05:07,840
+what our reasonable sets of
+
+158
+00:05:08,420 --> 00:05:09,460
+distortions, or whether these
+
+159
+00:05:09,720 --> 00:05:11,000
+are ways that amplify and multiply
+
+160
+00:05:11,470 --> 00:05:12,760
+your training set, and for
+
+161
+00:05:13,070 --> 00:05:15,130
+the specific example of
+
+162
+00:05:15,260 --> 00:05:17,170
+character recognition, introducing these
+
+163
+00:05:17,480 --> 00:05:18,310
+warping seems like a natural
+
+164
+00:05:18,780 --> 00:05:19,910
+choice, but for a
+
+165
+00:05:20,090 --> 00:05:21,970
+different learning machine application, there may
+
+166
+00:05:22,080 --> 00:05:24,180
+be different the distortions that might make more sense.
+
+167
+00:05:24,860 --> 00:05:25,600
+Let me just show one example
+
+168
+00:05:26,180 --> 00:05:28,750
+from the totally different domain of speech recognition.
+
+169
+00:05:30,230 --> 00:05:31,480
+So the speech recognition, let's say
+
+170
+00:05:31,580 --> 00:05:33,450
+you have audio clips and you
+
+171
+00:05:33,600 --> 00:05:35,010
+want to learn from the audio
+
+172
+00:05:35,350 --> 00:05:37,240
+clip to recognize what were
+
+173
+00:05:37,460 --> 00:05:38,780
+the words spoken in that clip.
+
+174
+00:05:39,510 --> 00:05:41,340
+So let's see how one labeled training example.
+
+175
+00:05:42,290 --> 00:05:43,190
+So let's say you have one
+
+176
+00:05:43,400 --> 00:05:45,000
+labeled training example, of someone
+
+177
+00:05:45,330 --> 00:05:46,660
+saying a few specific words.
+
+178
+00:05:46,860 --> 00:05:48,720
+So let's play that audio clip here.
+
+179
+00:05:49,150 --> 00:05:51,230
+0 -1-2-3-4-5.
+
+180
+00:05:51,570 --> 00:05:53,810
+Alright, so someone
+
+181
+00:05:54,220 --> 00:05:55,110
+counting from 0 to 5,
+
+182
+00:05:55,450 --> 00:05:57,180
+and so you want to
+
+183
+00:05:57,290 --> 00:05:58,460
+try to apply a learning algorithm
+
+184
+00:05:59,380 --> 00:06:01,320
+to try to recognize the words said in that.
+
+185
+00:06:02,040 --> 00:06:04,030
+So, how can we amplify the data set?
+
+186
+00:06:04,390 --> 00:06:05,340
+Well, one thing we do is
+
+187
+00:06:06,020 --> 00:06:09,180
+introduce additional audio distortions into the data set.
+
+188
+00:06:09,970 --> 00:06:10,960
+So here I'm going to
+
+189
+00:06:11,640 --> 00:06:14,700
+add background sounds to simulate a bad cell phone connection.
+
+190
+00:06:15,360 --> 00:06:16,800
+When you hear beeping sounds, that's
+
+191
+00:06:16,980 --> 00:06:17,710
+actually part of the audio
+
+192
+00:06:17,740 --> 00:06:20,350
+track, that's nothing wrong with the speakers, I'm going to play this now.
+
+193
+00:06:20,580 --> 00:06:20,580
+0-1-2-3-4-5.
+
+194
+00:06:21,380 --> 00:06:22,260
+Right, so you can listen
+
+195
+00:06:22,640 --> 00:06:24,890
+to that sort of audio clip and
+
+196
+00:06:25,720 --> 00:06:28,600
+recognize the sounds,
+
+197
+00:06:28,960 --> 00:06:30,800
+that seems like another useful training
+
+198
+00:06:31,370 --> 00:06:33,230
+example to have, here's another example, noisy background.
+
+199
+00:06:34,890 --> 00:06:36,870
+Zero, one, two, three
+
+200
+00:06:37,560 --> 00:06:39,060
+four five you know
+
+201
+00:06:39,090 --> 00:06:40,280
+of cars driving past, people walking
+
+202
+00:06:40,580 --> 00:06:42,200
+in the background, here's another
+
+203
+00:06:42,450 --> 00:06:43,880
+one, so taking the original
+
+204
+00:06:44,430 --> 00:06:45,980
+clean audio clip so
+
+205
+00:06:46,090 --> 00:06:47,810
+taking the clean audio of
+
+206
+00:06:47,990 --> 00:06:48,960
+someone saying 0 1 2 3
+
+207
+00:06:49,090 --> 00:06:50,490
+4 5 we can then automatically
+
+208
+00:06:51,790 --> 00:06:54,090
+synthesize these additional training
+
+209
+00:06:54,470 --> 00:06:55,850
+examples and thus amplify
+
+210
+00:06:56,410 --> 00:06:57,860
+one training example into maybe four different training examples.
+
+211
+00:07:00,110 --> 00:07:00,940
+So let me play this final
+
+212
+00:07:01,300 --> 00:07:03,180
+example, as well.
+
+213
+00:07:03,340 --> 00:07:07,180
+0-1 3-4-5 So by
+
+214
+00:07:07,530 --> 00:07:08,510
+taking just one labelled example,
+
+215
+00:07:09,000 --> 00:07:10,260
+we have to go through the effort
+
+216
+00:07:10,360 --> 00:07:11,760
+to collect just one labelled example
+
+217
+00:07:11,950 --> 00:07:13,270
+fall of the 01205, and by
+
+218
+00:07:14,140 --> 00:07:16,520
+synthesizing additional distortions,
+
+219
+00:07:17,290 --> 00:07:18,560
+by introducing different background sounds,
+
+220
+00:07:19,000 --> 00:07:20,240
+we've now multiplied this one
+
+221
+00:07:20,370 --> 00:07:21,810
+example into many more examples.
+
+222
+00:07:23,420 --> 00:07:24,480
+Much work by just automatically
+
+223
+00:07:25,270 --> 00:07:27,090
+adding these different background sounds
+
+224
+00:07:27,680 --> 00:07:30,510
+to the clean audio Just
+
+225
+00:07:30,740 --> 00:07:31,980
+one word of warning about synthesizing
+
+226
+00:07:33,190 --> 00:07:35,220
+data by introducing distortions: if
+
+227
+00:07:35,310 --> 00:07:36,630
+you try to do this
+
+228
+00:07:36,810 --> 00:07:38,580
+yourself, the distortions you
+
+229
+00:07:39,020 --> 00:07:40,300
+introduce should be representative the source
+
+230
+00:07:40,660 --> 00:07:42,010
+of noises, or distortions, that
+
+231
+00:07:42,110 --> 00:07:43,680
+you might see in the test set.
+
+232
+00:07:44,010 --> 00:07:45,350
+So, for the character recognition example,
+
+233
+00:07:45,930 --> 00:07:47,230
+you know, the working things
+
+234
+00:07:47,440 --> 00:07:48,620
+begin introduced are actually kind
+
+235
+00:07:48,770 --> 00:07:49,980
+of reasonable, because an image
+
+236
+00:07:50,340 --> 00:07:51,510
+A that looks like that, that's,
+
+237
+00:07:52,000 --> 00:07:53,020
+could be an image that
+
+238
+00:07:53,210 --> 00:07:55,170
+we could actually see in a test set.Reflect
+
+239
+00:07:55,370 --> 00:07:57,180
+a fact And, you know, that
+
+240
+00:07:57,380 --> 00:08:00,200
+image on the upper-right, that
+
+241
+00:08:00,350 --> 00:08:01,800
+could be an image that we could imagine seeing.
+
+242
+00:08:03,280 --> 00:08:04,570
+And for audio, well, we do
+
+243
+00:08:04,740 --> 00:08:06,560
+wanna recognize speech, even against
+
+244
+00:08:06,970 --> 00:08:07,990
+a bad self internal connection, against
+
+245
+00:08:08,480 --> 00:08:09,440
+different types of background noise, and
+
+246
+00:08:09,590 --> 00:08:10,920
+so for the audio, we're again
+
+247
+00:08:11,230 --> 00:08:12,800
+synthesizing examples are actually
+
+248
+00:08:13,530 --> 00:08:14,770
+representative of the sorts of
+
+249
+00:08:14,850 --> 00:08:15,830
+examples that we want to
+
+250
+00:08:15,990 --> 00:08:17,360
+classify, that we want to recognize correctly.
+
+251
+00:08:18,770 --> 00:08:20,660
+In contrast, usually it does
+
+252
+00:08:20,770 --> 00:08:21,940
+not help perhaps you actually
+
+253
+00:08:22,170 --> 00:08:23,760
+a meaning as noise to your data.
+
+254
+00:08:24,420 --> 00:08:25,170
+I'm not sure you can see
+
+255
+00:08:25,440 --> 00:08:26,400
+this, but what we've done
+
+256
+00:08:26,620 --> 00:08:28,050
+here is taken the image, and
+
+257
+00:08:28,210 --> 00:08:29,540
+for each pixel, in each
+
+258
+00:08:29,720 --> 00:08:30,710
+of these 4 images, has just
+
+259
+00:08:30,990 --> 00:08:32,970
+added some random Gaussian noise to each pixel.
+
+260
+00:08:33,240 --> 00:08:34,690
+To each pixel, is the
+
+261
+00:08:35,060 --> 00:08:36,370
+pixel brightness, it would
+
+262
+00:08:36,500 --> 00:08:38,880
+just add some, you know, maybe Gaussian random noise to each pixel.
+
+263
+00:08:39,360 --> 00:08:40,940
+So it's just a totally meaningless noise, right?
+
+264
+00:08:41,650 --> 00:08:43,280
+And so, unless you're expecting
+
+265
+00:08:43,800 --> 00:08:45,510
+to see these sorts of pixel
+
+266
+00:08:45,910 --> 00:08:46,830
+wise noise in your test
+
+267
+00:08:46,910 --> 00:08:48,190
+set, this sort of
+
+268
+00:08:48,660 --> 00:08:51,540
+purely random meaningless noise is less likely to be useful.
+
+269
+00:08:52,880 --> 00:08:53,750
+But the process of artificial
+
+270
+00:08:54,250 --> 00:08:55,570
+data synthesis it is you
+
+271
+00:08:55,640 --> 00:08:56,660
+know a little bit of
+
+272
+00:08:56,710 --> 00:08:57,850
+an art as well and sometimes
+
+273
+00:08:58,140 --> 00:09:00,250
+you just have to try it and see if it works.
+
+274
+00:09:01,280 --> 00:09:02,060
+But if you're trying to
+
+275
+00:09:02,140 --> 00:09:03,170
+decide what sorts of distortions
+
+276
+00:09:03,870 --> 00:09:04,720
+to add, you know, do
+
+277
+00:09:04,820 --> 00:09:06,260
+think about what other meaningful
+
+278
+00:09:06,670 --> 00:09:08,180
+distortions you might add that
+
+279
+00:09:08,660 --> 00:09:09,720
+will cause you to generate additional
+
+280
+00:09:10,110 --> 00:09:11,370
+training examples that are at
+
+281
+00:09:11,880 --> 00:09:13,410
+least somewhat representative of the
+
+282
+00:09:13,480 --> 00:09:15,830
+sorts of images you expect to see in your test sets.
+
+283
+00:09:18,100 --> 00:09:19,000
+Finally, to wrap up this
+
+284
+00:09:19,150 --> 00:09:19,920
+video, I just wanna say
+
+285
+00:09:20,140 --> 00:09:21,420
+a couple of words, more about
+
+286
+00:09:21,790 --> 00:09:23,360
+this idea of getting loss
+
+287
+00:09:23,600 --> 00:09:25,610
+of data via artificial data synthesis.
+
+288
+00:09:26,920 --> 00:09:28,780
+As always, before expending a lot
+
+289
+00:09:29,170 --> 00:09:30,280
+of effort, you know, figuring out
+
+290
+00:09:30,450 --> 00:09:32,020
+how to create artificial training
+
+291
+00:09:33,060 --> 00:09:34,140
+examples, it's often a good
+
+292
+00:09:34,220 --> 00:09:35,310
+practice is to make sure
+
+293
+00:09:35,650 --> 00:09:36,540
+that you really have a low biased
+
+294
+00:09:36,920 --> 00:09:38,350
+crossfire, and having a
+
+295
+00:09:38,460 --> 00:09:40,320
+lot more training data will be of help.
+
+296
+00:09:41,010 --> 00:09:41,840
+And standard way to do
+
+297
+00:09:41,970 --> 00:09:42,810
+this is to plot the learning
+
+298
+00:09:43,030 --> 00:09:43,970
+curves, and make sure that
+
+299
+00:09:44,130 --> 00:09:44,920
+you only have a low
+
+300
+00:09:45,000 --> 00:09:47,470
+as well, high variance falsifier.
+
+301
+00:09:47,760 --> 00:09:48,650
+Or if you don't have a low
+
+302
+00:09:48,720 --> 00:09:50,090
+bias falsifier, you know,
+
+303
+00:09:50,160 --> 00:09:51,040
+one other thing that's worth trying
+
+304
+00:09:51,450 --> 00:09:53,270
+is to keep increasing the number
+
+305
+00:09:53,540 --> 00:09:54,440
+of features that your classifier
+
+306
+00:09:54,600 --> 00:09:55,650
+has, increasing the number of
+
+307
+00:09:55,740 --> 00:09:56,710
+hidden units in your network,
+
+308
+00:09:57,180 --> 00:09:58,470
+saying, until you actually have a
+
+309
+00:09:58,540 --> 00:10:00,000
+low bias falsifier, and only
+
+310
+00:10:00,310 --> 00:10:01,820
+then, should you put
+
+311
+00:10:02,040 --> 00:10:04,020
+the effort into creating a
+
+312
+00:10:04,260 --> 00:10:05,760
+large, artificial training set, so
+
+313
+00:10:05,860 --> 00:10:06,660
+what you really want to avoid
+
+314
+00:10:06,870 --> 00:10:07,930
+is to, you know, spend
+
+315
+00:10:08,110 --> 00:10:08,890
+a whole week or spend a few
+
+316
+00:10:09,090 --> 00:10:10,370
+months figuring out how
+
+317
+00:10:10,540 --> 00:10:11,720
+to get a great artificially
+
+318
+00:10:12,450 --> 00:10:13,260
+synthesized data set.
+
+319
+00:10:13,820 --> 00:10:15,520
+Only to realize afterward, that,
+
+320
+00:10:15,760 --> 00:10:17,410
+you know, your learning algorithm, performance
+
+321
+00:10:18,030 --> 00:10:20,730
+doesn't improve that much, even when you're given a huge training set.
+
+322
+00:10:22,190 --> 00:10:23,060
+So that's about my usual advice
+
+323
+00:10:23,420 --> 00:10:24,690
+about of a testing that
+
+324
+00:10:25,030 --> 00:10:26,290
+you really can make use
+
+325
+00:10:26,530 --> 00:10:27,760
+of a large training set before
+
+326
+00:10:28,080 --> 00:10:30,530
+spending a lot of effort going out to get that large training set.
+
+327
+00:10:31,960 --> 00:10:33,280
+Second is, when i'm working
+
+328
+00:10:33,590 --> 00:10:35,250
+on machine learning problems, one question
+
+329
+00:10:35,690 --> 00:10:37,520
+I often ask the team
+
+330
+00:10:37,880 --> 00:10:39,210
+I'm working with, often ask my
+
+331
+00:10:39,430 --> 00:10:40,550
+students, which is, how much work
+
+332
+00:10:40,620 --> 00:10:42,810
+would it be to get 10 times as much date as we currently had.
+
+333
+00:10:46,720 --> 00:10:47,850
+When I face a new machine
+
+334
+00:10:48,200 --> 00:10:49,760
+learning application very often I
+
+335
+00:10:49,980 --> 00:10:50,940
+will sit down with a team
+
+336
+00:10:51,210 --> 00:10:52,440
+and ask exactly this question,
+
+337
+00:10:52,920 --> 00:10:53,870
+I've asked this question over and
+
+338
+00:10:53,970 --> 00:10:55,870
+over and over and I've
+
+339
+00:10:56,000 --> 00:10:57,540
+been very surprised how often
+
+340
+00:10:58,390 --> 00:10:59,660
+this answer has been that.
+
+341
+00:11:00,010 --> 00:11:01,070
+You know, it's really not that hard,
+
+342
+00:11:01,680 --> 00:11:02,670
+maybe a few days of work
+
+343
+00:11:02,930 --> 00:11:03,930
+at most, to get ten times
+
+344
+00:11:04,250 --> 00:11:05,300
+as much data as we currently
+
+345
+00:11:05,450 --> 00:11:06,650
+have for a machine
+
+346
+00:11:06,810 --> 00:11:08,820
+running application and very
+
+347
+00:11:09,080 --> 00:11:09,830
+often if you can get
+
+348
+00:11:09,950 --> 00:11:11,030
+ten times as much data there
+
+349
+00:11:11,270 --> 00:11:13,680
+will be a way to make your algorithm do much better.
+
+350
+00:11:14,060 --> 00:11:15,040
+So, you know, if you
+
+351
+00:11:15,260 --> 00:11:16,510
+ever join the product team
+
+352
+00:11:17,820 --> 00:11:18,880
+working on some machine learning
+
+353
+00:11:19,110 --> 00:11:20,430
+application product this is
+
+354
+00:11:20,550 --> 00:11:21,710
+a very good questions ask yourself
+
+355
+00:11:22,290 --> 00:11:23,500
+ask the team don't be
+
+356
+00:11:23,650 --> 00:11:25,120
+too surprised if after a
+
+357
+00:11:25,240 --> 00:11:26,530
+few minutes of brainstorming if your
+
+358
+00:11:26,650 --> 00:11:27,520
+team comes up with a
+
+359
+00:11:27,660 --> 00:11:28,950
+way to get literally ten
+
+360
+00:11:29,200 --> 00:11:30,250
+times this much data, in
+
+361
+00:11:30,380 --> 00:11:31,320
+which case, I think you would
+
+362
+00:11:31,430 --> 00:11:32,330
+be a hero to that team,
+
+363
+00:11:32,940 --> 00:11:34,000
+because with 10 times as
+
+364
+00:11:34,240 --> 00:11:35,360
+much data, I think you'll really
+
+365
+00:11:35,450 --> 00:11:38,460
+get much better performance, just from learning from so much data.
+
+366
+00:11:39,650 --> 00:11:44,500
+So there are several waysand
+
+367
+00:11:47,450 --> 00:11:48,510
+that comprised both the ideas
+
+368
+00:11:48,970 --> 00:11:50,440
+of generating data from
+
+369
+00:11:50,640 --> 00:11:53,050
+scratch using random fonts and so on.
+
+370
+00:11:53,570 --> 00:11:54,430
+As well as the second idea
+
+371
+00:11:54,840 --> 00:11:56,600
+of taking an existing example and
+
+372
+00:11:56,670 --> 00:11:58,100
+and introducing distortions that amplify
+
+373
+00:11:58,280 --> 00:12:00,910
+to enlarge the training set A
+
+374
+00:12:01,090 --> 00:12:02,150
+couple of other examples of
+
+375
+00:12:02,280 --> 00:12:03,130
+ways to get a lot more
+
+376
+00:12:03,270 --> 00:12:04,610
+data are to collect the
+
+377
+00:12:04,670 --> 00:12:06,600
+data or to label them yourself.
+
+378
+00:12:07,600 --> 00:12:09,090
+So one useful calculation that
+
+379
+00:12:09,210 --> 00:12:11,580
+I often do is, you know,
+
+380
+00:12:11,780 --> 00:12:13,320
+how many minutes, how many
+
+381
+00:12:13,520 --> 00:12:15,140
+hours does it take to
+
+382
+00:12:15,350 --> 00:12:16,420
+get a certain number of
+
+383
+00:12:16,610 --> 00:12:17,780
+examples, so actually sit down and
+
+384
+00:12:17,900 --> 00:12:19,410
+figure out, you know, suppose it
+
+385
+00:12:19,550 --> 00:12:21,830
+takes me ten seconds to
+
+386
+00:12:22,060 --> 00:12:23,990
+label one example then
+
+387
+00:12:24,120 --> 00:12:25,820
+and, suppose that, for
+
+388
+00:12:26,190 --> 00:12:29,050
+our application, currently we
+
+389
+00:12:29,190 --> 00:12:31,500
+have 1000 labeled examples examples
+
+390
+00:12:31,620 --> 00:12:32,730
+so ten times as
+
+391
+00:12:32,860 --> 00:12:34,090
+much of that would be
+
+392
+00:12:34,200 --> 00:12:35,940
+if n were equal to ten thousand.
+
+393
+00:12:37,440 --> 00:12:40,260
+A second way to
+
+394
+00:12:40,400 --> 00:12:41,530
+get a lot of data is
+
+395
+00:12:41,800 --> 00:12:43,540
+to just collect the data and you label it yourself.
+
+396
+00:12:44,510 --> 00:12:45,380
+So what I mean by this is
+
+397
+00:12:45,690 --> 00:12:46,970
+I will often set down and
+
+398
+00:12:47,240 --> 00:12:48,570
+do a calculation to figure
+
+399
+00:12:48,950 --> 00:12:50,190
+out how much time, you
+
+400
+00:12:50,350 --> 00:12:51,140
+know just like how many hours
+
+401
+00:12:52,640 --> 00:12:54,000
+will it take, how many
+
+402
+00:12:54,200 --> 00:12:55,130
+hours or how many days will
+
+403
+00:12:55,230 --> 00:12:56,890
+it take for me or
+
+404
+00:12:57,020 --> 00:12:58,400
+for someone else to just sit
+
+405
+00:12:58,640 --> 00:12:59,870
+down and collect ten times
+
+406
+00:13:00,190 --> 00:13:01,490
+as much data, as we have
+
+407
+00:13:01,800 --> 00:13:03,560
+currently, by collecting the data ourselves and labeling them ourselves.
+
+408
+00:13:05,260 --> 00:13:06,550
+So, for example, that, for
+
+409
+00:13:06,630 --> 00:13:08,200
+our machine learning application, currently
+
+410
+00:13:08,690 --> 00:13:10,180
+we have 1,000 examples, so M 1,000.
+
+411
+00:13:12,010 --> 00:13:12,750
+That what we do is sit
+
+412
+00:13:12,870 --> 00:13:14,500
+down and ask, how long does
+
+413
+00:13:14,720 --> 00:13:16,930
+it take me really to collect and label one example.
+
+414
+00:13:17,340 --> 00:13:18,480
+And sometimes maybe it will
+
+415
+00:13:18,600 --> 00:13:19,510
+take you, you know ten
+
+416
+00:13:19,790 --> 00:13:22,100
+seconds to label
+
+417
+00:13:23,310 --> 00:13:25,120
+one new example, and so
+
+418
+00:13:25,520 --> 00:13:27,720
+if I want 10 X as many examples, I'd do a calculation.
+
+419
+00:13:28,360 --> 00:13:30,400
+If it takes me 10 seconds to get one training example.
+
+420
+00:13:31,370 --> 00:13:32,340
+If I wanted to get 10
+
+421
+00:13:32,580 --> 00:13:35,320
+times as much data, then I need 10,000 examples.
+
+422
+00:13:35,830 --> 00:13:38,470
+So I do the calculation, how long
+
+423
+00:13:38,770 --> 00:13:40,380
+is it gonna take to label,
+
+424
+00:13:40,840 --> 00:13:42,640
+to manually label 10,000 examples,
+
+425
+00:13:43,340 --> 00:13:45,280
+if it takes me 10 seconds to label 1 example.
+
+426
+00:13:47,070 --> 00:13:47,940
+So when you do this calculation,
+
+427
+00:13:48,840 --> 00:13:49,920
+often I've seen many you
+
+428
+00:13:50,390 --> 00:13:51,780
+would be surprised, you know,
+
+429
+00:13:51,870 --> 00:13:53,140
+how little, or sometimes a
+
+430
+00:13:53,240 --> 00:13:54,730
+few days at work, sometimes a
+
+431
+00:13:54,880 --> 00:13:55,560
+small number of days of work,
+
+432
+00:13:55,780 --> 00:13:57,180
+well I've seen many teams be very
+
+433
+00:13:57,500 --> 00:13:59,160
+surprised that sometimes how
+
+434
+00:13:59,340 --> 00:14:00,280
+little work it could be,
+
+435
+00:14:00,410 --> 00:14:01,200
+to just get a lot more
+
+436
+00:14:01,370 --> 00:14:02,510
+data, and let that be
+
+437
+00:14:02,580 --> 00:14:03,470
+a way to give your learning
+
+438
+00:14:03,580 --> 00:14:04,310
+app to give you a huge boost
+
+439
+00:14:04,640 --> 00:14:06,350
+in performance, and necessarily, you
+
+440
+00:14:06,450 --> 00:14:07,550
+know, sometimes when you've just
+
+441
+00:14:07,790 --> 00:14:08,900
+managed to do this, you
+
+442
+00:14:09,190 --> 00:14:10,780
+will be a hero and whatever product
+
+443
+00:14:11,360 --> 00:14:12,520
+development, whatever team you're working
+
+444
+00:14:12,910 --> 00:14:14,150
+on, because this can
+
+445
+00:14:14,320 --> 00:14:15,760
+be a great way to get much better performance.
+
+446
+00:14:17,650 --> 00:14:19,490
+Third and finally, one sometimes
+
+447
+00:14:20,020 --> 00:14:21,230
+good way to get a
+
+448
+00:14:21,450 --> 00:14:22,650
+lot of data is to use
+
+449
+00:14:23,080 --> 00:14:24,350
+what's now called crowd sourcing.
+
+450
+00:14:25,280 --> 00:14:26,350
+So today, there are a
+
+451
+00:14:26,520 --> 00:14:27,270
+few websites or a few
+
+452
+00:14:27,460 --> 00:14:29,520
+services that allow you
+
+453
+00:14:29,920 --> 00:14:32,210
+to hire people on
+
+454
+00:14:32,350 --> 00:14:33,410
+the web to, you know, fairly
+
+455
+00:14:33,730 --> 00:14:36,140
+inexpensively label large training sets for you.
+
+456
+00:14:36,810 --> 00:14:37,870
+So this idea of crowd
+
+457
+00:14:38,190 --> 00:14:39,460
+sourcing, or crowd sourced
+
+458
+00:14:39,950 --> 00:14:41,390
+data labeling, is something
+
+459
+00:14:41,810 --> 00:14:43,180
+that has, is obviously, like
+
+460
+00:14:43,340 --> 00:14:45,200
+an entire academic literature,
+
+461
+00:14:45,660 --> 00:14:47,040
+has some of it's own complications and
+
+462
+00:14:47,210 --> 00:14:49,390
+so on, pertaining to labeler reliability.
+
+463
+00:14:50,440 --> 00:14:51,470
+Maybe, you know, hundreds of thousands
+
+464
+00:14:51,860 --> 00:14:53,420
+of labelers, around the
+
+465
+00:14:53,580 --> 00:14:55,530
+world, working fairly inexpensively to
+
+466
+00:14:55,630 --> 00:14:56,810
+help label data for you,
+
+467
+00:14:57,030 --> 00:14:58,580
+and that I've just had mentioned,
+
+468
+00:14:58,930 --> 00:15:00,120
+there's this one alternative as well.
+
+469
+00:15:00,390 --> 00:15:02,170
+And probably Amazon Mechanical Turk
+
+470
+00:15:02,510 --> 00:15:03,750
+systems is probably the most
+
+471
+00:15:03,900 --> 00:15:05,860
+popular crowd sourcing option right now.
+
+472
+00:15:06,860 --> 00:15:08,070
+This is often quite a
+
+473
+00:15:08,220 --> 00:15:10,040
+bit of work to
+
+474
+00:15:10,190 --> 00:15:10,940
+get to work, if you want
+
+475
+00:15:11,150 --> 00:15:12,520
+to get very high quality labels,
+
+476
+00:15:12,780 --> 00:15:14,160
+but is sometimes an
+
+477
+00:15:14,240 --> 00:15:15,760
+option worth considering as well.
+
+478
+00:15:17,330 --> 00:15:18,870
+If you want to try to
+
+479
+00:15:19,320 --> 00:15:21,000
+hire many people, fairly inexpensively
+
+480
+00:15:21,810 --> 00:15:24,220
+on the web, our labels launch miles of data for you.
+
+481
+00:15:26,320 --> 00:15:27,570
+So this video, we
+
+482
+00:15:27,660 --> 00:15:28,840
+talked about the idea of
+
+483
+00:15:29,100 --> 00:15:30,870
+artificial data synthesis of
+
+484
+00:15:31,120 --> 00:15:32,440
+either creating new data
+
+485
+00:15:32,750 --> 00:15:34,400
+from scratch, looking, using
+
+486
+00:15:34,640 --> 00:15:35,400
+the ramming funds as an example,
+
+487
+00:15:35,830 --> 00:15:37,710
+or by amplifying an
+
+488
+00:15:37,790 --> 00:15:38,980
+existing training set, by taking
+
+489
+00:15:39,420 --> 00:15:41,340
+existing label examples and
+
+490
+00:15:41,560 --> 00:15:42,980
+introducing distortions to it,
+
+491
+00:15:43,240 --> 00:15:44,880
+to sort of create extra label examples.
+
+492
+00:15:46,010 --> 00:15:47,450
+And finally, one thing that
+
+493
+00:15:47,630 --> 00:15:48,810
+I hope you remember from this
+
+494
+00:15:49,120 --> 00:15:49,970
+video this idea of if
+
+495
+00:15:50,540 --> 00:15:51,540
+you are facing a machine learning
+
+496
+00:15:51,830 --> 00:15:54,350
+problem, it is often worth doing two things.
+
+497
+00:15:54,660 --> 00:15:55,830
+One just a sanity check,
+
+498
+00:15:56,160 --> 00:15:58,600
+with learning curves, that having more data would help.
+
+499
+00:15:59,520 --> 00:16:00,340
+And second, assuming that that's the case,
+
+500
+00:16:00,730 --> 00:16:01,780
+I will often seat down and
+
+501
+00:16:01,850 --> 00:16:03,670
+ask yourself seriously: what would
+
+502
+00:16:04,050 --> 00:16:05,150
+it take to get ten times as
+
+503
+00:16:05,260 --> 00:16:06,510
+much creative data as you
+
+504
+00:16:06,630 --> 00:16:08,450
+currently have, and not always,
+
+505
+00:16:08,960 --> 00:16:10,440
+but sometimes, you may be
+
+506
+00:16:10,640 --> 00:16:12,310
+surprised by how easy that
+
+507
+00:16:12,580 --> 00:16:13,990
+turns out to be, maybe
+
+508
+00:16:14,060 --> 00:16:15,020
+a few days, a few weeks at
+
+509
+00:16:15,150 --> 00:16:16,160
+work, and that can be
+
+510
+00:16:16,260 --> 00:16:18,700
+a great way to give your learning algorithm a huge boost in performance

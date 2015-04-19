@@ -1,0 +1,1525 @@
+
+1
+00:00:00,000 --> 00:00:04,005
+This sequence of videos are going to take
+it to the next level with Hash tables and
+
+2
+00:00:04,005 --> 00:00:07,082
+understand more deeply the conditions
+under which they perform well, amazingly
+
+3
+00:00:07,082 --> 00:00:11,040
+well in fact As you know, we've constant
+time performance for all of their
+
+4
+00:00:11,040 --> 00:00:15,017
+operations. The main point of this first
+video is to explain in sense in which
+
+5
+00:00:15,017 --> 00:00:18,070
+every hash function has its own
+[inaudible]. A pathological data set for
+
+6
+00:00:18,070 --> 00:00:22,037
+it which then motivates immediate
+[inaudible] carefully with mathematics in
+
+7
+00:00:22,037 --> 00:00:27,024
+the subsequent videos. So, a quick review
+So remember that the whole purpose of a
+
+8
+00:00:27,024 --> 00:00:31,011
+hash table is to enable extremely fast
+look ups, ideally constant time loo kups.
+
+9
+00:00:31,012 --> 00:00:35,010
+Now, of course, to have anything to look
+up, you have to also allow insertions. So
+
+10
+00:00:35,010 --> 00:00:39,028
+all hash tables are going to export those
+two operations And then, sometimes, a hash
+
+11
+00:00:39,028 --> 00:00:43,041
+table also allows you to delete elements
+from it. That depends a little bit on the
+
+12
+00:00:43,041 --> 00:00:47,014
+underlying implementation. So certainly
+when you have it implemented using
+
+13
+00:00:47,014 --> 00:00:50,092
+chaining, that's when you have one linked
+list per bucket, it's very easy to
+
+14
+00:00:50,092 --> 00:00:54,075
+implement deletion. Sometimes, with open
+addressing, it's tricky enough, you're
+
+15
+00:00:54,075 --> 00:00:59,012
+just gonna wind up punting on deletion. So
+when we first started talking about hash
+
+16
+00:00:59,012 --> 00:01:03,049
+tables, I encouraged you to think about
+them logically. Much the way you do as an
+
+17
+00:01:03,049 --> 00:01:07,086
+array, except instead of being indexed
+just by the positions of an array, it's
+
+18
+00:01:07,086 --> 00:01:12,023
+indexed by the keys that you're storing.
+So just like an array via random access
+
+19
+00:01:12,023 --> 00:01:16,038
+supports constant time look up, so does a
+hash table. There was some fine print
+
+20
+00:01:16,038 --> 00:01:20,059
+however with hash tables. Remember there
+were these two caveats. So the first one
+
+21
+00:01:20,059 --> 00:01:24,069
+is that the hash table better be properly
+implemented And this means a couple of
+
+22
+00:01:24,069 --> 00:01:28,044
+things. So, one thing that it means is
+that the number of buckets that are being
+
+23
+00:01:28,044 --> 00:01:32,028
+[inaudible] with the number of things that
+you're storing in the Hash table, we'll
+
+24
+00:01:32,028 --> 00:01:35,084
+talk more about that in a second. The
+second thing it means is you better be
+
+25
+00:01:35,084 --> 00:01:39,045
+using a descent Hash function. So we
+discussed in a previous video the perils
+
+26
+00:01:39,045 --> 00:01:43,029
+of bad Hash functions, and it will be even
+more stringent with our demands on Hash
+
+27
+00:01:43,029 --> 00:01:46,070
+functions in the videos to come. The
+second [inaudible] which I'll try to
+
+28
+00:01:46,070 --> 00:01:50,041
+demystify in a few minutes is that you
+better have non-pathological data. So, in
+
+29
+00:01:50,041 --> 00:01:53,099
+some sense, wherever your Hash table
+described an item there is a path. To a
+
+30
+00:01:53,099 --> 00:01:58,072
+data set that will render its performance
+to be quite poor. So in the video on
+
+31
+00:01:58,072 --> 00:02:03,008
+implementation detail we also discussed
+how hash tables inevitably have to deal
+
+32
+00:02:03,008 --> 00:02:07,017
+with collisions. So you start seeing
+collisions way before your hash table's
+
+33
+00:02:07,017 --> 00:02:11,032
+start filling up so you need to have some
+sort of method for addressing two
+
+34
+00:02:11,032 --> 00:02:15,084
+different Ts that map to exactly the same
+bucket. Which one do you put there? Do you
+
+35
+00:02:15,084 --> 00:02:20,020
+put both there or what? So there's two
+popular approaches let me remind you what
+
+36
+00:02:20,020 --> 00:02:24,069
+they are First called chaining. So this is
+a very natural idea, where you just keep
+
+37
+00:02:24,069 --> 00:02:29,007
+all of the elements that hash to a common
+bucket in that bucket. How do you keep
+
+38
+00:02:29,007 --> 00:02:33,017
+track of all of them? Well, you just use a
+linked list. So, in the seventeenth
+
+39
+00:02:33,017 --> 00:02:37,033
+bucket, you will find all of the elements
+which ever hashed to bucket number
+
+40
+00:02:37,033 --> 00:02:41,091
+seventeen. The second approach which also
+has plenty of applications in practice is
+
+41
+00:02:41,091 --> 00:02:46,039
+open addressing. Here the constraint is
+that you are only going to store one item
+
+42
+00:02:46,039 --> 00:02:50,076
+one key in each bucket. So if two things
+mapped the bucket number seventeen, you
+
+43
+00:02:50,076 --> 00:02:55,019
+gotta find a separate place for one of
+them And so the way that you handle that
+
+44
+00:02:55,019 --> 00:02:59,089
+is you demand from your hash function not
+merely one bucket but rather a whole probe
+
+45
+00:02:59,089 --> 00:03:04,021
+sequence. So the sequence of buckets so
+that if you try to hash something into
+
+46
+00:03:04,021 --> 00:03:08,025
+bucket number seventeen, 17's already
+occupied then you go on to the next.
+
+47
+00:03:08,025 --> 00:03:12,008
+Bucket in the probe sequence. You try to
+insert it there And if it, you fail again
+
+48
+00:03:12,008 --> 00:03:15,081
+you go to third bucket in the sequence.
+You try to insert it there, and so on. So
+
+49
+00:03:15,081 --> 00:03:19,055
+we mentioned briefly the sorta two ways
+you can specify probe sequences. One is
+
+50
+00:03:19,055 --> 00:03:23,062
+called linear probing. So this is where if
+you fail in bucket seventeen you move on
+
+51
+00:03:23,062 --> 00:03:27,041
+to eighteen and then nineteen and then
+twenty and then 21. And you stop once you
+
+52
+00:03:27,041 --> 00:03:31,024
+find an empty one And that's where you
+insert the new element And another one is
+
+53
+00:03:31,024 --> 00:03:35,017
+double hashing And this is where you use a
+combination of two hash functions Where
+
+54
+00:03:35,017 --> 00:03:39,001
+the first hash function specifies the
+initial bucket that you probe. The second
+
+55
+00:03:39,001 --> 00:03:43,050
+hash function specifies the offset for
+each subsequent probe. So for example if
+
+56
+00:03:43,050 --> 00:03:48,010
+you have a given elements say the name
+Alice and the two hash functions give you
+
+57
+00:03:48,010 --> 00:03:52,036
+the number seventeen and 23 then the
+[inaudible] finding probe sequence is
+
+58
+00:03:52,036 --> 00:03:56,073
+going to be initially seventeen, failing
+that we'll try 40, still failing that
+
+59
+00:03:56,073 --> 00:04:01,021
+we'll try 63, failing that we'll try 86
+and so on. So in a course on the design
+
+60
+00:04:01,021 --> 00:04:05,023
+and analysis of algorithms like this one
+you typically talk a little bit more about
+
+61
+00:04:05,023 --> 00:04:08,065
+chaining than you do open addressing.
+That's not to imply that chaining is
+
+62
+00:04:08,065 --> 00:04:12,035
+somehow the more important one both of
+these are important But chaining is a
+
+63
+00:04:12,035 --> 00:04:15,072
+little easier to talk about
+mathematically. So we will talk about it a
+
+64
+00:04:15,072 --> 00:04:19,051
+little bit more cuz I'll be able to give
+you complete proofs for chaining whereas
+
+65
+00:04:19,051 --> 00:04:23,025
+complete proofs for open addressing would
+be outside the scope of this course. So
+
+66
+00:04:23,025 --> 00:04:26,094
+I'll mention it in passing but the details
+will be more about chaining just for
+
+67
+00:04:26,094 --> 00:04:31,062
+mathematical ease. So, there's one very
+important parameter which plays a big role
+
+68
+00:04:31,062 --> 00:04:36,015
+in governing the performance of a hash
+table, and that's known as the load
+
+69
+00:04:36,015 --> 00:04:41,014
+factor, or simply the load, of a hash
+table. And it's a very simple definition.
+
+70
+00:04:41,014 --> 00:04:46,002
+It just talks about how populated, a
+typical bucket of the hash table is. So
+
+71
+00:04:46,002 --> 00:04:52,017
+it's often denoted by alpha And in the
+numerator is the number of things that
+
+72
+00:04:52,017 --> 00:04:56,080
+have been inserted, and not subsequently
+deleted in the hash table. Divide it by
+
+73
+00:04:56,080 --> 00:05:01,032
+the number of buckets in the hash table.
+So, as you would expect, as you insert
+
+74
+00:05:01,032 --> 00:05:05,089
+more and more things into the hash table,
+the load grows, keeping the number of
+
+75
+00:05:05,089 --> 00:05:10,076
+items in the hash table fixed as you scale
+up the number of buckets, the load drops.
+
+76
+00:05:10,076 --> 00:05:14,073
+So just to make sure that the notion of
+the load is clear, and that also you're
+
+77
+00:05:14,073 --> 00:05:18,065
+clear on the different strategies for
+resolving collisions, th e next quiz will
+
+78
+00:05:18,065 --> 00:05:22,067
+ask you about the range of relevant alphas
+for the chaining and open addressing
+
+79
+00:05:22,067 --> 00:05:27,000
+implementations of the hash table.
+Alright, so the correct answer to this
+
+80
+00:05:27,000 --> 00:05:31,067
+quiz question is the third answer. Load
+factors bigger than one do make sense they
+
+81
+00:05:31,067 --> 00:05:35,071
+may not be optimal but they at least make
+sense for hash tables that implement with
+
+82
+00:05:35,071 --> 00:05:39,056
+chaining but they don't make sense for
+hash tables with open addressing. And the
+
+83
+00:05:39,056 --> 00:05:43,022
+reason is simple remember in open
+addressing you are required to store only
+
+84
+00:05:43,022 --> 00:05:47,008
+one object per bucket so as soon as the
+number of objects exceeds the number of
+
+85
+00:05:47,008 --> 00:05:50,074
+buckets there is no where to put the
+remaining objects. So the hash the hash
+
+86
+00:05:50,074 --> 00:05:54,078
+table will simply crash if, if load factor
+is bigger than one. [inaudible] hash table
+
+87
+00:05:54,078 --> 00:05:58,078
+with chaining there is no obvious problems
+with load factor bigger than one so you
+
+88
+00:05:58,078 --> 00:06:02,058
+can imagine a load factor equal to two
+say, say you insert 2,000 objects into a
+
+89
+00:06:02,058 --> 00:06:06,075
+hash table with 1,000 buckets. You know
+that means, hopefully At least in the best
+
+90
+00:06:06,075 --> 00:06:10,078
+case. Each buckets just gonna have a
+length list with two objects in it. So
+
+91
+00:06:10,078 --> 00:06:14,097
+there's no big deal. With having load
+factors bigger than one, and hash tables
+
+92
+00:06:14,097 --> 00:06:20,043
+With chaining. Alright, so let's then make
+a, a quite easy but also very important
+
+93
+00:06:20,043 --> 00:06:24,096
+observation about a necessary condition
+for hash tables to have good performance
+
+94
+00:06:24,096 --> 00:06:29,044
+And this goes into the first caveat that
+you better properly implement the hash
+
+95
+00:06:29,044 --> 00:06:33,047
+table if you expect to have good
+performance. So the first point is that
+
+96
+00:06:33,047 --> 00:06:37,056
+you're only gonna have constant time
+look-ups if you keep the load to be
+
+97
+00:06:37,056 --> 00:06:41,047
+constant. So for a hash table with open
+addressing, this is really obvious,
+
+98
+00:06:41,047 --> 00:06:45,024
+because you need alpha not just O(1) but
+less than one, less than 100 percent full,
+
+99
+00:06:45,024 --> 00:06:49,050
+otherwise the hash table is just gonna
+crash, cuz you don't have enough room for
+
+100
+00:06:49,050 --> 00:06:53,085
+all of the items, but even for hash tables
+that you implement using chaining, where
+
+101
+00:06:53,085 --> 00:06:58,016
+they at least make sense for load factors
+which are bigger than one, you'd better
+
+102
+00:06:58,016 --> 00:07:02,025
+keep the load not too much bigger than one
+if you want to have constant-time
+
+103
+00:07:02,025 --> 00:07:06,048
+operations. Right, so if you have, say, a
+hash table with. N buckets and you hash in
+
+104
+00:07:06,048 --> 00:07:10,059
+NlogN objects, then the average number of
+objects in a given bucket is gonna be
+
+105
+00:07:10,059 --> 00:07:14,070
+logarithmic And remember, when you do a
+lookup, after you hash to the bucket, you
+
+106
+00:07:14,070 --> 00:07:18,092
+have to do an exhaustive search through
+the linked list in that bucket. So if you
+
+107
+00:07:18,092 --> 00:07:23,003
+have NlogN objects and you hashed it with
+N buckets, you're expecting more like
+
+108
+00:07:23,003 --> 00:07:27,032
+logarithmic lookup time - not constant
+lookup time And then, as we discussed with
+
+109
+00:07:27,032 --> 00:07:31,071
+open addressing, of course, you need not
+just alpha = zero of one, but alpha less
+
+110
+00:07:31,071 --> 00:07:36,004
+than one. And in fact, alpha better be
+well below one. You don't want to let an
+
+111
+00:07:36,004 --> 00:07:40,035
+open addressing table get to a 90 percent
+load or something like that. So I'm going
+
+112
+00:07:40,035 --> 00:07:45,050
+to write meed Alpha less than less than
+one. So that just means you don't want to
+
+113
+00:07:45,050 --> 00:07:50,043
+let the load grow too close to 100%, you
+will see performance degrade. So again, I
+
+114
+00:07:50,043 --> 00:07:54,089
+hope the point of this slide is clear. If
+you want good hash able performance, one
+
+115
+00:07:54,089 --> 00:07:59,025
+of the things you're responsible for is
+keeping the load factor under control.
+
+116
+00:07:59,025 --> 00:08:03,068
+Keep it utmost a small constant with open
+address and keep it well below 100%. So
+
+117
+00:08:03,068 --> 00:08:06,083
+you might wonder what I mean by
+controlling the load. After all, you know
+
+118
+00:08:06,083 --> 00:08:10,052
+you writing this [inaudible] when you have
+no idea what some client's gonna do with
+
+119
+00:08:10,052 --> 00:08:13,072
+it. They can insert or delete whatever
+they want. So how do you, how do you
+
+120
+00:08:13,072 --> 00:08:16,097
+control alpha? Well, what you can control
+under the hood of your hash table
+
+121
+00:08:16,097 --> 00:08:20,051
+implementation is the number of buckets.
+You can control the denominator Of this
+
+122
+00:08:20,051 --> 00:08:24,050
+alpha so if the numerator starts growing
+at some point the denominator is going to
+
+123
+00:08:24,050 --> 00:08:28,019
+grow as well. So what actual
+implementations of hash tables do is they
+
+124
+00:08:28,019 --> 00:08:32,054
+keep track of the population of the hash
+table. How many objects are being stored,
+
+125
+00:08:32,054 --> 00:08:36,025
+and as this numerator grows, as more and
+more stuff gets inserted, the
+
+126
+00:08:36,025 --> 00:08:40,028
+implementation ensures that the
+denominator grows at the same rate so that
+
+127
+00:08:40,028 --> 00:08:44,052
+the number of buckets also increases. So
+if alpha exceeds some target, you know,
+
+128
+00:08:44,052 --> 00:08:48,045
+that could be say 75%, .75, or maybe
+it's.5. Then what you can do is you can
+
+129
+00:08:48,045 --> 00:08:52,059
+dou ble the number of buckets, say in your
+hash table. So you define a new hash
+
+130
+00:08:52,059 --> 00:08:56,088
+table, you have a new hash function with
+double the range, and now having doubled
+
+131
+00:08:56,088 --> 00:09:01,021
+the denominator. The load has dropped by a
+factor two. So that's how you can keep it
+
+132
+00:09:01,021 --> 00:09:05,030
+under control. Optionally, if space is at
+a real premium, you can also shrink the
+
+133
+00:09:05,030 --> 00:09:08,046
+hash table if there's a bunch of
+deletions, say, in a chaining
+
+134
+00:09:08,046 --> 00:09:13,005
+implementation. So that's the first take
+away point about what has to be happening
+
+135
+00:09:13,005 --> 00:09:16,094
+correctly under the hood in order to get
+the desired guarantees for [inaudible]
+
+136
+00:09:16,094 --> 00:09:20,098
+performance you gotta control the load. So
+you have to have a hash table whose size
+
+137
+00:09:20,098 --> 00:09:24,087
+is roughly the same as the as the number
+of objects that you are storing. So the
+
+138
+00:09:24,087 --> 00:09:28,085
+second thing you've gotta get right and
+this is something we've touched on in the
+
+139
+00:09:28,085 --> 00:09:32,094
+implementation videos is you better use a
+good enough hash function And so what's a
+
+140
+00:09:32,094 --> 00:09:36,078
+good hash function? It's something that
+spreads the data out evenly amongst the
+
+141
+00:09:36,078 --> 00:09:41,008
+buckets And what would really be awesome
+would be a hash function which works well
+
+142
+00:09:41,008 --> 00:09:45,032
+independent of the data And that's really
+been the theme of this whole course so
+
+143
+00:09:45,032 --> 00:09:49,039
+far, algorithmic solutions which work
+independent of any domain assumptions. No
+
+144
+00:09:49,039 --> 00:09:53,068
+matter what the input is, the algorithm is
+guaranteed to, for example, run blazingly
+
+145
+00:09:53,068 --> 00:09:57,086
+fast And I can appreciate that this is
+exactly the sort of thing you would want
+
+146
+00:09:57,086 --> 00:10:01,094
+to learn from a course like this, right?
+Take a class in the design analysis of
+
+147
+00:10:01,094 --> 00:10:05,080
+algorithms and you learn the secret hash
+function which always works well.
+
+148
+00:10:05,080 --> 00:10:10,079
+Unfortunately I'm not going to tell you
+such a hash function And the reason is not
+
+149
+00:10:10,079 --> 00:10:15,059
+cuz, I didn't prepare this lecture. The
+reason is not because people just haven't
+
+150
+00:10:15,059 --> 00:10:20,009
+been clever enough to discover such a
+function. The problem is much more
+
+151
+00:10:20,009 --> 00:10:24,083
+fundamental. The problem is that such a
+function cannot exist. That is for every
+
+152
+00:10:24,083 --> 00:10:29,051
+hash function it has its own kryptonite.
+There is a pathological dataset under
+
+153
+00:10:29,051 --> 00:10:33,083
+which the performance of this hatch
+function will be as bad as the most
+
+154
+00:10:33,083 --> 00:10:38,047
+miserable constant hash function you'd
+ever seen. A nd the reason is quite
+
+155
+00:10:38,047 --> 00:10:42,085
+simple; it's really an inevitable
+consequence of the compressing that hash
+
+156
+00:10:42,085 --> 00:10:47,023
+functions are effectively implementing
+from some massive universe to some
+
+157
+00:10:47,023 --> 00:10:51,085
+relatively modest number of buckets. Let
+me elaborate. Fix any hash function as
+
+158
+00:10:51,085 --> 00:10:56,046
+clever as you could possibly imagine. So
+this hash function maps some universe
+
+159
+00:10:56,046 --> 00:11:01,007
+through the buckets indexed from zero to
+end minus one. Remember in all of the
+
+160
+00:11:01,007 --> 00:11:05,045
+interesting situations of hash functions,
+the universe size is huge, so the
+
+161
+00:11:05,045 --> 00:11:10,025
+cardinality of view should be much, much
+bigger than end. That's what I'm going to
+
+162
+00:11:10,025 --> 00:11:15,032
+assume here. So for example, maybe you're
+remembering people's names, and then the
+
+163
+00:11:15,032 --> 00:11:20,021
+universe is strings, which have, say at
+most, 30 characters, and N, I assure you
+
+164
+00:11:20,021 --> 00:11:25,028
+in any application is going to be much,
+much, much smaller than say, 26 raised to
+
+165
+00:11:25,028 --> 00:11:30,042
+the thirtieth power. So now let's use a
+variant on the pigeon hole principle, and
+
+166
+00:11:30,042 --> 00:11:35,050
+acclaim that at least one of these end
+buckets has to have at least a one over
+
+167
+00:11:35,050 --> 00:11:40,076
+end fraction of the number of keys in this
+universe. That is, there exists a bucket
+
+168
+00:11:40,076 --> 00:11:46,028
+I, somewhere between zero and end minus
+one. Such hat, at least The [inaudible] of
+
+169
+00:11:46,028 --> 00:11:56,034
+the universe over N Keys Hash to I get
+mapped to I under this hash function H. So
+
+170
+00:11:56,034 --> 00:12:01,045
+the way to see this is just to remember
+the picture of a hash function mapping in
+
+171
+00:12:01,045 --> 00:12:06,037
+principal any key from the universe, all
+keys from the universe to one of these
+
+172
+00:12:06,037 --> 00:12:10,099
+buckets. So the hash function has to put
+each key somewhere in one of the n buckets
+
+173
+00:12:10,099 --> 00:12:15,060
+So one of the buckets has to have at least
+a 1/n fraction above all of the possible
+
+174
+00:12:15,060 --> 00:12:19,089
+keys. One more fun, pre way of thinking,
+thinking about it is that you might want
+
+175
+00:12:19,089 --> 00:12:24,028
+to think about a hash table implemented
+with chaining. You might want to imagine,
+
+176
+00:12:24,028 --> 00:12:28,051
+just in your mind, that you hash every
+single key into the hash table. So this
+
+177
+00:12:28,051 --> 00:12:32,058
+hash table is going to be insanely
+over-populated. You'll never be able to
+
+178
+00:12:32,058 --> 00:12:36,092
+store it on the computer because it will
+have the full co-ordinarily of u objects
+
+179
+00:12:36,092 --> 00:12:41,027
+in it, but it has u objects, it only has n
+buckets. One of those buckets has to have
+
+180
+00:12:41,027 --> 00:12:47,041
+at leas T The U over N fraction of the
+population. So the point here is that no
+
+181
+00:12:47,041 --> 00:12:52,039
+matter what the hash function is no matter
+how clever you build it there's gonna be
+
+182
+00:12:52,039 --> 00:12:57,020
+some buckets say bucket number 31 which
+gets its fair share of the universe maps
+
+183
+00:12:57,020 --> 00:13:01,088
+to it. So having identified this bucket,
+bucket number 31 where it gets at least
+
+184
+00:13:01,088 --> 00:13:06,086
+its fair share of the universe maps to it
+now to construct our pathological dataset
+
+185
+00:13:06,086 --> 00:13:11,055
+all we do is picked from amongst these
+elements that get mapped to bucket number
+
+186
+00:13:11,055 --> 00:13:16,007
+31. So for such as a data set and we can
+make this data set basically as large as
+
+187
+00:13:16,007 --> 00:13:20,076
+we want because the cardinality of u over
+n is unimaginably big, because u itself is
+
+188
+00:13:20,076 --> 00:13:25,005
+unimaginably big Then in this data set,
+everything collides. The hash function
+
+189
+00:13:25,005 --> 00:13:29,049
+maps every single one to bucket number 31
+and that's gonna lead to Terrible hash
+
+190
+00:13:29,049 --> 00:13:33,080
+table performance. Hast table performance
+which is really no better than the naive
+
+191
+00:13:33,080 --> 00:13:37,096
+going to list solutions. So for example an
+hash table with collisions, in bucket 31,
+
+192
+00:13:37,096 --> 00:13:41,081
+you'll just find a link listed every
+single thing that's ever been inserted
+
+193
+00:13:41,081 --> 00:13:45,057
+into the hash table and for open
+addressing maybe it's a little harder to
+
+194
+00:13:45,057 --> 00:13:48,091
+see, what's going on but again if
+everything collides, you're gonna
+
+195
+00:13:48,091 --> 00:13:52,092
+basically wind up with linear time
+performance A far cry from constant time
+
+196
+00:13:52,092 --> 00:13:57,063
+performance. Now, for those of you to whom
+this seems like just sort of pointless,
+
+197
+00:13:57,063 --> 00:14:02,034
+abstract mathematics, I want to make two
+points. The first is that at the very
+
+198
+00:14:02,034 --> 00:14:06,095
+least these pathological data sets. Tells
+us, indicates, that we will have to
+
+199
+00:14:06,095 --> 00:14:11,050
+discuss hash functions in a way
+differently than how we've been discussing
+
+200
+00:14:11,050 --> 00:14:16,055
+algorithms so far. So when we talked about
+merge sort, we just said it runs in n log
+
+201
+00:14:16,055 --> 00:14:20,035
+n time. No matter what the input is.
+Whether we discuss the Dyxtra's algorithm
+
+202
+00:14:20,035 --> 00:14:24,039
+It runs in n log n time, no matter what
+the input is. That first search, that
+
+203
+00:14:24,039 --> 00:14:28,053
+first search many a time no matter what
+the input is. We're gonna have to say
+
+204
+00:14:28,053 --> 00:14:33,006
+something different about hash functions.
+We'll not be able to say that a hash table
+
+205
+00:14:33,006 --> 00:14:37,000
+has good conformance, no matter what the
+input is. This slide shows that's
+
+206
+00:14:37,000 --> 00:14:41,036
+[inaudible]. The second point I want to
+make is that while this pathological data
+
+207
+00:14:41,036 --> 00:14:45,056
+sets of course are not likely to arise
+just by random chance. Sometimes you're
+
+208
+00:14:45,056 --> 00:14:49,066
+concerned about somebody constructing a
+pathological data set for your hash
+
+209
+00:14:49,066 --> 00:14:54,007
+function, for example in a denial service
+attack. So there's a very clever
+
+210
+00:14:54,007 --> 00:15:00,036
+illustration of exactly this point in a
+research paper, from 2003 By Crosby and
+
+211
+00:15:00,036 --> 00:15:05,042
+Wallach. So the main point of Crosby and
+Wallach was that there's a number of real
+
+212
+00:15:05,042 --> 00:15:09,084
+world systems And maybe there, most
+interesting application was a network
+
+213
+00:15:09,084 --> 00:15:14,045
+intrusion detection system, for which you
+could bring them to their knees by
+
+214
+00:15:14,045 --> 00:15:18,090
+exploiting badly designed hash functions.
+So these were all applications that made
+
+215
+00:15:18,090 --> 00:15:22,063
+crucial use of hash tables and, the
+feasibility of these systems really,
+
+216
+00:15:22,063 --> 00:15:26,066
+completed depended on getting cost and
+time performance from the hash tables. So
+
+217
+00:15:26,066 --> 00:15:30,069
+if you could exhibit a pathological data
+set for these hash tables and make the
+
+218
+00:15:30,069 --> 00:15:34,078
+performance devolve to linear, devolve to
+that of a simple link list solution, the
+
+219
+00:15:34,078 --> 00:15:39,039
+systems would be broken, they would just
+crash of they'd fail to function. Now we
+
+220
+00:15:39,039 --> 00:15:43,066
+saw in the last slide that every hash
+table does have its own Kryptonite. Has a
+
+221
+00:15:43,066 --> 00:15:47,063
+pathological data set But the question is.
+How can you come up with such a
+
+222
+00:15:47,063 --> 00:15:52,013
+pathological data set if you're trying to
+do a denial of service attack on one of
+
+223
+00:15:52,013 --> 00:15:56,016
+these systems? And so the systems that
+Crosby and Waller looked at generally
+
+224
+00:15:56,016 --> 00:16:00,030
+shared two properties. So first of all,
+they were open source. You could inspect
+
+225
+00:16:00,030 --> 00:16:04,091
+the code. You could see what hash function
+it was that they were using And second of
+
+226
+00:16:04,091 --> 00:16:09,009
+all, the hash, function was often very
+simplistic. So it was engineered for speed
+
+227
+00:16:09,009 --> 00:16:13,023
+more than anything else And as a result,
+it was easy to, just be inspecting the
+
+228
+00:16:13,023 --> 00:16:17,080
+code, reverse engineer a data set. That
+really did break the hash table. That led
+
+229
+00:16:17,080 --> 00:16:22,064
+it That devolved the performance to
+linear. So for example, in the network
+
+230
+00:16:22,064 --> 00:16:26,080
+intrusion detection application, there was
+some hash table that was just remembering
+
+231
+00:16:26,080 --> 00:16:30,071
+the IP addresses of packets that we re
+going through, because it was looking for
+
+232
+00:16:30,071 --> 00:16:34,088
+patterns of pack, data packets that seemed
+to indicate some sort of intrusion. And
+
+233
+00:16:34,088 --> 00:16:39,042
+Crosby and Wallach just showed how sending
+a bunch of data packets to this system
+
+234
+00:16:39,042 --> 00:16:44,002
+with cleverly chosen sender IP's really
+did just crash the system because the hash
+
+235
+00:16:44,002 --> 00:16:47,074
+table performance blew up to an
+unacceptable degree. So how should we
+
+236
+00:16:47,074 --> 00:16:52,045
+address this fact of life that every hash
+function has a pathological data set? And
+
+237
+00:16:52,045 --> 00:16:56,056
+that question is meaningful both from a
+practical perspective, so what hash
+
+238
+00:16:56,056 --> 00:17:00,045
+functions should we use if we are
+concerned about someone constructing
+
+239
+00:17:00,045 --> 00:17:04,083
+pathological data sets, for example, the
+implemented denial-of-service attack, and
+
+240
+00:17:04,083 --> 00:17:09,022
+secondly, mathematically, if we can't give
+the kinds of guarantees we've given so
+
+241
+00:17:09,022 --> 00:17:13,071
+far, data-independent guarantees, how can
+we mathematically say that hash functions
+
+242
+00:17:13,071 --> 00:17:17,079
+have good performance. So let me mention
+two solutions, the first solution is, is
+
+243
+00:17:17,079 --> 00:17:21,073
+meant more just on the practical point.
+You know what hash function should you
+
+244
+00:17:21,073 --> 00:17:25,056
+implement if you are concerned with
+someone creating pathological data sets?
+
+245
+00:17:25,056 --> 00:17:29,029
+So there are these things called
+cryptographic hash functions. There for
+
+246
+00:17:29,029 --> 00:17:34,018
+example, one cryptographic hash function
+or really family of hash functions, for
+
+247
+00:17:34,018 --> 00:17:38,073
+different numbers of buckets, is shot two
+And these are really outside the scope of
+
+248
+00:17:38,073 --> 00:17:41,084
+this course. I mean, you'll learn more
+about this in a In a course on
+
+249
+00:17:41,084 --> 00:17:45,059
+cryptography And obviously using these
+keywords you can look it up on the web and
+
+250
+00:17:45,059 --> 00:17:49,099
+read more about it. The one point I want
+to make is, you know these cryptographic
+
+251
+00:17:49,099 --> 00:17:54,068
+hash functions like SHA2, they themselves,
+they do have pathological datasets. They
+
+252
+00:17:54,068 --> 00:17:59,048
+have their own version of kryptonite. The
+reason that they work well in practice is
+
+253
+00:17:59,048 --> 00:18:04,045
+because it's infeasible to figure out what
+this pathological dataset is So unlike the
+
+254
+00:18:04,045 --> 00:18:08,084
+very simplistic hash functions which
+Crosby and Wallach found in the source
+
+255
+00:18:08,084 --> 00:18:13,058
+code of their applications, where it was
+easy to reverse-engineer bad datasets, for
+
+256
+00:18:13,058 --> 00:18:18,031
+something like SHA2 nobody knows how to
+reverse-engineer a bad dataset for it An d
+
+257
+00:18:18,031 --> 00:18:22,077
+when I say infeasible, I mean in the usual
+cryptographic sense, in a way similar to
+
+258
+00:18:22,077 --> 00:18:27,040
+how one would say it's infeasible to break
+the RSA cryptosystem if you implement it
+
+259
+00:18:27,040 --> 00:18:31,080
+properly, or it's infeasible to factor
+large numbers except in very special case,
+
+260
+00:18:31,097 --> 00:18:36,048
+and so on. So that's all I'm going to say
+about cryptographic hash functions. I also
+
+261
+00:18:36,048 --> 00:18:41,010
+want to mention a second solution, which
+would be reasonable both in practice, and
+
+262
+00:18:41,010 --> 00:18:45,056
+also for which we can say a number of
+things mathematically about it Which is to
+
+263
+00:18:45,056 --> 00:18:50,029
+use randomization. So more specifically
+we're not going to design, a single.
+
+264
+00:18:50,029 --> 00:18:55,035
+Clever hash function Because again, a
+single hash function we know Must have a
+
+265
+00:18:55,035 --> 00:19:00,028
+pathological data set But we're gonna
+design a very clever, family of hash
+
+266
+00:19:00,028 --> 00:19:05,055
+functions And then, at run time. We're
+going to pick, one of these hash functions
+
+267
+00:19:05,055 --> 00:19:09,072
+at random. Another kind of guarantee you
+are going to walk, we are going to be able
+
+268
+00:19:09,072 --> 00:19:13,056
+to prove on a family affairs function
+would be very much in the spirit of cook
+
+269
+00:19:13,056 --> 00:19:17,036
+sword. So you would call that in the cook
+sword algorithm, pretty much. For any
+
+270
+00:19:17,036 --> 00:19:21,034
+fixed pivot sequence there is a
+pathological input for which quick sort
+
+271
+00:19:21,034 --> 00:19:25,077
+will devolve to quadratic running time. So
+our solution was randomize quick sort
+
+272
+00:19:25,077 --> 00:19:30,009
+which is rather than committing up front
+to any particular method of choosing
+
+273
+00:19:30,009 --> 00:19:34,035
+pivots at run time we are gonna pick
+pivots randomly. What did we prove about
+
+274
+00:19:34,035 --> 00:19:38,056
+quick sort? We proved that for any
+possible input for any possible array the
+
+275
+00:19:38,056 --> 00:19:43,016
+average running time with quick sort was
+[inaudible] with the average was over the
+
+276
+00:19:43,016 --> 00:19:47,059
+run time random choices of quick sort.
+Here we are gonna do the same thing we'll
+
+277
+00:19:47,059 --> 00:19:51,075
+now be able to say for any dataset. On
+average, with respect to our run time
+
+278
+00:19:51,075 --> 00:19:55,092
+choice of a hash function. The hash
+function will perform well, in the sense
+
+279
+00:19:55,092 --> 00:20:00,004
+that it will spread out the data of the
+data set evenly. So we flip to the
+
+280
+00:20:00,004 --> 00:20:04,005
+quantifiers from the previous slide.
+There, we said if we pre-commit to a
+
+281
+00:20:04,005 --> 00:20:09,019
+single hash function. If we fix one hash
+function, Then there's a data set that
+
+282
+00:20:09,019 --> 00:20:14,004
+breaks the hash function. Here we're
+flipping it, we're s aying for each fixed
+
+283
+00:20:14,004 --> 00:20:19,002
+data set a random choice of a hash
+function is going to do well on average on
+
+284
+00:20:19,002 --> 00:20:23,057
+that data set. Just like in Quick Sort.
+This doesn't mean notice that we can't
+
+285
+00:20:23,057 --> 00:20:28,020
+make our program open source. We can still
+publish code which says here is our family
+
+286
+00:20:28,020 --> 00:20:32,088
+of hash functions and in the code would be
+make a random choice from this set of hash
+
+287
+00:20:32,088 --> 00:20:37,040
+functions But the point is by inspecting
+the code you'll have no idea what was the
+
+288
+00:20:37,040 --> 00:20:41,054
+real time random choices made by the
+algorithm. So you'll know nothing about
+
+289
+00:20:41,054 --> 00:20:45,057
+what the actual hash function is so you
+won't be able to reverse engineer
+
+290
+00:20:45,057 --> 00:20:49,090
+pathological dataset for the real time
+choice of the hash function. So the next
+
+291
+00:20:49,090 --> 00:20:54,044
+couple of videos are gonna elaborate on
+the second solution Of using a real time
+
+292
+00:20:54,044 --> 00:20:59,004
+random choice of a hash function as a way
+of saying. You do well on every data set
+
+293
+00:20:59,004 --> 00:21:03,069
+At least on average. So let me just give
+you a road map of where we're going to go
+
+294
+00:21:03,069 --> 00:21:08,063
+from here. So I'm going to break the
+discussion of the details of a randomized
+
+295
+00:21:08,063 --> 00:21:13,014
+solution into three parts, spread over two
+videos. So in the next video we're going
+
+296
+00:21:13,014 --> 00:21:17,053
+to begin with the definition of what do I
+mean by a family of hash functions, so
+
+297
+00:21:17,053 --> 00:21:21,066
+that if you pick one at random, you're
+likely to do pretty well. So that's a
+
+298
+00:21:21,066 --> 00:21:25,039
+definition that's called a universal
+family of hash functions. Now a
+
+299
+00:21:25,039 --> 00:21:29,060
+mathematical definition by itself is worth
+approximately nothing. For it to be
+
+300
+00:21:29,060 --> 00:21:33,048
+valuable, it has to satisfy two
+properties. So first of all there have to
+
+301
+00:21:33,048 --> 00:21:37,064
+be interesting and useful examples that
+meet the definition. So that is, there
+
+302
+00:21:37,064 --> 00:21:42,001
+better be Useful looking hash functions
+that meet this definition of a universal
+
+303
+00:21:42,001 --> 00:21:46,016
+family. So the second thing will be to
+show you that they do indeed exist And
+
+304
+00:21:46,016 --> 00:21:50,032
+then the other thing a mathematical
+definition needs is applications. So that
+
+305
+00:21:50,032 --> 00:21:54,031
+if you can meet, the definition. Then,
+good things happen. So that'll be part

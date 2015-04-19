@@ -1,0 +1,1120 @@
+
+1
+00:00:00,044 --> 00:00:01,039
+In this and in the
+
+2
+00:00:01,048 --> 00:00:02,064
+next set of videos, I'd like
+
+3
+00:00:02,077 --> 00:00:04,026
+to tell you about a learning
+
+4
+00:00:04,054 --> 00:00:06,011
+algorithm called a Neural Network.
+
+5
+00:00:07,019 --> 00:00:07,090
+We're going to first talk about
+
+6
+00:00:08,007 --> 00:00:09,033
+the representation and then
+
+7
+00:00:09,059 --> 00:00:10,039
+in the next set of videos
+
+8
+00:00:10,041 --> 00:00:12,016
+talk about learning algorithms for it.
+
+9
+00:00:12,066 --> 00:00:14,007
+Neutral networks is actually
+
+10
+00:00:14,050 --> 00:00:15,086
+a pretty old idea, but had
+
+11
+00:00:16,028 --> 00:00:17,067
+fallen out of favor for a while.
+
+12
+00:00:18,019 --> 00:00:19,026
+But today, it is the
+
+13
+00:00:19,057 --> 00:00:20,082
+state of the art technique for
+
+14
+00:00:21,008 --> 00:00:22,039
+many different machine learning problems.
+
+15
+00:00:23,073 --> 00:00:25,073
+So why do we need yet another learning algorithm?
+
+16
+00:00:26,030 --> 00:00:28,003
+We already have linear regression and
+
+17
+00:00:28,017 --> 00:00:31,026
+we have logistic regression, so why do we need, you know, neural networks?
+
+18
+00:00:32,028 --> 00:00:34,025
+In order to motivate the discussion
+
+19
+00:00:34,078 --> 00:00:35,096
+of neural networks, let me
+
+20
+00:00:36,011 --> 00:00:37,013
+start by showing you a few
+
+21
+00:00:37,031 --> 00:00:38,071
+examples of machine learning
+
+22
+00:00:38,092 --> 00:00:40,010
+problems where we need
+
+23
+00:00:40,029 --> 00:00:41,085
+to learn complex non-linear hypotheses.
+
+24
+00:00:43,085 --> 00:00:45,064
+Consider a supervised learning classification
+
+25
+00:00:46,053 --> 00:00:48,043
+problem where you have a training set like this.
+
+26
+00:00:49,028 --> 00:00:50,053
+If you want to apply logistic
+
+27
+00:00:50,096 --> 00:00:52,071
+regression to this problem, one
+
+28
+00:00:52,089 --> 00:00:54,025
+thing you could do is apply
+
+29
+00:00:54,065 --> 00:00:56,014
+logistic regression with a
+
+30
+00:00:56,018 --> 00:00:57,071
+lot of nonlinear features like that.
+
+31
+00:00:58,017 --> 00:00:59,057
+So here, g as usual
+
+32
+00:01:00,007 --> 00:01:01,071
+is the sigmoid function, and we
+
+33
+00:01:01,078 --> 00:01:04,068
+can include lots of polynomial terms like these.
+
+34
+00:01:05,045 --> 00:01:06,079
+And, if you include enough polynomial
+
+35
+00:01:07,037 --> 00:01:08,028
+terms then, you know, maybe
+
+36
+00:01:08,095 --> 00:01:10,028
+you can get a hypotheses
+
+37
+00:01:11,059 --> 00:01:13,078
+that separates the positive and negative examples.
+
+38
+00:01:14,062 --> 00:01:16,007
+This particular method works well
+
+39
+00:01:16,046 --> 00:01:18,040
+when you have only, say, two
+
+40
+00:01:18,062 --> 00:01:20,018
+features - x1 and x2
+
+41
+00:01:20,018 --> 00:01:20,098
+- because you can then include
+
+42
+00:01:21,050 --> 00:01:22,087
+all those polynomial terms of
+
+43
+00:01:23,040 --> 00:01:24,062
+x1 and x2.
+
+44
+00:01:24,081 --> 00:01:26,028
+But for many interesting machine learning
+
+45
+00:01:26,051 --> 00:01:27,073
+problems would have a
+
+46
+00:01:27,090 --> 00:01:29,023
+lot more features than just two.
+
+47
+00:01:30,078 --> 00:01:31,076
+We've been talking for a while
+
+48
+00:01:32,031 --> 00:01:34,056
+about housing prediction, and suppose
+
+49
+00:01:35,012 --> 00:01:36,098
+you have a housing classification
+
+50
+00:01:38,001 --> 00:01:39,028
+problem rather than a
+
+51
+00:01:39,039 --> 00:01:41,017
+regression problem, like maybe
+
+52
+00:01:41,057 --> 00:01:43,034
+if you have different features of
+
+53
+00:01:43,043 --> 00:01:44,076
+a house, and you want
+
+54
+00:01:45,001 --> 00:01:46,000
+to predict what are the
+
+55
+00:01:46,004 --> 00:01:47,059
+odds that your house will
+
+56
+00:01:47,070 --> 00:01:48,070
+be sold within the next
+
+57
+00:01:48,090 --> 00:01:51,004
+six months, so that will be a classification problem.
+
+58
+00:01:52,009 --> 00:01:53,006
+And as we saw we can
+
+59
+00:01:53,026 --> 00:01:55,012
+come up with quite a
+
+60
+00:01:55,026 --> 00:01:56,048
+lot of features, maybe a hundred
+
+61
+00:01:56,084 --> 00:01:58,026
+different features of different houses.
+
+62
+00:02:00,012 --> 00:02:01,060
+For a problem like this, if
+
+63
+00:02:01,087 --> 00:02:03,026
+you were to include all the
+
+64
+00:02:03,037 --> 00:02:04,098
+quadratic terms, all of
+
+65
+00:02:05,009 --> 00:02:06,026
+these, even all of the
+
+66
+00:02:06,054 --> 00:02:07,054
+quadratic that is the second
+
+67
+00:02:07,093 --> 00:02:10,044
+or the polynomial terms, there would be a lot of them.
+
+68
+00:02:10,056 --> 00:02:11,058
+There would be terms like x1 squared,
+
+69
+00:02:12,096 --> 00:02:17,061
+x1x2, x1x3, you know, x1x4
+
+70
+00:02:18,075 --> 00:02:21,087
+up to x1x100 and then
+
+71
+00:02:21,097 --> 00:02:23,062
+you have x2 squared, x2x3
+
+72
+00:02:25,062 --> 00:02:25,097
+and so on.
+
+73
+00:02:26,050 --> 00:02:27,077
+And if you include just
+
+74
+00:02:28,006 --> 00:02:29,019
+the second order terms, that
+
+75
+00:02:29,033 --> 00:02:30,075
+is, the terms that are
+
+76
+00:02:30,084 --> 00:02:32,009
+a product of, you know,
+
+77
+00:02:32,021 --> 00:02:33,038
+two of these terms, x1
+
+78
+00:02:33,050 --> 00:02:35,000
+times x1 and so on, then,
+
+79
+00:02:35,078 --> 00:02:36,091
+for the case of n equals
+
+80
+00:02:38,018 --> 00:02:40,028
+100, you end up with about five thousand features.
+
+81
+00:02:41,088 --> 00:02:44,087
+And, asymptotically, the
+
+82
+00:02:45,000 --> 00:02:46,033
+number of quadratic features grows
+
+83
+00:02:46,077 --> 00:02:48,066
+roughly as order n
+
+84
+00:02:48,081 --> 00:02:50,033
+squared, where n is the
+
+85
+00:02:50,046 --> 00:02:52,078
+number of the original features,
+
+86
+00:02:53,037 --> 00:02:54,078
+like x1 through x100 that we had.
+
+87
+00:02:55,069 --> 00:02:58,075
+And its actually closer to n squared over two.
+
+88
+00:02:59,091 --> 00:03:01,043
+So including all the
+
+89
+00:03:01,056 --> 00:03:02,091
+quadratic features doesn't seem
+
+90
+00:03:03,021 --> 00:03:04,021
+like it's maybe a good
+
+91
+00:03:04,030 --> 00:03:05,037
+idea, because that is a
+
+92
+00:03:05,058 --> 00:03:07,005
+lot of features and you
+
+93
+00:03:07,021 --> 00:03:08,091
+might up overfitting the training
+
+94
+00:03:09,033 --> 00:03:10,050
+set, and it can
+
+95
+00:03:10,074 --> 00:03:12,080
+also be computationally expensive, you know, to
+
+96
+00:03:14,008 --> 00:03:15,012
+be working with that many features.
+
+97
+00:03:16,044 --> 00:03:17,053
+One thing you could do is
+
+98
+00:03:17,077 --> 00:03:19,009
+include only a subset of
+
+99
+00:03:19,028 --> 00:03:20,094
+these, so if you include only the
+
+100
+00:03:21,005 --> 00:03:22,062
+features x1 squared, x2 squared,
+
+101
+00:03:23,059 --> 00:03:25,018
+x3 squared, up to
+
+102
+00:03:25,058 --> 00:03:27,075
+maybe x100 squared, then
+
+103
+00:03:28,009 --> 00:03:29,050
+the number of features is much smaller.
+
+104
+00:03:29,097 --> 00:03:31,071
+Here you have only 100 such
+
+105
+00:03:32,006 --> 00:03:33,084
+quadratic features, but this
+
+106
+00:03:34,012 --> 00:03:35,094
+is not enough features and
+
+107
+00:03:36,009 --> 00:03:37,016
+certainly won't let you fit
+
+108
+00:03:37,028 --> 00:03:39,033
+the data set like that on the upper left.
+
+109
+00:03:39,056 --> 00:03:40,055
+In fact, if you include
+
+110
+00:03:41,003 --> 00:03:42,071
+only these quadratic features together
+
+111
+00:03:43,016 --> 00:03:44,087
+with the original x1, and
+
+112
+00:03:45,034 --> 00:03:46,050
+so on, up to x100 features,
+
+113
+00:03:47,046 --> 00:03:48,053
+then you can actually fit very
+
+114
+00:03:48,090 --> 00:03:50,021
+interesting hypotheses. So, you
+
+115
+00:03:50,033 --> 00:03:52,034
+can fit things like, you know, access a
+
+116
+00:03:52,049 --> 00:03:53,086
+line of the ellipses like these, but
+
+117
+00:03:55,008 --> 00:03:56,024
+you certainly cannot fit a more
+
+118
+00:03:56,034 --> 00:03:57,093
+complex data set like that shown here.
+
+119
+00:03:59,036 --> 00:04:00,053
+So 5000 features seems like
+
+120
+00:04:00,062 --> 00:04:03,009
+a lot, if you were
+
+121
+00:04:03,022 --> 00:04:04,086
+to include the cubic, or
+
+122
+00:04:05,013 --> 00:04:06,009
+third order known of each others,
+
+123
+00:04:06,043 --> 00:04:08,005
+the x1, x2, x3.
+
+124
+00:04:08,040 --> 00:04:09,080
+You know, x1 squared,
+
+125
+00:04:10,031 --> 00:04:12,024
+x2, x10 and
+
+126
+00:04:12,090 --> 00:04:15,028
+x11, x17 and so on.
+
+127
+00:04:15,069 --> 00:04:18,011
+You can imagine there are gonna be a lot of these features.
+
+128
+00:04:19,004 --> 00:04:19,076
+In fact, they are going to be
+
+129
+00:04:20,005 --> 00:04:21,025
+order and cube such features
+
+130
+00:04:22,020 --> 00:04:23,082
+and if any is 100
+
+131
+00:04:24,014 --> 00:04:25,066
+you can compute that, you
+
+132
+00:04:25,074 --> 00:04:26,087
+end up with on the order
+
+133
+00:04:27,073 --> 00:04:29,064
+of about 170,000 such cubic
+
+134
+00:04:30,004 --> 00:04:31,067
+features and so including
+
+135
+00:04:32,025 --> 00:04:34,047
+these higher auto-polynomial features when
+
+136
+00:04:34,092 --> 00:04:36,005
+your original feature set end
+
+137
+00:04:36,023 --> 00:04:37,073
+is large this really dramatically
+
+138
+00:04:38,052 --> 00:04:40,043
+blows up your feature space and
+
+139
+00:04:41,006 --> 00:04:42,018
+this doesn't seem like a
+
+140
+00:04:42,031 --> 00:04:43,031
+good way to come up with
+
+141
+00:04:43,056 --> 00:04:45,005
+additional features with which
+
+142
+00:04:45,024 --> 00:04:48,010
+to build none many classifiers when n is large.
+
+143
+00:04:49,058 --> 00:04:52,056
+For many machine learning problems, n will be pretty large.
+
+144
+00:04:53,026 --> 00:04:53,056
+Here's an example.
+
+145
+00:04:55,000 --> 00:04:58,013
+Let's consider the problem of computer vision.
+
+146
+00:04:59,067 --> 00:05:00,076
+And suppose you want to
+
+147
+00:05:01,025 --> 00:05:02,062
+use machine learning to train
+
+148
+00:05:02,070 --> 00:05:04,061
+a classifier to examine an
+
+149
+00:05:04,070 --> 00:05:05,087
+image and tell us whether
+
+150
+00:05:06,016 --> 00:05:08,002
+or not the image is a car.
+
+151
+00:05:09,048 --> 00:05:11,089
+Many people wonder why computer vision could be difficult.
+
+152
+00:05:12,038 --> 00:05:13,013
+I mean when you and I
+
+153
+00:05:13,026 --> 00:05:15,067
+look at this picture it is so obvious what this is.
+
+154
+00:05:15,089 --> 00:05:17,000
+You wonder how is it
+
+155
+00:05:17,018 --> 00:05:18,031
+that a learning algorithm could possibly
+
+156
+00:05:18,091 --> 00:05:20,087
+fail to know what this picture is.
+
+157
+00:05:22,011 --> 00:05:23,032
+To understand why computer vision
+
+158
+00:05:23,072 --> 00:05:25,037
+is hard let's zoom
+
+159
+00:05:25,064 --> 00:05:26,068
+into a small part of the
+
+160
+00:05:26,093 --> 00:05:28,018
+image like that area where the
+
+161
+00:05:28,050 --> 00:05:30,024
+little red rectangle is.
+
+162
+00:05:30,039 --> 00:05:31,032
+It turns out that where you
+
+163
+00:05:31,044 --> 00:05:34,026
+and I see a car, the computer sees that.
+
+164
+00:05:34,077 --> 00:05:35,093
+What it sees is this matrix,
+
+165
+00:05:36,060 --> 00:05:38,011
+or this grid, of pixel
+
+166
+00:05:38,057 --> 00:05:40,035
+intensity values that tells
+
+167
+00:05:40,061 --> 00:05:42,093
+us the brightness of each pixel in the image.
+
+168
+00:05:43,063 --> 00:05:45,017
+So the computer vision problem is
+
+169
+00:05:45,055 --> 00:05:47,023
+to look at this matrix of
+
+170
+00:05:47,031 --> 00:05:49,013
+pixel intensity values, and tell
+
+171
+00:05:49,041 --> 00:05:52,043
+us that these numbers represent the door handle of a car.
+
+172
+00:05:54,023 --> 00:05:55,074
+Concretely, when we use
+
+173
+00:05:56,002 --> 00:05:57,022
+machine learning to build a
+
+174
+00:05:57,043 --> 00:05:59,006
+car detector, what we do
+
+175
+00:05:59,036 --> 00:06:00,050
+is we come up with a
+
+176
+00:06:00,080 --> 00:06:02,068
+label training set, with, let's
+
+177
+00:06:02,088 --> 00:06:04,025
+say, a few label examples
+
+178
+00:06:04,073 --> 00:06:05,085
+of cars and a few
+
+179
+00:06:06,000 --> 00:06:07,014
+label examples of things that
+
+180
+00:06:07,037 --> 00:06:08,077
+are not cars, then we
+
+181
+00:06:09,008 --> 00:06:10,058
+give our training set to
+
+182
+00:06:10,072 --> 00:06:12,023
+the learning algorithm trained a
+
+183
+00:06:12,031 --> 00:06:13,050
+classifier and then, you
+
+184
+00:06:13,068 --> 00:06:14,069
+know, we may test it and show
+
+185
+00:06:14,088 --> 00:06:16,070
+the new image and ask, "What is this new thing?".
+
+186
+00:06:17,098 --> 00:06:20,002
+And hopefully it will recognize that that is a car.
+
+187
+00:06:21,041 --> 00:06:24,000
+To understand why we
+
+188
+00:06:24,012 --> 00:06:26,081
+need nonlinear hypotheses, let's take
+
+189
+00:06:27,005 --> 00:06:27,093
+a look at some of the
+
+190
+00:06:28,018 --> 00:06:29,036
+images of cars and maybe
+
+191
+00:06:29,048 --> 00:06:31,077
+non-cars that we might feed to our learning algorithm.
+
+192
+00:06:32,095 --> 00:06:33,092
+Let's pick a couple of pixel
+
+193
+00:06:34,008 --> 00:06:35,062
+locations in our images, so
+
+194
+00:06:35,075 --> 00:06:37,004
+that's pixel one location and
+
+195
+00:06:37,018 --> 00:06:39,050
+pixel two location, and let's
+
+196
+00:06:39,073 --> 00:06:42,038
+plot this car, you know, at the
+
+197
+00:06:42,050 --> 00:06:44,000
+location, at a certain
+
+198
+00:06:44,036 --> 00:06:45,088
+point, depending on the intensities
+
+199
+00:06:46,043 --> 00:06:47,087
+of pixel one and pixel two.
+
+200
+00:06:49,025 --> 00:06:50,062
+And let's do this with a few other images.
+
+201
+00:06:51,006 --> 00:06:52,044
+So let's take a different example
+
+202
+00:06:52,098 --> 00:06:53,098
+of the car and you know,
+
+203
+00:06:54,007 --> 00:06:55,000
+look at the same two pixel locations
+
+204
+00:06:56,016 --> 00:06:57,056
+and that image has a
+
+205
+00:06:57,076 --> 00:06:58,097
+different intensity for pixel one
+
+206
+00:06:59,023 --> 00:07:00,066
+and a different intensity for pixel two.
+
+207
+00:07:00,095 --> 00:07:02,093
+So, it ends up at a different location on the figure.
+
+208
+00:07:03,036 --> 00:07:05,074
+And then let's plot some negative examples as well.
+
+209
+00:07:05,099 --> 00:07:07,058
+That's a non-car, that's a
+
+210
+00:07:07,072 --> 00:07:09,047
+non-car  .
+
+211
+00:07:09,073 --> 00:07:10,091
+And if we do this for
+
+212
+00:07:11,006 --> 00:07:12,072
+more and more examples using
+
+213
+00:07:13,027 --> 00:07:14,068
+the pluses to denote cars
+
+214
+00:07:15,007 --> 00:07:16,031
+and minuses to denote non-cars,
+
+215
+00:07:16,088 --> 00:07:18,050
+what we'll find is that
+
+216
+00:07:18,082 --> 00:07:20,068
+the cars and non-cars end up
+
+217
+00:07:20,088 --> 00:07:22,043
+lying in different regions of
+
+218
+00:07:22,056 --> 00:07:24,091
+the space, and what we
+
+219
+00:07:25,018 --> 00:07:26,056
+need therefore is some sort
+
+220
+00:07:26,075 --> 00:07:28,079
+of non-linear hypotheses to try
+
+221
+00:07:29,000 --> 00:07:30,089
+to separate out the two classes.
+
+222
+00:07:32,048 --> 00:07:34,030
+What is the dimension of the feature space?
+
+223
+00:07:35,029 --> 00:07:38,020
+Suppose we were to use just 50 by 50 pixel images.
+
+224
+00:07:38,076 --> 00:07:40,005
+Now that suppose our images were
+
+225
+00:07:40,051 --> 00:07:42,075
+pretty small ones, just 50 pixels on the side.
+
+226
+00:07:43,047 --> 00:07:44,099
+Then we would have 2500 pixels,
+
+227
+00:07:46,032 --> 00:07:47,064
+and so the dimension of
+
+228
+00:07:47,074 --> 00:07:49,031
+our feature size will be N
+
+229
+00:07:49,051 --> 00:07:51,044
+equals 2500 where our feature
+
+230
+00:07:51,069 --> 00:07:52,091
+vector x is a list
+
+231
+00:07:53,018 --> 00:07:54,056
+of all the pixel testings, you
+
+232
+00:07:54,070 --> 00:07:56,068
+know, the pixel brightness of pixel
+
+233
+00:07:57,007 --> 00:07:58,002
+one, the brightness of pixel
+
+234
+00:07:58,032 --> 00:07:59,057
+two, and so on down
+
+235
+00:07:59,087 --> 00:08:01,031
+to the pixel brightness of the
+
+236
+00:08:01,039 --> 00:08:03,042
+last pixel where, you know, in a
+
+237
+00:08:03,058 --> 00:08:05,044
+typical computer representation, each of
+
+238
+00:08:05,054 --> 00:08:07,018
+these may be values between say
+
+239
+00:08:07,048 --> 00:08:09,001
+0 to 255 if it gives
+
+240
+00:08:09,023 --> 00:08:12,011
+us the grayscale value.
+
+241
+00:08:12,051 --> 00:08:13,029
+So we have n equals 2500,
+
+242
+00:08:13,094 --> 00:08:15,057
+and that's if we
+
+243
+00:08:15,074 --> 00:08:17,013
+were using grayscale images.
+
+244
+00:08:17,079 --> 00:08:18,080
+If we were using RGB
+
+245
+00:08:19,043 --> 00:08:21,013
+images with separate red, green
+
+246
+00:08:21,042 --> 00:08:23,087
+and blue values, we would have n equals 7500.
+
+247
+00:08:27,064 --> 00:08:28,062
+So, if we were to
+
+248
+00:08:29,000 --> 00:08:29,092
+try to learn a nonlinear
+
+249
+00:08:30,037 --> 00:08:32,001
+hypothesis by including all
+
+250
+00:08:32,029 --> 00:08:33,071
+the quadratic features, that is
+
+251
+00:08:33,080 --> 00:08:34,067
+all the terms of the form, you know,
+
+252
+00:08:35,042 --> 00:08:38,089
+Xi times Xj, while with the
+
+253
+00:08:39,012 --> 00:08:40,037
+2500 pixels we would end
+
+254
+00:08:40,058 --> 00:08:42,050
+up with a total of three million features.
+
+255
+00:08:43,004 --> 00:08:44,062
+And that's just too large to
+
+256
+00:08:44,072 --> 00:08:46,042
+be reasonable; the computation would
+
+257
+00:08:46,060 --> 00:08:48,067
+be very expensive to find and
+
+258
+00:08:48,084 --> 00:08:50,007
+to represent all of these
+
+259
+00:08:50,030 --> 00:08:52,025
+three million features per training example.
+
+260
+00:08:55,047 --> 00:08:57,058
+So, simple logistic regression together
+
+261
+00:08:58,010 --> 00:08:59,023
+with adding in maybe the
+
+262
+00:08:59,029 --> 00:09:00,050
+quadratic or the cubic features
+
+263
+00:09:00,092 --> 00:09:01,090
+- that's just not a
+
+264
+00:09:01,098 --> 00:09:03,095
+good way to learn complex
+
+265
+00:09:04,054 --> 00:09:06,009
+nonlinear hypotheses when n
+
+266
+00:09:06,030 --> 00:09:08,040
+is large because you just end up with too many features.
+
+267
+00:09:09,037 --> 00:09:10,062
+In the next few videos, I
+
+268
+00:09:10,084 --> 00:09:11,088
+would like to tell you about Neural
+
+269
+00:09:12,008 --> 00:09:13,066
+Networks, which turns out
+
+270
+00:09:13,098 --> 00:09:15,037
+to be a much better way to
+
+271
+00:09:15,064 --> 00:09:17,072
+learn complex hypotheses, complex nonlinear
+
+272
+00:09:17,096 --> 00:09:19,077
+hypotheses even when your
+
+273
+00:09:20,007 --> 00:09:22,008
+input feature space, even when n is large.
+
+274
+00:09:22,086 --> 00:09:24,008
+And along the way I'll
+
+275
+00:09:24,041 --> 00:09:25,058
+also get to show
+
+276
+00:09:25,077 --> 00:09:26,073
+you a couple of fun videos
+
+277
+00:09:27,024 --> 00:09:29,002
+of historically important applications
+
+278
+00:09:30,029 --> 00:09:31,028
+of Neural networks as well that I
+
+279
+00:09:32,010 --> 00:09:33,048
+hope those videos that
+
+280
+00:09:33,057 --> 00:09:35,046
+we'll see later will be fun for you to watch as well.

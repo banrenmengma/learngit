@@ -1,0 +1,796 @@
+
+1
+00:00:00,026 --> 00:00:01,034
+We've talked about how to evaluate
+
+2
+00:00:01,096 --> 00:00:03,035
+learning algorithms, talked about model selection,
+
+3
+00:00:04,015 --> 00:00:06,049
+talked a lot about bias and variance.
+
+4
+00:00:06,096 --> 00:00:08,010
+So how does this help us figure
+
+5
+00:00:08,033 --> 00:00:09,073
+out what are potentially fruitful,
+
+6
+00:00:10,033 --> 00:00:11,071
+potentially not fruitful things to
+
+7
+00:00:11,094 --> 00:00:13,098
+try to do to improve the performance of a learning algorithm.
+
+8
+00:00:15,048 --> 00:00:16,066
+Let's go back to our original
+
+9
+00:00:16,094 --> 00:00:18,089
+motivating example and go for the result.
+
+10
+00:00:21,003 --> 00:00:22,057
+So here is our earlier example
+
+11
+00:00:23,000 --> 00:00:24,012
+of maybe having fit regularized
+
+12
+00:00:24,071 --> 00:00:27,064
+linear regression and finding that it doesn't work as well as we're hoping.
+
+13
+00:00:28,030 --> 00:00:30,007
+We said that we had this menu of options.
+
+14
+00:00:30,091 --> 00:00:32,042
+So is there some way to
+
+15
+00:00:32,059 --> 00:00:34,053
+figure out which of these might be fruitful options?
+
+16
+00:00:35,047 --> 00:00:36,049
+The first thing all of this
+
+17
+00:00:36,065 --> 00:00:38,077
+was getting more training examples.
+
+18
+00:00:39,054 --> 00:00:40,070
+What this is good for,
+
+19
+00:00:40,088 --> 00:00:42,089
+is this helps to fix high variance.
+
+20
+00:00:45,032 --> 00:00:46,060
+And concretely, if you instead
+
+21
+00:00:47,014 --> 00:00:48,054
+have a high bias problem and
+
+22
+00:00:48,067 --> 00:00:50,053
+don't have any variance problem, then
+
+23
+00:00:50,082 --> 00:00:52,000
+we saw in the previous video
+
+24
+00:00:52,050 --> 00:00:53,056
+that getting more training examples,
+
+25
+00:00:54,064 --> 00:00:56,038
+while maybe just isn't going to help much at all.
+
+26
+00:00:57,035 --> 00:00:58,032
+So the first option is useful
+
+27
+00:00:58,078 --> 00:01:00,022
+only if you, say, plot
+
+28
+00:01:00,057 --> 00:01:01,061
+the learning curves and figure
+
+29
+00:01:01,071 --> 00:01:02,082
+out that you have at least
+
+30
+00:01:02,085 --> 00:01:03,096
+a bit of a variance, meaning that
+
+31
+00:01:04,017 --> 00:01:06,053
+the cross-validation error is, you know,
+
+32
+00:01:06,068 --> 00:01:08,079
+quite a bit bigger than your training set error.
+
+33
+00:01:08,090 --> 00:01:10,040
+How about trying a smaller set of features?
+
+34
+00:01:10,093 --> 00:01:11,092
+Well, trying a smaller
+
+35
+00:01:12,034 --> 00:01:13,056
+set of features, that's again
+
+36
+00:01:13,096 --> 00:01:16,006
+something that fixes high variance.
+
+37
+00:01:17,009 --> 00:01:18,007
+And in other words, if you figure
+
+38
+00:01:18,042 --> 00:01:19,043
+out, by looking at learning curves
+
+39
+00:01:19,081 --> 00:01:20,082
+or something else that you used,
+
+40
+00:01:21,018 --> 00:01:22,010
+that have a high bias
+
+41
+00:01:22,037 --> 00:01:23,045
+problem; then for goodness
+
+42
+00:01:23,067 --> 00:01:25,000
+sakes, don't waste your time
+
+43
+00:01:25,054 --> 00:01:27,025
+trying to carefully select out
+
+44
+00:01:27,045 --> 00:01:29,012
+a smaller set of features to use.
+
+45
+00:01:29,032 --> 00:01:31,018
+Because if you have a high bias problem, using
+
+46
+00:01:32,006 --> 00:01:33,021
+fewer features is not going to help.
+
+47
+00:01:33,089 --> 00:01:35,026
+Whereas in contrast, if you
+
+48
+00:01:35,048 --> 00:01:36,073
+look at the learning curves or something
+
+49
+00:01:36,090 --> 00:01:38,001
+else you figure out that you
+
+50
+00:01:38,035 --> 00:01:39,078
+have a high variance problem, then,
+
+51
+00:01:40,031 --> 00:01:41,073
+indeed trying to select
+
+52
+00:01:42,015 --> 00:01:43,018
+out a smaller set of features,
+
+53
+00:01:43,043 --> 00:01:45,037
+that might indeed be a very good use of your time.
+
+54
+00:01:45,079 --> 00:01:47,012
+How about trying to get additional
+
+55
+00:01:47,070 --> 00:01:49,064
+features, adding features, usually,
+
+56
+00:01:50,017 --> 00:01:51,037
+not always, but usually we
+
+57
+00:01:51,048 --> 00:01:53,001
+think of this as a solution
+
+58
+00:01:54,006 --> 00:01:56,092
+for fixing high bias problems.
+
+59
+00:01:57,059 --> 00:01:58,070
+So if you are adding extra
+
+60
+00:01:58,098 --> 00:02:00,064
+features it's usually because
+
+61
+00:02:01,075 --> 00:02:03,015
+your current hypothesis is too
+
+62
+00:02:03,028 --> 00:02:04,028
+simple, and so we want
+
+63
+00:02:04,054 --> 00:02:06,051
+to try to get additional features to
+
+64
+00:02:06,073 --> 00:02:08,053
+make our hypothesis better able
+
+65
+00:02:09,006 --> 00:02:10,080
+to fit the training set. And
+
+66
+00:02:11,041 --> 00:02:13,046
+similarly, adding polynomial features;
+
+67
+00:02:13,077 --> 00:02:14,093
+this is another way of adding
+
+68
+00:02:15,013 --> 00:02:16,041
+features and so there
+
+69
+00:02:16,056 --> 00:02:18,021
+is another way to try
+
+70
+00:02:18,043 --> 00:02:19,094
+to fix the high bias problem.
+
+71
+00:02:21,002 --> 00:02:22,081
+And, if concretely if
+
+72
+00:02:23,021 --> 00:02:24,034
+your learning curves show you
+
+73
+00:02:24,056 --> 00:02:25,040
+that you still have a high
+
+74
+00:02:25,052 --> 00:02:27,018
+variance problem, then, you know, again this
+
+75
+00:02:27,031 --> 00:02:29,036
+is maybe a less good use of your time.
+
+76
+00:02:30,063 --> 00:02:32,068
+And finally, decreasing and increasing lambda.
+
+77
+00:02:33,019 --> 00:02:34,009
+This are quick and easy to try,
+
+78
+00:02:34,046 --> 00:02:36,000
+I guess these are less likely to
+
+79
+00:02:36,013 --> 00:02:38,018
+be a waste of, you know, many months of your life.
+
+80
+00:02:39,006 --> 00:02:41,053
+But decreasing lambda, you
+
+81
+00:02:41,065 --> 00:02:43,040
+already know fixes high bias.
+
+82
+00:02:45,036 --> 00:02:46,034
+In case this isn't clear to
+
+83
+00:02:46,050 --> 00:02:47,034
+you, you know, I do encourage
+
+84
+00:02:47,081 --> 00:02:50,034
+you to pause the video and think through this that
+
+85
+00:02:50,099 --> 00:02:52,078
+convince yourself that decreasing lambda
+
+86
+00:02:53,062 --> 00:02:55,003
+helps fix high bias, whereas increasing
+
+87
+00:02:55,059 --> 00:02:57,047
+lambda fixes high variance.
+
+88
+00:02:59,087 --> 00:03:00,093
+And if you aren't sure why
+
+89
+00:03:01,027 --> 00:03:02,046
+this is the case, do
+
+90
+00:03:02,065 --> 00:03:04,012
+pause the video and make
+
+91
+00:03:04,015 --> 00:03:05,081
+sure you can convince yourself that this is the case.
+
+92
+00:03:06,058 --> 00:03:07,031
+Or take a look at the curves
+
+93
+00:03:07,080 --> 00:03:09,003
+that we were plotting at the
+
+94
+00:03:09,018 --> 00:03:10,059
+end of the previous video and
+
+95
+00:03:10,071 --> 00:03:11,065
+try to make sure you understand
+
+96
+00:03:12,016 --> 00:03:13,066
+why these are the case.
+
+97
+00:03:15,008 --> 00:03:16,012
+Finally, let us take everything
+
+98
+00:03:16,043 --> 00:03:17,084
+we have learned and relate it back
+
+99
+00:03:18,040 --> 00:03:19,097
+to neural networks and so,
+
+100
+00:03:20,012 --> 00:03:21,018
+here is some practical
+
+101
+00:03:21,071 --> 00:03:22,071
+advice for how I usually
+
+102
+00:03:23,052 --> 00:03:25,006
+choose the architecture or the
+
+103
+00:03:25,053 --> 00:03:28,065
+connectivity pattern of the neural networks I use.
+
+104
+00:03:30,006 --> 00:03:31,018
+So, if you are fitting
+
+105
+00:03:31,040 --> 00:03:33,015
+a neural network, one option would
+
+106
+00:03:33,040 --> 00:03:34,068
+be to fit, say, a pretty
+
+107
+00:03:34,084 --> 00:03:36,053
+small neural network with you know, relatively
+
+108
+00:03:37,053 --> 00:03:38,066
+few hidden units, maybe just
+
+109
+00:03:38,093 --> 00:03:40,043
+one hidden unit. If you're fitting
+
+110
+00:03:40,088 --> 00:03:42,066
+a neural network, one option would
+
+111
+00:03:42,080 --> 00:03:44,043
+be to fit a relatively small
+
+112
+00:03:44,091 --> 00:03:46,050
+neural network with, say,
+
+113
+00:03:48,003 --> 00:03:49,062
+relatively few, maybe only one
+
+114
+00:03:49,097 --> 00:03:51,075
+hidden layer and maybe
+
+115
+00:03:52,006 --> 00:03:53,037
+only a relatively few number
+
+116
+00:03:53,075 --> 00:03:55,015
+of hidden units.
+
+117
+00:03:55,056 --> 00:03:56,058
+So, a network like this might have relatively
+
+118
+00:03:57,005 --> 00:03:59,016
+few parameters and be more prone to underfitting.
+
+119
+00:04:00,044 --> 00:04:01,084
+The main advantage of these small
+
+120
+00:04:02,025 --> 00:04:04,075
+neural networks is that the computation will be cheaper.
+
+121
+00:04:05,081 --> 00:04:06,090
+An alternative would be to
+
+122
+00:04:07,000 --> 00:04:08,046
+fit a, maybe relatively large
+
+123
+00:04:08,090 --> 00:04:10,078
+neural network with either more
+
+124
+00:04:10,096 --> 00:04:12,037
+hidden units--there's a lot
+
+125
+00:04:12,056 --> 00:04:14,093
+of hidden in one there--or with more hidden layers.
+
+126
+00:04:16,019 --> 00:04:17,080
+And so these neural networks tend
+
+127
+00:04:18,000 --> 00:04:20,087
+to have more parameters and therefore be more prone to overfitting.
+
+128
+00:04:22,041 --> 00:04:24,000
+One disadvantage, often not a
+
+129
+00:04:24,005 --> 00:04:25,016
+major one but something to
+
+130
+00:04:25,025 --> 00:04:26,043
+think about, is that if you have
+
+131
+00:04:27,000 --> 00:04:28,044
+a large number of neurons
+
+132
+00:04:28,095 --> 00:04:30,004
+in your network, then it can
+
+133
+00:04:30,023 --> 00:04:31,092
+be more computationally expensive.
+
+134
+00:04:33,006 --> 00:04:35,079
+Although within reason, this is often hopefully not a huge problem.
+
+135
+00:04:36,083 --> 00:04:38,042
+The main potential problem of
+
+136
+00:04:38,054 --> 00:04:39,070
+these much larger neural networks is that it could be more prone to overfitting
+
+137
+00:04:39,098 --> 00:04:44,012
+and it turns out if you're applying neural
+
+138
+00:04:44,069 --> 00:04:46,089
+network very often using
+
+139
+00:04:47,024 --> 00:04:48,089
+a large neural network often it's actually the larger, the better
+
+140
+00:04:50,061 --> 00:04:51,069
+but if it's overfitting, you can
+
+141
+00:04:51,088 --> 00:04:53,080
+then use regularization to address
+
+142
+00:04:54,023 --> 00:04:56,050
+overfitting, usually using
+
+143
+00:04:56,091 --> 00:04:58,048
+a larger neural network by using
+
+144
+00:04:58,072 --> 00:04:59,098
+regularization to address is
+
+145
+00:05:00,031 --> 00:05:01,091
+overfitting that's often more
+
+146
+00:05:02,012 --> 00:05:04,016
+effective than using a smaller neural network.
+
+147
+00:05:05,010 --> 00:05:06,093
+And the main possible disadvantage is
+
+148
+00:05:07,012 --> 00:05:09,042
+that it can be more computationally expensive.
+
+149
+00:05:10,047 --> 00:05:11,093
+And finally, one of the other decisions is, say,
+
+150
+00:05:12,027 --> 00:05:14,033
+the number of hidden layers you want to have, right?
+
+151
+00:05:14,048 --> 00:05:16,039
+So, do you want
+
+152
+00:05:17,002 --> 00:05:18,012
+one hidden layer or do
+
+153
+00:05:18,037 --> 00:05:19,069
+you want three hidden layers, as
+
+154
+00:05:20,004 --> 00:05:21,079
+we've shown here, or do you want two hidden layers?
+
+155
+00:05:23,025 --> 00:05:24,085
+And usually, as I
+
+156
+00:05:24,098 --> 00:05:25,072
+think I said in the previous
+
+157
+00:05:26,018 --> 00:05:27,042
+video, using a single
+
+158
+00:05:27,063 --> 00:05:29,056
+hidden layer is a reasonable default, but
+
+159
+00:05:29,077 --> 00:05:30,080
+if you want to choose the
+
+160
+00:05:30,088 --> 00:05:32,039
+number of hidden layers, one
+
+161
+00:05:32,057 --> 00:05:33,061
+other thing you can try is
+
+162
+00:05:34,026 --> 00:05:35,080
+find yourself a training cross-validation,
+
+163
+00:05:36,066 --> 00:05:38,031
+and test set split and try
+
+164
+00:05:38,073 --> 00:05:40,006
+training neural networks with one
+
+165
+00:05:40,025 --> 00:05:41,020
+hidden layer or two hidden
+
+166
+00:05:41,049 --> 00:05:42,081
+layers or three hidden layers and
+
+167
+00:05:43,023 --> 00:05:44,030
+see which of those neural
+
+168
+00:05:44,045 --> 00:05:47,045
+networks performs best on the cross-validation sets.
+
+169
+00:05:48,018 --> 00:05:49,018
+You take your three neural networks
+
+170
+00:05:49,066 --> 00:05:50,050
+with one, two and three hidden
+
+171
+00:05:50,077 --> 00:05:52,041
+layers, and compute the
+
+172
+00:05:52,056 --> 00:05:53,087
+cross validation error at Jcv
+
+173
+00:05:54,013 --> 00:05:55,012
+and all of
+
+174
+00:05:55,024 --> 00:05:56,062
+them and use that to
+
+175
+00:05:56,095 --> 00:05:58,035
+select which of these
+
+176
+00:05:58,068 --> 00:06:00,029
+is you think the best neural network.
+
+177
+00:06:02,057 --> 00:06:04,001
+So, that's it for
+
+178
+00:06:04,023 --> 00:06:05,049
+bias and variance and ways
+
+179
+00:06:05,077 --> 00:06:08,017
+like learning curves, who tried to diagnose these problems.
+
+180
+00:06:08,056 --> 00:06:09,086
+As far as what
+
+181
+00:06:09,093 --> 00:06:11,001
+you think is implied, for one
+
+182
+00:06:11,025 --> 00:06:12,048
+might be truthful or not
+
+183
+00:06:12,062 --> 00:06:13,050
+truthful things to try
+
+184
+00:06:13,091 --> 00:06:15,072
+to improve the performance of a learning algorithm.
+
+185
+00:06:16,095 --> 00:06:18,000
+If you understood the contents
+
+186
+00:06:18,099 --> 00:06:20,069
+of the last few videos and if
+
+187
+00:06:20,079 --> 00:06:22,001
+you apply them you actually
+
+188
+00:06:22,062 --> 00:06:24,030
+be much more effective already and
+
+189
+00:06:24,043 --> 00:06:25,088
+getting learning algorithms to work on problems
+
+190
+00:06:26,061 --> 00:06:27,097
+and even a large fraction,
+
+191
+00:06:28,056 --> 00:06:29,081
+maybe the majority of practitioners
+
+192
+00:06:30,054 --> 00:06:31,086
+of machine learning here in
+
+193
+00:06:32,006 --> 00:06:34,075
+Silicon Valley today doing these things as their full-time jobs.
+
+194
+00:06:35,081 --> 00:06:37,056
+So I hope that these
+
+195
+00:06:37,099 --> 00:06:39,011
+pieces of advice
+
+196
+00:06:39,056 --> 00:06:41,042
+on by experience in diagnostics
+
+197
+00:06:42,073 --> 00:06:44,011
+will help you to much effectively
+
+198
+00:06:44,079 --> 00:06:47,026
+and powerfully apply learning and
+
+199
+00:06:48,000 --> 00:06:49,030
+get them to work very well.

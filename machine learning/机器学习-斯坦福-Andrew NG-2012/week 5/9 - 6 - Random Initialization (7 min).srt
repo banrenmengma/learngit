@@ -1,0 +1,772 @@
+
+1
+00:00:00,054 --> 00:00:01,082
+In the previous videos, we put
+
+2
+00:00:01,095 --> 00:00:03,022
+together almost all
+
+3
+00:00:03,027 --> 00:00:04,062
+the pieces you need in order
+
+4
+00:00:04,082 --> 00:00:07,016
+to implement and train in your network.
+
+5
+00:00:07,094 --> 00:00:09,006
+There's just one last idea I
+
+6
+00:00:09,011 --> 00:00:09,098
+need to share with you, which
+
+7
+00:00:10,019 --> 00:00:11,057
+is the idea of random initialization.
+
+8
+00:00:13,022 --> 00:00:14,035
+When you're running an algorithm like
+
+9
+00:00:14,050 --> 00:00:15,099
+gradient descent or also the
+
+10
+00:00:16,028 --> 00:00:17,080
+advanced optimization algorithms, we
+
+11
+00:00:17,094 --> 00:00:20,076
+need to pick some initial value for the parameters theta.
+
+12
+00:00:21,060 --> 00:00:22,098
+So for the advanced optimization algorithm, you know,
+
+13
+00:00:23,057 --> 00:00:24,062
+it assumes that you will
+
+14
+00:00:24,078 --> 00:00:26,008
+pass it some initial value
+
+15
+00:00:26,069 --> 00:00:27,064
+for the parameters theta.
+
+16
+00:00:29,001 --> 00:00:30,067
+Now let's consider gradient descent.
+
+17
+00:00:31,032 --> 00:00:34,009
+For that, you know, we also need to initialize theta to something.
+
+18
+00:00:34,057 --> 00:00:36,003
+And then we can slowly take steps
+
+19
+00:00:36,067 --> 00:00:38,082
+go downhill, using graded descent,
+
+20
+00:00:38,090 --> 00:00:40,092
+to go downhill to minimize the function J of theta.
+
+21
+00:00:41,099 --> 00:00:43,096
+So what do we set the initial value of theta to?
+
+22
+00:00:44,024 --> 00:00:47,000
+Is it possible to set
+
+23
+00:00:47,052 --> 00:00:48,092
+the initial value of theta
+
+24
+00:00:49,025 --> 00:00:50,045
+to the vector of all zeroes.
+
+25
+00:00:51,086 --> 00:00:54,079
+Whereas this worked okay when we were using logistic regression.
+
+26
+00:00:55,063 --> 00:00:56,068
+Initializing all of your
+
+27
+00:00:56,075 --> 00:00:57,096
+parameters to zero actually
+
+28
+00:00:58,031 --> 00:01:00,028
+does not work when you're trading a neural network.
+
+29
+00:01:01,040 --> 00:01:03,014
+Consider training the following neural network.
+
+30
+00:01:03,064 --> 00:01:06,043
+And let's say we initialized all of the parameters in the network to zero.
+
+31
+00:01:07,096 --> 00:01:09,020
+And if you do that then
+
+32
+00:01:09,078 --> 00:01:10,092
+what that means is that
+
+33
+00:01:11,015 --> 00:01:13,087
+at the initialization this blue weight, that I'm covering blue
+
+34
+00:01:15,039 --> 00:01:16,054
+is going to equal to that weight.
+
+35
+00:01:17,051 --> 00:01:17,051
+So, they're both zero.
+
+36
+00:01:18,057 --> 00:01:19,087
+And this weight that I'm covering
+
+37
+00:01:20,032 --> 00:01:21,093
+in in red, is equal to that weight.
+
+38
+00:01:22,054 --> 00:01:23,004
+Which I'm covering it in red.
+
+39
+00:01:23,079 --> 00:01:25,028
+And also this weight, well
+
+40
+00:01:25,062 --> 00:01:26,050
+which I'm covering it in green
+
+41
+00:01:26,068 --> 00:01:28,093
+is going to be equal to the value of that weight.
+
+42
+00:01:30,003 --> 00:01:32,081
+And what that means is that both of your hidden units: a1 and a2
+
+43
+00:01:32,095 --> 00:01:35,093
+are going to be computing the same function
+
+44
+00:01:36,065 --> 00:01:36,081
+of your inputs.
+
+45
+00:01:37,081 --> 00:01:38,090
+And thus, you end up with
+
+46
+00:01:39,050 --> 00:01:40,087
+for everyone of your training your examples.
+
+47
+00:01:41,043 --> 00:01:43,064
+You end up with a(2)1 equals a(2)2.
+
+48
+00:01:46,095 --> 00:01:48,070
+and moreover because, I'm not
+
+49
+00:01:48,095 --> 00:01:50,004
+going to show this too much
+
+50
+00:01:50,031 --> 00:01:51,042
+detail, but because these out
+
+51
+00:01:51,057 --> 00:01:52,098
+going weights are the same you
+
+52
+00:01:53,007 --> 00:01:54,062
+can also show that the
+
+53
+00:01:54,070 --> 00:01:56,056
+delta values are also going to be the same.
+
+54
+00:01:56,079 --> 00:01:57,079
+So concretely, you end up
+
+55
+00:01:57,096 --> 00:02:00,006
+with delta 1 1,
+
+56
+00:02:00,076 --> 00:02:02,090
+delta 2 1, equals delta 2 2.
+
+57
+00:02:06,012 --> 00:02:07,015
+And if you work through the
+
+58
+00:02:07,023 --> 00:02:08,047
+map further, what you can
+
+59
+00:02:08,075 --> 00:02:09,099
+show is that the partial derivatives
+
+60
+00:02:11,056 --> 00:02:14,008
+with respect to your parameters will satisfy the following.
+
+61
+00:02:15,012 --> 00:02:16,071
+That the partial derivative
+
+62
+00:02:17,055 --> 00:02:19,025
+of the cost
+
+63
+00:02:19,058 --> 00:02:21,002
+function with respect to
+
+64
+00:02:21,080 --> 00:02:23,068
+writing out the derivatives respect to
+
+65
+00:02:23,090 --> 00:02:25,031
+these two blue weights neural network.
+
+66
+00:02:26,018 --> 00:02:27,028
+You'll find that these two partial
+
+67
+00:02:27,068 --> 00:02:30,034
+derivatives are going to be equal to each other.
+
+68
+00:02:31,096 --> 00:02:33,018
+And so, what this means, is
+
+69
+00:02:33,031 --> 00:02:35,081
+that even after say, one gradient descent update.
+
+70
+00:02:36,068 --> 00:02:38,019
+You're going to update, say this
+
+71
+00:02:38,046 --> 00:02:40,080
+first blue weight with, you know, learning rate times this.
+
+72
+00:02:41,058 --> 00:02:42,050
+And you're going to update the second
+
+73
+00:02:42,091 --> 00:02:44,062
+blue weight to a sum learning rate times this.
+
+74
+00:02:44,081 --> 00:02:45,087
+But what this means is
+
+75
+00:02:45,097 --> 00:02:47,009
+that even after one gradient
+
+76
+00:02:47,041 --> 00:02:49,033
+descent update, those two
+
+77
+00:02:49,068 --> 00:02:50,071
+blue weights, those two blue
+
+78
+00:02:51,043 --> 00:02:53,005
+color parameters will end
+
+79
+00:02:53,024 --> 00:02:54,096
+up the same as each other.
+
+80
+00:02:55,018 --> 00:02:56,021
+So they'll be some non-zero
+
+81
+00:02:56,075 --> 00:02:57,071
+value now, but this value
+
+82
+00:02:58,055 --> 00:02:59,052
+will be equal to that value.
+
+83
+00:03:00,036 --> 00:03:02,078
+And similarly, even after one gradient descent update.
+
+84
+00:03:03,068 --> 00:03:05,074
+This value will equal to that value.
+
+85
+00:03:06,016 --> 00:03:07,019
+There will be some non-zero values.
+
+86
+00:03:07,063 --> 00:03:09,044
+Just that the two red values will be equal to each other.
+
+87
+00:03:10,024 --> 00:03:11,075
+And similarly the two green
+
+88
+00:03:12,006 --> 00:03:13,071
+weights, they'll both change values
+
+89
+00:03:13,086 --> 00:03:16,034
+but they'll both end up the same value as each other.
+
+90
+00:03:17,059 --> 00:03:19,002
+So after each update, the parameters corresponding
+
+91
+00:03:19,074 --> 00:03:20,088
+to the inputs going to each
+
+92
+00:03:21,006 --> 00:03:22,087
+of the two hidden units identical.
+
+93
+00:03:23,069 --> 00:03:24,049
+That's just saying that the two
+
+94
+00:03:24,071 --> 00:03:25,059
+green weights must be sustained,
+
+95
+00:03:25,063 --> 00:03:26,031
+the two red weights must be
+
+96
+00:03:26,055 --> 00:03:27,075
+sustained, the two blue weights
+
+97
+00:03:28,000 --> 00:03:30,000
+are still the same and what
+
+98
+00:03:30,015 --> 00:03:31,059
+that means is that even after
+
+99
+00:03:31,077 --> 00:03:33,006
+one iteration of say, gradient
+
+100
+00:03:33,046 --> 00:03:34,086
+descent, you find that
+
+101
+00:03:35,059 --> 00:03:37,025
+your two hidden units are still
+
+102
+00:03:37,080 --> 00:03:40,037
+computing exactly the same function that the input.
+
+103
+00:03:40,083 --> 00:03:43,003
+So you still have this a(1)2 equals a(2)2.
+
+104
+00:03:43,050 --> 00:03:45,019
+And so you're back to this case.
+
+105
+00:03:45,093 --> 00:03:47,037
+And as keep running gradient descent.
+
+106
+00:03:48,038 --> 00:03:50,093
+The blue weights, the two blue weights will stay the same as each other.
+
+107
+00:03:51,018 --> 00:03:52,091
+The two red weights will stay the same as each other.
+
+108
+00:03:53,006 --> 00:03:54,099
+The two green weights will stay the same as each other.
+
+109
+00:03:55,015 --> 00:03:56,086
+And what this means
+
+110
+00:03:57,012 --> 00:03:58,025
+is that your neural network really
+
+111
+00:03:58,046 --> 00:03:59,097
+can't compute very interesting functions.
+
+112
+00:04:00,069 --> 00:04:01,090
+Imagine that you had
+
+113
+00:04:02,024 --> 00:04:03,066
+not only two hidden
+
+114
+00:04:04,000 --> 00:04:05,046
+units but imagine
+
+115
+00:04:05,063 --> 00:04:07,009
+that you had many many hidden units.
+
+116
+00:04:08,008 --> 00:04:09,015
+Then what this is saying is that
+
+117
+00:04:09,043 --> 00:04:10,068
+all of your hidden units are
+
+118
+00:04:10,074 --> 00:04:12,031
+computing the exact same
+
+119
+00:04:12,053 --> 00:04:16,030
+feature, all of your hidden units are computing all of the exact same function of the input.
+
+120
+00:04:17,002 --> 00:04:18,098
+And this is a highly redundant representation.
+
+121
+00:04:20,013 --> 00:04:21,000
+Because that means that your
+
+122
+00:04:21,011 --> 00:04:24,016
+final logistic regression unit, you know, really only gets to see one feature.
+
+123
+00:04:24,073 --> 00:04:25,045
+Because all of these are the same
+
+124
+00:04:26,032 --> 00:04:28,068
+and this prevents your neural network from learning something interesting.
+
+125
+00:04:31,060 --> 00:04:32,082
+In order to get around this
+
+126
+00:04:32,095 --> 00:04:34,005
+problem, the way we initialize
+
+127
+00:04:34,058 --> 00:04:35,068
+the parameters of a neural network
+
+128
+00:04:36,005 --> 00:04:37,066
+therefore, is with random initialization.
+
+129
+00:04:41,081 --> 00:04:43,012
+Concretely, the problem we
+
+130
+00:04:43,025 --> 00:04:44,047
+saw on the previous slide
+
+131
+00:04:44,075 --> 00:04:46,024
+is sometimes called the problem
+
+132
+00:04:46,063 --> 00:04:49,004
+of symmetric weights, that is if the weights all being the same.
+
+133
+00:04:49,081 --> 00:04:51,047
+And so this random initialization
+
+134
+00:04:52,058 --> 00:04:54,024
+is how we perform symmetry breaking.
+
+135
+00:04:55,051 --> 00:04:56,048
+So what we do is we
+
+136
+00:04:56,068 --> 00:04:58,019
+initialize each value of
+
+137
+00:04:58,031 --> 00:04:59,045
+theta to a random
+
+138
+00:04:59,082 --> 00:05:01,030
+number between minus epsilon and epsilon.
+
+139
+00:05:02,007 --> 00:05:03,019
+So this is a notation to
+
+140
+00:05:03,031 --> 00:05:05,035
+mean numbers between minus epsilon and plus epsilon.
+
+141
+00:05:06,032 --> 00:05:07,043
+So my weights on my
+
+142
+00:05:07,054 --> 00:05:08,066
+parameters are all going
+
+143
+00:05:08,070 --> 00:05:11,047
+to be randomly initialized between minus epsilon and plus epsilon.
+
+144
+00:05:12,030 --> 00:05:13,032
+The way I write code to do
+
+145
+00:05:13,042 --> 00:05:16,076
+this in octave, this I've said you know theta 1 to be equal to this.
+
+146
+00:05:17,055 --> 00:05:19,062
+So this rand 10 by 11.
+
+147
+00:05:19,091 --> 00:05:21,006
+That's how you compute
+
+148
+00:05:21,063 --> 00:05:23,062
+a random 10 by 11
+
+149
+00:05:24,067 --> 00:05:26,063
+dimensional matrix, and all
+
+150
+00:05:27,006 --> 00:05:30,037
+of the values are between 0 and 1.
+
+151
+00:05:30,057 --> 00:05:31,035
+So these are going to
+
+152
+00:05:31,051 --> 00:05:32,069
+be real numbers that take on
+
+153
+00:05:32,087 --> 00:05:34,086
+any continuous values between 0 and 1.
+
+154
+00:05:35,044 --> 00:05:36,029
+And so, if you take a
+
+155
+00:05:36,031 --> 00:05:37,043
+number between 0 and
+
+156
+00:05:37,055 --> 00:05:38,031
+1, multiply it by 2
+
+157
+00:05:38,058 --> 00:05:39,055
+times an epsilon, and
+
+158
+00:05:39,060 --> 00:05:41,005
+minus an epsilon, then you
+
+159
+00:05:41,016 --> 00:05:42,026
+end up with a number that's
+
+160
+00:05:42,068 --> 00:05:44,016
+between minus epsilon and plus epsilon.
+
+161
+00:05:45,063 --> 00:05:46,097
+And incidentally, this epsilon here
+
+162
+00:05:47,023 --> 00:05:48,041
+has nothing to do
+
+163
+00:05:48,073 --> 00:05:49,086
+with the epsilon that we were
+
+164
+00:05:50,006 --> 00:05:51,070
+using when we were doing gradient checking.
+
+165
+00:05:52,058 --> 00:05:54,006
+So when we were doing numerical gradient checking,
+
+166
+00:05:54,085 --> 00:05:57,006
+there we were adding some values of epsilon to theta.
+
+167
+00:05:57,043 --> 00:05:59,056
+This is, you know, an unrelated value of epsilon.
+
+168
+00:05:59,077 --> 00:06:00,058
+Which is why I am denoting
+
+169
+00:06:00,099 --> 00:06:02,019
+in it epsilon, just to distinguish
+
+170
+00:06:02,048 --> 00:06:04,097
+it from the value of epsilon we were using in gradient checking.
+
+171
+00:06:06,049 --> 00:06:07,058
+Absolutely, if you want to
+
+172
+00:06:07,068 --> 00:06:09,062
+initialize theta 2
+
+173
+00:06:09,063 --> 00:06:10,081
+to a random 1 by
+
+174
+00:06:10,092 --> 00:06:13,043
+11 matrix, you can do so using this piece of code here.
+
+175
+00:06:15,091 --> 00:06:17,045
+So, to summarize, to
+
+176
+00:06:17,066 --> 00:06:18,091
+train a neural network, what you
+
+177
+00:06:19,006 --> 00:06:20,085
+should do is randomly initialize the
+
+178
+00:06:20,093 --> 00:06:21,081
+weights to, you know, small
+
+179
+00:06:22,012 --> 00:06:23,037
+values close to 0, between
+
+180
+00:06:23,074 --> 00:06:24,074
+minus epsilon and plus epsilon,
+
+181
+00:06:25,016 --> 00:06:27,014
+say, and then implement
+
+182
+00:06:27,062 --> 00:06:29,032
+back-propagation; do gradient checking;
+
+183
+00:06:30,022 --> 00:06:31,030
+and use either gradient
+
+184
+00:06:31,066 --> 00:06:32,062
+descent or one of the
+
+185
+00:06:32,087 --> 00:06:34,086
+advanced optimization algorithms to try
+
+186
+00:06:35,010 --> 00:06:36,025
+to minimize J of theta
+
+187
+00:06:36,079 --> 00:06:37,086
+as a function of the
+
+188
+00:06:38,005 --> 00:06:39,061
+parameters theta starting from just
+
+189
+00:06:39,088 --> 00:06:41,089
+randomly chosen initial value for the parameters.
+
+190
+00:06:42,097 --> 00:06:45,043
+And by doing symmetry breaking, which is this process.
+
+191
+00:06:46,000 --> 00:06:47,011
+Hopefully, gradient descent or the
+
+192
+00:06:47,057 --> 00:06:48,081
+advanced optimization algorithms will be
+
+193
+00:06:48,098 --> 00:06:50,070
+able to find a good value of theta.

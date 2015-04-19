@@ -1,0 +1,1092 @@
+
+1
+00:00:00,036 --> 00:00:01,062
+By now, you've seen a
+
+2
+00:00:01,076 --> 00:00:03,079
+couple different learning algorithms, linear
+
+3
+00:00:04,005 --> 00:00:05,032
+regression and logistic regression.
+
+4
+00:00:06,050 --> 00:00:07,066
+They work well for many problems,
+
+5
+00:00:08,053 --> 00:00:09,050
+but when you apply them
+
+6
+00:00:09,066 --> 00:00:11,075
+to certain machine learning applications, they
+
+7
+00:00:11,088 --> 00:00:13,032
+can run into a problem called
+
+8
+00:00:13,090 --> 00:00:16,055
+overfitting that can cause them to perform very poorly.
+
+9
+00:00:18,005 --> 00:00:18,078
+What I'd like to do in
+
+10
+00:00:18,085 --> 00:00:20,023
+this video is explain to
+
+11
+00:00:20,039 --> 00:00:21,076
+you what is this overfitting
+
+12
+00:00:22,037 --> 00:00:23,092
+problem, and in the
+
+13
+00:00:24,007 --> 00:00:25,019
+next few videos after this,
+
+14
+00:00:25,082 --> 00:00:27,019
+we'll talk about a technique called
+
+15
+00:00:27,076 --> 00:00:29,048
+regularization, that will allow
+
+16
+00:00:29,078 --> 00:00:31,035
+us to ameliorate or to
+
+17
+00:00:31,051 --> 00:00:33,050
+reduce this overfitting problem and
+
+18
+00:00:33,060 --> 00:00:35,065
+get these learning algorithms to maybe work much better.
+
+19
+00:00:36,085 --> 00:00:37,089
+So what is overfitting?
+
+20
+00:00:39,067 --> 00:00:41,017
+Let's keep using our running
+
+21
+00:00:41,061 --> 00:00:43,060
+example of predicting housing
+
+22
+00:00:44,004 --> 00:00:45,027
+prices with linear regression
+
+23
+00:00:46,013 --> 00:00:47,000
+where we want to predict the
+
+24
+00:00:47,006 --> 00:00:49,013
+price as a function of the size of the house.
+
+25
+00:00:50,071 --> 00:00:51,064
+One thing we could do is
+
+26
+00:00:51,090 --> 00:00:53,042
+fit a linear function to
+
+27
+00:00:53,059 --> 00:00:54,079
+this data, and if we
+
+28
+00:00:54,089 --> 00:00:55,085
+do that, maybe we get
+
+29
+00:00:56,025 --> 00:00:57,078
+that sort of straight line fit to the data.
+
+30
+00:00:58,089 --> 00:01:00,011
+But this isn't a very good model.
+
+31
+00:01:01,000 --> 00:01:02,021
+Looking at the data, it seems
+
+32
+00:01:02,056 --> 00:01:03,089
+pretty clear that as the
+
+33
+00:01:04,009 --> 00:01:05,089
+size of the housing freezes, the
+
+34
+00:01:06,025 --> 00:01:08,012
+housing prices plateau, or kind
+
+35
+00:01:08,026 --> 00:01:10,085
+of flattens out as we move to the right and so
+
+36
+00:01:11,073 --> 00:01:13,079
+this algorithm does not
+
+37
+00:01:14,001 --> 00:01:15,076
+fit the training and we
+
+38
+00:01:15,085 --> 00:01:18,092
+call this problem underfitting, and
+
+39
+00:01:19,018 --> 00:01:20,031
+another term for this is
+
+40
+00:01:20,050 --> 00:01:22,098
+that this algorithm has high bias.
+
+41
+00:01:25,014 --> 00:01:26,057
+Both of these roughly
+
+42
+00:01:26,089 --> 00:01:29,073
+mean that it's just not even fitting the training data very well.
+
+43
+00:01:30,073 --> 00:01:32,018
+The term is kind of
+
+44
+00:01:32,026 --> 00:01:33,090
+a historical or technical one,
+
+45
+00:01:34,048 --> 00:01:35,054
+but the idea is that
+
+46
+00:01:36,010 --> 00:01:37,018
+if a fitting a straight line to
+
+47
+00:01:37,029 --> 00:01:38,073
+the data, then, it's as
+
+48
+00:01:38,092 --> 00:01:40,029
+if the algorithm has a
+
+49
+00:01:40,032 --> 00:01:42,050
+very strong preconception, or a
+
+50
+00:01:42,062 --> 00:01:44,028
+very strong bias that housing
+
+51
+00:01:44,065 --> 00:01:45,076
+prices are going to vary
+
+52
+00:01:46,031 --> 00:01:49,045
+linearly with their size and despite the data to the contrary.
+
+53
+00:01:50,000 --> 00:01:51,021
+Despite the evidence of the
+
+54
+00:01:51,029 --> 00:01:53,079
+contrary is preconceptions still
+
+55
+00:01:54,014 --> 00:01:55,029
+are bias, still closes
+
+56
+00:01:55,043 --> 00:01:56,035
+it to fit a straight line
+
+57
+00:01:57,012 --> 00:01:59,009
+and this ends up being a poor fit to the data.
+
+58
+00:02:00,062 --> 00:02:02,004
+Now, in the middle, we could
+
+59
+00:02:02,020 --> 00:02:03,098
+fit a quadratic functions enter and,
+
+60
+00:02:04,057 --> 00:02:06,012
+with this data set, we fit the
+
+61
+00:02:06,021 --> 00:02:07,064
+quadratic function, maybe, we get
+
+62
+00:02:07,081 --> 00:02:09,055
+that kind of curve
+
+63
+00:02:10,018 --> 00:02:14,006
+and, that works pretty well.
+
+64
+00:02:14,028 --> 00:02:17,002
+And, at the other extreme, would be if we were to fit, say a fourth other polynomial to the data.
+
+65
+00:02:17,055 --> 00:02:18,075
+So, here we have five parameters,
+
+66
+00:02:19,046 --> 00:02:23,012
+theta zero through theta four,
+
+67
+00:02:23,040 --> 00:02:23,084
+and, with that, we can actually fill a curve
+
+68
+00:02:23,090 --> 00:02:25,062
+that process through all five of our training examples.
+
+69
+00:02:26,071 --> 00:02:28,059
+You might get a curve that looks like this.
+
+70
+00:02:31,025 --> 00:02:32,027
+That, on the one
+
+71
+00:02:32,046 --> 00:02:33,053
+hand, seems to do
+
+72
+00:02:33,075 --> 00:02:34,096
+a very good job fitting the
+
+73
+00:02:35,003 --> 00:02:36,003
+training set and, that is
+
+74
+00:02:36,021 --> 00:02:37,069
+processed through all of my data, at least.
+
+75
+00:02:38,027 --> 00:02:40,009
+But, this is still a very wiggly curve, right?
+
+76
+00:02:40,030 --> 00:02:41,022
+So, it's going up and down all
+
+77
+00:02:41,065 --> 00:02:43,003
+over the place, and, we don't actually
+
+78
+00:02:43,041 --> 00:02:45,075
+think that's such a good model for predicting housing prices.
+
+79
+00:02:47,000 --> 00:02:48,074
+So, this problem we
+
+80
+00:02:48,090 --> 00:02:51,065
+call overfitting, and, another
+
+81
+00:02:51,096 --> 00:02:52,094
+term for this is that
+
+82
+00:02:53,016 --> 00:02:54,091
+this algorithm has high variants.
+
+83
+00:02:57,088 --> 00:02:59,068
+The term high variants is another
+
+84
+00:02:59,094 --> 00:03:01,050
+sort of historical or technical one.
+
+85
+00:03:02,012 --> 00:03:03,028
+But, the intuition is that,
+
+86
+00:03:03,080 --> 00:03:04,087
+if we're fitting such a high
+
+87
+00:03:05,008 --> 00:03:06,087
+order polynomial, then, the
+
+88
+00:03:07,033 --> 00:03:08,044
+hypothesis can fit, you know,
+
+89
+00:03:08,062 --> 00:03:09,040
+it's almost as if it can
+
+90
+00:03:09,056 --> 00:03:11,058
+fit almost any function and
+
+91
+00:03:11,096 --> 00:03:13,018
+this face of possible hypothesis
+
+92
+00:03:14,012 --> 00:03:15,034
+is just too large, it's too variable.
+
+93
+00:03:16,061 --> 00:03:17,056
+And we don't have enough data
+
+94
+00:03:18,000 --> 00:03:19,011
+to constrain it to give
+
+95
+00:03:19,024 --> 00:03:21,093
+us a good hypothesis so that's called overfitting.
+
+96
+00:03:22,074 --> 00:03:23,093
+And in the middle, there isn't really
+
+97
+00:03:24,034 --> 00:03:26,015
+a name but I'm just going to write, you know, just right.
+
+98
+00:03:26,096 --> 00:03:29,005
+Where a second degree polynomial, quadratic function
+
+99
+00:03:29,084 --> 00:03:31,038
+seems to be just right for fitting this data.
+
+100
+00:03:32,053 --> 00:03:34,030
+To recap a bit the
+
+101
+00:03:34,068 --> 00:03:36,055
+problem of over fitting comes
+
+102
+00:03:37,003 --> 00:03:38,012
+when if we have
+
+103
+00:03:38,025 --> 00:03:40,056
+too many features, then to
+
+104
+00:03:40,071 --> 00:03:43,002
+learn hypothesis may fit the training side very well.
+
+105
+00:03:43,087 --> 00:03:45,009
+So, your cost function
+
+106
+00:03:46,000 --> 00:03:46,096
+may actually be very close
+
+107
+00:03:47,031 --> 00:03:48,016
+to zero or may be
+
+108
+00:03:48,043 --> 00:03:50,055
+even zero exactly, but you
+
+109
+00:03:50,075 --> 00:03:51,090
+may then end up with a
+
+110
+00:03:51,097 --> 00:03:53,075
+curve like this that, you
+
+111
+00:03:53,084 --> 00:03:55,012
+know tries too hard to
+
+112
+00:03:55,027 --> 00:03:56,075
+fit the training set, so that it
+
+113
+00:03:57,011 --> 00:03:59,008
+even fails to generalize to
+
+114
+00:03:59,025 --> 00:04:01,000
+new examples and fails to
+
+115
+00:04:01,012 --> 00:04:02,047
+predict prices on new examples
+
+116
+00:04:03,005 --> 00:04:04,022
+as well, and here the
+
+117
+00:04:04,034 --> 00:04:06,033
+term generalized refers to
+
+118
+00:04:06,084 --> 00:04:10,012
+how well a hypothesis applies even to new examples.
+
+119
+00:04:10,086 --> 00:04:12,009
+That is to data to
+
+120
+00:04:12,031 --> 00:04:14,033
+houses that it has not seen in the data center.
+
+121
+00:04:16,060 --> 00:04:17,068
+On this slide, we looked at
+
+122
+00:04:17,091 --> 00:04:19,070
+over fitting for the case of linear regression.
+
+123
+00:04:20,081 --> 00:04:23,088
+A similar thing can apply to logistic regression as well.
+
+124
+00:04:24,018 --> 00:04:25,066
+Here is a logistic regression
+
+125
+00:04:26,006 --> 00:04:28,000
+example with two features X1 and x2.
+
+126
+00:04:28,091 --> 00:04:29,086
+One thing we could do, is
+
+127
+00:04:30,013 --> 00:04:31,043
+fit logistic regression with
+
+128
+00:04:31,051 --> 00:04:34,018
+just a simple hypothesis like this,
+
+129
+00:04:34,052 --> 00:04:36,082
+where, as usual, G is my sigmoid function.
+
+130
+00:04:38,012 --> 00:04:39,014
+And if you do that, you end up
+
+131
+00:04:39,032 --> 00:04:41,004
+with a hypothesis, trying to
+
+132
+00:04:41,060 --> 00:04:42,080
+use, maybe, just a straight
+
+133
+00:04:42,092 --> 00:04:44,056
+line to separate the positive and the negative examples.
+
+134
+00:04:45,067 --> 00:04:47,081
+And this doesn't look like a very good fit to the hypothesis.
+
+135
+00:04:49,010 --> 00:04:50,029
+So, once again, this
+
+136
+00:04:50,062 --> 00:04:51,087
+is an example of underfitting
+
+137
+00:04:52,056 --> 00:04:54,043
+or of the hypothesis having high bias.
+
+138
+00:04:56,020 --> 00:04:57,031
+In contrast, if you were
+
+139
+00:04:57,049 --> 00:04:58,087
+to add to your features
+
+140
+00:04:59,017 --> 00:05:00,074
+these quadratic terms, then,
+
+141
+00:05:00,099 --> 00:05:02,008
+you could get a decision
+
+142
+00:05:02,055 --> 00:05:04,079
+boundary that might look more like this.
+
+143
+00:05:05,061 --> 00:05:07,019
+And, you know, that's a pretty good fit to the data.
+
+144
+00:05:07,077 --> 00:05:10,050
+Probably, about as
+
+145
+00:05:10,086 --> 00:05:12,052
+good as we could get, on this training set.
+
+146
+00:05:14,000 --> 00:05:15,005
+And, finally, at the other
+
+147
+00:05:15,017 --> 00:05:16,000
+extreme, if you were to
+
+148
+00:05:16,013 --> 00:05:18,010
+fit a very high-order polynomial, if
+
+149
+00:05:18,018 --> 00:05:19,036
+you were to generate lots of
+
+150
+00:05:19,097 --> 00:05:21,060
+high-order polynomial terms of speeches,
+
+151
+00:05:22,049 --> 00:05:24,012
+then, logistical regression may contort
+
+152
+00:05:24,075 --> 00:05:26,029
+itself, may try really
+
+153
+00:05:26,056 --> 00:05:28,011
+hard to find a
+
+154
+00:05:28,022 --> 00:05:31,044
+decision boundary that fits
+
+155
+00:05:31,070 --> 00:05:32,086
+your training data or go
+
+156
+00:05:33,002 --> 00:05:34,032
+to great lengths to contort itself,
+
+157
+00:05:34,099 --> 00:05:36,072
+to fit every single training example well.
+
+158
+00:05:37,069 --> 00:05:38,064
+And, you know, if the
+
+159
+00:05:38,070 --> 00:05:39,043
+features X1 and
+
+160
+00:05:39,055 --> 00:05:41,022
+X2 offer predicting, maybe,
+
+161
+00:05:41,043 --> 00:05:43,012
+the cancer to the,
+
+162
+00:05:43,038 --> 00:05:45,070
+you know, cancer is a malignant, benign breast tumors.
+
+163
+00:05:46,042 --> 00:05:47,064
+This doesn't, this really doesn't
+
+164
+00:05:47,094 --> 00:05:50,093
+look like a very good hypothesis, for making predictions.
+
+165
+00:05:51,093 --> 00:05:53,033
+And so, once again, this is
+
+166
+00:05:53,045 --> 00:05:54,074
+an instance of overfitting
+
+167
+00:05:55,042 --> 00:05:56,079
+and, of a hypothesis having
+
+168
+00:05:57,010 --> 00:05:58,064
+high variance and not really,
+
+169
+00:05:59,039 --> 00:06:01,092
+and, being unlikely to generalize well to new examples.
+
+170
+00:06:04,056 --> 00:06:06,001
+Later, in this course, when we
+
+171
+00:06:06,013 --> 00:06:07,069
+talk about debugging and diagnosing
+
+172
+00:06:08,045 --> 00:06:09,061
+things that can go wrong with
+
+173
+00:06:09,081 --> 00:06:11,029
+learning algorithms, we'll give you
+
+174
+00:06:11,044 --> 00:06:12,058
+specific tools to recognize
+
+175
+00:06:13,026 --> 00:06:14,060
+when overfitting and, also,
+
+176
+00:06:14,093 --> 00:06:16,014
+when underfitting may be occurring.
+
+177
+00:06:17,038 --> 00:06:18,056
+But, for now, lets talk about
+
+178
+00:06:18,077 --> 00:06:20,025
+the problem of, if we
+
+179
+00:06:20,036 --> 00:06:21,036
+think overfitting is occurring,
+
+180
+00:06:22,025 --> 00:06:23,068
+what can we do to address it?
+
+181
+00:06:24,086 --> 00:06:26,024
+In the previous examples, we had
+
+182
+00:06:26,066 --> 00:06:28,043
+one or two dimensional data so,
+
+183
+00:06:28,069 --> 00:06:30,051
+we could just plot the hypothesis and see what was going
+
+184
+00:06:31,023 --> 00:06:33,051
+on and select the appropriate degree polynomial.
+
+185
+00:06:34,062 --> 00:06:36,038
+So, earlier for the housing
+
+186
+00:06:36,077 --> 00:06:37,099
+prices example, we could just
+
+187
+00:06:38,041 --> 00:06:40,049
+plot the hypothesis and, you
+
+188
+00:06:40,060 --> 00:06:41,049
+know, maybe see that it
+
+189
+00:06:41,056 --> 00:06:42,062
+was fitting the sort of
+
+190
+00:06:42,076 --> 00:06:45,037
+very wiggly function that goes all over the place to predict housing prices.
+
+191
+00:06:46,031 --> 00:06:47,043
+And we could then use figures
+
+192
+00:06:47,074 --> 00:06:49,075
+like these to select an appropriate degree polynomial.
+
+193
+00:06:50,068 --> 00:06:53,088
+So plotting the hypothesis, could
+
+194
+00:06:54,016 --> 00:06:55,018
+be one way to try to
+
+195
+00:06:55,075 --> 00:06:57,036
+decide what degree polynomial to use.
+
+196
+00:06:58,006 --> 00:06:59,061
+But that doesn't always work.
+
+197
+00:07:00,018 --> 00:07:01,085
+And, in fact more often we
+
+198
+00:07:01,097 --> 00:07:04,086
+may have learning problems that where we just have a lot of features.
+
+199
+00:07:06,005 --> 00:07:07,020
+And there is not
+
+200
+00:07:07,045 --> 00:07:09,062
+just a matter of selecting what degree polynomial.
+
+201
+00:07:10,062 --> 00:07:12,004
+And, in fact, when we
+
+202
+00:07:12,017 --> 00:07:13,041
+have so many features, it also
+
+203
+00:07:13,076 --> 00:07:15,024
+becomes much harder to plot
+
+204
+00:07:15,062 --> 00:07:17,036
+the data and it becomes
+
+205
+00:07:17,070 --> 00:07:18,094
+much harder to visualize it,
+
+206
+00:07:19,013 --> 00:07:20,072
+to decide what features to keep or not.
+
+207
+00:07:22,042 --> 00:07:23,085
+So concretely, if we're trying
+
+208
+00:07:24,016 --> 00:07:27,044
+predict housing prices sometimes we can just have a lot of different features.
+
+209
+00:07:27,087 --> 00:07:30,062
+And all of these features seem, you know, maybe they seem kind of useful.
+
+210
+00:07:31,036 --> 00:07:32,043
+But, if we have a
+
+211
+00:07:32,057 --> 00:07:33,080
+lot of features, and, very little
+
+212
+00:07:34,006 --> 00:07:35,058
+training data, then, over
+
+213
+00:07:35,083 --> 00:07:37,012
+fitting can become a problem.
+
+214
+00:07:37,076 --> 00:07:38,098
+In order to address over
+
+215
+00:07:39,016 --> 00:07:40,038
+fitting, there are two
+
+216
+00:07:40,063 --> 00:07:42,057
+main options for things that we can do.
+
+217
+00:07:43,077 --> 00:07:45,058
+The first option is, to try
+
+218
+00:07:45,076 --> 00:07:47,010
+to reduce the number of features.
+
+219
+00:07:47,099 --> 00:07:49,023
+Concretely, one thing we
+
+220
+00:07:49,032 --> 00:07:51,002
+could do is manually look through
+
+221
+00:07:51,036 --> 00:07:52,099
+the list of features, and, use
+
+222
+00:07:53,022 --> 00:07:54,050
+that to try to decide which
+
+223
+00:07:54,086 --> 00:07:56,077
+are the more important features, and, therefore,
+
+224
+00:07:57,020 --> 00:07:58,023
+which are the features we should
+
+225
+00:07:58,047 --> 00:08:00,066
+keep, and, which are the features we should throw out.
+
+226
+00:08:01,083 --> 00:08:03,011
+Later in this course, where also
+
+227
+00:08:03,036 --> 00:08:05,007
+talk about model selection algorithms.
+
+228
+00:08:06,004 --> 00:08:07,069
+Which are algorithms for automatically
+
+229
+00:08:08,035 --> 00:08:09,064
+deciding which features
+
+230
+00:08:09,080 --> 00:08:11,050
+to keep and, which features to throw out.
+
+231
+00:08:12,050 --> 00:08:13,087
+This idea of reducing the
+
+232
+00:08:13,098 --> 00:08:15,026
+number of features can work
+
+233
+00:08:15,050 --> 00:08:16,093
+well, and, can reduce over fitting.
+
+234
+00:08:17,085 --> 00:08:19,002
+And, when we talk about model
+
+235
+00:08:19,036 --> 00:08:21,055
+selection, we'll go into this in much greater depth.
+
+236
+00:08:22,051 --> 00:08:24,011
+But, the disadvantage is that, by
+
+237
+00:08:24,036 --> 00:08:25,044
+throwing away some of the
+
+238
+00:08:25,060 --> 00:08:27,000
+features, is also throwing
+
+239
+00:08:27,037 --> 00:08:29,080
+away some of the information you have about the problem.
+
+240
+00:08:30,064 --> 00:08:31,085
+For example, maybe, all of
+
+241
+00:08:31,093 --> 00:08:33,033
+those features are actually useful
+
+242
+00:08:33,077 --> 00:08:35,004
+for predicting the price of a
+
+243
+00:08:35,007 --> 00:08:36,019
+house, so, maybe, we don't actually
+
+244
+00:08:36,063 --> 00:08:37,058
+want to throw some of
+
+245
+00:08:37,067 --> 00:08:39,078
+our information or throw some of our features away.
+
+246
+00:08:41,053 --> 00:08:43,050
+The second option, which we'll
+
+247
+00:08:44,045 --> 00:08:45,077
+talk about in the
+
+248
+00:08:46,000 --> 00:08:47,033
+next few videos, is regularization.
+
+249
+00:08:49,012 --> 00:08:49,099
+Here, we're going to keep
+
+250
+00:08:50,037 --> 00:08:52,040
+all the features, but we're
+
+251
+00:08:52,055 --> 00:08:53,094
+going to reduce the magnitude
+
+252
+00:08:54,096 --> 00:08:55,086
+or the values of the parameters
+
+253
+00:08:56,051 --> 00:08:58,052
+theta J. And, this
+
+254
+00:08:58,075 --> 00:09:00,005
+method works well, we'll see,
+
+255
+00:09:00,069 --> 00:09:01,067
+when we have a lot of
+
+256
+00:09:01,089 --> 00:09:03,012
+features, each of which contributes
+
+257
+00:09:03,082 --> 00:09:04,080
+a little bit to predicting
+
+258
+00:09:05,033 --> 00:09:07,057
+the value of Y, like we
+
+259
+00:09:07,074 --> 00:09:09,055
+saw in the housing price prediction example.
+
+260
+00:09:10,027 --> 00:09:11,009
+Where we could have a lot
+
+261
+00:09:11,039 --> 00:09:12,051
+of features, each of which
+
+262
+00:09:12,075 --> 00:09:15,040
+are, you know, somewhat useful, so, maybe, we don't want to throw them away.
+
+263
+00:09:16,092 --> 00:09:18,094
+So, this subscribes the
+
+264
+00:09:19,025 --> 00:09:21,078
+idea of regularization at a very high level.
+
+265
+00:09:22,063 --> 00:09:24,016
+And, I realize that, all
+
+266
+00:09:24,036 --> 00:09:26,024
+of these details probably don't make sense to you yet.
+
+267
+00:09:26,074 --> 00:09:28,007
+But, in the next video, we'll
+
+268
+00:09:28,028 --> 00:09:30,012
+start to formulate exactly how
+
+269
+00:09:30,091 --> 00:09:34,000
+to apply regularization and, exactly what regularization means.
+
+270
+00:09:35,013 --> 00:09:36,058
+And, then we'll start to
+
+271
+00:09:36,074 --> 00:09:38,008
+figure out, how to use this,
+
+272
+00:09:38,030 --> 00:09:40,012
+to make how learning algorithms work
+
+273
+00:09:40,040 --> 00:09:41,083
+well and avoid overfitting.

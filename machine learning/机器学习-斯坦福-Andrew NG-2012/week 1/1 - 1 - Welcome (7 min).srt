@@ -1,0 +1,429 @@
+
+1
+00:00:00,000 --> 00:00:04,026
+Welcome to this free online class on
+machine learning. Machine learning is one
+
+2
+00:00:04,026 --> 00:00:08,057
+of the most exciting recent technologies.
+And in this class, you learn about the
+
+3
+00:00:08,057 --> 00:00:13,011
+state of the art and also gain practice
+implementing and deploying these algorithms
+
+4
+00:00:13,011 --> 00:00:17,048
+yourself. You've probably use a learning
+algorithm dozens of times a day without
+
+5
+00:00:17,048 --> 00:00:21,042
+knowing it. Every time you use a web
+search engine like Google or Bing to
+
+6
+00:00:21,042 --> 00:00:25,079
+search the internet, one of the reasons
+that works so well is because a learning
+
+7
+00:00:25,079 --> 00:00:30,000
+algorithm, one implemented by Google or
+Microsoft, has learned how to rank web
+
+8
+00:00:30,000 --> 00:00:35,014
+pages. Every time you use Facebook or
+Apple's photo typing application and it
+
+9
+00:00:35,014 --> 00:00:40,059
+recognizes your friends' photos, that's
+also machine learning. Every time you read
+
+10
+00:00:40,059 --> 00:00:46,005
+your email and your spam filter saves you
+from having to wade through tons of spam
+
+11
+00:00:46,005 --> 00:00:50,097
+email, that's also a learning algorithm.
+For me one of the reasons I'm excited is
+
+12
+00:00:50,097 --> 00:00:55,064
+the AI dream of someday building machines
+as intelligent as you or me. We're a long
+
+13
+00:00:55,064 --> 00:01:00,007
+way away from that goal, but many AI
+researchers believe that the best way to
+
+14
+00:01:00,007 --> 00:01:04,056
+towards that goal is through learning
+algorithms that try to mimic how the human
+
+15
+00:01:04,056 --> 00:01:08,099
+brain learns. I'll tell you a little bit
+about that too in this class. In this
+
+16
+00:01:08,099 --> 00:01:13,054
+class you learn about state-of-the-art
+machine learning algorithms. But it turns
+
+17
+00:01:13,054 --> 00:01:17,091
+out just knowing the algorithms and
+knowing the math isn't that much good if
+
+18
+00:01:17,091 --> 00:01:22,046
+you don't also know how to actually get
+this stuff to work on problems that you
+
+19
+00:01:22,046 --> 00:01:26,084
+care about. So, we've also spent a lot
+of time developing exercises for you to
+
+20
+00:01:26,084 --> 00:01:32,008
+implement each of these algorithms and
+see how they work fot yourself. So why is
+
+21
+00:01:32,008 --> 00:01:37,007
+machine learning so prevalent today?
+It turns out that machine learning is a
+
+22
+00:01:37,007 --> 00:01:41,071
+field that had grown out of the field of
+AI, or artificial intelligence. We wanted
+
+23
+00:01:41,071 --> 00:01:46,064
+to build intelligent machines and it turns
+out that there are a few basic things that
+
+24
+00:01:46,064 --> 00:01:51,045
+we could program a machine to do such as
+how to find the shortest path from A to B.
+
+25
+00:01:51,045 --> 00:01:56,026
+But for the most part we just did not know
+how to write AI programs to do the more
+
+26
+00:01:56,026 --> 00:02:00,090
+interesting things such as web search or
+photo tagging or email anti-spam. There
+
+27
+00:02:00,090 --> 00:02:05,071
+was a realization that the only way to do
+these things was to have a machine learn
+
+28
+00:02:05,071 --> 00:02:11,023
+to do it by itself. So, machine learning
+was developed as a new capability for
+
+29
+00:02:11,023 --> 00:02:16,094
+computers and today it touches many
+segments of industry and basic science.
+
+30
+00:02:16,094 --> 00:02:21,049
+For me, I work on machine learning and
+in a typical week I might end up talking to
+
+31
+00:02:21,049 --> 00:02:25,069
+helicopter pilots, biologists, a bunch
+of computer systems people (so my
+
+32
+00:02:25,069 --> 00:02:30,059
+colleagues here at Stanford) and averaging
+two or three times a week I get email from
+
+33
+00:02:30,059 --> 00:02:35,002
+people in industry from Silicon Valley
+contacting me who have an interest in
+
+34
+00:02:35,002 --> 00:02:39,074
+applying learning algorithms to their own
+problems. This is a sign of the range of
+
+35
+00:02:39,074 --> 00:02:44,000
+problems that machine learning touches.
+There is autonomous robotics, computational
+
+36
+00:02:44,000 --> 00:02:48,077
+biology, tons of things in Silicon Valley
+that machine learning is having an impact
+
+37
+00:02:48,077 --> 00:02:55,031
+on. Here are some other examples of
+machine learning. There's database mining.
+
+38
+00:02:55,031 --> 00:03:00,006
+One of the reasons machine learning has so
+pervaded is the growth of the web and the
+
+39
+00:03:00,006 --> 00:03:04,075
+growth of automation All this means that
+we have much larger data sets than ever
+
+40
+00:03:04,075 --> 00:03:09,027
+before. So, for example tons of Silicon
+Valley companies are today collecting web
+
+41
+00:03:09,027 --> 00:03:13,073
+click data, also called clickstream data,
+and are trying to use machine learning
+
+42
+00:03:13,073 --> 00:03:18,048
+algorithms to mine this data to understand
+the users better and to serve the users
+
+43
+00:03:18,048 --> 00:03:22,032
+better, that's a huge segment of
+Silicon Valley right now. Medical
+
+44
+00:03:22,032 --> 00:03:27,048
+records. With the advent of automation, we
+now have electronic medical records, so if
+
+45
+00:03:27,048 --> 00:03:32,063
+we can turn medical records into medical
+knowledge, then we can start to understand
+
+46
+00:03:32,063 --> 00:03:37,023
+disease better. Computational biology.
+With automation again, biologists are
+
+47
+00:03:37,023 --> 00:03:41,077
+collecting lots of data about gene
+sequences, DNA sequences, and so on, and
+
+48
+00:03:41,077 --> 00:03:46,093
+machines running algorithms are giving us
+a much better understanding of the human
+
+49
+00:03:46,093 --> 00:03:51,037
+genome, and what it means to be human.
+And in engineering as well, in all fields of
+
+50
+00:03:51,037 --> 00:03:55,003
+engineering, we have larger and larger,
+and larger and larger data sets, that
+
+51
+00:03:55,003 --> 00:03:59,024
+we're trying to understand using learning
+algorithms. A second range of machinery
+
+52
+00:03:59,024 --> 00:04:03,043
+applications is ones that we cannot
+program by hand. So for example, I've
+
+53
+00:04:03,043 --> 00:04:08,032
+worked on autonomous helicopters for many
+years. We just did not know how to write a
+
+54
+00:04:08,032 --> 00:04:18,002
+computer program to make this helicopter
+fly by itself. The only thing that worked
+
+55
+00:04:18,002 --> 00:04:35,057
+was having a computer learn by itself how
+to fly this helicopter. [Helicopter whirling]
+
+56
+00:04:37,012 --> 00:04:42,087
+Handwriting recognition. It turns out one
+of the reasons it's so inexpensive today to
+
+57
+00:04:42,087 --> 00:04:47,032
+route a piece of mail across the
+countries, in the US and internationally,
+
+58
+00:04:47,032 --> 00:04:51,089
+is that when you write an envelope like
+this, it turns out there's a learning
+
+59
+00:04:51,089 --> 00:04:56,094
+algorithm that has learned how to read your
+handwriting so that it can automatically
+
+60
+00:04:56,094 --> 00:05:01,074
+route this envelope on its way, and so it
+costs us a few cents to send this thing
+
+61
+00:05:01,074 --> 00:05:06,031
+thousands of miles. And in fact if you've
+seen the fields of natural language
+
+62
+00:05:06,031 --> 00:05:10,053
+processing or computer vision,
+these are the fields of AI pertaining to
+
+63
+00:05:10,053 --> 00:05:15,032
+understanding language or understanding
+images. Most of natural language processing
+
+64
+00:05:15,032 --> 00:05:20,068
+and most of computer vision today is
+applied machine learning. Learning
+
+65
+00:05:20,068 --> 00:05:25,057
+algorithms are also widely used for self-
+customizing programs. Every time you go to
+
+66
+00:05:25,057 --> 00:05:30,028
+Amazon or Netflix or iTunes Genius, and it
+recommends the movies or products and
+
+67
+00:05:30,028 --> 00:05:35,007
+music to you, that's a learning algorithm.
+If you think about it they have million
+
+68
+00:05:35,007 --> 00:05:39,099
+users; there is no way to write a million
+different programs for your million users.
+
+69
+00:05:39,099 --> 00:05:44,080
+The only way to have software give these
+customized recommendations is to become
+
+70
+00:05:44,080 --> 00:05:49,025
+learn by itself to customize itself to
+your preferences. Finally learning
+
+71
+00:05:49,025 --> 00:05:53,029
+algorithms are being used today to
+understand human learning and to
+
+72
+00:05:53,029 --> 00:05:58,004
+understand the brain. We'll talk about
+how researches are using this to make
+
+73
+00:05:58,004 --> 00:06:03,018
+progress towards the big AI dream. A few
+months ago, a student showed me an article
+
+74
+00:06:03,018 --> 00:06:07,099
+on the top twelve IT skills. The skills
+that information technology hiring
+
+75
+00:06:07,099 --> 00:06:13,000
+managers cannot say no to. It was a
+slightly older article, but at the top of
+
+76
+00:06:13,000 --> 00:06:17,098
+this list of the twelve most desirable IT
+skills was machine learning. Here at
+
+77
+00:06:17,098 --> 00:06:21,079
+Stanford, the number of recruiters
+that contact me asking if I know any
+
+78
+00:06:21,079 --> 00:06:25,092
+graduating machine learning students
+is far larger than the machine learning
+
+79
+00:06:25,092 --> 00:06:30,004
+students we graduate each year. So I
+think there is a vast, unfulfilled demand
+
+80
+00:06:30,004 --> 00:06:34,027
+for this skill set, and this is a great time to
+be learning about machine learning, and I
+
+81
+00:06:34,027 --> 00:06:38,045
+hope to teach you a lot about machine
+learning in this class. In the next video,
+
+82
+00:06:38,045 --> 00:06:42,012
+we'll start to give a more formal
+definition of what is machine learning.
+
+83
+00:06:42,012 --> 00:06:46,004
+And we'll begin to talk about the main
+types of machine learning problems and
+
+84
+00:06:46,004 --> 00:06:49,086
+algorithms. You'll pick up some of the
+main machine learning terminology, and
+
+85
+00:06:49,086 --> 00:06:53,068
+start to get a sense of what are the
+different algorithms, and when each one
+
+86
+00:06:53,068 --> 00:06:54,074
+might be appropriate.

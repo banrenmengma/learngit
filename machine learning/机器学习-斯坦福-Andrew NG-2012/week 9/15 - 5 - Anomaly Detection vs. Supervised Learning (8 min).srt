@@ -1,0 +1,936 @@
+
+1
+00:00:00,018 --> 00:00:01,020
+In the last video, we talked
+
+2
+00:00:01,058 --> 00:00:02,095
+about the process of evaluating
+
+3
+00:00:03,079 --> 00:00:05,078
+an anomaly detection algorithm and
+
+4
+00:00:05,091 --> 00:00:06,098
+there we started to use some
+
+5
+00:00:07,020 --> 00:00:08,081
+labelled data, with examples
+
+6
+00:00:08,088 --> 00:00:10,015
+that we knew were either anomalous
+
+7
+00:00:11,000 --> 00:00:13,016
+or not anomalous, with y equals 1 or y equals 0.
+
+8
+00:00:14,068 --> 00:00:15,038
+So the question then arises, if
+
+9
+00:00:15,068 --> 00:00:17,069
+we have this labeled data,
+
+10
+00:00:18,012 --> 00:00:19,062
+we have some examples that are
+
+11
+00:00:19,075 --> 00:00:20,083
+known to be anomalies and some
+
+12
+00:00:21,001 --> 00:00:21,085
+that are known not to be not
+
+13
+00:00:22,008 --> 00:00:23,053
+anomalies, why don't we
+
+14
+00:00:23,064 --> 00:00:25,057
+just use a supervised learning algorithm,
+
+15
+00:00:25,071 --> 00:00:26,078
+so why don't we just use
+
+16
+00:00:27,010 --> 00:00:28,035
+logistic regression or a neural
+
+17
+00:00:28,067 --> 00:00:29,076
+network to try to
+
+18
+00:00:30,001 --> 00:00:31,026
+learn directly from our labeled
+
+19
+00:00:31,055 --> 00:00:34,011
+data, to predict whether y equals one or y equals zero.
+
+20
+00:00:34,089 --> 00:00:35,089
+In this video, I'll try to
+
+21
+00:00:36,015 --> 00:00:37,017
+share with you some of
+
+22
+00:00:37,035 --> 00:00:38,082
+the thinking and some guidelines for
+
+23
+00:00:39,013 --> 00:00:40,060
+when you should probably use an
+
+24
+00:00:40,071 --> 00:00:42,015
+anomaly detection algorithm and when
+
+25
+00:00:42,043 --> 00:00:43,050
+it might be more fruitful to consider
+
+26
+00:00:43,092 --> 00:00:45,038
+using a supervised learning algorithm.
+
+27
+00:00:47,015 --> 00:00:48,095
+This slide shows, what are
+
+28
+00:00:49,000 --> 00:00:50,013
+the settings under which you should
+
+29
+00:00:50,089 --> 00:00:52,036
+maybe use anomaly detection versus
+
+30
+00:00:52,092 --> 00:00:54,059
+when supervised learning might be more fruitful.
+
+31
+00:00:56,003 --> 00:00:57,043
+If you have a problem with a
+
+32
+00:00:57,056 --> 00:00:58,082
+very small number of positive
+
+33
+00:00:59,071 --> 00:01:01,078
+examples, and remember examples of
+
+34
+00:01:01,089 --> 00:01:03,000
+y equals one are the
+
+35
+00:01:03,064 --> 00:01:05,051
+anomalous examples, then
+
+36
+00:01:06,017 --> 00:01:08,015
+you might consider using an anomaly detection algorithm inset.
+
+37
+00:01:09,026 --> 00:01:10,043
+So having 0 to 20,
+
+38
+00:01:10,059 --> 00:01:12,073
+maybe up to 50 positive examples,
+
+39
+00:01:13,045 --> 00:01:15,018
+might be pretty typical, and usually,
+
+40
+00:01:15,068 --> 00:01:16,081
+we have such a small set
+
+41
+00:01:17,012 --> 00:01:18,034
+of positive examples,
+
+42
+00:01:19,026 --> 00:01:20,017
+we are going to save the positive
+
+43
+00:01:20,051 --> 00:01:21,053
+examples just for the cross
+
+44
+00:01:21,084 --> 00:01:24,043
+validation sets and test sets.
+
+45
+00:01:24,084 --> 00:01:26,012
+In contrast, in a typical
+
+46
+00:01:26,051 --> 00:01:28,056
+normal anomaly detection setting,
+
+47
+00:01:29,034 --> 00:01:30,062
+we will often have a relatively
+
+48
+00:01:31,001 --> 00:01:32,034
+large number of negative examples,
+
+49
+00:01:33,010 --> 00:01:34,029
+of these normal examples of
+
+50
+00:01:34,090 --> 00:01:36,070
+normal aircraft engines.
+
+51
+00:01:37,071 --> 00:01:38,090
+And we can then use this very
+
+52
+00:01:39,020 --> 00:01:40,023
+large number of negative examples,
+
+53
+00:01:41,046 --> 00:01:42,051
+with which to fit the model
+
+54
+00:01:43,000 --> 00:01:44,009
+p of x.  And so, there is
+
+55
+00:01:44,018 --> 00:01:45,093
+this idea in many anomaly detection
+
+56
+00:01:46,031 --> 00:01:48,051
+applications, you have
+
+57
+00:01:48,076 --> 00:01:50,021
+very few positive examples, and
+
+58
+00:01:50,031 --> 00:01:52,054
+lots of negative examples, and when
+
+59
+00:01:52,081 --> 00:01:54,095
+we are doing the process of
+
+60
+00:01:55,021 --> 00:01:57,051
+estimating p of x, of fitting all those Gaussian parameters,
+
+61
+00:01:58,065 --> 00:02:00,068
+we need only negative examples to do that.
+
+62
+00:02:00,084 --> 00:02:01,068
+So if you have a lot of negative data,
+
+63
+00:02:02,014 --> 00:02:04,031
+we can still fit to p of x pretty well.
+
+64
+00:02:05,034 --> 00:02:07,009
+In contrast, for supervised learning,
+
+65
+00:02:07,076 --> 00:02:08,078
+more typically we would have
+
+66
+00:02:09,018 --> 00:02:10,081
+a reasonably large number of
+
+67
+00:02:11,005 --> 00:02:12,037
+both positive and negative examples.
+
+68
+00:02:13,091 --> 00:02:14,096
+And so this is one
+
+69
+00:02:15,006 --> 00:02:16,024
+way to look at your problem
+
+70
+00:02:16,077 --> 00:02:17,086
+and decide if you should use
+
+71
+00:02:18,024 --> 00:02:20,018
+an anomaly detection algorithm or a supervised learning algorithm.
+
+72
+00:02:21,075 --> 00:02:24,075
+Here is another way people often think about anomaly detection algorithms.
+
+73
+00:02:25,053 --> 00:02:26,088
+So, for anomaly detection applications
+
+74
+00:02:27,090 --> 00:02:28,088
+often there are many
+
+75
+00:02:29,003 --> 00:02:30,059
+different types of anomalies.
+
+76
+00:02:31,028 --> 00:02:31,077
+So think about aircraft engines.
+
+77
+00:02:32,003 --> 00:02:34,068
+You know there are so many different ways for aircraft engines to go wrong.
+
+78
+00:02:34,087 --> 00:02:36,097
+Right? There are so many things that could go wrong that could break an aircraft engine.
+
+79
+00:02:38,083 --> 00:02:40,008
+And so, if that's the
+
+80
+00:02:40,012 --> 00:02:40,093
+case and you have a pretty small
+
+81
+00:02:41,013 --> 00:02:43,056
+set of positive examples, then
+
+82
+00:02:44,043 --> 00:02:46,075
+it can be difficult for
+
+83
+00:02:47,058 --> 00:02:48,037
+an algorithm to learn from your small
+
+84
+00:02:48,074 --> 00:02:50,012
+set of positive examples what the anomalies look like.
+
+85
+00:02:50,018 --> 00:02:51,087
+And in particular,
+
+86
+00:02:52,080 --> 00:02:54,005
+you know, future anomalies may look
+
+87
+00:02:54,021 --> 00:02:55,075
+nothing like the ones you've seen so far.
+
+88
+00:02:56,005 --> 00:02:57,053
+So maybe in your set
+
+89
+00:02:57,078 --> 00:02:59,003
+of positive examples, maybe you
+
+90
+00:02:59,018 --> 00:02:59,074
+had seen 5 or 10, or 20
+
+91
+00:02:59,094 --> 00:03:02,096
+different ways that an aircraft engine could go wrong.
+
+92
+00:03:03,078 --> 00:03:05,059
+But maybe tomorrow, you
+
+93
+00:03:05,078 --> 00:03:07,011
+need to detect a totally
+
+94
+00:03:07,043 --> 00:03:08,087
+new set, a totally new
+
+95
+00:03:09,025 --> 00:03:10,062
+type of anomaly, a totally
+
+96
+00:03:10,081 --> 00:03:12,016
+new way for an aircraft
+
+97
+00:03:12,056 --> 00:03:13,087
+engine to be broken that
+
+98
+00:03:14,009 --> 00:03:15,065
+you have just never seen before,
+
+99
+00:03:15,094 --> 00:03:17,000
+and if that is the case,
+
+100
+00:03:17,055 --> 00:03:18,046
+then it might be more
+
+101
+00:03:18,065 --> 00:03:20,002
+promising to just model
+
+102
+00:03:20,047 --> 00:03:21,077
+the negative examples, with a
+
+103
+00:03:21,096 --> 00:03:23,062
+sort of a Gaussian model
+
+104
+00:03:23,096 --> 00:03:24,094
+P of X. Rather than try
+
+105
+00:03:25,028 --> 00:03:26,025
+too hard to model the positive
+
+106
+00:03:26,063 --> 00:03:27,084
+examples, because, you know,
+
+107
+00:03:28,003 --> 00:03:29,031
+tomorrow's anomaly may be
+
+108
+00:03:29,041 --> 00:03:32,068
+nothing like the ones you've seen so far.
+
+109
+00:03:33,013 --> 00:03:34,063
+In contrast, in some other
+
+110
+00:03:34,078 --> 00:03:36,016
+problems you have enough
+
+111
+00:03:36,059 --> 00:03:37,078
+positive examples for an algorithm
+
+112
+00:03:38,072 --> 00:03:40,084
+to get a sense of what the positive examples are like.
+
+113
+00:03:40,097 --> 00:03:42,086
+And in particular, if you
+
+114
+00:03:42,096 --> 00:03:44,027
+think that future positive examples
+
+115
+00:03:44,087 --> 00:03:45,068
+are likely to be similar
+
+116
+00:03:46,012 --> 00:03:46,097
+to ones in the training set,
+
+117
+00:03:47,066 --> 00:03:49,009
+then in that setting it might
+
+118
+00:03:49,022 --> 00:03:51,071
+be more reasonable to have a supervised learning algorithm,
+
+119
+00:03:52,055 --> 00:03:53,038
+that looks at a lot of
+
+120
+00:03:53,052 --> 00:03:54,075
+the positive examples, looks at a
+
+121
+00:03:54,093 --> 00:03:56,053
+lot of the negative examples, and
+
+122
+00:03:56,065 --> 00:03:58,097
+uses that to try to distinguish between positives and negatives.
+
+123
+00:04:01,062 --> 00:04:02,078
+So hopefully this gives you
+
+124
+00:04:02,087 --> 00:04:04,018
+a sense of if you have
+
+125
+00:04:04,052 --> 00:04:05,068
+a specific problem you should think
+
+126
+00:04:05,094 --> 00:04:07,080
+about using the anomaly
+
+127
+00:04:08,011 --> 00:04:09,044
+detection algorithm or a supervised learning algorithm.
+
+128
+00:04:11,011 --> 00:04:12,034
+And the key difference really is,
+
+129
+00:04:12,052 --> 00:04:13,087
+that in anomaly detection, after
+
+130
+00:04:14,002 --> 00:04:15,003
+we have such a small
+
+131
+00:04:15,033 --> 00:04:17,019
+number of positive examples that there
+
+132
+00:04:17,024 --> 00:04:18,063
+is not possible, for a learning
+
+133
+00:04:19,032 --> 00:04:21,081
+algorithm to learn that much from the positive examples.
+
+134
+00:04:22,043 --> 00:04:23,043
+And so what we do instead,
+
+135
+00:04:23,088 --> 00:04:25,005
+is take a large set of
+
+136
+00:04:25,023 --> 00:04:26,042
+negative examples, and have it just
+
+137
+00:04:27,005 --> 00:04:28,006
+learned a lot, learned p
+
+138
+00:04:28,023 --> 00:04:29,030
+of x from just the negative
+
+139
+00:04:29,050 --> 00:04:31,073
+examples of the normal aircraft engines, say.
+
+140
+00:04:32,018 --> 00:04:33,048
+And we reserve the small
+
+141
+00:04:33,063 --> 00:04:36,074
+number of positive examples for evaluating our algorithm
+
+142
+00:04:37,035 --> 00:04:39,068
+to use in either the cross validation sets or the test sets.
+
+143
+00:04:41,020 --> 00:04:42,037
+And just as a side comment about
+
+144
+00:04:42,062 --> 00:04:43,097
+these many different types of
+
+145
+00:04:44,008 --> 00:04:45,049
+anomalies, you know, in
+
+146
+00:04:45,079 --> 00:04:46,091
+some earlier videos we talked
+
+147
+00:04:47,005 --> 00:04:49,006
+about the email SPAM examples.
+
+148
+00:04:50,001 --> 00:04:51,050
+In those examples, there are
+
+149
+00:04:51,091 --> 00:04:53,044
+actually many different types of SPAM email.
+
+150
+00:04:53,093 --> 00:04:54,075
+The SPAM email is trying to
+
+151
+00:04:55,002 --> 00:04:57,064
+sell you things spam email, trying to steal your passwords,
+
+152
+00:04:58,047 --> 00:05:01,006
+this is called fishing emails, and many different types of SPAM emails.
+
+153
+00:05:01,081 --> 00:05:03,049
+But for the SPAM problem, we usually
+
+154
+00:05:03,093 --> 00:05:05,066
+have enough examples of spam
+
+155
+00:05:06,000 --> 00:05:07,039
+email to see, you know,
+
+156
+00:05:07,049 --> 00:05:08,064
+most of these different types of
+
+157
+00:05:08,088 --> 00:05:10,019
+SPAM email, because we have a
+
+158
+00:05:10,041 --> 00:05:11,064
+large set of examples of
+
+159
+00:05:11,086 --> 00:05:13,005
+SPAM, and that's why we
+
+160
+00:05:13,032 --> 00:05:14,080
+usually think of SPAM as
+
+161
+00:05:14,098 --> 00:05:16,050
+a supervised learning setting, even
+
+162
+00:05:16,070 --> 00:05:17,038
+though, you know, there may be
+
+163
+00:05:17,052 --> 00:05:19,023
+many different types of SPAM.
+
+164
+00:05:21,088 --> 00:05:23,017
+And so, if we look at
+
+165
+00:05:23,031 --> 00:05:24,093
+some applications of anomaly detection
+
+166
+00:05:25,060 --> 00:05:27,029
+versus supervised learning, we'll find
+
+167
+00:05:27,048 --> 00:05:29,027
+that, in fraud detection, if
+
+168
+00:05:29,041 --> 00:05:31,004
+you have many different types
+
+169
+00:05:31,044 --> 00:05:32,050
+of ways for people to
+
+170
+00:05:32,068 --> 00:05:34,012
+try to commit fraud, and a
+
+171
+00:05:34,017 --> 00:05:35,073
+relevantly small training set, a
+
+172
+00:05:35,087 --> 00:05:37,050
+small number of fraudulent users
+
+173
+00:05:37,092 --> 00:05:40,030
+on your website, then I would use an anomaly detection algorithm.
+
+174
+00:05:41,031 --> 00:05:42,051
+I should say, if you
+
+175
+00:05:42,064 --> 00:05:44,056
+have, if you are very a
+
+176
+00:05:44,069 --> 00:05:46,081
+major online retailer, and
+
+177
+00:05:46,093 --> 00:05:48,017
+if you actually have had a
+
+178
+00:05:48,032 --> 00:05:49,023
+lot of people try to commit
+
+179
+00:05:49,038 --> 00:05:50,042
+fraud on your website, so if
+
+180
+00:05:50,048 --> 00:05:51,033
+you actually have a lot of
+
+181
+00:05:51,041 --> 00:05:53,075
+examples where y equals 1, then
+
+182
+00:05:53,097 --> 00:05:55,041
+you know, sometimes fraud detection
+
+183
+00:05:55,069 --> 00:05:58,002
+could actually shift over to the supervised learning column.
+
+184
+00:05:58,085 --> 00:06:01,000
+But, if you
+
+185
+00:06:01,020 --> 00:06:02,043
+haven't seen that many
+
+186
+00:06:02,093 --> 00:06:04,048
+examples of users doing
+
+187
+00:06:04,068 --> 00:06:05,072
+strange things on your website
+
+188
+00:06:05,092 --> 00:06:07,097
+then, more frequently, fraud detection
+
+189
+00:06:08,050 --> 00:06:09,073
+is actually treated as an
+
+190
+00:06:09,099 --> 00:06:12,006
+anomaly detection algorithm, rather than one of the supervised learning algorithm.
+
+191
+00:06:14,013 --> 00:06:15,016
+Other examples, we talked about
+
+192
+00:06:15,031 --> 00:06:16,081
+manufacturing already, hopefully you'll
+
+193
+00:06:16,094 --> 00:06:18,023
+see more normal examples,
+
+194
+00:06:19,011 --> 00:06:19,083
+not that many anomalies.
+
+195
+00:06:20,051 --> 00:06:21,056
+But then again, for some manufacturing
+
+196
+00:06:22,018 --> 00:06:23,089
+processes, if you're
+
+197
+00:06:23,099 --> 00:06:25,068
+manufacturing very large volumes
+
+198
+00:06:25,086 --> 00:06:26,077
+and you've seen a lot
+
+199
+00:06:27,023 --> 00:06:29,022
+of bad examples, maybe manufacturing
+
+200
+00:06:29,079 --> 00:06:31,068
+could shift to the supervised learning column as well.
+
+201
+00:06:32,062 --> 00:06:33,068
+But, if you haven't seen that
+
+202
+00:06:33,094 --> 00:06:35,063
+many bad examples of
+
+203
+00:06:35,082 --> 00:06:38,013
+the old products, then I'll do this anomaly detection.
+
+204
+00:06:39,018 --> 00:06:40,029
+Monitoring machines in the
+
+205
+00:06:40,039 --> 00:06:42,044
+data center, again similar
+
+206
+00:06:42,087 --> 00:06:44,005
+sorts of arguments apply.
+
+207
+00:06:45,027 --> 00:06:46,064
+Whereas, email SPAM
+
+208
+00:06:47,006 --> 00:06:48,094
+classification, weather prediction, and classifying
+
+209
+00:06:49,050 --> 00:06:50,057
+cancers, if you have
+
+210
+00:06:51,019 --> 00:06:52,085
+equal numbers of positive and
+
+211
+00:06:52,087 --> 00:06:53,092
+negative examples, a lot of you
+
+212
+00:06:54,000 --> 00:06:55,055
+have many examples of your
+
+213
+00:06:55,067 --> 00:06:56,077
+positive and your negative
+
+214
+00:06:57,002 --> 00:06:57,087
+examples, then, we would tend to
+
+215
+00:06:58,007 --> 00:07:00,062
+treat all of these as supervised learning problems.
+
+216
+00:07:03,039 --> 00:07:04,050
+So, hopefully, that gives you
+
+217
+00:07:04,057 --> 00:07:05,060
+a sense of what are the
+
+218
+00:07:05,076 --> 00:07:07,005
+properties of a learning
+
+219
+00:07:07,035 --> 00:07:08,098
+problem that would cause you to
+
+220
+00:07:09,042 --> 00:07:10,041
+treat it as an anomaly
+
+221
+00:07:10,081 --> 00:07:12,066
+detention problem verses a supervised learning
+
+222
+00:07:14,025 --> 00:07:14,025
+problem.
+
+223
+00:07:14,068 --> 00:07:16,001
+And for many of the problems that are
+
+224
+00:07:16,025 --> 00:07:17,081
+faced by various technology companies
+
+225
+00:07:18,019 --> 00:07:19,077
+and so on, we actually are
+
+226
+00:07:19,086 --> 00:07:20,089
+in these settings where we have
+
+227
+00:07:21,050 --> 00:07:23,031
+very few or sometimes zero
+
+228
+00:07:24,006 --> 00:07:25,008
+positive training examples,
+
+229
+00:07:25,039 --> 00:07:26,082
+maybe there are so many
+
+230
+00:07:26,098 --> 00:07:28,041
+different types of anomalies that we've never
+
+231
+00:07:28,052 --> 00:07:29,081
+seen them before, and for those
+
+232
+00:07:29,095 --> 00:07:31,089
+sorts of problems, very often,
+
+233
+00:07:32,043 --> 00:07:33,057
+the algorithm that is used
+
+234
+00:07:33,079 --> 00:07:35,017
+is an anomaly detection algorithm.

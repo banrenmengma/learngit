@@ -1,0 +1,960 @@
+
+1
+00:00:00,010 --> 00:00:01,085
+Let's get started with our linear algebra review.
+
+2
+00:00:02,087 --> 00:00:03,085
+In this video I want to
+
+3
+00:00:03,091 --> 00:00:06,020
+tell you what are matrices and what are vectors.
+
+4
+00:00:09,027 --> 00:00:10,076
+A matrix is a
+
+5
+00:00:11,001 --> 00:00:12,058
+rectangular array of numbers
+
+6
+00:00:13,057 --> 00:00:14,081
+written between square brackets.
+
+7
+00:00:16,007 --> 00:00:17,025
+So, for example, here is a
+
+8
+00:00:17,028 --> 00:00:20,017
+matrix on the right, a left square bracket.
+
+9
+00:00:22,000 --> 00:00:24,066
+And then, write in a bunch of numbers.
+
+10
+00:00:27,001 --> 00:00:29,010
+These could be features from
+
+11
+00:00:29,055 --> 00:00:30,066
+a learning problem or it could
+
+12
+00:00:30,080 --> 00:00:33,074
+be data from somewhere else, but
+
+13
+00:00:35,007 --> 00:00:36,089
+the specific values don't matter,
+
+14
+00:00:37,043 --> 00:00:40,046
+and then I'm going to close it with another right bracket on the right.
+
+15
+00:00:40,067 --> 00:00:41,043
+And so that's one matrix.
+
+16
+00:00:41,092 --> 00:00:43,052
+And, here's another example of
+
+17
+00:00:44,028 --> 00:00:46,035
+the matrix, let's write 3, 4, 5,6.
+
+18
+00:00:46,081 --> 00:00:48,002
+So matrix is just another
+
+19
+00:00:48,029 --> 00:00:49,063
+way for saying, is a
+
+20
+00:00:49,068 --> 00:00:51,053
+2D or a two dimensional array.
+
+21
+00:00:53,025 --> 00:00:54,092
+And the other piece
+
+22
+00:00:55,025 --> 00:00:56,032
+of knowledge that we need is
+
+23
+00:00:56,064 --> 00:00:57,074
+that the dimension of the
+
+24
+00:00:57,081 --> 00:00:58,097
+matrix is going to
+
+25
+00:00:59,010 --> 00:01:01,007
+be written as the
+
+26
+00:01:01,017 --> 00:01:04,075
+number of row times the number of columns in the matrix.
+
+27
+00:01:05,048 --> 00:01:07,018
+So, concretely, this example
+
+28
+00:01:07,082 --> 00:01:09,070
+on the left, this
+
+29
+00:01:09,090 --> 00:01:11,000
+has 1, 2, 3, 4
+
+30
+00:01:11,029 --> 00:01:13,037
+rows and has 2 columns,
+
+31
+00:01:14,054 --> 00:01:15,095
+and so this example on the
+
+32
+00:01:16,010 --> 00:01:17,084
+left is a 4 by
+
+33
+00:01:18,064 --> 00:01:23,031
+2 matrix -  number of rows by number of columns.
+
+34
+00:01:23,059 --> 00:01:24,037
+So, four rows, two columns.
+
+35
+00:01:25,029 --> 00:01:27,073
+This one on the right, this matrix has two rows.
+
+36
+00:01:28,032 --> 00:01:29,079
+That's the first row, that's
+
+37
+00:01:30,004 --> 00:01:32,057
+the second row, and it has three columns.
+
+38
+00:01:35,043 --> 00:01:36,089
+That's the first column, that's the
+
+39
+00:01:37,006 --> 00:01:38,034
+second column, that's the third
+
+40
+00:01:38,060 --> 00:01:41,034
+column So, this second
+
+41
+00:01:41,067 --> 00:01:42,079
+matrix we say it is
+
+42
+00:01:42,096 --> 00:01:44,065
+a 2 by 3 matrix.
+
+43
+00:01:45,070 --> 00:01:48,023
+So we say that the dimension of this matrix is 2 by 3.
+
+44
+00:01:50,045 --> 00:01:51,068
+Sometimes you also see this
+
+45
+00:01:51,084 --> 00:01:53,048
+written out, in the case
+
+46
+00:01:53,073 --> 00:01:54,051
+of left, you will see this
+
+47
+00:01:55,000 --> 00:01:56,035
+written out as R4 by 2
+
+48
+00:01:56,045 --> 00:01:58,009
+or concretely what people
+
+49
+00:01:58,046 --> 00:02:00,028
+will sometimes say this matrix
+
+50
+00:02:00,093 --> 00:02:02,084
+is an element of the set R 4 by 2.
+
+51
+00:02:03,006 --> 00:02:04,026
+So, this thing here, this
+
+52
+00:02:04,040 --> 00:02:05,018
+just means the set of all
+
+53
+00:02:05,079 --> 00:02:07,001
+matrices that of dimension
+
+54
+00:02:07,051 --> 00:02:08,096
+4 by 2 and this thing
+
+55
+00:02:09,009 --> 00:02:10,065
+on the right, sometimes this is
+
+56
+00:02:10,087 --> 00:02:12,080
+written out as a matrix that is an R 2 by 3.
+
+57
+00:02:13,012 --> 00:02:16,008
+So if you ever see, 2 by 3.
+
+58
+00:02:16,056 --> 00:02:17,046
+So if you ever see
+
+59
+00:02:17,056 --> 00:02:18,069
+something like this are 4 by
+
+60
+00:02:18,087 --> 00:02:19,096
+2 or are 2 by 3,
+
+61
+00:02:20,031 --> 00:02:21,044
+people are just referring to
+
+62
+00:02:21,090 --> 00:02:23,083
+matrices of a specific dimension.
+
+63
+00:02:26,075 --> 00:02:28,024
+Next, let's talk about how
+
+64
+00:02:28,059 --> 00:02:31,037
+to refer to specific elements of the matrix.
+
+65
+00:02:31,097 --> 00:02:32,084
+And by matrix elements, other than
+
+66
+00:02:33,002 --> 00:02:34,009
+the matrix I just mean
+
+67
+00:02:34,036 --> 00:02:35,093
+the entries, so the numbers inside the matrix.
+
+68
+00:02:37,019 --> 00:02:38,027
+So, in the standard notation,
+
+69
+00:02:38,088 --> 00:02:40,011
+if A is this
+
+70
+00:02:40,028 --> 00:02:41,086
+matrix here, then A sub-strip
+
+71
+00:02:42,083 --> 00:02:44,005
+IJ is going to refer
+
+72
+00:02:44,041 --> 00:02:46,006
+to the i, j entry,
+
+73
+00:02:46,094 --> 00:02:48,049
+meaning the entry in
+
+74
+00:02:48,056 --> 00:02:50,068
+the matrix in the ith row and jth column.
+
+75
+00:02:51,087 --> 00:02:54,019
+So for example a1-1 is
+
+76
+00:02:54,053 --> 00:02:55,065
+going to refer to the entry
+
+77
+00:02:56,021 --> 00:02:57,050
+in the 1st row and
+
+78
+00:02:57,059 --> 00:02:58,090
+the 1st column, so that's the
+
+79
+00:02:58,096 --> 00:02:59,071
+first row and the first
+
+80
+00:03:00,009 --> 00:03:02,059
+column and so a1-1
+
+81
+00:03:02,063 --> 00:03:03,091
+is going to be equal to
+
+82
+00:03:04,024 --> 00:03:05,087
+1, 4, 0, 2.
+
+83
+00:03:06,041 --> 00:03:07,062
+Another example, 8 1
+
+84
+00:03:07,078 --> 00:03:10,002
+2 is going to refer to
+
+85
+00:03:10,015 --> 00:03:11,015
+the entry in the first
+
+86
+00:03:11,065 --> 00:03:13,086
+row and the second
+
+87
+00:03:14,028 --> 00:03:16,016
+column and so A
+
+88
+00:03:16,027 --> 00:03:19,000
+1 2 is going to be equal to one nine one.
+
+89
+00:03:20,043 --> 00:03:21,018
+This come from a quick examples.
+
+90
+00:03:22,043 --> 00:03:24,036
+Let's see, A, oh let's
+
+91
+00:03:24,053 --> 00:03:26,096
+say A 3 2, is going to refer
+
+92
+00:03:27,034 --> 00:03:29,024
+to the entry in the 3rd
+
+93
+00:03:30,003 --> 00:03:32,034
+row, and second column,
+
+94
+00:03:33,075 --> 00:03:35,003
+right, because that's 3 2
+
+95
+00:03:35,046 --> 00:03:41,027
+so that's equal to 1 4 3 7.
+
+96
+00:03:41,049 --> 00:03:42,047
+And finally, 8 4 1
+
+97
+00:03:43,037 --> 00:03:44,053
+is going to refer to
+
+98
+00:03:45,031 --> 00:03:47,031
+this one right, fourth row,
+
+99
+00:03:47,071 --> 00:03:49,021
+first column is equal to
+
+100
+00:03:49,052 --> 00:03:53,015
+1 4 7 and if,
+
+101
+00:03:53,077 --> 00:03:54,059
+hopefully you won't, but if
+
+102
+00:03:54,065 --> 00:03:55,056
+you were to write and say
+
+103
+00:03:55,065 --> 00:03:57,053
+well this A 4
+
+104
+00:03:57,087 --> 00:03:59,019
+3, well, that refers to
+
+105
+00:03:59,061 --> 00:04:01,012
+the fourth row, and the
+
+106
+00:04:01,022 --> 00:04:02,072
+third column that, you know,
+
+107
+00:04:02,084 --> 00:04:03,093
+this matrix has no third
+
+108
+00:04:04,018 --> 00:04:05,041
+column so this is undefined,
+
+109
+00:04:06,063 --> 00:04:08,028
+you know, or you can think of this as an error.
+
+110
+00:04:08,083 --> 00:04:10,071
+There's no such element as
+
+111
+00:04:10,084 --> 00:04:12,053
+8 4 3, so, you know, you
+
+112
+00:04:12,094 --> 00:04:14,050
+shouldn't be referring to 8 4 3.
+
+113
+00:04:14,062 --> 00:04:17,012
+So, the matrix
+
+114
+00:04:17,063 --> 00:04:19,006
+gets you a way of letting
+
+115
+00:04:19,037 --> 00:04:22,027
+you quickly organize, index and access lots of data.
+
+116
+00:04:22,067 --> 00:04:24,019
+In case I seem to be
+
+117
+00:04:24,031 --> 00:04:25,013
+tossing up a lot of
+
+118
+00:04:25,043 --> 00:04:26,011
+concepts, a lot of new notations
+
+119
+00:04:26,056 --> 00:04:27,092
+very rapidly, you don't need
+
+120
+00:04:28,013 --> 00:04:29,023
+to memorize all of this, but
+
+121
+00:04:29,052 --> 00:04:31,050
+on the course website where we
+
+122
+00:04:31,069 --> 00:04:33,033
+have posted the lecture notes,
+
+123
+00:04:33,069 --> 00:04:35,095
+we also have all of these definitions written down.
+
+124
+00:04:36,064 --> 00:04:37,074
+So you can always refer back,
+
+125
+00:04:38,016 --> 00:04:39,019
+you know, either to these slides,
+
+126
+00:04:39,056 --> 00:04:40,094
+possible coursework, so audible lecture
+
+127
+00:04:41,025 --> 00:04:44,006
+notes if you forget well, A41 was that?
+
+128
+00:04:44,029 --> 00:04:45,031
+Which row, which column was that?
+
+129
+00:04:45,064 --> 00:04:47,016
+Don't worry about memorizing everything now.
+
+130
+00:04:47,047 --> 00:04:48,095
+You can always refer back to
+
+131
+00:04:49,010 --> 00:04:51,058
+the written materials on the course website, and use that as a reference.
+
+132
+00:04:52,050 --> 00:04:53,074
+So that's what a matrix is.
+
+133
+00:04:54,016 --> 00:04:57,000
+Next, let's talk about what is a vector.
+
+134
+00:04:57,030 --> 00:04:59,039
+A vector turns out to be a special case of a matrix.
+
+135
+00:04:59,088 --> 00:05:01,017
+A vector is a matrix
+
+136
+00:05:02,006 --> 00:05:03,058
+that has only 1 column so
+
+137
+00:05:03,074 --> 00:05:04,064
+you have an N x 1
+
+138
+00:05:04,085 --> 00:05:07,032
+matrix, then that's a remember, right?
+
+139
+00:05:07,081 --> 00:05:08,097
+N is the number of
+
+140
+00:05:09,018 --> 00:05:10,075
+rows, and 1 here
+
+141
+00:05:10,087 --> 00:05:12,054
+is the number of columns, so, so
+
+142
+00:05:12,070 --> 00:05:13,075
+matrix with just one column
+
+143
+00:05:14,072 --> 00:05:15,073
+is what we call a vector.
+
+144
+00:05:16,069 --> 00:05:17,094
+So here's an example
+
+145
+00:05:18,031 --> 00:05:19,080
+of a vector, with I
+
+146
+00:05:20,012 --> 00:05:22,069
+guess I have N equals four elements here.
+
+147
+00:05:23,086 --> 00:05:25,008
+so we also call this
+
+148
+00:05:25,037 --> 00:05:26,056
+thing, another term for
+
+149
+00:05:26,066 --> 00:05:28,030
+this is a four dmensional
+
+150
+00:05:30,012 --> 00:05:31,041
+vector, just means that
+
+151
+00:05:32,087 --> 00:05:34,041
+this is a vector with four
+
+152
+00:05:34,080 --> 00:05:36,039
+elements, with four numbers in it.
+
+153
+00:05:36,087 --> 00:05:38,012
+And, just as earlier
+
+154
+00:05:38,050 --> 00:05:39,051
+for matrices you saw this
+
+155
+00:05:39,074 --> 00:05:40,095
+notation R3 by 2
+
+156
+00:05:41,012 --> 00:05:42,033
+to refer to 2 by
+
+157
+00:05:42,033 --> 00:05:43,076
+3 matrices, for this vector
+
+158
+00:05:44,066 --> 00:05:46,033
+we are going to refer to this
+
+159
+00:05:46,050 --> 00:05:48,026
+as a vector in the set R4.
+
+160
+00:05:49,063 --> 00:05:50,089
+So this R4 means a
+
+161
+00:05:51,001 --> 00:05:53,048
+set of four-dimensional vectors.
+
+162
+00:05:56,035 --> 00:05:59,023
+Next let's talk about how to refer to the elements of the vector.
+
+163
+00:06:01,079 --> 00:06:02,097
+We are going to use the notation
+
+164
+00:06:03,073 --> 00:06:06,002
+yi to refer to
+
+165
+00:06:06,031 --> 00:06:07,062
+the ith element of the
+
+166
+00:06:07,068 --> 00:06:08,064
+vector y. So if y
+
+167
+00:06:08,081 --> 00:06:11,047
+is this vector, y subscript i is the ith element.
+
+168
+00:06:12,005 --> 00:06:13,007
+So y1 is the
+
+169
+00:06:13,044 --> 00:06:16,031
+first element,four sixty, y2
+
+170
+00:06:16,054 --> 00:06:18,067
+is equal to the second element,
+
+171
+00:06:19,068 --> 00:06:21,002
+two thirty two -there's the first.
+
+172
+00:06:21,037 --> 00:06:21,077
+There's the second.
+
+173
+00:06:22,056 --> 00:06:24,083
+Y3 is equal to
+
+174
+00:06:24,097 --> 00:06:26,037
+315 and so on, and
+
+175
+00:06:26,075 --> 00:06:28,024
+only y1 through y4 are
+
+176
+00:06:28,064 --> 00:06:31,060
+defined consistency 4-dimensional vector.
+
+177
+00:06:32,093 --> 00:06:33,099
+Also it turns out that
+
+178
+00:06:34,056 --> 00:06:35,094
+there are actually 2 conventions
+
+179
+00:06:36,031 --> 00:06:37,058
+for how to index into a
+
+180
+00:06:37,073 --> 00:06:39,025
+vector and here they are.
+
+181
+00:06:39,056 --> 00:06:41,001
+Sometimes, people will use
+
+182
+00:06:41,062 --> 00:06:43,081
+one index and sometimes zero index factors.
+
+183
+00:06:44,076 --> 00:06:45,062
+So this example on the left
+
+184
+00:06:46,008 --> 00:06:47,098
+is a one in that
+
+185
+00:06:48,018 --> 00:06:49,024
+specter where the element
+
+186
+00:06:49,064 --> 00:06:51,087
+we write is y1, y2, y3, y4.
+
+187
+00:06:53,054 --> 00:06:54,070
+And this example in the right
+
+188
+00:06:54,087 --> 00:06:56,033
+is an example of a zero index
+
+189
+00:06:56,083 --> 00:06:58,037
+factor where we start
+
+190
+00:06:58,073 --> 00:07:00,045
+the indexing of the elements from zero.
+
+191
+00:07:01,051 --> 00:07:04,062
+So the elements go from a zero up to y three.
+
+192
+00:07:05,044 --> 00:07:07,017
+And this is a bit like the
+
+193
+00:07:07,037 --> 00:07:08,077
+arrays of some primary languages
+
+194
+00:07:09,093 --> 00:07:11,007
+where the arrays can either
+
+195
+00:07:11,043 --> 00:07:12,074
+be indexed starting from one.
+
+196
+00:07:13,013 --> 00:07:14,038
+The first element of an
+
+197
+00:07:14,050 --> 00:07:15,058
+array is sometimes a Y1,
+
+198
+00:07:16,016 --> 00:07:17,048
+this is sequence notation I guess,
+
+199
+00:07:17,093 --> 00:07:20,057
+and sometimes it's zero index
+
+200
+00:07:21,025 --> 00:07:22,086
+depending on what programming language you use.
+
+201
+00:07:23,063 --> 00:07:25,000
+So it turns out that in
+
+202
+00:07:25,018 --> 00:07:26,068
+most of math, the one
+
+203
+00:07:27,012 --> 00:07:28,038
+index version is more
+
+204
+00:07:28,056 --> 00:07:30,014
+common For a lot
+
+205
+00:07:30,037 --> 00:07:32,063
+of machine learning applications, zero index
+
+206
+00:07:33,068 --> 00:07:35,039
+vectors gives us a more convenient notation.
+
+207
+00:07:36,081 --> 00:07:37,064
+So what you should usually
+
+208
+00:07:37,097 --> 00:07:39,057
+do is, unless otherwised specified,
+
+209
+00:07:40,062 --> 00:07:43,006
+you should assume we are using one index vectors.
+
+210
+00:07:43,068 --> 00:07:44,075
+In fact, throughout the rest
+
+211
+00:07:44,088 --> 00:07:46,037
+of these videos on linear algebra
+
+212
+00:07:46,076 --> 00:07:49,018
+review, I will be using one index vectors.
+
+213
+00:07:50,020 --> 00:07:51,017
+But just be aware that
+
+214
+00:07:51,027 --> 00:07:52,014
+when we are talking about machine learning
+
+215
+00:07:52,038 --> 00:07:53,098
+applications, sometimes I will
+
+216
+00:07:54,022 --> 00:07:55,033
+explicitly say when we
+
+217
+00:07:55,048 --> 00:07:56,063
+need to switch to, when we
+
+218
+00:07:56,074 --> 00:07:57,075
+need to use the zero index
+
+219
+00:07:59,001 --> 00:07:59,027
+vectors as well.
+
+220
+00:08:00,024 --> 00:08:02,047
+Finally, by convention, usually
+
+221
+00:08:02,093 --> 00:08:04,047
+when writing matrices and vectors,
+
+222
+00:08:05,006 --> 00:08:06,070
+most people will use upper
+
+223
+00:08:06,089 --> 00:08:08,044
+case to refer to matrices.
+
+224
+00:08:09,000 --> 00:08:09,075
+So we're going to use
+
+225
+00:08:09,093 --> 00:08:12,002
+capital letters like
+
+226
+00:08:12,025 --> 00:08:13,083
+A, B, C, you know,
+
+227
+00:08:14,010 --> 00:08:15,037
+X, to refer to matrices,
+
+228
+00:08:16,062 --> 00:08:17,091
+and usually we'll use lowercase,
+
+229
+00:08:18,066 --> 00:08:19,062
+like a, b, x, y,
+
+230
+00:08:21,013 --> 00:08:22,045
+to refer to either numbers,
+
+231
+00:08:23,006 --> 00:08:25,039
+or just raw numbers or scalars or to vectors.
+
+232
+00:08:26,014 --> 00:08:27,086
+This isn't always true but
+
+233
+00:08:28,011 --> 00:08:29,020
+this is the more common
+
+234
+00:08:29,045 --> 00:08:30,061
+notation where we use
+
+235
+00:08:30,093 --> 00:08:31,087
+lower case "Y" for referring
+
+236
+00:08:32,001 --> 00:08:33,036
+to vector and we usually
+
+237
+00:08:34,014 --> 00:08:35,046
+use upper case to refer to a matrix.
+
+238
+00:08:37,020 --> 00:08:39,082
+So, you now know what are matrices and vectors.
+
+239
+00:08:40,079 --> 00:08:42,030
+Next, we'll talk about some
+
+240
+00:08:42,050 --> 00:08:44,033
+of the things you can do with them

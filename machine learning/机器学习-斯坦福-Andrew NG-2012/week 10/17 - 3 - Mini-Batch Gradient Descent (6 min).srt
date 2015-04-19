@@ -1,0 +1,705 @@
+
+1
+00:00:00,027 --> 00:00:01,043
+In the previous video, we talked
+
+2
+00:00:01,070 --> 00:00:04,011
+about Stochastic gradient descent,
+
+3
+00:00:04,016 --> 00:00:06,058
+and how that can be much faster than Batch gradient descent.
+
+4
+00:00:07,044 --> 00:00:08,097
+In this video, let's talk about another variation on these ideas
+
+5
+00:00:09,064 --> 00:00:10,073
+is
+
+6
+00:00:10,094 --> 00:00:12,043
+called Mini-batch gradient descent
+
+7
+00:00:13,013 --> 00:00:14,063
+they can work sometimes even a
+
+8
+00:00:14,068 --> 00:00:16,039
+bit faster than stochastic gradient descent.
+
+9
+00:00:19,014 --> 00:00:21,032
+To summarize the algorithms we talked about so far.
+
+10
+00:00:21,091 --> 00:00:23,037
+In Batch gradient descent we
+
+11
+00:00:23,051 --> 00:00:25,087
+will use all m examples in each generation.
+
+12
+00:00:26,096 --> 00:00:27,080
+Whereas in Stochastic gradient
+
+13
+00:00:27,098 --> 00:00:29,026
+descent we will use
+
+14
+00:00:29,053 --> 00:00:31,025
+a single example in each generation.
+
+15
+00:00:32,060 --> 00:00:35,040
+What Mini-batch gradient descent does is somewhere in between.
+
+16
+00:00:36,015 --> 00:00:38,006
+Specifically, with this algorithm we're going to use
+
+17
+00:00:38,077 --> 00:00:40,042
+b examples in each
+
+18
+00:00:40,068 --> 00:00:42,024
+iteration where b is
+
+19
+00:00:42,036 --> 00:00:43,082
+a parameter called the mini
+
+20
+00:00:45,032 --> 00:00:47,077
+batch size so the
+
+21
+00:00:47,089 --> 00:00:49,024
+idea is that this
+
+22
+00:00:49,040 --> 00:00:52,015
+is somewhat in-between Batch gradient descent and Stochastic gradient descent.
+
+23
+00:00:53,018 --> 00:00:54,015
+This is just like batch gradient
+
+24
+00:00:54,067 --> 00:00:56,084
+descent, except that I'm going to use a much smaller batch size.
+
+25
+00:00:57,095 --> 00:00:59,036
+A typical tourist for the
+
+26
+00:00:59,071 --> 00:01:00,096
+value of b might be
+
+27
+00:01:01,007 --> 00:01:02,040
+b equals 10 lets say
+
+28
+00:01:03,014 --> 00:01:04,062
+and a typical range really might
+
+29
+00:01:04,079 --> 00:01:05,096
+be anywhere from b equals 2
+
+30
+00:01:06,012 --> 00:01:08,004
+up to b equals 100.
+
+31
+00:01:08,048 --> 00:01:09,062
+So that will be a pretty typical
+
+32
+00:01:10,045 --> 00:01:12,048
+range of values for the
+
+33
+00:01:12,059 --> 00:01:14,010
+Mini-batch size.
+
+34
+00:01:14,045 --> 00:01:15,089
+And the idea is that
+
+35
+00:01:16,020 --> 00:01:17,051
+rather than using one example
+
+36
+00:01:17,082 --> 00:01:18,060
+at a time or m examples
+
+37
+00:01:18,065 --> 00:01:20,012
+at a time we will use b examples at a time.
+
+38
+00:01:21,012 --> 00:01:22,009
+So let me just
+
+39
+00:01:22,031 --> 00:01:24,023
+write this off informally, we're going
+
+40
+00:01:24,043 --> 00:01:26,012
+to get, let's say, b.
+
+41
+00:01:27,001 --> 00:01:28,048
+For this example, let's say b equals 10.
+
+42
+00:01:28,057 --> 00:01:29,054
+So we're going to get, you
+
+43
+00:01:29,067 --> 00:01:32,089
+know, the next 10 examples from
+
+44
+00:01:33,009 --> 00:01:34,023
+my training set so that
+
+45
+00:01:34,045 --> 00:01:35,070
+may be some set of
+
+46
+00:01:35,098 --> 00:01:37,037
+examples xi, yi.
+
+47
+00:01:38,048 --> 00:01:40,004
+If it's 10 examples then the
+
+48
+00:01:40,012 --> 00:01:41,020
+indexing will be up
+
+49
+00:01:41,042 --> 00:01:44,045
+to x (i+9),
+
+50
+00:01:45,046 --> 00:01:47,026
+y (i+9)
+
+51
+00:01:47,032 --> 00:01:49,032
+so that's 10 examples altogether and
+
+52
+00:01:49,046 --> 00:01:52,026
+then we'll perform essentially a
+
+53
+00:01:53,043 --> 00:01:56,057
+gradient descent update using these
+
+54
+00:01:56,085 --> 00:01:59,007
+10 examples. So, that's
+
+55
+00:01:59,067 --> 00:02:00,085
+any rate times one tenth times
+
+56
+00:02:01,029 --> 00:02:04,056
+sum over k equals
+
+57
+00:02:05,015 --> 00:02:08,000
+i through i+9 of x subscript theta of x(k)
+
+58
+00:02:08,083 --> 00:02:10,081
+
+
+59
+00:02:13,074 --> 00:02:15,036
+minus y(k) you times
+
+60
+00:02:17,031 --> 00:02:21,028
+x(k)j.
+And so
+
+61
+00:02:21,071 --> 00:02:24,015
+in this expression, where summing the
+
+62
+00:02:24,059 --> 00:02:26,047
+gradient terms over my ten examples.
+
+63
+00:02:27,018 --> 00:02:28,093
+So, that's number ten, that's, you know, my mini
+
+64
+00:02:29,094 --> 00:02:31,069
+batch size and just i+9
+
+65
+00:02:31,091 --> 00:02:32,068
+again, the 9
+
+66
+00:02:32,087 --> 00:02:34,046
+comes from the choice of
+
+67
+00:02:34,053 --> 00:02:36,027
+the parameter b, and then
+
+68
+00:02:36,053 --> 00:02:37,046
+after this we will then
+
+69
+00:02:38,009 --> 00:02:41,011
+increase, you know, i by
+
+70
+00:02:41,027 --> 00:02:42,046
+tenth, we will go on
+
+71
+00:02:42,053 --> 00:02:44,078
+to the next ten examples and then
+
+72
+00:02:45,061 --> 00:02:48,068
+keep moving like this. So just
+
+73
+00:02:48,072 --> 00:02:49,058
+to write out the entire algorithm in
+
+74
+00:02:50,006 --> 00:02:51,059
+full. In order to
+
+75
+00:02:51,094 --> 00:02:53,028
+simplify the indexing for
+
+76
+00:02:53,040 --> 00:02:54,061
+this one at the
+
+77
+00:02:54,066 --> 00:02:55,049
+right top, I'm going to
+
+78
+00:02:55,061 --> 00:02:57,003
+assume we have a mini-batch size of
+
+79
+00:02:57,015 --> 00:02:58,043
+ten and a training
+
+80
+00:02:58,097 --> 00:03:00,050
+set size of a thousand, what we're
+
+81
+00:03:00,081 --> 00:03:01,078
+going to do is have this
+
+82
+00:03:02,000 --> 00:03:02,086
+sort of form, you know, for i
+
+83
+00:03:03,025 --> 00:03:03,096
+equals 1 and that in 21's
+
+84
+00:03:04,056 --> 00:03:05,075
+the stepping, in steps of
+
+85
+00:03:05,083 --> 00:03:06,074
+10 because we look at
+
+86
+00:03:06,094 --> 00:03:08,068
+10 examples at a time.
+
+87
+00:03:08,093 --> 00:03:10,031
+And then we perform this sort of
+
+88
+00:03:10,034 --> 00:03:11,071
+gradient descent update using
+
+89
+00:03:12,038 --> 00:03:14,025
+ten examples at a time
+
+90
+00:03:14,055 --> 00:03:16,040
+so this 10 and this
+
+91
+00:03:17,012 --> 00:03:18,008
+i+9 those are consequence
+
+92
+00:03:19,025 --> 00:03:21,006
+of having chosen my mini-batch to be ten.
+
+93
+00:03:22,011 --> 00:03:25,034
+And you know, this ultimate four-loop, this ends at 991
+
+94
+00:03:26,046 --> 00:03:28,036
+here because if I
+
+95
+00:03:28,055 --> 00:03:30,027
+have 1000 training samples then
+
+96
+00:03:30,038 --> 00:03:31,052
+I need 100 steps of size
+
+97
+00:03:31,096 --> 00:03:33,040
+10 in order to get through my training set.
+
+98
+00:03:34,096 --> 00:03:37,009
+So this is mini-batch gradient descent.
+
+99
+00:03:38,024 --> 00:03:39,093
+Compared to batch gradient
+
+100
+00:03:40,031 --> 00:03:42,077
+descent, this also allows us to make progress much faster.
+
+101
+00:03:43,037 --> 00:03:44,093
+So we have again our
+
+102
+00:03:45,013 --> 00:03:46,069
+running example of, you know,
+
+103
+00:03:46,077 --> 00:03:47,088
+U.S. Census data with 300
+
+104
+00:03:48,037 --> 00:03:50,040
+million training examples, then what
+
+105
+00:03:50,050 --> 00:03:51,068
+we're saying is after looking at
+
+106
+00:03:52,018 --> 00:03:53,031
+just the first 10 examples
+
+107
+00:03:53,063 --> 00:03:54,083
+we can start to make progress
+
+108
+00:03:55,068 --> 00:03:57,041
+in improving the parameters
+
+109
+00:03:57,099 --> 00:03:58,088
+theta so we don't' need
+
+110
+00:03:58,093 --> 00:04:00,058
+to scan through the entire training set.
+
+111
+00:04:00,083 --> 00:04:01,066
+We just need to look
+
+112
+00:04:01,084 --> 00:04:02,077
+at the first 10 examples
+
+113
+00:04:02,093 --> 00:04:04,003
+and this will start letting us make
+
+114
+00:04:04,006 --> 00:04:04,087
+progress and then we can look at the second ten examples and modify the parameters a little bit again
+
+115
+00:04:04,093 --> 00:04:10,036
+and so on. So, that
+
+116
+00:04:10,053 --> 00:04:11,088
+is why Mini-batch gradient descent can be faster
+
+117
+00:04:12,025 --> 00:04:13,056
+than batch gradient descent.
+
+118
+00:04:14,012 --> 00:04:15,050
+Namely, you can start making progress
+
+119
+00:04:16,041 --> 00:04:17,083
+in modifying the parameters after
+
+120
+00:04:18,002 --> 00:04:19,072
+looking at just ten examples rather
+
+121
+00:04:19,087 --> 00:04:21,012
+than needing to wait 'till
+
+122
+00:04:21,031 --> 00:04:22,057
+you've scan through every single training
+
+123
+00:04:23,073 --> 00:04:24,049
+example of 300 million of them.
+
+124
+00:04:25,035 --> 00:04:26,041
+So, how about Mini-batch
+
+125
+00:04:26,072 --> 00:04:29,007
+gradient descent versus Stochastic gradient descent.
+
+126
+00:04:29,047 --> 00:04:30,043
+So, why do we
+
+127
+00:04:30,054 --> 00:04:31,072
+want to look at b examples
+
+128
+00:04:32,012 --> 00:04:33,064
+at a time rather than
+
+129
+00:04:33,093 --> 00:04:35,055
+look at just a single example
+
+130
+00:04:36,042 --> 00:04:38,032
+at a time as the Stochastic gradient descent?
+
+131
+00:04:38,057 --> 00:04:40,049
+The answer is in vectorization.
+
+132
+00:04:42,025 --> 00:04:44,012
+In particular, Mini-batch
+
+133
+00:04:44,041 --> 00:04:45,075
+gradient descent is likely to
+
+134
+00:04:45,095 --> 00:04:47,018
+outperform Stochastic gradient descent
+
+135
+00:04:47,050 --> 00:04:49,004
+only if you have a good vectorized
+
+136
+00:04:49,073 --> 00:04:49,073
+implementation.
+
+137
+00:04:51,002 --> 00:04:53,072
+In that case, the sum over
+
+138
+00:04:54,025 --> 00:04:55,095
+10 examples can be
+
+139
+00:04:56,007 --> 00:04:58,037
+performed in a more vectorized way
+
+140
+00:04:59,019 --> 00:05:00,050
+which will allow you to
+
+141
+00:05:01,064 --> 00:05:04,068
+partially parallelize your computation over the ten examples.
+
+142
+00:05:05,044 --> 00:05:06,099
+So, in other words, by using
+
+143
+00:05:07,037 --> 00:05:08,075
+appropriate vectorization to compute
+
+144
+00:05:09,025 --> 00:05:10,036
+the rest of the terms, you can
+
+145
+00:05:10,055 --> 00:05:12,062
+sometimes partially use the
+
+146
+00:05:12,070 --> 00:05:14,051
+good numerical algebra libraries and
+
+147
+00:05:14,067 --> 00:05:16,060
+parallelize your gradient computations
+
+148
+00:05:17,043 --> 00:05:19,032
+over the b examples, whereas if
+
+149
+00:05:19,082 --> 00:05:20,063
+you were looking at just a
+
+150
+00:05:20,076 --> 00:05:22,027
+single example of time with Stochastic
+
+151
+00:05:22,082 --> 00:05:24,012
+gradient descent then you know
+
+152
+00:05:24,052 --> 00:05:27,006
+just looking at one example at a time their isn't much to parallelize over.
+
+153
+00:05:27,018 --> 00:05:28,054
+At least there is less to parallelize over.
+
+154
+00:05:29,082 --> 00:05:31,032
+One disadvantage of Mini-batch
+
+155
+00:05:31,062 --> 00:05:32,099
+gradient descent is that there is now
+
+156
+00:05:33,024 --> 00:05:34,087
+this extra parameter b, the
+
+157
+00:05:35,000 --> 00:05:36,031
+Mini-batch size which you
+
+158
+00:05:36,041 --> 00:05:38,079
+may have to fiddle with, and which may therefore take time.
+
+159
+00:05:39,045 --> 00:05:40,060
+But if you have a good
+
+160
+00:05:40,068 --> 00:05:42,010
+vectorized implementation this can
+
+161
+00:05:42,027 --> 00:05:45,013
+sometimes run even faster that Stochastic gradient descent.
+
+162
+00:05:47,039 --> 00:05:48,067
+So that was Mini-batch
+
+163
+00:05:49,000 --> 00:05:50,024
+gradient descent which is an
+
+164
+00:05:50,038 --> 00:05:51,050
+algorithm that in some sense
+
+165
+00:05:52,018 --> 00:05:53,048
+does something that's somewhat in
+
+166
+00:05:53,056 --> 00:05:55,042
+between what Stochastic gradient descent does and what Batch gradient descent does.
+
+167
+00:05:56,087 --> 00:05:58,057
+And if you
+
+168
+00:05:58,089 --> 00:06:00,062
+choose their reasonable value of b. I usually
+
+169
+00:06:01,005 --> 00:06:02,051
+use b equals 10, but,
+
+170
+00:06:02,069 --> 00:06:04,051
+you know, other values, anywhere from
+
+171
+00:06:05,014 --> 00:06:06,095
+say 2 to 100, would be reasonably common.
+
+172
+00:06:07,074 --> 00:06:08,093
+So we choose value of
+
+173
+00:06:09,005 --> 00:06:09,086
+b and if you use
+
+174
+00:06:10,000 --> 00:06:12,018
+a good vectorized implementation, sometimes t
+
+175
+00:06:12,043 --> 00:06:13,088
+can be faster than both Stochastic
+
+176
+00:06:14,058 --> 00:06:17,000
+gradient descent and faster than Batch gradient descent.

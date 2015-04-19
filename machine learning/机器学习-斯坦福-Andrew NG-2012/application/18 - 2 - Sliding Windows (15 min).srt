@@ -1,0 +1,1831 @@
+1
+00:00:00,370 --> 00:00:01,590
+In the previous video, we talked
+
+2
+00:00:01,890 --> 00:00:04,570
+about the photo OCR pipeline and how that worked.
+
+3
+00:00:05,480 --> 00:00:06,370
+In which we would take an image
+
+4
+00:00:07,050 --> 00:00:08,070
+and pass the Through a
+
+5
+00:00:08,130 --> 00:00:10,010
+sequence of machine learning
+
+6
+00:00:10,280 --> 00:00:11,680
+components in order to
+
+7
+00:00:11,890 --> 00:00:13,820
+try to read the text that appears in an image.
+
+8
+00:00:14,590 --> 00:00:15,820
+In this video I like to.
+
+9
+00:00:16,210 --> 00:00:17,360
+A little bit more about how the
+
+10
+00:00:17,780 --> 00:00:20,310
+individual components of the pipeline works.
+
+11
+00:00:21,270 --> 00:00:24,070
+In particular most of this video will center around the discussion.
+
+12
+00:00:24,680 --> 00:00:25,950
+of whats called a sliding windows.
+
+13
+00:00:26,750 --> 00:00:31,570
+The first stage
+
+14
+00:00:32,000 --> 00:00:33,390
+of the filter was the
+
+15
+00:00:33,730 --> 00:00:35,090
+Text detection where we look
+
+16
+00:00:35,330 --> 00:00:36,640
+at an image like this and try
+
+17
+00:00:37,020 --> 00:00:39,320
+to find the regions of text that appear in this image.
+
+18
+00:00:39,850 --> 00:00:42,490
+Text detection is an unusual problem in computer vision.
+
+19
+00:00:43,220 --> 00:00:44,820
+Because depending on the length
+
+20
+00:00:45,140 --> 00:00:46,150
+of the text you're trying to
+
+21
+00:00:46,290 --> 00:00:47,870
+find, these rectangles that you're
+
+22
+00:00:47,970 --> 00:00:49,600
+trying to find can have different aspect.
+
+23
+00:00:51,100 --> 00:00:52,060
+So in order to talk
+
+24
+00:00:52,220 --> 00:00:53,550
+about detecting things in images
+
+25
+00:00:54,300 --> 00:00:55,860
+let's start with a simpler example
+
+26
+00:00:56,550 --> 00:01:00,080
+of pedestrian detection and we'll then later go back to.
+
+27
+00:01:00,460 --> 00:01:02,300
+Ideas that were developed
+
+28
+00:01:02,570 --> 00:01:04,840
+in pedestrian detection and apply them to text detection.
+
+29
+00:01:06,280 --> 00:01:08,010
+So in pedestrian detection you want
+
+30
+00:01:08,360 --> 00:01:09,440
+to take an image that looks
+
+31
+00:01:09,600 --> 00:01:11,010
+like this and the whole
+
+32
+00:01:11,160 --> 00:01:12,920
+idea is the individual pedestrians that appear in the image.
+
+33
+00:01:13,260 --> 00:01:14,440
+So there's one pedestrian that we
+
+34
+00:01:14,520 --> 00:01:15,550
+found, there's a second
+
+35
+00:01:15,780 --> 00:01:17,920
+one, a third one a fourth one, a fifth one.
+
+36
+00:01:18,290 --> 00:01:19,390
+And a one.
+
+37
+00:01:19,560 --> 00:01:20,990
+This problem is maybe slightly
+
+38
+00:01:21,320 --> 00:01:22,770
+simpler than text detection just
+
+39
+00:01:23,100 --> 00:01:24,200
+for the reason that the aspect
+
+40
+00:01:24,560 --> 00:01:27,490
+ratio of most pedestrians are pretty similar.
+
+41
+00:01:28,170 --> 00:01:29,280
+Just using a fixed aspect
+
+42
+00:01:29,630 --> 00:01:31,960
+ratio for these rectangles that we're trying to find.
+
+43
+00:01:32,420 --> 00:01:33,610
+So by aspect ratio I mean
+
+44
+00:01:33,920 --> 00:01:36,420
+the ratio between the height and the width of these rectangles.
+
+45
+00:01:37,820 --> 00:01:38,190
+They're all the same.
+
+46
+00:01:38,650 --> 00:01:40,120
+for different pedestrians but for
+
+47
+00:01:40,490 --> 00:01:42,650
+text detection the height
+
+48
+00:01:43,030 --> 00:01:44,560
+and width ratio is different
+
+49
+00:01:44,960 --> 00:01:45,830
+for different lines of text
+
+50
+00:01:46,460 --> 00:01:47,940
+Although for pedestrian detection, the
+
+51
+00:01:48,020 --> 00:01:49,250
+pedestrians can be different distances
+
+52
+00:01:49,810 --> 00:01:51,250
+away from the camera and
+
+53
+00:01:51,390 --> 00:01:52,730
+so the height of these rectangles
+
+54
+00:01:53,380 --> 00:01:55,600
+can be different depending on how far away they are.
+
+55
+00:01:55,990 --> 00:01:57,090
+but the aspect ratio is the same.
+
+56
+00:01:57,720 --> 00:01:58,880
+In order to build a pedestrian
+
+57
+00:01:59,440 --> 00:02:02,460
+detection system here's how you can go about it.
+
+58
+00:02:02,520 --> 00:02:03,650
+Let's say that we decide to
+
+59
+00:02:03,970 --> 00:02:06,100
+standardize on this aspect
+
+60
+00:02:06,690 --> 00:02:08,010
+ratio of 82 by 36
+
+61
+00:02:08,180 --> 00:02:10,040
+and we could
+
+62
+00:02:10,330 --> 00:02:11,510
+have chosen some rounded number
+
+63
+00:02:12,020 --> 00:02:14,000
+like 80 by 40 or something, but 82 by 36 seems alright.
+
+64
+00:02:16,110 --> 00:02:17,280
+What we would do is then go
+
+65
+00:02:17,650 --> 00:02:20,420
+out and collect large training sets of positive and negative examples.
+
+66
+00:02:21,240 --> 00:02:22,790
+Here are examples of 82
+
+67
+00:02:22,900 --> 00:02:24,230
+X 36 image patches that do
+
+68
+00:02:24,360 --> 00:02:26,230
+contain pedestrians and here are
+
+69
+00:02:26,550 --> 00:02:28,360
+examples of images that do not.
+
+70
+00:02:29,470 --> 00:02:30,710
+On this slide I show 12
+
+71
+00:02:31,050 --> 00:02:33,170
+positive examples of y1
+
+72
+00:02:33,730 --> 00:02:34,990
+and 12 examples of y0.
+
+73
+00:02:36,410 --> 00:02:37,790
+In a more typical pedestrian detection
+
+74
+00:02:38,180 --> 00:02:39,200
+application, we may have
+
+75
+00:02:39,500 --> 00:02:40,880
+anywhere from a 1,000 training
+
+76
+00:02:41,230 --> 00:02:42,210
+examples up to maybe
+
+77
+00:02:42,300 --> 00:02:44,410
+10,000 training examples, or
+
+78
+00:02:44,460 --> 00:02:45,360
+even more if you can
+
+79
+00:02:45,510 --> 00:02:47,180
+get even larger training sets.
+
+80
+00:02:47,460 --> 00:02:48,590
+And what you can do, is then train
+
+81
+00:02:48,910 --> 00:02:50,160
+in your network or some
+
+82
+00:02:50,510 --> 00:02:52,420
+other learning algorithm to
+
+83
+00:02:52,610 --> 00:02:54,570
+take this input, an MS
+
+84
+00:02:54,970 --> 00:02:56,710
+patch of dimension 82 by
+
+85
+00:02:56,850 --> 00:02:59,180
+36, and to classify  'y'
+
+86
+00:02:59,710 --> 00:03:01,070
+and to classify that image patch
+
+87
+00:03:01,510 --> 00:03:03,850
+as either containing a pedestrian or not.
+
+88
+00:03:05,250 --> 00:03:06,250
+So this gives you a way
+
+89
+00:03:06,470 --> 00:03:08,050
+of applying supervised learning in
+
+90
+00:03:08,210 --> 00:03:09,290
+order to take an image
+
+91
+00:03:09,530 --> 00:03:12,420
+patch can determine whether or not a pedestrian appears in that image capture.
+
+92
+00:03:14,310 --> 00:03:15,190
+Now, lets say we get
+
+93
+00:03:15,400 --> 00:03:16,520
+a new image, a test set
+
+94
+00:03:16,850 --> 00:03:17,920
+image like this and we
+
+95
+00:03:18,030 --> 00:03:20,240
+want to try to find a pedestrian's picture image.
+
+96
+00:03:21,520 --> 00:03:22,340
+What we would do is start
+
+97
+00:03:22,670 --> 00:03:25,140
+by taking a rectangular patch of this image.
+
+98
+00:03:25,580 --> 00:03:26,800
+Like that shown up here, so
+
+99
+00:03:26,900 --> 00:03:27,930
+that's maybe a 82 X
+
+100
+00:03:28,010 --> 00:03:29,440
+36 patch of this image,
+
+101
+00:03:30,270 --> 00:03:31,530
+and run that image patch through
+
+102
+00:03:31,830 --> 00:03:33,660
+our classifier to determine whether
+
+103
+00:03:33,840 --> 00:03:34,900
+or not there is a
+
+104
+00:03:34,980 --> 00:03:36,310
+pedestrian in that image patch,
+
+105
+00:03:36,620 --> 00:03:38,100
+and hopefully our classifier will
+
+106
+00:03:38,260 --> 00:03:40,600
+return y equals 0 for that patch, since there is no pedestrian.
+
+107
+00:03:42,020 --> 00:03:42,900
+Next, we then take that green
+
+108
+00:03:43,140 --> 00:03:44,380
+rectangle and we slide it
+
+109
+00:03:44,490 --> 00:03:45,680
+over a bit and then
+
+110
+00:03:45,940 --> 00:03:47,180
+run that new image patch
+
+111
+00:03:47,560 --> 00:03:49,700
+through our classifier to decide if there's a pedestrian there.
+
+112
+00:03:50,760 --> 00:03:51,740
+And having done that, we then
+
+113
+00:03:51,920 --> 00:03:53,070
+slide the window further to the
+
+114
+00:03:53,160 --> 00:03:54,160
+right and run that patch
+
+115
+00:03:54,420 --> 00:03:56,690
+through the classifier again.
+
+116
+00:03:56,970 --> 00:03:57,850
+The amount by which you shift
+
+117
+00:03:58,280 --> 00:03:59,770
+the rectangle over each time
+
+118
+00:04:00,260 --> 00:04:01,720
+is a parameter, that's sometimes
+
+119
+00:04:02,190 --> 00:04:04,000
+called the step size of the
+
+120
+00:04:04,070 --> 00:04:06,020
+parameter, sometimes also called
+
+121
+00:04:06,380 --> 00:04:08,970
+the slide parameter, and if
+
+122
+00:04:09,120 --> 00:04:11,050
+you step this one pixel at a time.
+
+123
+00:04:11,210 --> 00:04:12,020
+So you can use the step size
+
+124
+00:04:12,360 --> 00:04:14,020
+or stride of 1, that usually
+
+125
+00:04:14,340 --> 00:04:15,560
+performs best, that is
+
+126
+00:04:15,700 --> 00:04:16,960
+more cost effective, and
+
+127
+00:04:17,430 --> 00:04:18,940
+so using a step size of
+
+128
+00:04:19,090 --> 00:04:20,010
+maybe 4 pixels at a
+
+129
+00:04:20,210 --> 00:04:20,970
+time, or eight pixels at a
+
+130
+00:04:21,250 --> 00:04:22,350
+time or some large number of
+
+131
+00:04:22,550 --> 00:04:23,600
+pixels might be more common,
+
+132
+00:04:24,010 --> 00:04:25,320
+since you're then moving the
+
+133
+00:04:25,430 --> 00:04:26,570
+rectangle a little bit
+
+134
+00:04:26,700 --> 00:04:28,570
+more each time.
+
+135
+00:04:28,870 --> 00:04:30,090
+So, using this process, you continue
+
+136
+00:04:30,870 --> 00:04:32,310
+stepping the rectangle over to
+
+137
+00:04:32,340 --> 00:04:33,160
+the right a bit at a
+
+138
+00:04:33,370 --> 00:04:34,450
+time and running each of
+
+139
+00:04:34,520 --> 00:04:35,780
+these patches through a classifier,
+
+140
+00:04:36,620 --> 00:04:38,220
+until eventually, as you
+
+141
+00:04:38,900 --> 00:04:42,080
+slide this window over the
+
+142
+00:04:42,150 --> 00:04:43,340
+different locations in the image,
+
+143
+00:04:43,550 --> 00:04:44,680
+first starting with the first
+
+144
+00:04:44,850 --> 00:04:46,080
+row and then we
+
+145
+00:04:46,160 --> 00:04:47,580
+go further rows in
+
+146
+00:04:47,710 --> 00:04:49,100
+the image, you would
+
+147
+00:04:49,290 --> 00:04:50,490
+then run all of
+
+148
+00:04:50,550 --> 00:04:52,070
+these different image patches at
+
+149
+00:04:52,240 --> 00:04:53,330
+some step size or some
+
+150
+00:04:53,430 --> 00:04:54,990
+stride through your classifier.
+
+151
+00:04:56,990 --> 00:04:57,870
+Now, that was a pretty
+
+152
+00:04:57,970 --> 00:04:59,870
+small rectangle, that would only
+
+153
+00:05:00,310 --> 00:05:02,310
+detect pedestrians of one specific size.
+
+154
+00:05:02,780 --> 00:05:04,210
+What we do next is
+
+155
+00:05:04,470 --> 00:05:05,990
+start to look at larger image patches.
+
+156
+00:05:06,730 --> 00:05:08,270
+So now let's take larger images
+
+157
+00:05:08,610 --> 00:05:09,700
+patches, like those shown here
+
+158
+00:05:10,310 --> 00:05:11,960
+and run those through the crossfire as well.
+
+159
+00:05:13,540 --> 00:05:14,320
+And by the way when I say
+
+160
+00:05:14,600 --> 00:05:15,830
+take a larger image patch, what
+
+161
+00:05:16,080 --> 00:05:17,780
+I really mean is when you
+
+162
+00:05:17,860 --> 00:05:18,850
+take an image patch like this,
+
+163
+00:05:19,490 --> 00:05:20,720
+what you're really doing is taking
+
+164
+00:05:20,880 --> 00:05:22,110
+that image patch, and resizing
+
+165
+00:05:22,800 --> 00:05:24,750
+it down to 82 X 36, say.
+
+166
+00:05:25,000 --> 00:05:26,260
+So you take this larger
+
+167
+00:05:26,550 --> 00:05:28,180
+patch and re-size it to
+
+168
+00:05:28,300 --> 00:05:29,800
+be smaller image and then
+
+169
+00:05:29,970 --> 00:05:31,260
+it would be the smaller size image
+
+170
+00:05:31,600 --> 00:05:32,620
+that is what you
+
+171
+00:05:32,990 --> 00:05:35,340
+would pass through your classifier to try and decide if there is a pedestrian in that patch.
+
+172
+00:05:37,230 --> 00:05:38,310
+And finally you can do
+
+173
+00:05:38,470 --> 00:05:39,530
+this at an even larger
+
+174
+00:05:39,930 --> 00:05:41,870
+scales and run
+
+175
+00:05:42,080 --> 00:05:43,830
+that side of Windows to
+
+176
+00:05:43,980 --> 00:05:45,920
+the end And after
+
+177
+00:05:45,980 --> 00:05:47,480
+this whole process hopefully your algorithm
+
+178
+00:05:48,040 --> 00:05:49,670
+will detect whether theres pedestrian
+
+179
+00:05:50,140 --> 00:05:52,070
+appears in the image, so
+
+180
+00:05:52,470 --> 00:05:53,850
+thats how you train a
+
+181
+00:05:54,290 --> 00:05:55,630
+the classifier, and then
+
+182
+00:05:55,890 --> 00:05:57,360
+use a sliding windows classifier,
+
+183
+00:05:57,920 --> 00:05:59,820
+or use a sliding windows detector in
+
+184
+00:05:59,970 --> 00:06:01,740
+order to find pedestrians in the image.
+
+185
+00:06:03,070 --> 00:06:04,050
+Let's have a turn to the
+
+186
+00:06:04,150 --> 00:06:05,910
+text detection example and talk
+
+187
+00:06:06,100 --> 00:06:07,490
+about that stage in our
+
+188
+00:06:07,790 --> 00:06:09,330
+photo OCR pipeline, where our
+
+189
+00:06:09,570 --> 00:06:11,340
+goal is to find the text regions in unit.
+
+190
+00:06:13,250 --> 00:06:15,010
+similar to pedestrian detection you
+
+191
+00:06:15,250 --> 00:06:16,730
+can come up with a label
+
+192
+00:06:17,030 --> 00:06:18,410
+training set with positive examples
+
+193
+00:06:19,060 --> 00:06:20,930
+and negative examples with examples
+
+194
+00:06:21,530 --> 00:06:23,810
+corresponding to regions where text appears.
+
+195
+00:06:24,300 --> 00:06:27,290
+So instead of trying to detect pedestrians, we're now trying to detect texts.
+
+196
+00:06:28,130 --> 00:06:29,670
+And so positive examples are going
+
+197
+00:06:29,770 --> 00:06:31,640
+to be patches of images where there is text.
+
+198
+00:06:31,970 --> 00:06:33,330
+And negative examples is going
+
+199
+00:06:33,380 --> 00:06:36,000
+to be patches of images where there isn't text.
+
+200
+00:06:36,330 --> 00:06:37,530
+Having trained this we can
+
+201
+00:06:38,030 --> 00:06:39,450
+now apply it to a
+
+202
+00:06:39,870 --> 00:06:41,190
+new image, into a test
+
+203
+00:06:42,460 --> 00:06:42,910
+set image.
+
+204
+00:06:43,310 --> 00:06:44,900
+So here's the image that we've been using as example.
+
+205
+00:06:46,040 --> 00:06:47,300
+Now, last time we run,
+
+206
+00:06:47,440 --> 00:06:48,400
+for this example we are going
+
+207
+00:06:48,560 --> 00:06:50,300
+to run a sliding windows at
+
+208
+00:06:50,640 --> 00:06:52,030
+just one fixed scale just
+
+209
+00:06:52,370 --> 00:06:54,360
+for purpose of illustration, meaning that
+
+210
+00:06:54,450 --> 00:06:56,000
+I'm going to use just one rectangle size.
+
+211
+00:06:56,790 --> 00:06:58,110
+But lets say I run my little
+
+212
+00:06:58,350 --> 00:07:00,070
+sliding windows classifier on lots
+
+213
+00:07:00,170 --> 00:07:01,570
+of little image patches like
+
+214
+00:07:01,630 --> 00:07:04,340
+this if I
+
+215
+00:07:04,430 --> 00:07:05,430
+do that, what Ill end
+
+216
+00:07:05,530 --> 00:07:06,670
+up with is a result
+
+217
+00:07:07,040 --> 00:07:08,530
+like this where the white
+
+218
+00:07:08,900 --> 00:07:10,700
+region show where my
+
+219
+00:07:10,940 --> 00:07:12,190
+text detection system has found
+
+220
+00:07:12,210 --> 00:07:15,960
+text and so the axis' of these two figures are the same.
+
+221
+00:07:16,390 --> 00:07:17,700
+So there is a region
+
+222
+00:07:18,110 --> 00:07:19,200
+up here, of course also
+
+223
+00:07:19,230 --> 00:07:20,710
+a region up here, so the
+
+224
+00:07:20,840 --> 00:07:22,040
+fact that this black up here
+
+225
+00:07:22,850 --> 00:07:24,390
+represents that the classifier
+
+226
+00:07:24,840 --> 00:07:25,940
+does not think it's found any
+
+227
+00:07:26,170 --> 00:07:28,100
+texts up there, whereas the
+
+228
+00:07:28,170 --> 00:07:29,630
+fact that there's a lot
+
+229
+00:07:29,810 --> 00:07:31,300
+of white stuff here, that reflects that
+
+230
+00:07:31,540 --> 00:07:33,260
+classifier thinks that it's found a bunch of texts.
+
+231
+00:07:33,520 --> 00:07:34,310
+over there on the image.
+
+232
+00:07:35,040 --> 00:07:35,700
+What i have done on this
+
+233
+00:07:35,780 --> 00:07:36,870
+image on the lower left is
+
+234
+00:07:37,070 --> 00:07:38,820
+actually use white to
+
+235
+00:07:38,970 --> 00:07:41,050
+show where the classifier thinks it has found text.
+
+236
+00:07:41,810 --> 00:07:43,280
+And different shades of grey
+
+237
+00:07:43,880 --> 00:07:45,560
+correspond to the probability that
+
+238
+00:07:45,670 --> 00:07:46,750
+was output by the classifier,
+
+239
+00:07:47,110 --> 00:07:48,000
+so like the shades of grey
+
+240
+00:07:48,520 --> 00:07:49,860
+corresponds to where it
+
+241
+00:07:49,930 --> 00:07:50,750
+thinks it might have found text
+
+242
+00:07:51,210 --> 00:07:53,900
+but has lower confidence the bright
+
+243
+00:07:54,260 --> 00:07:55,980
+white response to whether the classifier,
+
+244
+00:07:57,440 --> 00:07:58,400
+up with a very high
+
+245
+00:07:58,660 --> 00:08:00,470
+probability, estimated probability of
+
+246
+00:08:00,630 --> 00:08:03,110
+there being pedestrians in that location.
+
+247
+00:08:04,110 --> 00:08:05,270
+We aren't quite done yet because
+
+248
+00:08:05,690 --> 00:08:06,580
+what we actually want to do
+
+249
+00:08:06,830 --> 00:08:08,620
+is draw rectangles around all
+
+250
+00:08:08,850 --> 00:08:09,780
+the region where this text
+
+251
+00:08:10,490 --> 00:08:12,540
+in the image, so were
+
+252
+00:08:12,650 --> 00:08:13,540
+going to take one more step
+
+253
+00:08:13,840 --> 00:08:14,990
+which is we take the output
+
+254
+00:08:15,230 --> 00:08:16,880
+of the classifier and apply
+
+255
+00:08:17,290 --> 00:08:19,280
+to it what is called an expansion operator.
+
+256
+00:08:20,750 --> 00:08:22,250
+So what that does is, it
+
+257
+00:08:22,430 --> 00:08:24,270
+take the image here,
+
+258
+00:08:25,450 --> 00:08:26,700
+and it takes each of
+
+259
+00:08:26,800 --> 00:08:28,200
+the white blobs, it takes each
+
+260
+00:08:28,270 --> 00:08:30,590
+of the white regions and it expands that white region.
+
+261
+00:08:31,460 --> 00:08:32,460
+Mathematically, the way you
+
+262
+00:08:32,610 --> 00:08:34,110
+implement that is, if you
+
+263
+00:08:34,270 --> 00:08:35,280
+look at the image on the right, what
+
+264
+00:08:35,690 --> 00:08:36,780
+we're doing to create the
+
+265
+00:08:36,930 --> 00:08:38,110
+image on the right is, for every
+
+266
+00:08:38,370 --> 00:08:39,510
+pixel we are going
+
+267
+00:08:39,610 --> 00:08:40,790
+to ask, is it withing
+
+268
+00:08:41,370 --> 00:08:42,960
+some distance of a
+
+269
+00:08:43,100 --> 00:08:44,650
+white pixel in the left image.
+
+270
+00:08:45,430 --> 00:08:46,800
+And so, if a specific pixel
+
+271
+00:08:47,220 --> 00:08:48,420
+is within, say, five pixels
+
+272
+00:08:48,950 --> 00:08:50,280
+or ten pixels of a white
+
+273
+00:08:50,610 --> 00:08:52,310
+pixel in the leftmost image, then
+
+274
+00:08:52,540 --> 00:08:55,020
+we'll also color that pixel white in the rightmost image.
+
+275
+00:08:56,190 --> 00:08:57,010
+And so, the effect of this
+
+276
+00:08:57,300 --> 00:08:58,350
+is, we'll take each of the
+
+277
+00:08:58,730 --> 00:08:59,630
+white blobs in the leftmost
+
+278
+00:09:00,030 --> 00:09:01,370
+image and expand them a
+
+279
+00:09:01,500 --> 00:09:02,200
+bit, grow them a little
+
+280
+00:09:02,670 --> 00:09:04,110
+bit, by seeing whether the
+
+281
+00:09:04,170 --> 00:09:05,420
+nearby pixels, the white pixels,
+
+282
+00:09:05,900 --> 00:09:07,980
+and then coloring those nearby pixels in white as well.
+
+283
+00:09:08,430 --> 00:09:09,900
+Finally, we are just about done.
+
+284
+00:09:10,180 --> 00:09:11,210
+We can now look at this
+
+285
+00:09:11,480 --> 00:09:12,900
+right most image and just
+
+286
+00:09:13,210 --> 00:09:14,650
+look at the connecting components
+
+287
+00:09:15,320 --> 00:09:16,700
+and look at the as white
+
+288
+00:09:16,990 --> 00:09:19,350
+regions and draw bounding boxes around them.
+
+289
+00:09:20,260 --> 00:09:20,990
+And in particular, if we look at
+
+290
+00:09:21,390 --> 00:09:22,850
+all the white regions, like
+
+291
+00:09:23,080 --> 00:09:24,750
+this one, this one, this
+
+292
+00:09:24,990 --> 00:09:26,670
+one, and so on, and
+
+293
+00:09:27,030 --> 00:09:27,810
+if we use a simple heuristic
+
+294
+00:09:28,390 --> 00:09:30,240
+to rule out rectangles whose aspect
+
+295
+00:09:30,660 --> 00:09:32,760
+ratios look funny because we
+
+296
+00:09:32,870 --> 00:09:34,460
+know that boxes around text
+
+297
+00:09:34,730 --> 00:09:36,130
+should be much wider than they are tall.
+
+298
+00:09:37,110 --> 00:09:38,310
+And so if we ignore the
+
+299
+00:09:38,410 --> 00:09:39,990
+thin, tall blobs like this one
+
+300
+00:09:40,230 --> 00:09:42,120
+and this one, and
+
+301
+00:09:42,190 --> 00:09:43,390
+we discard these ones because
+
+302
+00:09:43,880 --> 00:09:45,490
+they are too tall and thin, and
+
+303
+00:09:45,660 --> 00:09:46,780
+we then draw a the rectangles
+
+304
+00:09:47,470 --> 00:09:48,440
+around the ones whose aspect
+
+305
+00:09:48,840 --> 00:09:50,420
+ratio thats a height
+
+306
+00:09:50,610 --> 00:09:51,800
+to what ratio looks like for
+
+307
+00:09:51,950 --> 00:09:53,310
+text regions, then we
+
+308
+00:09:53,380 --> 00:09:55,070
+can draw rectangles, the bounding
+
+309
+00:09:55,450 --> 00:09:56,660
+boxes around this text
+
+310
+00:09:56,970 --> 00:09:58,500
+region, this text region, and
+
+311
+00:09:58,610 --> 00:10:00,550
+that text region, corresponding to
+
+312
+00:10:01,060 --> 00:10:02,180
+the Lula B's antique mall logo,
+
+313
+00:10:02,650 --> 00:10:04,690
+the Lula B's, and this little open sign.
+
+314
+00:10:05,840 --> 00:10:06,000
+Of over there.
+
+315
+00:10:07,100 --> 00:10:09,550
+This example by the actually misses one piece of text.
+
+316
+00:10:09,860 --> 00:10:12,550
+This is very hard to read, but there is actually one piece of text there.
+
+317
+00:10:13,080 --> 00:10:14,710
+That says [xx] are corresponding
+
+318
+00:10:14,950 --> 00:10:16,180
+to this but the aspect ratio
+
+319
+00:10:16,530 --> 00:10:17,960
+looks wrong so we discarded that one.
+
+320
+00:10:19,100 --> 00:10:20,240
+So you know it's ok
+
+321
+00:10:20,530 --> 00:10:21,460
+on this image, but in
+
+322
+00:10:21,660 --> 00:10:22,760
+this particular example the classifier
+
+323
+00:10:23,290 --> 00:10:24,400
+actually missed one piece of text.
+
+324
+00:10:24,760 --> 00:10:25,780
+It's very hard to read because
+
+325
+00:10:25,960 --> 00:10:26,900
+there's a piece of text
+
+326
+00:10:27,240 --> 00:10:28,700
+written against a transparent window.
+
+327
+00:10:29,750 --> 00:10:31,200
+So that's text detection
+
+328
+00:10:32,430 --> 00:10:33,120
+using sliding windows.
+
+329
+00:10:33,800 --> 00:10:35,300
+And having found these rectangles
+
+330
+00:10:36,100 --> 00:10:37,010
+with the text in it, we
+
+331
+00:10:37,110 --> 00:10:38,240
+can now just cut out
+
+332
+00:10:38,450 --> 00:10:39,890
+these image regions and then
+
+333
+00:10:40,070 --> 00:10:42,100
+use later stages of pipeline to try to meet the texts.
+
+334
+00:10:45,390 --> 00:10:46,820
+Now, you recall that the
+
+335
+00:10:46,880 --> 00:10:48,360
+second stage of pipeline was
+
+336
+00:10:48,570 --> 00:10:50,620
+character segmentation, so given an
+
+337
+00:10:50,890 --> 00:10:52,530
+image like that shown on top,
+
+338
+00:10:52,790 --> 00:10:55,660
+how do we segment out the individual characters in this image?
+
+339
+00:10:56,580 --> 00:10:57,460
+So what we can do is
+
+340
+00:10:57,910 --> 00:10:59,590
+again use a supervised learning
+
+341
+00:11:00,010 --> 00:11:01,020
+algorithm with some set of
+
+342
+00:11:01,100 --> 00:11:01,990
+positive and some set of
+
+343
+00:11:02,100 --> 00:11:03,810
+negative examples, what were
+
+344
+00:11:03,880 --> 00:11:04,840
+going to do is look in
+
+345
+00:11:04,900 --> 00:11:06,160
+the image patch and try
+
+346
+00:11:06,390 --> 00:11:08,110
+to decide if there
+
+347
+00:11:08,370 --> 00:11:09,690
+is split between two characters
+
+348
+00:11:10,700 --> 00:11:12,070
+right in the middle of that image match.
+
+349
+00:11:13,030 --> 00:11:14,100
+So for initial positive examples.
+
+350
+00:11:14,960 --> 00:11:17,040
+This first cross example, this image
+
+351
+00:11:17,290 --> 00:11:18,590
+patch looks like the
+
+352
+00:11:18,650 --> 00:11:20,050
+middle of it is indeed
+
+353
+00:11:21,320 --> 00:11:22,890
+the middle has splits between two
+
+354
+00:11:23,110 --> 00:11:24,120
+characters and the second example
+
+355
+00:11:24,680 --> 00:11:25,770
+again this looks like a
+
+356
+00:11:25,950 --> 00:11:27,370
+positive example, because if I split
+
+357
+00:11:27,840 --> 00:11:29,020
+two characters by putting a
+
+358
+00:11:29,160 --> 00:11:31,190
+line right down the middle, that's the right thing to do.
+
+359
+00:11:31,350 --> 00:11:33,310
+So, these are positive examples, where
+
+360
+00:11:33,510 --> 00:11:35,370
+the middle of the image represents
+
+361
+00:11:35,970 --> 00:11:36,930
+a gap or a split
+
+362
+00:11:37,960 --> 00:11:40,320
+between two distinct characters, whereas
+
+363
+00:11:40,560 --> 00:11:41,870
+the negative examples, well, you
+
+364
+00:11:42,010 --> 00:11:43,160
+know, you don't want to split
+
+365
+00:11:43,690 --> 00:11:44,810
+two characters right in the
+
+366
+00:11:44,900 --> 00:11:46,610
+middle, and so
+
+367
+00:11:46,820 --> 00:11:48,160
+these are negative examples because
+
+368
+00:11:48,460 --> 00:11:50,660
+they don't represent the midpoint between two characters.
+
+369
+00:11:51,760 --> 00:11:52,490
+So what we will do
+
+370
+00:11:52,650 --> 00:11:53,940
+is, we will train a classifier,
+
+371
+00:11:54,500 --> 00:11:55,910
+maybe using new network, maybe
+
+372
+00:11:56,180 --> 00:11:58,000
+using a different learning algorithm, to
+
+373
+00:11:58,120 --> 00:12:01,420
+try to classify between the positive and negative examples.
+
+374
+00:12:02,770 --> 00:12:03,980
+Having trained such a classifier,
+
+375
+00:12:04,320 --> 00:12:06,030
+we can then run this on
+
+376
+00:12:06,690 --> 00:12:07,830
+this sort of text that our
+
+377
+00:12:07,940 --> 00:12:09,410
+text detection system has pulled out.
+
+378
+00:12:09,590 --> 00:12:10,970
+As we start by looking at
+
+379
+00:12:11,130 --> 00:12:12,080
+that rectangle, and we ask,
+
+380
+00:12:12,230 --> 00:12:13,280
+"Gee, does it look
+
+381
+00:12:13,510 --> 00:12:15,000
+like the middle of
+
+382
+00:12:15,100 --> 00:12:16,600
+that green rectangle, does it
+
+383
+00:12:16,680 --> 00:12:18,470
+look like the midpoint between two characters?".
+
+384
+00:12:18,980 --> 00:12:20,220
+And hopefully, the classifier will
+
+385
+00:12:20,320 --> 00:12:21,760
+say no, then we slide
+
+386
+00:12:22,170 --> 00:12:23,280
+the window over and this
+
+387
+00:12:23,410 --> 00:12:24,850
+is a one dimensional sliding
+
+388
+00:12:25,200 --> 00:12:26,410
+window classifier, because were
+
+389
+00:12:26,500 --> 00:12:27,820
+going to slide the window only
+
+390
+00:12:28,470 --> 00:12:29,560
+in one straight line from
+
+391
+00:12:29,780 --> 00:12:32,070
+left to right, theres no different rows here.
+
+392
+00:12:32,270 --> 00:12:34,420
+There's only one row here.
+
+393
+00:12:34,520 --> 00:12:36,160
+But now, with the classifier in
+
+394
+00:12:36,240 --> 00:12:37,250
+this position, we ask, well,
+
+395
+00:12:37,490 --> 00:12:38,700
+should we split those two characters
+
+396
+00:12:39,570 --> 00:12:41,580
+or should we put a split right down the middle of this rectangle.
+
+397
+00:12:41,950 --> 00:12:43,040
+And hopefully, the classifier will
+
+398
+00:12:43,190 --> 00:12:44,720
+output y equals one, in
+
+399
+00:12:44,780 --> 00:12:46,460
+which case we will decide to
+
+400
+00:12:46,630 --> 00:12:49,690
+draw a line down there, to try to split two characters.
+
+401
+00:12:50,710 --> 00:12:51,620
+Then we slide the window over
+
+402
+00:12:51,870 --> 00:12:53,440
+again, optic process, don't
+
+403
+00:12:53,650 --> 00:12:55,020
+close the gap, slide over again,
+
+404
+00:12:55,300 --> 00:12:56,580
+optic says yes, do split
+
+405
+00:12:57,230 --> 00:12:58,830
+there and so
+
+406
+00:12:59,200 --> 00:13:00,410
+on, and we slowly slide the
+
+407
+00:13:00,560 --> 00:13:01,770
+classifier over to the
+
+408
+00:13:01,920 --> 00:13:03,310
+right and hopefully it will
+
+409
+00:13:03,380 --> 00:13:05,160
+classify this as another positive example and
+
+410
+00:13:05,770 --> 00:13:07,470
+so on.
+
+411
+00:13:08,010 --> 00:13:09,180
+And we will slide this window
+
+412
+00:13:09,820 --> 00:13:10,990
+over to the right, running the
+
+413
+00:13:11,160 --> 00:13:12,670
+classifier at every step, and
+
+414
+00:13:12,800 --> 00:13:13,800
+hopefully it will tell us,
+
+415
+00:13:14,210 --> 00:13:15,070
+you know, what are the right locations
+
+416
+00:13:16,190 --> 00:13:17,820
+to split these characters up into,
+
+417
+00:13:18,290 --> 00:13:20,410
+just split this image up into individual characters.
+
+418
+00:13:21,090 --> 00:13:22,450
+And so thats 1D sliding
+
+419
+00:13:22,810 --> 00:13:24,190
+windows for character segmentation.
+
+420
+00:13:25,520 --> 00:13:28,430
+So, here's the overall photo OCR pipe line again.
+
+421
+00:13:29,120 --> 00:13:30,280
+In this video we've talked about
+
+422
+00:13:30,780 --> 00:13:32,170
+the text detection step, where
+
+423
+00:13:32,360 --> 00:13:34,570
+we use sliding windows to detect text.
+
+424
+00:13:35,200 --> 00:13:36,390
+And we also use a one-dimensional
+
+425
+00:13:37,070 --> 00:13:38,420
+sliding windows to do character
+
+426
+00:13:38,790 --> 00:13:40,160
+segmentation to segment out,
+
+427
+00:13:40,730 --> 00:13:42,860
+you know, this text image in division of characters.
+
+428
+00:13:43,900 --> 00:13:44,770
+The final step through the
+
+429
+00:13:44,810 --> 00:13:46,040
+pipeline is the character qualification
+
+430
+00:13:46,720 --> 00:13:48,150
+step and that step you might
+
+431
+00:13:48,370 --> 00:13:49,750
+already be much more familiar
+
+432
+00:13:50,020 --> 00:13:51,490
+with the early videos
+
+433
+00:13:52,080 --> 00:13:54,470
+on supervised learning
+
+434
+00:13:55,170 --> 00:13:56,440
+where you can apply a standard
+
+435
+00:13:56,940 --> 00:13:58,150
+supervised learning within maybe
+
+436
+00:13:58,360 --> 00:13:59,250
+on your network or maybe something
+
+437
+00:13:59,570 --> 00:14:00,650
+else in order to
+
+438
+00:14:00,860 --> 00:14:02,100
+take it's input, an image
+
+439
+00:14:02,980 --> 00:14:05,030
+like that and classify which alphabet
+
+440
+00:14:05,480 --> 00:14:07,120
+or which 26 characters A
+
+441
+00:14:07,230 --> 00:14:08,320
+to Z, or maybe we should
+
+442
+00:14:08,570 --> 00:14:09,670
+have 36 characters if you
+
+443
+00:14:09,780 --> 00:14:11,140
+have the numerical digits as
+
+444
+00:14:11,270 --> 00:14:12,650
+well, the multi class
+
+445
+00:14:13,080 --> 00:14:14,410
+classification problem where you
+
+446
+00:14:14,510 --> 00:14:15,690
+take it's input and image
+
+447
+00:14:16,050 --> 00:14:17,390
+contained a character and decide
+
+448
+00:14:18,140 --> 00:14:20,450
+what is the character that appears in that image?
+
+449
+00:14:21,080 --> 00:14:22,460
+So that was the photo OCR
+
+450
+00:14:23,730 --> 00:14:24,750
+pipeline and how you can
+
+451
+00:14:24,910 --> 00:14:26,140
+use ideas like sliding windows
+
+452
+00:14:26,520 --> 00:14:27,960
+classifiers in order to
+
+453
+00:14:28,100 --> 00:14:29,790
+put these different components to
+
+454
+00:14:30,060 --> 00:14:31,570
+develop a photo OCR system.
+
+455
+00:14:32,430 --> 00:14:33,570
+In the next few videos we
+
+456
+00:14:33,680 --> 00:14:34,930
+keep on using the problem of
+
+457
+00:14:35,150 --> 00:14:36,550
+photo OCR to explore somewhat
+
+458
+00:14:36,960 --> 00:14:39,070
+interesting issues surrounding building an application like this.

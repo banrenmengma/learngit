@@ -1,0 +1,1680 @@
+
+1
+00:00:00,032 --> 00:00:01,051
+In the last few videos, we talked
+
+2
+00:00:01,081 --> 00:00:03,043
+about stochastic gradient descent, and,
+
+3
+00:00:03,062 --> 00:00:05,001
+you know, other variations of the
+
+4
+00:00:05,012 --> 00:00:06,053
+stochastic gradient descent algorithm,
+
+5
+00:00:06,091 --> 00:00:09,015
+including those adaptations to online
+
+6
+00:00:09,049 --> 00:00:10,041
+learning, but all of those
+
+7
+00:00:10,060 --> 00:00:11,081
+algorithms could be run on
+
+8
+00:00:12,010 --> 00:00:13,074
+one machine, or could be run on one computer.
+
+9
+00:00:14,080 --> 00:00:15,086
+And some machine learning problems
+
+10
+00:00:16,030 --> 00:00:17,026
+are just too big to run
+
+11
+00:00:17,051 --> 00:00:19,016
+on one machine, sometimes maybe
+
+12
+00:00:19,030 --> 00:00:21,005
+you just so much data you
+
+13
+00:00:21,017 --> 00:00:22,035
+just don't ever want to run
+
+14
+00:00:22,067 --> 00:00:23,098
+all that data through a
+
+15
+00:00:24,010 --> 00:00:26,026
+single computer, no matter what algorithm you would use on that computer.
+
+16
+00:00:28,046 --> 00:00:29,064
+So in this video I'd
+
+17
+00:00:29,073 --> 00:00:31,023
+like to talk about different approach
+
+18
+00:00:31,076 --> 00:00:33,060
+to large scale machine learning, called
+
+19
+00:00:34,000 --> 00:00:36,018
+the map reduce approach.
+
+20
+00:00:37,003 --> 00:00:38,007
+And even though we have
+
+21
+00:00:38,038 --> 00:00:39,039
+quite a few videos on stochastic
+
+22
+00:00:39,096 --> 00:00:41,022
+gradient descent and we're going
+
+23
+00:00:41,054 --> 00:00:43,010
+to spend relative less time
+
+24
+00:00:43,046 --> 00:00:45,035
+on map reduce--don't judge the
+
+25
+00:00:45,056 --> 00:00:46,075
+relative importance of map reduce
+
+26
+00:00:47,015 --> 00:00:48,024
+versus the gradient descent
+
+27
+00:00:48,068 --> 00:00:49,059
+based on the amount amount of
+
+28
+00:00:49,065 --> 00:00:51,047
+time I spend on these ideas in particular.
+
+29
+00:00:52,022 --> 00:00:53,038
+Many people will say that
+
+30
+00:00:53,078 --> 00:00:54,084
+map reduce is at least
+
+31
+00:00:55,009 --> 00:00:56,032
+an equally important, and some
+
+32
+00:00:56,057 --> 00:00:57,085
+would say an even more important idea
+
+33
+00:00:58,050 --> 00:01:00,061
+compared to gradient descent, only
+
+34
+00:01:01,046 --> 00:01:03,003
+it's relatively simpler to
+
+35
+00:01:03,015 --> 00:01:04,062
+explain, which is why I'm
+
+36
+00:01:04,071 --> 00:01:05,057
+going to spend less time on
+
+37
+00:01:05,082 --> 00:01:07,004
+it, but using these ideas
+
+38
+00:01:07,067 --> 00:01:08,040
+you might be able to scale
+
+39
+00:01:09,006 --> 00:01:10,064
+learning algorithms to even
+
+40
+00:01:10,087 --> 00:01:12,051
+far larger problems than is
+
+41
+00:01:12,062 --> 00:01:14,053
+possible using stochastic gradient descent.
+
+42
+00:01:18,071 --> 00:01:19,000
+Here's the idea.
+
+43
+00:01:19,081 --> 00:01:21,001
+Let's say we want to fit
+
+44
+00:01:21,048 --> 00:01:22,095
+a linear regression model or
+
+45
+00:01:23,014 --> 00:01:24,043
+a logistic regression model or some
+
+46
+00:01:24,054 --> 00:01:26,009
+such, and let's start again
+
+47
+00:01:26,043 --> 00:01:27,065
+with batch gradient descent, so
+
+48
+00:01:27,084 --> 00:01:30,029
+that's our batch gradient descent learning rule.
+
+49
+00:01:31,023 --> 00:01:32,043
+And to keep the writing
+
+50
+00:01:32,084 --> 00:01:34,017
+on this slide tractable, I'm going
+
+51
+00:01:34,034 --> 00:01:36,098
+to assume throughout that we have m equals 400 examples.
+
+52
+00:01:37,053 --> 00:01:39,056
+Of course, by our
+
+53
+00:01:39,075 --> 00:01:40,084
+standards, in terms of large scale
+
+54
+00:01:41,009 --> 00:01:42,004
+machine learning, you know m
+
+55
+00:01:42,017 --> 00:01:43,020
+might be pretty small and so,
+
+56
+00:01:43,076 --> 00:01:45,039
+this might be more commonly
+
+57
+00:01:45,087 --> 00:01:46,092
+applied to problems, where you
+
+58
+00:01:47,004 --> 00:01:48,018
+have maybe closer to 400
+
+59
+00:01:48,073 --> 00:01:49,093
+million examples, or some
+
+60
+00:01:50,007 --> 00:01:51,031
+such, but just to
+
+61
+00:01:51,039 --> 00:01:52,032
+make the writing on the slide
+
+62
+00:01:52,076 --> 00:01:55,000
+simpler, I'm going to pretend we have 400 examples.
+
+63
+00:01:55,068 --> 00:01:57,045
+So in that case, the
+
+64
+00:01:57,079 --> 00:01:59,007
+batch gradient descent learning rule
+
+65
+00:01:59,056 --> 00:02:00,093
+has this 400 and the
+
+66
+00:02:01,050 --> 00:02:02,093
+sum from i equals 1 through
+
+67
+00:02:03,032 --> 00:02:05,004
+400 through my 400 examples
+
+68
+00:02:05,059 --> 00:02:06,089
+here, and if m
+
+69
+00:02:07,004 --> 00:02:09,078
+is large, then this is a computationally expensive step.
+
+70
+00:02:10,088 --> 00:02:12,083
+So, what the MapReduce idea
+
+71
+00:02:13,025 --> 00:02:14,046
+does is the following, and
+
+72
+00:02:14,088 --> 00:02:15,074
+I should say the map
+
+73
+00:02:15,094 --> 00:02:16,093
+reduce idea is due to
+
+74
+00:02:17,068 --> 00:02:20,018
+two researchers, Jeff Dean
+
+75
+00:02:20,069 --> 00:02:22,006
+and Sanjay Gimawat.
+
+76
+00:02:22,063 --> 00:02:23,049
+Jeff Dean, by the way, is
+
+77
+00:02:24,018 --> 00:02:26,052
+one of the most legendary engineers in
+
+78
+00:02:26,065 --> 00:02:28,030
+all of Silicon Valley and he
+
+79
+00:02:28,041 --> 00:02:29,053
+kind of built a large
+
+80
+00:02:29,081 --> 00:02:31,066
+fraction of the architectural
+
+81
+00:02:32,031 --> 00:02:34,077
+infrastructure that all of Google runs on today.
+
+82
+00:02:36,000 --> 00:02:37,031
+But here's the map reduce idea.
+
+83
+00:02:37,084 --> 00:02:38,056
+So, let's say I have
+
+84
+00:02:38,069 --> 00:02:39,084
+some training set, if we
+
+85
+00:02:39,090 --> 00:02:41,021
+want to denote by this box here
+
+86
+00:02:41,061 --> 00:02:42,075
+of X Y pairs,
+
+87
+00:02:44,025 --> 00:02:47,072
+where it's X1, Y1, down
+
+88
+00:02:47,099 --> 00:02:49,063
+to my 400 examples,
+
+89
+00:02:50,052 --> 00:02:51,065
+Xm, Ym.
+
+90
+00:02:52,018 --> 00:02:53,078
+So, that's my training set with 400 training examples.
+
+91
+00:02:55,006 --> 00:02:56,055
+In the MapReduce idea, one way
+
+92
+00:02:56,068 --> 00:02:58,018
+to do, is split this training
+
+93
+00:02:58,056 --> 00:03:00,050
+set in to different subsets.
+
+94
+00:03:01,088 --> 00:03:02,059
+I'm going to.
+
+95
+00:03:02,094 --> 00:03:04,015
+assume for this example that
+
+96
+00:03:04,028 --> 00:03:05,053
+I have 4 computers,
+
+97
+00:03:06,015 --> 00:03:07,015
+or 4 machines to run in
+
+98
+00:03:07,030 --> 00:03:08,066
+parallel on my training set,
+
+99
+00:03:08,088 --> 00:03:10,056
+which is why I'm splitting this into 4 machines.
+
+100
+00:03:10,091 --> 00:03:12,028
+If you have 10 machines or
+
+101
+00:03:12,040 --> 00:03:13,081
+100 machines, then you would
+
+102
+00:03:13,096 --> 00:03:15,088
+split your training set into 10 pieces or 100 pieces or what have you.
+
+103
+00:03:18,003 --> 00:03:19,071
+And what the first of my
+
+104
+00:03:19,084 --> 00:03:20,084
+4 machines is to do,
+
+105
+00:03:21,009 --> 00:03:23,016
+say, is use just the
+
+106
+00:03:23,027 --> 00:03:25,016
+first one quarter of my
+
+107
+00:03:25,030 --> 00:03:28,068
+training set--so use just the first 100 training examples.
+
+108
+00:03:30,002 --> 00:03:31,043
+And in particular, what it's
+
+109
+00:03:31,047 --> 00:03:32,052
+going to do is look at
+
+110
+00:03:32,062 --> 00:03:34,080
+this summation, and compute
+
+111
+00:03:35,049 --> 00:03:38,056
+that summation for just the first 100 training examples.
+
+112
+00:03:40,003 --> 00:03:40,096
+So let me write that up
+
+113
+00:03:41,011 --> 00:03:42,053
+I'm going to compute a variable
+
+114
+00:03:43,056 --> 00:03:46,022
+temp 1 to superscript 1
+
+115
+00:03:46,031 --> 00:03:49,040
+the first machine J equals
+
+116
+00:03:50,044 --> 00:03:52,015
+sum from equals 1 through
+
+117
+00:03:52,025 --> 00:03:53,015
+100, and then I'm going to plug
+
+118
+00:03:53,050 --> 00:03:56,061
+in exactly that term there--so I have
+
+119
+00:03:57,025 --> 00:04:00,013
+X-theta, Xi, minus Yi
+
+120
+00:04:01,080 --> 00:04:03,022
+times Xij, right?
+
+121
+00:04:03,074 --> 00:04:05,068
+So that's just that
+
+122
+00:04:05,090 --> 00:04:07,046
+gradient descent term up there.
+
+123
+00:04:08,030 --> 00:04:09,078
+And then similarly, I'm going
+
+124
+00:04:10,000 --> 00:04:11,033
+to take the second quarter
+
+125
+00:04:11,059 --> 00:04:13,012
+of my data and send it
+
+126
+00:04:13,031 --> 00:04:14,052
+to my second machine, and
+
+127
+00:04:14,068 --> 00:04:15,068
+my second machine will use
+
+128
+00:04:15,090 --> 00:04:18,075
+training examples 101 through 200
+
+129
+00:04:19,035 --> 00:04:21,017
+and you will compute similar variables
+
+130
+00:04:21,072 --> 00:04:22,087
+of a temp to j which
+
+131
+00:04:23,011 --> 00:04:24,044
+is the same sum for index
+
+132
+00:04:24,088 --> 00:04:26,062
+from examples 101 through 200.
+
+133
+00:04:26,083 --> 00:04:29,068
+And similarly machines 3
+
+134
+00:04:29,082 --> 00:04:32,072
+and 4 will use the
+
+135
+00:04:32,082 --> 00:04:34,011
+third quarter and the fourth
+
+136
+00:04:34,056 --> 00:04:36,055
+quarter of my training set.
+
+137
+00:04:37,052 --> 00:04:38,094
+So now each machine has
+
+138
+00:04:39,018 --> 00:04:40,057
+to sum over 100 instead
+
+139
+00:04:41,006 --> 00:04:42,056
+of over 400 examples and so
+
+140
+00:04:42,075 --> 00:04:43,075
+has to do only a quarter
+
+141
+00:04:44,005 --> 00:04:45,022
+of the work and thus presumably
+
+142
+00:04:45,089 --> 00:04:48,000
+it could do it about four times as fast.
+
+143
+00:04:49,037 --> 00:04:50,062
+Finally, after all these machines
+
+144
+00:04:50,099 --> 00:04:51,074
+have done this work, I am
+
+145
+00:04:51,085 --> 00:04:53,056
+going to take these temp variables
+
+146
+00:04:55,035 --> 00:04:56,048
+and put them back together.
+
+147
+00:04:56,087 --> 00:04:58,039
+So I take these variables and
+
+148
+00:04:58,052 --> 00:04:59,094
+send them all to a You
+
+149
+00:05:00,008 --> 00:05:03,007
+know centralized master server and
+
+150
+00:05:03,030 --> 00:05:04,075
+what the master will do
+
+151
+00:05:05,013 --> 00:05:06,072
+is combine these results together.
+
+152
+00:05:07,036 --> 00:05:08,047
+and in particular, it will
+
+153
+00:05:08,077 --> 00:05:10,077
+update my parameters theta
+
+154
+00:05:11,000 --> 00:05:13,016
+j according to theta
+
+155
+00:05:13,041 --> 00:05:14,072
+j gets updated as theta j
+
+156
+00:05:15,073 --> 00:05:17,056
+minus Of the
+
+157
+00:05:17,068 --> 00:05:19,050
+learning rate alpha times one
+
+158
+00:05:20,012 --> 00:05:22,093
+over 400 times temp,
+
+159
+00:05:23,030 --> 00:05:27,041
+1, J, plus temp
+
+160
+00:05:27,075 --> 00:05:30,029
+2j plus temp 3j
+
+161
+00:05:32,039 --> 00:05:35,047
+plus temp 4j and
+
+162
+00:05:35,056 --> 00:05:37,088
+of course we have to do this separately for J equals 0.
+
+163
+00:05:37,098 --> 00:05:39,056
+You know, up to
+
+164
+00:05:39,081 --> 00:05:41,022
+and within this number of features.
+
+165
+00:05:42,055 --> 00:05:45,042
+So operating this equation into I hope it's clear.
+
+166
+00:05:45,067 --> 00:05:47,087
+So what this equation
+
+167
+00:05:50,093 --> 00:05:53,022
+is doing is exactly the
+
+168
+00:05:53,029 --> 00:05:54,056
+same is that when you
+
+169
+00:05:54,066 --> 00:05:56,013
+have a centralized master server
+
+170
+00:05:56,068 --> 00:05:57,094
+that takes the results, the ten
+
+171
+00:05:58,004 --> 00:05:58,077
+one j the ten two j
+
+172
+00:05:59,000 --> 00:05:59,085
+ten three j and ten four
+
+173
+00:05:59,097 --> 00:06:01,075
+j and adds them up
+
+174
+00:06:02,002 --> 00:06:03,043
+and so of course the sum
+
+175
+00:06:04,008 --> 00:06:04,095
+of these four things.
+
+176
+00:06:06,036 --> 00:06:07,081
+Right, that's just the sum of
+
+177
+00:06:08,006 --> 00:06:09,043
+this, plus the sum
+
+178
+00:06:09,075 --> 00:06:11,049
+of this, plus the sum
+
+179
+00:06:11,062 --> 00:06:13,000
+of this, plus the sum
+
+180
+00:06:13,012 --> 00:06:14,029
+of that, and those four
+
+181
+00:06:14,047 --> 00:06:15,082
+things just add up to
+
+182
+00:06:15,092 --> 00:06:17,074
+be equal to this sum that
+
+183
+00:06:17,087 --> 00:06:19,057
+we're originally computing a batch stream descent.
+
+184
+00:06:20,058 --> 00:06:21,055
+And then we have the alpha times
+
+185
+00:06:21,086 --> 00:06:22,091
+1 of 400, alpha times 1
+
+186
+00:06:23,035 --> 00:06:24,068
+of 100, and this is
+
+187
+00:06:25,001 --> 00:06:27,001
+exactly equivalent to the
+
+188
+00:06:27,013 --> 00:06:29,038
+batch gradient descent algorithm, only,
+
+189
+00:06:29,091 --> 00:06:30,087
+instead of needing to sum
+
+190
+00:06:31,029 --> 00:06:32,054
+over all four hundred training
+
+191
+00:06:32,081 --> 00:06:33,089
+examples on just one
+
+192
+00:06:34,004 --> 00:06:35,027
+machine, we can instead
+
+193
+00:06:35,075 --> 00:06:37,045
+divide up the work load on four machines.
+
+194
+00:06:39,008 --> 00:06:40,018
+So, here's what the general
+
+195
+00:06:40,062 --> 00:06:43,041
+picture of the MapReduce technique looks like.
+
+196
+00:06:45,006 --> 00:06:46,050
+We have some training sets, and
+
+197
+00:06:46,067 --> 00:06:48,019
+if we want to paralyze across four
+
+198
+00:06:48,042 --> 00:06:49,010
+machines, we are going to
+
+199
+00:06:49,017 --> 00:06:51,067
+take the training set and split it, you know, equally.
+
+200
+00:06:52,012 --> 00:06:54,063
+Split it as evenly as we can into four subsets.
+
+201
+00:06:56,047 --> 00:06:57,011
+Then we are going to take the
+
+202
+00:06:57,018 --> 00:06:59,056
+4 subsets of the training data and send them to 4 different computers.
+
+203
+00:07:00,052 --> 00:07:01,066
+And each of the 4 computers
+
+204
+00:07:02,012 --> 00:07:03,056
+can compute a summation over
+
+205
+00:07:03,094 --> 00:07:04,085
+just one quarter of the
+
+206
+00:07:04,091 --> 00:07:06,023
+training set, and then
+
+207
+00:07:06,033 --> 00:07:07,072
+finally take each of
+
+208
+00:07:07,077 --> 00:07:09,031
+the computers takes the results, sends
+
+209
+00:07:09,057 --> 00:07:12,072
+them to a centralized server, which then combines the results together.
+
+210
+00:07:13,056 --> 00:07:14,089
+So, on the previous line
+
+211
+00:07:15,018 --> 00:07:16,054
+in that example, the bulk
+
+212
+00:07:16,080 --> 00:07:17,091
+of the work in gradient descent,
+
+213
+00:07:18,032 --> 00:07:20,013
+was computing the sum from
+
+214
+00:07:20,043 --> 00:07:22,026
+i equals 1 to 400 of something.
+
+215
+00:07:22,067 --> 00:07:24,011
+So more generally, sum from
+
+216
+00:07:24,037 --> 00:07:25,056
+i equals 1 to m
+
+217
+00:07:26,031 --> 00:07:28,018
+of that formula for gradient descent.
+
+218
+00:07:29,016 --> 00:07:30,043
+And now, because each of
+
+219
+00:07:30,055 --> 00:07:31,088
+the four computers can do just
+
+220
+00:07:32,018 --> 00:07:33,080
+a quarter of the work, potentially
+
+221
+00:07:34,035 --> 00:07:35,093
+you can get up to a 4x speed up.
+
+222
+00:07:38,081 --> 00:07:39,098
+In particular, if there were
+
+223
+00:07:40,018 --> 00:07:41,089
+no network latencies and
+
+224
+00:07:42,010 --> 00:07:42,097
+no costs of the network
+
+225
+00:07:43,039 --> 00:07:44,044
+communications to send the
+
+226
+00:07:44,060 --> 00:07:45,044
+data back and forth, you can
+
+227
+00:07:45,061 --> 00:07:47,081
+potentially get up to a 4x speed up.
+
+228
+00:07:48,005 --> 00:07:49,041
+Of course, in practice,
+
+229
+00:07:50,010 --> 00:07:52,007
+because of network latencies,
+
+230
+00:07:52,081 --> 00:07:54,050
+the overhead of combining the
+
+231
+00:07:54,060 --> 00:07:55,087
+results afterwards and other factors,
+
+232
+00:07:56,063 --> 00:07:59,014
+in practice you get slightly less than a 4x speedup.
+
+233
+00:08:00,013 --> 00:08:01,027
+But, none the less, this sort
+
+234
+00:08:01,036 --> 00:08:02,070
+of macro juice approach does offer
+
+235
+00:08:03,011 --> 00:08:04,056
+us a way to process much
+
+236
+00:08:04,087 --> 00:08:05,093
+larger data sets than is
+
+237
+00:08:06,026 --> 00:08:07,055
+possible using a single computer.
+
+238
+00:08:08,076 --> 00:08:10,006
+If you are thinking of applying
+
+239
+00:08:10,073 --> 00:08:12,019
+Map Reduce to some learning
+
+240
+00:08:12,035 --> 00:08:14,025
+algorithm, in order to speed this up.
+
+241
+00:08:14,075 --> 00:08:16,016
+By paralleling the computation
+
+242
+00:08:16,089 --> 00:08:18,048
+over different computers, the key
+
+243
+00:08:18,073 --> 00:08:20,004
+question to ask yourself is,
+
+244
+00:08:20,075 --> 00:08:22,018
+can your learning algorithm be expressed
+
+245
+00:08:22,087 --> 00:08:25,014
+as a summation over the training set?
+
+246
+00:08:25,043 --> 00:08:26,043
+And it turns out that many
+
+247
+00:08:26,067 --> 00:08:28,010
+learning algorithms can actually be
+
+248
+00:08:28,041 --> 00:08:29,087
+expressed as computing sums of
+
+249
+00:08:30,017 --> 00:08:31,081
+functions over the training set and
+
+250
+00:08:32,061 --> 00:08:34,002
+the computational expense of running
+
+251
+00:08:34,025 --> 00:08:35,048
+them on large data sets is
+
+252
+00:08:35,060 --> 00:08:37,080
+because they need to sum over a very large training set.
+
+253
+00:08:38,062 --> 00:08:39,087
+So, whenever your learning algorithm
+
+254
+00:08:40,020 --> 00:08:41,035
+can be expressed as a
+
+255
+00:08:41,045 --> 00:08:42,040
+sum of the training set
+
+256
+00:08:42,065 --> 00:08:43,075
+and whenever the bulk of the
+
+257
+00:08:43,086 --> 00:08:44,080
+work of the learning algorithm
+
+258
+00:08:45,020 --> 00:08:46,016
+can be expressed as the sum
+
+259
+00:08:46,032 --> 00:08:47,077
+of the training set, then mac
+
+260
+00:08:48,002 --> 00:08:49,002
+reviews might a good candidate
+
+261
+00:08:50,010 --> 00:08:52,083
+for scaling your learning algorithms through very, very good data sets.
+
+262
+00:08:53,087 --> 00:08:54,090
+Lets just look at one more example.
+
+263
+00:08:56,001 --> 00:08:58,012
+Let's say that we want to use one of the advanced optimization algorithm.
+
+264
+00:08:58,040 --> 00:08:59,042
+So, things like, you
+
+265
+00:08:59,054 --> 00:09:00,046
+know, l, b, f, g, s constant
+
+266
+00:09:00,089 --> 00:09:02,096
+gradient and so on, and
+
+267
+00:09:03,007 --> 00:09:05,019
+let's say we want to train a logistic regression of the algorithm.
+
+268
+00:09:06,008 --> 00:09:08,067
+For that, we need to compute two main quantities.
+
+269
+00:09:09,029 --> 00:09:10,046
+One is for the advanced
+
+270
+00:09:10,096 --> 00:09:13,051
+optimization algorithms like, you know, LPF and constant gradient.
+
+271
+00:09:14,030 --> 00:09:15,026
+We need to provide it a
+
+272
+00:09:15,052 --> 00:09:17,021
+routine to compute the
+
+273
+00:09:17,046 --> 00:09:18,075
+cost function of the optimization objective.
+
+274
+00:09:20,022 --> 00:09:21,069
+And so for logistic regression, you
+
+275
+00:09:21,082 --> 00:09:22,087
+remember that a cost function
+
+276
+00:09:23,065 --> 00:09:24,070
+has this sort of sum over
+
+277
+00:09:24,096 --> 00:09:26,034
+the training set, and so
+
+278
+00:09:26,097 --> 00:09:28,098
+if youre paralizing over
+
+279
+00:09:29,011 --> 00:09:29,097
+ten machines, you would split
+
+280
+00:09:30,030 --> 00:09:31,063
+up the training set onto ten
+
+281
+00:09:31,090 --> 00:09:33,014
+machines and have each
+
+282
+00:09:33,036 --> 00:09:35,037
+of the ten machines compute the sum
+
+283
+00:09:35,086 --> 00:09:37,046
+of this quantity over just
+
+284
+00:09:37,075 --> 00:09:38,065
+one tenth of the training
+
+285
+00:09:40,037 --> 00:09:40,037
+data.
+
+286
+00:09:40,066 --> 00:09:41,054
+Then, the other thing that the
+
+287
+00:09:42,011 --> 00:09:43,039
+advanced optimization algorithms need,
+
+288
+00:09:43,065 --> 00:09:44,078
+is a routine to compute
+
+289
+00:09:45,019 --> 00:09:47,015
+these partial derivative terms.
+
+290
+00:09:47,027 --> 00:09:48,098
+Once again, these derivative terms, for
+
+291
+00:09:49,010 --> 00:09:50,035
+which it's a logistic regression, can
+
+292
+00:09:50,053 --> 00:09:51,084
+be expressed as a sum over
+
+293
+00:09:52,000 --> 00:09:53,012
+the training set, and so once
+
+294
+00:09:53,033 --> 00:09:54,060
+again, similar to our earlier
+
+295
+00:09:54,095 --> 00:09:56,005
+example, you would have
+
+296
+00:09:56,051 --> 00:09:57,079
+each machine compute that summation
+
+297
+00:09:58,079 --> 00:10:01,016
+over just some small fraction of your training data.
+
+298
+00:10:02,044 --> 00:10:04,059
+And finally, having computed
+
+299
+00:10:05,004 --> 00:10:06,025
+all of these things, they could
+
+300
+00:10:06,039 --> 00:10:07,051
+then send their results to
+
+301
+00:10:07,067 --> 00:10:09,039
+a centralized server, which can
+
+302
+00:10:09,063 --> 00:10:12,075
+then add up the partial sums.
+
+303
+00:10:13,032 --> 00:10:14,040
+This corresponds to adding up
+
+304
+00:10:14,050 --> 00:10:17,000
+those tenth i or
+
+305
+00:10:17,054 --> 00:10:21,087
+tenth ij variables, which
+
+306
+00:10:22,010 --> 00:10:23,061
+were computed locally on machine
+
+307
+00:10:23,098 --> 00:10:25,038
+number i, and so
+
+308
+00:10:25,041 --> 00:10:26,079
+the centralized server can sum
+
+309
+00:10:27,004 --> 00:10:28,022
+these things up and get
+
+310
+00:10:28,045 --> 00:10:30,023
+the overall cost function
+
+311
+00:10:30,087 --> 00:10:32,075
+and get the overall partial derivative,
+
+312
+00:10:33,038 --> 00:10:35,071
+which you can then pass through the advanced optimization algorithm.
+
+313
+00:10:36,088 --> 00:10:38,010
+So, more broadly, by taking
+
+314
+00:10:39,008 --> 00:10:40,078
+other learning algorithms and
+
+315
+00:10:41,001 --> 00:10:42,042
+expressing them in sort of
+
+316
+00:10:42,072 --> 00:10:43,079
+summation form or by expressing
+
+317
+00:10:44,034 --> 00:10:45,065
+them in terms of computing sums
+
+318
+00:10:45,099 --> 00:10:47,010
+of functions over the training set,
+
+319
+00:10:47,074 --> 00:10:49,028
+you can use the MapReduce technique to
+
+320
+00:10:49,044 --> 00:10:51,041
+parallelize other learning algorithms as well,
+
+321
+00:10:51,071 --> 00:10:53,030
+and scale them to very large training sets.
+
+322
+00:10:54,034 --> 00:10:55,085
+Finally, as one last comment,
+
+323
+00:10:56,038 --> 00:10:57,016
+so far we have been
+
+324
+00:10:57,050 --> 00:10:59,062
+discussing MapReduce algorithms as
+
+325
+00:10:59,085 --> 00:11:01,039
+allowing you to parallelize over
+
+326
+00:11:02,009 --> 00:11:03,062
+multiple computers, maybe multiple
+
+327
+00:11:03,094 --> 00:11:05,001
+computers in a computer
+
+328
+00:11:05,022 --> 00:11:08,005
+cluster or over multiple computers in the data center.
+
+329
+00:11:09,014 --> 00:11:10,058
+It turns out that sometimes even
+
+330
+00:11:10,076 --> 00:11:12,000
+if you have just a single computer,
+
+331
+00:11:13,009 --> 00:11:14,038
+MapReduce can also be applicable.
+
+332
+00:11:15,052 --> 00:11:16,097
+In particular, on many single
+
+333
+00:11:17,032 --> 00:11:18,050
+computers now, you can have
+
+334
+00:11:18,077 --> 00:11:20,051
+multiple processing cores.
+
+335
+00:11:21,016 --> 00:11:21,086
+You can have multiple CPUs,
+
+336
+00:11:22,017 --> 00:11:23,012
+and within each CPU you can
+
+337
+00:11:23,024 --> 00:11:26,016
+have multiple proc cores.
+
+338
+00:11:26,030 --> 00:11:27,016
+If you have a large training
+
+339
+00:11:27,051 --> 00:11:28,046
+set, what you can
+
+340
+00:11:28,057 --> 00:11:29,053
+do if, say, you have
+
+341
+00:11:29,074 --> 00:11:31,051
+a computer with 4
+
+342
+00:11:31,087 --> 00:11:33,039
+computing cores, what you
+
+343
+00:11:33,046 --> 00:11:34,038
+can do is, even on a
+
+344
+00:11:34,054 --> 00:11:35,058
+single computer you can split the
+
+345
+00:11:35,075 --> 00:11:37,067
+training sets into pieces and
+
+346
+00:11:37,080 --> 00:11:39,013
+send the training set to different
+
+347
+00:11:39,065 --> 00:11:40,096
+cores within a single box,
+
+348
+00:11:41,022 --> 00:11:42,057
+like within a single desktop computer
+
+349
+00:11:43,024 --> 00:11:45,007
+or a single server and use
+
+350
+00:11:45,037 --> 00:11:47,020
+MapReduce this way to divvy up work load.
+
+351
+00:11:48,000 --> 00:11:49,000
+Each of the cores can then
+
+352
+00:11:49,020 --> 00:11:50,024
+carry out the sum over,
+
+353
+00:11:50,095 --> 00:11:52,000
+say, one quarter of your
+
+354
+00:11:52,004 --> 00:11:53,044
+training set, and then they
+
+355
+00:11:53,050 --> 00:11:55,009
+can take the partial sums and
+
+356
+00:11:55,050 --> 00:11:56,088
+combine them, in order
+
+357
+00:11:57,022 --> 00:11:59,036
+to get the summation over the entire training set.
+
+358
+00:11:59,075 --> 00:12:01,027
+The advantage of thinking
+
+359
+00:12:01,060 --> 00:12:02,087
+about MapReduce this way, as
+
+360
+00:12:03,035 --> 00:12:04,075
+paralyzing over cause within a
+
+361
+00:12:04,089 --> 00:12:06,072
+single machine, rather than parallelizing over
+
+362
+00:12:06,090 --> 00:12:08,048
+multiple machines is that,
+
+363
+00:12:09,005 --> 00:12:09,097
+this way you don't have to
+
+364
+00:12:10,010 --> 00:12:11,074
+worry about network latency, because
+
+365
+00:12:12,001 --> 00:12:13,037
+all the communication, all the
+
+366
+00:12:13,046 --> 00:12:14,080
+sending of the  [xx]
+
+367
+00:12:15,088 --> 00:12:18,001
+back and forth, all that happens within a single machine.
+
+368
+00:12:18,041 --> 00:12:20,016
+And so network latency becomes
+
+369
+00:12:20,059 --> 00:12:21,052
+much less of an issue compared
+
+370
+00:12:21,096 --> 00:12:23,004
+to if you were using this
+
+371
+00:12:23,053 --> 00:12:26,008
+to over different computers within the data sensor.
+
+372
+00:12:27,003 --> 00:12:27,092
+Finally, one last caveat on
+
+373
+00:12:27,099 --> 00:12:30,074
+parallelizing within a multi-core machine.
+
+374
+00:12:31,058 --> 00:12:32,060
+Depending on the details
+
+375
+00:12:32,092 --> 00:12:34,028
+of your implementation, if you have a
+
+376
+00:12:34,061 --> 00:12:35,091
+multi-core machine and if you
+
+377
+00:12:36,019 --> 00:12:38,012
+have certain numerical linear algebra libraries.
+
+378
+00:12:39,035 --> 00:12:40,049
+It turns out that the sum numerical linear algebra libraries
+
+379
+00:12:41,049 --> 00:12:43,094
+that can automatically parallelize their
+
+380
+00:12:44,067 --> 00:12:47,050
+linear algebra operations across multiple cores within the machine.
+
+381
+00:12:48,076 --> 00:12:50,013
+So if you're fortunate enough to
+
+382
+00:12:50,027 --> 00:12:51,029
+be using one of those numerical linear algebra
+
+383
+00:12:51,071 --> 00:12:52,098
+libraries and certainly
+
+384
+00:12:53,063 --> 00:12:55,012
+this does not apply to every single library.
+
+385
+00:12:55,083 --> 00:12:57,079
+If you're using one of those libraries and.
+
+386
+00:12:58,020 --> 00:13:00,067
+If you have a very good vectorizing implementation of the learning algorithm.
+
+387
+00:13:01,072 --> 00:13:02,071
+Sometimes you can just implement
+
+388
+00:13:03,015 --> 00:13:05,005
+you standard learning algorithm in
+
+389
+00:13:05,014 --> 00:13:06,046
+a vectorized fashion and not
+
+390
+00:13:06,071 --> 00:13:08,062
+worry about parallelization and numerical linear algebra libararies
+
+391
+00:13:10,002 --> 00:13:12,048
+could take care of some of it for you.
+
+392
+00:13:12,062 --> 00:13:14,071
+So you don't need to implement [xx] but.
+
+393
+00:13:14,086 --> 00:13:16,057
+for other any problems, taking advantage
+
+394
+00:13:17,017 --> 00:13:18,065
+of this sort of map reducing commentation,
+
+395
+00:13:19,024 --> 00:13:20,069
+finding and using this
+
+396
+00:13:20,087 --> 00:13:22,007
+MapReduce formulation and to
+
+397
+00:13:22,016 --> 00:13:23,040
+paralelize a cross coarse except
+
+398
+00:13:23,088 --> 00:13:24,097
+yourself might be a
+
+399
+00:13:25,007 --> 00:13:27,030
+good idea as well and could let you speed up your learning algorithm.
+
+400
+00:13:29,086 --> 00:13:31,038
+In this video, we talked about
+
+401
+00:13:31,073 --> 00:13:33,064
+the MapReduce approach to parallelizing
+
+402
+00:13:34,046 --> 00:13:35,085
+machine learning by taking a
+
+403
+00:13:36,007 --> 00:13:37,045
+data and spreading them across
+
+404
+00:13:37,083 --> 00:13:39,065
+many computers in the data center.
+
+405
+00:13:40,015 --> 00:13:41,092
+Although these ideas are
+
+406
+00:13:42,028 --> 00:13:43,097
+critical to paralysing across multiple
+
+407
+00:13:44,028 --> 00:13:45,039
+cores within a single computer
+
+408
+00:13:46,087 --> 00:13:47,014
+as well.
+
+409
+00:13:47,064 --> 00:13:48,060
+Today there are some good
+
+410
+00:13:49,025 --> 00:13:51,008
+open source implementations of MapReduce,
+
+411
+00:13:51,044 --> 00:13:52,021
+so there are many users
+
+412
+00:13:52,071 --> 00:13:54,048
+in open source system called
+
+413
+00:13:54,088 --> 00:13:55,082
+Hadoop and using either your
+
+414
+00:13:56,000 --> 00:13:57,058
+own implementation or using someone
+
+415
+00:13:57,085 --> 00:13:59,076
+else's open source implementation, you
+
+416
+00:13:59,091 --> 00:14:01,009
+can use these ideas to
+
+417
+00:14:01,040 --> 00:14:02,073
+parallelize learning algorithms and
+
+418
+00:14:03,053 --> 00:14:04,058
+get them to run on much
+
+419
+00:14:04,095 --> 00:14:05,098
+larger data sets than is
+
+420
+00:14:06,032 --> 00:14:07,076
+possible using just a single machine.

@@ -1,0 +1,1560 @@
+
+1
+00:00:00,012 --> 00:00:01,021
+In the last video, we developed
+
+2
+00:00:01,085 --> 00:00:03,020
+an anomaly detection algorithm.
+
+3
+00:00:04,015 --> 00:00:05,024
+In this video, I like to
+
+4
+00:00:05,029 --> 00:00:06,087
+talk about the process of how
+
+5
+00:00:07,008 --> 00:00:08,075
+to go about developing a specific
+
+6
+00:00:09,006 --> 00:00:10,078
+application of anomaly detection
+
+7
+00:00:11,041 --> 00:00:12,081
+to a problem and in particular
+
+8
+00:00:13,047 --> 00:00:14,050
+this will focus on the problem
+
+9
+00:00:15,008 --> 00:00:18,069
+of how to evaluate an anomaly detection algorithm. In
+
+10
+00:00:18,087 --> 00:00:20,048
+previous videos, we've already talked
+
+11
+00:00:20,080 --> 00:00:22,037
+about the importance of real
+
+12
+00:00:22,057 --> 00:00:24,076
+number evaluation and this captures the idea that
+
+13
+00:00:25,017 --> 00:00:26,080
+when you're trying to develop
+
+14
+00:00:27,026 --> 00:00:28,046
+a learning algorithm for a
+
+15
+00:00:28,069 --> 00:00:30,030
+specific application, you need to
+
+16
+00:00:30,055 --> 00:00:31,053
+often make a lot of choices
+
+17
+00:00:31,071 --> 00:00:34,040
+like, you know, choosing what features to use and then so on.
+
+18
+00:00:35,000 --> 00:00:36,079
+And making decisions about all
+
+19
+00:00:36,088 --> 00:00:38,053
+of these choices is often much
+
+20
+00:00:38,078 --> 00:00:39,089
+easier, and if you have
+
+21
+00:00:40,003 --> 00:00:41,032
+a way to evaluate your learning
+
+22
+00:00:41,040 --> 00:00:43,018
+algorithm that just gives you back a number.
+
+23
+00:00:44,020 --> 00:00:44,095
+So if you're trying to decide,
+
+24
+00:00:45,097 --> 00:00:47,013
+you know, I have an idea for
+
+25
+00:00:47,021 --> 00:00:49,072
+one extra feature, do I include this feature or not.
+
+26
+00:00:50,056 --> 00:00:51,056
+If you can run the algorithm
+
+27
+00:00:51,075 --> 00:00:52,082
+with the feature, and run the
+
+28
+00:00:52,096 --> 00:00:54,042
+algorithm without the feature, and
+
+29
+00:00:54,057 --> 00:00:55,096
+just get back a number that
+
+30
+00:00:56,010 --> 00:00:57,035
+tells you, you know, did
+
+31
+00:00:57,046 --> 00:01:00,007
+it improve or worsen performance to add this feature?
+
+32
+00:01:00,067 --> 00:01:01,047
+Then it gives you a much better
+
+33
+00:01:01,067 --> 00:01:04,037
+way, a much simpler way, with which
+
+34
+00:01:04,059 --> 00:01:06,010
+to decide whether or not to include that feature.
+
+35
+00:01:07,056 --> 00:01:09,001
+So in order to be
+
+36
+00:01:09,020 --> 00:01:10,084
+able to develop an anomaly
+
+37
+00:01:11,040 --> 00:01:13,087
+detection system quickly, it would
+
+38
+00:01:14,007 --> 00:01:14,095
+be a really helpful to have
+
+39
+00:01:15,015 --> 00:01:17,081
+a way of evaluating an anomaly detection system.
+
+40
+00:01:19,026 --> 00:01:20,042
+In order to do this,
+
+41
+00:01:20,079 --> 00:01:22,037
+in order to evaluate an anomaly
+
+42
+00:01:22,073 --> 00:01:24,007
+detection system, we're
+
+43
+00:01:24,031 --> 00:01:26,037
+actually going to assume have some labeled data.
+
+44
+00:01:27,026 --> 00:01:28,026
+So, so far, we'll be treating
+
+45
+00:01:28,042 --> 00:01:29,087
+anomaly detection as an
+
+46
+00:01:30,031 --> 00:01:31,076
+unsupervised learning problem, using
+
+47
+00:01:32,020 --> 00:01:33,056
+unlabeled data.
+
+48
+00:01:34,001 --> 00:01:35,018
+But if you have some labeled
+
+49
+00:01:35,056 --> 00:01:37,039
+data that specifies what
+
+50
+00:01:37,070 --> 00:01:39,056
+are some anomalous examples, and
+
+51
+00:01:39,067 --> 00:01:42,003
+what are some non-anomalous examples, then
+
+52
+00:01:42,046 --> 00:01:43,034
+this is how we actually
+
+53
+00:01:43,062 --> 00:01:45,067
+think of as the standard way of evaluating an anomaly detection algorithm.
+
+54
+00:01:45,081 --> 00:01:49,001
+So taking the
+
+55
+00:01:49,029 --> 00:01:50,057
+aircraft engine example again.
+
+56
+00:01:51,001 --> 00:01:52,068
+Let's say that, you know, we have some
+
+57
+00:01:53,006 --> 00:01:55,084
+label data of just a few anomalous
+
+58
+00:01:56,032 --> 00:01:57,089
+examples of some aircraft engines
+
+59
+00:01:58,040 --> 00:02:00,078
+that were manufactured in the past that turns out to be anomalous.
+
+60
+00:02:01,051 --> 00:02:02,035
+Turned out to be flawed or strange in some way.
+
+61
+00:02:02,040 --> 00:02:04,012
+Let's say we
+
+62
+00:02:04,035 --> 00:02:05,075
+use we also have some non-anomalous
+
+63
+00:02:06,009 --> 00:02:07,081
+examples, so some
+
+64
+00:02:08,005 --> 00:02:10,019
+perfectly okay examples.
+
+65
+00:02:10,093 --> 00:02:12,005
+I'm going to use y equals 0
+
+66
+00:02:12,011 --> 00:02:13,059
+to denote the normal or the
+
+67
+00:02:13,078 --> 00:02:15,046
+non-anomalous example and
+
+68
+00:02:15,053 --> 00:02:21,044
+y equals 1 to denote the anomalous examples.
+
+69
+00:02:22,044 --> 00:02:24,066
+The process of developing and evaluating an anomaly
+
+70
+00:02:25,012 --> 00:02:26,044
+detection algorithm is as follows.
+
+71
+00:02:27,050 --> 00:02:28,030
+We're going to think of it as
+
+72
+00:02:28,056 --> 00:02:29,083
+a training set and talk
+
+73
+00:02:30,000 --> 00:02:31,031
+about the cross validation in test
+
+74
+00:02:31,043 --> 00:02:32,058
+sets later, but the training set we usually
+
+75
+00:02:33,028 --> 00:02:34,000
+think of this as still the unlabeled
+
+76
+00:02:35,003 --> 00:02:36,018
+training set.
+
+77
+00:02:36,050 --> 00:02:37,025
+And so this is our large
+
+78
+00:02:37,056 --> 00:02:39,058
+collection of normal, non-anomalous
+
+79
+00:02:40,018 --> 00:02:41,012
+or not anomalous examples.
+
+80
+00:02:42,040 --> 00:02:43,053
+And usually we think
+
+81
+00:02:43,068 --> 00:02:44,075
+of this as being as non-anomalous,
+
+82
+00:02:45,000 --> 00:02:46,049
+but it's actually okay even
+
+83
+00:02:46,074 --> 00:02:48,065
+if a few anomalies slip into
+
+84
+00:02:48,065 --> 00:02:51,024
+your unlabeled training set.
+
+85
+00:02:51,041 --> 00:02:52,009
+And next we are going to
+
+86
+00:02:52,031 --> 00:02:53,083
+define a cross validation set
+
+87
+00:02:54,009 --> 00:02:55,050
+and a test set, with which
+
+88
+00:02:55,075 --> 00:02:58,036
+to evaluate a particular anomaly detection algorithm.
+
+89
+00:02:59,022 --> 00:03:00,084
+So, specifically, for both the
+
+90
+00:03:01,000 --> 00:03:01,096
+cross validation test sets we're
+
+91
+00:03:02,008 --> 00:03:03,059
+going to assume that, you know, we
+
+92
+00:03:03,080 --> 00:03:05,003
+can include a few examples
+
+93
+00:03:05,066 --> 00:03:06,071
+in the cross validation set and
+
+94
+00:03:06,090 --> 00:03:08,015
+the test set that contain examples
+
+95
+00:03:08,090 --> 00:03:09,065
+that are known to be anomalous.
+
+96
+00:03:10,019 --> 00:03:11,040
+So the test sets say
+
+97
+00:03:11,094 --> 00:03:13,027
+we have a few examples with
+
+98
+00:03:13,034 --> 00:03:14,077
+y equals 1 that
+
+99
+00:03:15,003 --> 00:03:17,046
+correspond to anomalous aircraft engines.
+
+100
+00:03:18,063 --> 00:03:19,080
+So here's a specific example.
+
+101
+00:03:20,093 --> 00:03:23,012
+Let's say that, altogether, this
+
+102
+00:03:23,028 --> 00:03:24,099
+is the data that we have.
+
+103
+00:03:25,025 --> 00:03:27,040
+We have manufactured 10,000 examples
+
+104
+00:03:28,012 --> 00:03:29,013
+of engines that, as far
+
+105
+00:03:29,044 --> 00:03:30,074
+as we know we're perfectly normal,
+
+106
+00:03:31,021 --> 00:03:33,011
+perfectly good aircraft engines.
+
+107
+00:03:34,006 --> 00:03:35,024
+And again, it turns out to be okay even
+
+108
+00:03:35,056 --> 00:03:37,031
+if a few flawed engine
+
+109
+00:03:37,074 --> 00:03:39,040
+slips into the set of
+
+110
+00:03:39,055 --> 00:03:40,086
+10,000 is actually okay, but
+
+111
+00:03:40,096 --> 00:03:41,096
+we kind of assumed that the vast
+
+112
+00:03:42,040 --> 00:03:44,030
+majority of these
+
+113
+00:03:44,050 --> 00:03:47,065
+10,000 examples are, you know, good and normal non-anomalous engines.
+
+114
+00:03:48,047 --> 00:03:50,093
+And let's say that, you know, historically, however
+
+115
+00:03:51,019 --> 00:03:52,012
+long we've been running on manufacturing
+
+116
+00:03:52,065 --> 00:03:54,012
+plant, let's say that
+
+117
+00:03:54,047 --> 00:03:55,093
+we end up getting features,
+
+118
+00:03:56,043 --> 00:03:57,096
+getting 24 to 28
+
+119
+00:03:58,024 --> 00:04:00,018
+anomalous engines as well.
+
+120
+00:04:01,012 --> 00:04:03,003
+And for a pretty typical application of
+
+121
+00:04:03,031 --> 00:04:05,049
+anomaly detection, you know, the number non-anomalous
+
+122
+00:04:06,074 --> 00:04:08,009
+examples, that is with y equals
+
+123
+00:04:08,075 --> 00:04:10,065
+1, we may have anywhere from, you know, 20 to 50.
+
+124
+00:04:10,081 --> 00:04:12,091
+It would be a pretty typical
+
+125
+00:04:13,036 --> 00:04:14,056
+range of examples, number of
+
+126
+00:04:14,083 --> 00:04:16,070
+examples that we have with y equals 1.
+
+127
+00:04:16,091 --> 00:04:17,073
+And usually we will have a
+
+128
+00:04:17,086 --> 00:04:20,000
+much larger number of good examples.
+
+129
+00:04:21,081 --> 00:04:23,014
+So, given this data set,
+
+130
+00:04:24,018 --> 00:04:25,041
+a fairly typical way to split
+
+131
+00:04:25,085 --> 00:04:27,014
+it into the training set,
+
+132
+00:04:27,043 --> 00:04:29,020
+cross validation set and test set would be as follows.
+
+133
+00:04:30,038 --> 00:04:31,087
+Let's take 10,000 good aircraft
+
+134
+00:04:32,036 --> 00:04:34,006
+engines and put 6,000
+
+135
+00:04:34,025 --> 00:04:37,010
+of that into the unlabeled training set.
+
+136
+00:04:37,062 --> 00:04:38,080
+So, I'm calling this an unlabeled training
+
+137
+00:04:39,012 --> 00:04:40,005
+set but all of these examples
+
+138
+00:04:40,063 --> 00:04:42,050
+are really ones that correspond to
+
+139
+00:04:42,081 --> 00:04:44,037
+y equals 0, as far as we know.
+
+140
+00:04:45,030 --> 00:04:46,035
+And so, we will use this to
+
+141
+00:04:46,051 --> 00:04:48,083
+fit p of x, right.
+
+142
+00:04:49,014 --> 00:04:49,085
+So, we will use these 6000 engines
+
+143
+00:04:50,035 --> 00:04:51,018
+to fit p of x, which
+
+144
+00:04:51,036 --> 00:04:52,018
+is that p of x
+
+145
+00:04:52,042 --> 00:04:53,093
+one parametrized by Mu
+
+146
+00:04:54,032 --> 00:04:56,037
+1, sigma squared 1, up
+
+147
+00:04:56,054 --> 00:04:57,069
+to p of Xn parametrized
+
+148
+00:04:58,037 --> 00:04:59,056
+by Mu N sigma squared
+
+149
+00:05:00,079 --> 00:05:02,030
+n. And so it would be these
+
+150
+00:05:02,050 --> 00:05:03,093
+6,000 examples that we would
+
+151
+00:05:04,011 --> 00:05:05,037
+use to estimate the parameters
+
+152
+00:05:05,058 --> 00:05:06,075
+Mu 1, sigma squared 1,
+
+153
+00:05:07,013 --> 00:05:08,095
+up to Mu N, sigma
+
+154
+00:05:09,019 --> 00:05:10,027
+squared N. And so that's our training
+
+155
+00:05:10,050 --> 00:05:11,095
+set of all, you know,
+
+156
+00:05:12,014 --> 00:05:13,098
+good, or the vast majority of good examples.
+
+157
+00:05:15,043 --> 00:05:16,094
+Next we will take our good
+
+158
+00:05:17,013 --> 00:05:18,037
+aircraft engines and put some
+
+159
+00:05:18,066 --> 00:05:19,047
+number of them in a cross
+
+160
+00:05:19,057 --> 00:05:21,031
+validation set plus some number
+
+161
+00:05:21,056 --> 00:05:22,097
+of them in the test sets.
+
+162
+00:05:23,027 --> 00:05:24,030
+So 6,000 plus 2,000 plus 2,000,
+
+163
+00:05:24,048 --> 00:05:25,047
+that's how we split up our
+
+164
+00:05:25,074 --> 00:05:28,081
+10,000 good aircraft engines.
+
+165
+00:05:29,025 --> 00:05:31,045
+And then we also have 20
+
+166
+00:05:31,093 --> 00:05:33,037
+flawed aircraft engines, and we'll
+
+167
+00:05:33,049 --> 00:05:34,088
+take that and maybe split it
+
+168
+00:05:35,016 --> 00:05:36,010
+up, you know, put ten of them in
+
+169
+00:05:36,019 --> 00:05:37,023
+the cross validation set and put
+
+170
+00:05:37,037 --> 00:05:39,056
+ten of them in the test sets.
+
+171
+00:05:39,085 --> 00:05:41,031
+And in the next slide
+
+172
+00:05:41,066 --> 00:05:42,045
+we will talk about how to
+
+173
+00:05:42,075 --> 00:05:43,080
+actually use this to evaluate
+
+174
+00:05:44,051 --> 00:05:46,032
+the anomaly detection algorithm.
+
+175
+00:05:48,012 --> 00:05:49,013
+So what I have
+
+176
+00:05:49,022 --> 00:05:50,061
+just described here is a you
+
+177
+00:05:50,079 --> 00:05:52,030
+know probably the recommend a
+
+178
+00:05:52,043 --> 00:05:55,029
+good way of splitting the labeled and unlabeled example.
+
+179
+00:05:55,081 --> 00:05:57,097
+The good and the flawed aircraft engines.
+
+180
+00:05:58,048 --> 00:06:00,037
+Where we use like
+
+181
+00:06:00,073 --> 00:06:01,064
+a 60, 20, 20% split for
+
+182
+00:06:01,080 --> 00:06:03,035
+the good engines and we take
+
+183
+00:06:03,056 --> 00:06:04,077
+the flawed engines, and we
+
+184
+00:06:04,091 --> 00:06:05,075
+put them just in the cross
+
+185
+00:06:05,087 --> 00:06:06,093
+validation set, and just in
+
+186
+00:06:07,002 --> 00:06:09,019
+the test set, then we'll see in the next slide why that's the case.
+
+187
+00:06:10,037 --> 00:06:12,007
+Just as an aside, if you
+
+188
+00:06:12,036 --> 00:06:13,036
+look at how people apply anomaly
+
+189
+00:06:13,075 --> 00:06:15,039
+detection algorithms, sometimes you see
+
+190
+00:06:15,050 --> 00:06:16,098
+other peoples' split the data differently as well.
+
+191
+00:06:17,045 --> 00:06:19,039
+So, another alternative, this is really
+
+192
+00:06:19,066 --> 00:06:21,029
+not a recommended alternative, but
+
+193
+00:06:21,047 --> 00:06:23,064
+some people want to
+
+194
+00:06:23,079 --> 00:06:24,076
+take off your 10,000 good engines, maybe put 6000
+
+195
+00:06:24,081 --> 00:06:26,001
+of them in your training set
+
+196
+00:06:26,031 --> 00:06:27,012
+and then put the same
+
+197
+00:06:27,064 --> 00:06:28,080
+4000 in the cross validation
+
+198
+00:06:30,037 --> 00:06:31,001
+set and the test set.
+
+199
+00:06:31,017 --> 00:06:32,002
+And so, you know, we like to think of the cross
+
+200
+00:06:32,036 --> 00:06:33,033
+validation set and the
+
+201
+00:06:33,039 --> 00:06:34,062
+test set as being completely
+
+202
+00:06:35,027 --> 00:06:36,037
+different data sets to each other.
+
+203
+00:06:37,068 --> 00:06:39,002
+But you know, in anomaly detection, you know,
+
+204
+00:06:39,023 --> 00:06:40,036
+for sometimes you see
+
+205
+00:06:40,060 --> 00:06:41,075
+people, sort of, use the
+
+206
+00:06:42,006 --> 00:06:42,097
+same set of good engines
+
+207
+00:06:43,037 --> 00:06:44,063
+in the cross validation sets, and
+
+208
+00:06:44,070 --> 00:06:46,014
+the test sets, and sometimes you
+
+209
+00:06:46,025 --> 00:06:48,006
+see people use exactly the
+
+210
+00:06:48,018 --> 00:06:49,080
+same sets of anomalous
+
+211
+00:06:50,087 --> 00:06:54,018
+engines in the cross validation set and the test set.
+
+212
+00:06:54,058 --> 00:06:55,097
+And so, all of these are considered, you know,
+
+213
+00:06:56,085 --> 00:06:59,002
+less good practices and definitely less recommended.
+
+214
+00:07:00,025 --> 00:07:01,036
+Certainly using the same
+
+215
+00:07:01,064 --> 00:07:02,052
+data in the cross validation
+
+216
+00:07:03,019 --> 00:07:04,022
+set and the test set, that
+
+217
+00:07:04,050 --> 00:07:06,039
+is not considered a good machine learning practice.
+
+218
+00:07:07,018 --> 00:07:08,077
+But, sometimes you see people do this too.
+
+219
+00:07:09,079 --> 00:07:11,032
+So, given the training cross
+
+220
+00:07:11,055 --> 00:07:12,077
+validation and test sets,
+
+221
+00:07:13,025 --> 00:07:15,022
+here's how you evaluate or
+
+222
+00:07:15,037 --> 00:07:16,092
+here is how you develop and evaluate an algorithm.
+
+223
+00:07:18,049 --> 00:07:19,050
+First, we take the training sets
+
+224
+00:07:19,091 --> 00:07:20,075
+and we fit the model p of
+
+225
+00:07:20,083 --> 00:07:21,086
+x. So, we fit, you know, all these
+
+226
+00:07:22,020 --> 00:07:24,060
+Gaussians to my m
+
+227
+00:07:25,006 --> 00:07:26,068
+unlabeled examples of aircraft engines,
+
+228
+00:07:27,008 --> 00:07:28,013
+and these, I am calling them
+
+229
+00:07:28,026 --> 00:07:29,056
+unlabeled examples, but these are
+
+230
+00:07:29,066 --> 00:07:31,037
+really examples that we're assuming
+
+231
+00:07:31,079 --> 00:07:33,038
+our goods are the normal aircraft engines.
+
+232
+00:07:34,057 --> 00:07:36,050
+Then imagine that your
+
+233
+00:07:36,064 --> 00:07:38,058
+anomaly detection algorithm is actually making prediction.
+
+234
+00:07:39,002 --> 00:07:40,006
+So, on the cross validation
+
+235
+00:07:40,062 --> 00:07:42,027
+of the test set, given that,
+
+236
+00:07:42,061 --> 00:07:44,066
+say, test example X, think
+
+237
+00:07:44,083 --> 00:07:46,049
+of the algorithm as predicting that
+
+238
+00:07:46,073 --> 00:07:48,008
+y is equal to 1, p
+
+239
+00:07:48,023 --> 00:07:49,031
+of x is less than epsilon,
+
+240
+00:07:50,004 --> 00:07:51,074
+we must be taking zero, if
+
+241
+00:07:52,027 --> 00:07:54,075
+p of x is
+
+242
+00:07:54,094 --> 00:07:57,033
+greater than or equal to epsilon.
+
+243
+00:07:58,038 --> 00:07:59,027
+So, given x, it's trying to predict, what is
+
+244
+00:07:59,033 --> 00:08:00,026
+the label, given y equals 1 corresponding
+
+245
+00:08:00,050 --> 00:08:01,047
+to an anomaly or is
+
+246
+00:08:01,062 --> 00:08:06,037
+it y equals 0 corresponding to a normal example?
+
+247
+00:08:07,029 --> 00:08:09,048
+So given the training, cross validation, and test sets.
+
+248
+00:08:09,093 --> 00:08:11,007
+How do you develop an algorithm?
+
+249
+00:08:11,048 --> 00:08:12,092
+And more specifically, how do
+
+250
+00:08:13,000 --> 00:08:15,044
+you evaluate an anomaly detection algorithm?
+
+251
+00:08:15,079 --> 00:08:17,047
+Well, to this whole,
+
+252
+00:08:17,081 --> 00:08:19,041
+the first step is to take
+
+253
+00:08:19,067 --> 00:08:21,012
+the unlabeled training set, and
+
+254
+00:08:21,029 --> 00:08:23,051
+to fit the model p of x lead training data.
+
+255
+00:08:23,099 --> 00:08:25,006
+So you take this, you know
+
+256
+00:08:25,012 --> 00:08:26,062
+on I'm coming, unlabeled training set,
+
+257
+00:08:26,091 --> 00:08:28,038
+but really, these are examples
+
+258
+00:08:28,087 --> 00:08:30,029
+that we are assuming, vast majority
+
+259
+00:08:30,075 --> 00:08:32,039
+of which are normal aircraft engines,
+
+260
+00:08:32,089 --> 00:08:34,001
+not because they're not anomalies
+
+261
+00:08:34,014 --> 00:08:35,037
+and it will
+
+262
+00:08:35,049 --> 00:08:36,047
+fit the model p of x. It
+
+263
+00:08:36,063 --> 00:08:38,011
+will fit all those parameters for all
+
+264
+00:08:38,024 --> 00:08:40,033
+the Gaussians on this data.
+
+265
+00:08:41,055 --> 00:08:43,019
+Next on the cross validation
+
+266
+00:08:43,029 --> 00:08:44,048
+of the test set, we're
+
+267
+00:08:44,060 --> 00:08:45,046
+going to think of the anomaly
+
+268
+00:08:46,010 --> 00:08:47,052
+detention algorithm as trying to
+
+269
+00:08:47,063 --> 00:08:48,058
+predict the value of
+
+270
+00:08:49,053 --> 00:08:51,066
+y. So in each of like
+
+271
+00:08:52,042 --> 00:08:53,047
+say test examples.
+
+272
+00:08:54,013 --> 00:08:56,011
+We have these X-I tests,
+
+273
+00:08:57,020 --> 00:08:58,072
+Y-I test, where y is
+
+274
+00:08:58,087 --> 00:09:00,010
+going to be equal to
+
+275
+00:09:00,032 --> 00:09:03,023
+1 or 0 depending on whether this was an anomalous example.
+
+276
+00:09:04,037 --> 00:09:05,050
+So given input x in
+
+277
+00:09:05,060 --> 00:09:07,034
+my test set, my anomaly detection
+
+278
+00:09:07,073 --> 00:09:08,085
+algorithm think of it as
+
+279
+00:09:09,010 --> 00:09:11,087
+predicting the y as 1 if p of x is less than epsilon.
+
+280
+00:09:12,024 --> 00:09:15,012
+So predicting that it is an anomaly, it is probably is very low.
+
+281
+00:09:15,096 --> 00:09:17,080
+And we think of the algorithm is predicting that y is equal to 0.
+
+282
+00:09:17,097 --> 00:09:20,083
+If p of x is greater then or equals epsilon.
+
+283
+00:09:21,028 --> 00:09:23,060
+So predicting those normal example
+
+284
+00:09:24,020 --> 00:09:26,034
+if the p of x is reasonably large.
+
+285
+00:09:27,035 --> 00:09:28,050
+And so we can now
+
+286
+00:09:28,072 --> 00:09:29,092
+think of the anomaly detection algorithm
+
+287
+00:09:30,058 --> 00:09:32,003
+as making predictions for what
+
+288
+00:09:32,024 --> 00:09:33,049
+are the values of these y
+
+289
+00:09:33,083 --> 00:09:35,008
+labels in the test sets
+
+290
+00:09:36,004 --> 00:09:37,000
+or on the cross validation set.
+
+291
+00:09:37,072 --> 00:09:39,013
+And this puts us somewhat more similar
+
+292
+00:09:39,066 --> 00:09:41,025
+to the supervised learning setting, right?
+
+293
+00:09:41,062 --> 00:09:42,087
+Where we have label test
+
+294
+00:09:43,016 --> 00:09:44,054
+set and our algorithm is
+
+295
+00:09:44,079 --> 00:09:46,005
+making predictions on these labels
+
+296
+00:09:46,019 --> 00:09:48,004
+and so we can evaluate it you
+
+297
+00:09:48,048 --> 00:09:50,092
+know by seeing how often it gets these labels right.
+
+298
+00:09:52,017 --> 00:09:53,082
+Of course these labels are
+
+299
+00:09:54,053 --> 00:09:56,041
+will be very skewed because y
+
+300
+00:09:56,071 --> 00:09:57,092
+equals zero, that is normal
+
+301
+00:09:58,029 --> 00:10:00,049
+examples, usually be much
+
+302
+00:10:00,077 --> 00:10:01,092
+more common than y equals
+
+303
+00:10:02,030 --> 00:10:03,051
+1 than anomalous examples.
+
+304
+00:10:04,065 --> 00:10:05,061
+But, you know, this is much closer
+
+305
+00:10:06,003 --> 00:10:06,099
+to the source of evaluation
+
+306
+00:10:07,069 --> 00:10:09,076
+metrics we can use in supervised learning.
+
+307
+00:10:12,038 --> 00:10:14,050
+So what's a good evaluation metric to use.
+
+308
+00:10:14,078 --> 00:10:18,052
+Well, because the data is
+
+309
+00:10:18,084 --> 00:10:20,045
+very skewed, because y equals 0 is
+
+310
+00:10:20,087 --> 00:10:22,098
+much more common, classification accuracy
+
+311
+00:10:23,051 --> 00:10:24,095
+would not be a good the evaluation metrics.
+
+312
+00:10:25,036 --> 00:10:26,075
+So, we talked about this in the earlier video.
+
+313
+00:10:28,036 --> 00:10:29,012
+So, if you have a very
+
+314
+00:10:29,040 --> 00:10:31,036
+skewed data set, then predicting
+
+315
+00:10:31,074 --> 00:10:32,075
+y equals 0 all the time,
+
+316
+00:10:33,042 --> 00:10:34,029
+will have very high classification accuracy.
+
+317
+00:10:35,069 --> 00:10:36,082
+Instead, we should use evaluation
+
+318
+00:10:37,033 --> 00:10:38,091
+metrics, like computing the fraction
+
+319
+00:10:39,052 --> 00:10:41,002
+of true positives, false positives,
+
+320
+00:10:41,066 --> 00:10:42,094
+false negatives, true negatives or
+
+321
+00:10:43,058 --> 00:10:44,083
+compute the position of the
+
+322
+00:10:44,088 --> 00:10:46,037
+v curve of this algorithm or
+
+323
+00:10:46,078 --> 00:10:48,037
+do things like compute the
+
+324
+00:10:48,051 --> 00:10:50,050
+f1 score, right, which is
+
+325
+00:10:50,062 --> 00:10:51,067
+a single real number way of summarizing
+
+326
+00:10:52,060 --> 00:10:53,045
+the position and the recall numbers.
+
+327
+00:10:54,034 --> 00:10:55,009
+And so these would be ways
+
+328
+00:10:55,075 --> 00:10:56,094
+to evaluate an anomaly detection
+
+329
+00:10:57,032 --> 00:10:59,009
+algorithm on your cross validation set or on your test set.
+
+330
+00:11:01,054 --> 00:11:02,096
+Finally, earlier in the
+
+331
+00:11:03,010 --> 00:11:05,004
+anomaly detection algorithm, we
+
+332
+00:11:05,020 --> 00:11:06,072
+also had this parameter epsilon, right?
+
+333
+00:11:07,039 --> 00:11:09,010
+So, epsilon is this threshold
+
+334
+00:11:09,091 --> 00:11:11,032
+that we would use to decide
+
+335
+00:11:11,078 --> 00:11:13,062
+when to flag something as an anomaly.
+
+336
+00:11:14,084 --> 00:11:16,074
+And so, if you have
+
+337
+00:11:16,084 --> 00:11:18,037
+a cross validation set, another way
+
+338
+00:11:19,000 --> 00:11:20,032
+to and to choose this parameter
+
+339
+00:11:20,071 --> 00:11:22,001
+epsilon, would be to
+
+340
+00:11:22,024 --> 00:11:24,009
+try a different, try many
+
+341
+00:11:24,034 --> 00:11:26,022
+different values of epsilon, and
+
+342
+00:11:26,037 --> 00:11:27,051
+then pick the value of epsilon
+
+343
+00:11:27,099 --> 00:11:30,066
+that, let's say, maximizes f1
+
+344
+00:11:31,062 --> 00:11:33,094
+score, or that otherwise does well on your cross validation set.
+
+345
+00:11:35,034 --> 00:11:36,076
+And more generally, the way
+
+346
+00:11:37,000 --> 00:11:38,023
+to reduce the training, testing,
+
+347
+00:11:38,062 --> 00:11:40,023
+and cross validation sets, is that
+
+348
+00:11:41,075 --> 00:11:43,001
+when we are trying to make decisions,
+
+349
+00:11:43,063 --> 00:11:45,042
+like what features to include, or
+
+350
+00:11:45,057 --> 00:11:46,058
+trying to, you know, tune the parameter
+
+351
+00:11:47,010 --> 00:11:48,015
+epsilon, we would then
+
+352
+00:11:48,040 --> 00:11:51,000
+continually evaluate the algorithm
+
+353
+00:11:51,050 --> 00:11:52,087
+on the cross validation sets and
+
+354
+00:11:53,000 --> 00:11:54,012
+make all those decisions like what
+
+355
+00:11:54,032 --> 00:11:55,070
+features did you use, you know,
+
+356
+00:11:55,078 --> 00:11:57,064
+how to set epsilon, use that, evaluate
+
+357
+00:11:58,024 --> 00:11:59,040
+the algorithm on the cross validation
+
+358
+00:11:59,087 --> 00:12:00,087
+set, and then when we've
+
+359
+00:12:01,032 --> 00:12:02,076
+picked the set of features, when
+
+360
+00:12:02,090 --> 00:12:03,086
+we've found the value of
+
+361
+00:12:04,007 --> 00:12:05,014
+epsilon that we're happy with, we
+
+362
+00:12:05,025 --> 00:12:07,002
+can then take the final model and
+
+363
+00:12:07,026 --> 00:12:08,067
+evaluate it, you know, do the
+
+364
+00:12:08,076 --> 00:12:11,036
+final evaluation of the algorithm on the test sets.
+
+365
+00:12:12,067 --> 00:12:13,089
+So, in this video, we talked
+
+366
+00:12:14,017 --> 00:12:15,024
+about the process of how
+
+367
+00:12:15,051 --> 00:12:17,005
+to evaluate an anomaly
+
+368
+00:12:17,051 --> 00:12:18,097
+detection algorithm, and again,
+
+369
+00:12:19,096 --> 00:12:21,022
+having being able to evaluate
+
+370
+00:12:21,040 --> 00:12:22,053
+an algorithm, you know, with
+
+371
+00:12:22,063 --> 00:12:23,083
+a single real number evaluation,
+
+372
+00:12:24,073 --> 00:12:25,062
+with a number like an F1 score
+
+373
+00:12:26,052 --> 00:12:27,065
+that often allows you to
+
+374
+00:12:28,008 --> 00:12:29,071
+much more efficient use
+
+375
+00:12:29,096 --> 00:12:31,015
+of your time when you are
+
+376
+00:12:31,027 --> 00:12:33,025
+trying to develop an anomaly detection system.
+
+377
+00:12:33,079 --> 00:12:34,097
+And we try to make these sorts of decisions.
+
+378
+00:12:35,064 --> 00:12:38,001
+I have to chose epsilon, what features to include, and so on.
+
+379
+00:12:38,097 --> 00:12:39,091
+In this video, we started
+
+380
+00:12:40,033 --> 00:12:40,083
+to use a bit of labeled
+
+381
+00:12:41,059 --> 00:12:42,075
+data in order to
+
+382
+00:12:43,001 --> 00:12:43,054
+evaluate the anomaly detection algorithm and
+
+383
+00:12:43,057 --> 00:12:45,071
+this takes us a
+
+384
+00:12:45,088 --> 00:12:48,034
+little bit closer to a supervised learning setting.
+
+385
+00:12:49,061 --> 00:12:50,080
+In the next video, I'm going
+
+386
+00:12:51,000 --> 00:12:52,077
+to say a bit more about that.
+
+387
+00:12:52,094 --> 00:12:54,024
+And in particular we'll talk about when should
+
+388
+00:12:54,044 --> 00:12:55,086
+you be using an anomaly detection
+
+389
+00:12:56,030 --> 00:12:57,012
+algorithm and when should we
+
+390
+00:12:57,055 --> 00:13:00,076
+be thinking about using supervised learning instead, and what are the differences between these two formalisms.
