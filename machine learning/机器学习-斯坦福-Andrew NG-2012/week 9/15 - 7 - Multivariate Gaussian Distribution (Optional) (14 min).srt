@@ -1,0 +1,1636 @@
+
+1
+00:00:00,050 --> 00:00:01,055
+In this and the next video,
+
+2
+00:00:02,004 --> 00:00:03,047
+I'd like to tell you about one
+
+3
+00:00:03,075 --> 00:00:05,087
+possible extension to the
+
+4
+00:00:06,013 --> 00:00:08,026
+anomaly detection algorithm that we've developed so far.
+
+5
+00:00:09,001 --> 00:00:11,097
+This extension uses something called the multivariate
+
+6
+00:00:12,009 --> 00:00:13,048
+Gaussian distribution, and it
+
+7
+00:00:13,076 --> 00:00:14,097
+has some advantages, and some
+
+8
+00:00:15,016 --> 00:00:16,078
+disadvantages, and it can
+
+9
+00:00:17,007 --> 00:00:20,060
+sometimes catch some anomalies that the earlier algorithm didn't.
+
+10
+00:00:21,073 --> 00:00:23,073
+To motivate this, let's start with an example.
+
+11
+00:00:25,062 --> 00:00:28,041
+Let's say that so our unlabeled data looks like what I have plotted here.
+
+12
+00:00:29,005 --> 00:00:30,019
+And I'm going to use
+
+13
+00:00:30,033 --> 00:00:32,032
+the example of monitoring machines
+
+14
+00:00:32,089 --> 00:00:34,089
+in the data center, monitoring computers in the data center.
+
+15
+00:00:35,028 --> 00:00:36,017
+So my two features are x1
+
+16
+00:00:36,021 --> 00:00:37,007
+which is the CPU load and x2
+
+17
+00:00:37,025 --> 00:00:39,028
+which is maybe the memory use.
+
+18
+00:00:41,015 --> 00:00:42,015
+So if I take
+
+19
+00:00:42,034 --> 00:00:43,032
+my two features, x1 and x2,
+
+20
+00:00:43,057 --> 00:00:45,096
+and I model them as Gaussians then
+
+21
+00:00:46,020 --> 00:00:47,042
+here's a plot of
+
+22
+00:00:47,060 --> 00:00:49,003
+my X1 features, here's a
+
+23
+00:00:49,021 --> 00:00:50,036
+plot of my X2 features,
+
+24
+00:00:50,097 --> 00:00:51,088
+and so if I fit a
+
+25
+00:00:51,090 --> 00:00:52,064
+Gaussian to that, maybe I'll
+
+26
+00:00:52,075 --> 00:00:56,004
+get a Gaussian like this, so
+
+27
+00:00:56,072 --> 00:00:57,075
+here's P of X 1,
+
+28
+00:00:57,085 --> 00:01:00,035
+which depends
+
+29
+00:01:00,068 --> 00:01:02,013
+on the parameters mu 1, and
+
+30
+00:01:02,043 --> 00:01:04,073
+sigma squared 1,
+
+31
+00:01:04,087 --> 00:01:06,012
+and here's my memory used, and,
+
+32
+00:01:06,023 --> 00:01:07,001
+you know, maybe I'll get a Gaussian
+
+33
+00:01:07,056 --> 00:01:09,090
+that looks like this, and this is my P of X 2,
+
+34
+00:01:10,076 --> 00:01:12,050
+which depends on mu 2 and sigma squared 2.
+
+35
+00:01:12,059 --> 00:01:14,065
+And so this is
+
+36
+00:01:14,087 --> 00:01:16,034
+how the anomaly detection algorithm
+
+37
+00:01:16,079 --> 00:01:17,084
+models X1 and X2.
+
+38
+00:01:19,090 --> 00:01:21,015
+Now let's say that in the
+
+39
+00:01:21,026 --> 00:01:22,032
+test sets I have an
+
+40
+00:01:22,040 --> 00:01:24,001
+example that looks like this.
+
+41
+00:01:25,054 --> 00:01:26,059
+The location of that green
+
+42
+00:01:27,031 --> 00:01:29,015
+cross, so the value of
+
+43
+00:01:29,035 --> 00:01:31,021
+X 1 is about 0.4, and the value of X 2 is about 1.5.
+
+44
+00:01:31,029 --> 00:01:34,043
+Now, if you look at
+
+45
+00:01:34,065 --> 00:01:35,078
+the data, it looks like,
+
+46
+00:01:35,095 --> 00:01:36,078
+yeah, most of the data data
+
+47
+00:01:37,014 --> 00:01:38,079
+lies in this region, and
+
+48
+00:01:38,093 --> 00:01:40,040
+so that green cross
+
+49
+00:01:41,010 --> 00:01:43,051
+is pretty far away from any of the data I've seen.
+
+50
+00:01:43,084 --> 00:01:44,087
+It looks like that should be raised
+
+51
+00:01:45,020 --> 00:01:46,079
+as an anomaly. So, in my
+
+52
+00:01:46,096 --> 00:01:48,065
+data, in my, in the
+
+53
+00:01:48,079 --> 00:01:49,093
+data of my good examples,
+
+54
+00:01:50,031 --> 00:01:51,043
+it looks like, you know, the
+
+55
+00:01:51,051 --> 00:01:52,068
+CPU load, and the
+
+56
+00:01:52,076 --> 00:01:54,032
+memory use, they sort
+
+57
+00:01:54,068 --> 00:01:56,009
+of grow linearly with each other.
+
+58
+00:01:56,056 --> 00:01:57,071
+So if I have a
+
+59
+00:01:57,093 --> 00:01:59,000
+machine using lots of CPU,
+
+60
+00:01:59,015 --> 00:02:00,045
+you know memory use
+
+61
+00:02:00,082 --> 00:02:02,093
+will also be high, whereas this
+
+62
+00:02:03,031 --> 00:02:05,090
+example, this green example it looks like
+
+63
+00:02:06,004 --> 00:02:07,014
+here, the CPU load is
+
+64
+00:02:07,028 --> 00:02:08,028
+very low, but the memory use
+
+65
+00:02:08,049 --> 00:02:09,031
+is very high, and I just
+
+66
+00:02:09,043 --> 00:02:10,081
+have not seen that before in my training set.
+
+67
+00:02:10,097 --> 00:02:12,015
+It looks like that should be an anomaly.
+
+68
+00:02:13,018 --> 00:02:15,030
+But let's see what the anomaly detection algorithm will do.
+
+69
+00:02:15,056 --> 00:02:16,075
+Well, for the CPU load, it
+
+70
+00:02:16,084 --> 00:02:17,099
+puts it at around there
+
+71
+00:02:18,028 --> 00:02:20,069
+0.5 and this reasonably high
+
+72
+00:02:20,090 --> 00:02:21,090
+probability is not that
+
+73
+00:02:22,012 --> 00:02:23,034
+far from other examples we've seen,
+
+74
+00:02:23,065 --> 00:02:25,022
+maybe, whereas, for the
+
+75
+00:02:26,015 --> 00:02:28,031
+memory use, this appointment, 0.5,
+
+76
+00:02:29,003 --> 00:02:29,090
+whereas for the memory
+
+77
+00:02:30,003 --> 00:02:32,034
+use, it's about 1.5, which is there. Again,
+
+78
+00:02:32,068 --> 00:02:34,059
+you know, it's all to
+
+79
+00:02:34,072 --> 00:02:35,084
+us, it's not terribly Gaussian, but
+
+80
+00:02:35,097 --> 00:02:37,031
+the value here and the value
+
+81
+00:02:37,055 --> 00:02:38,083
+here is not that different
+
+82
+00:02:39,021 --> 00:02:41,018
+from many other examples we've
+
+83
+00:02:41,043 --> 00:02:43,002
+seen, and so P of
+
+84
+00:02:43,021 --> 00:02:44,053
+X 1, will be pretty high,
+
+85
+00:02:45,055 --> 00:02:46,003
+reasonably high.
+
+86
+00:02:46,028 --> 00:02:47,072
+P of X 2 reasonably high.
+
+87
+00:02:47,097 --> 00:02:49,003
+I mean, if you look at this
+
+88
+00:02:49,090 --> 00:02:51,022
+plot right, this point here,
+
+89
+00:02:51,040 --> 00:02:52,053
+it doesn't look that bad, and
+
+90
+00:02:52,083 --> 00:02:54,043
+if you look at this plot, you
+
+91
+00:02:54,071 --> 00:02:56,068
+know across here, doesn't look that bad.
+
+92
+00:02:57,005 --> 00:02:58,078
+I mean, I have had examples with
+
+93
+00:02:58,097 --> 00:03:00,072
+even greater memory used, or
+
+94
+00:03:01,003 --> 00:03:02,027
+with even less CPU use,
+
+95
+00:03:02,086 --> 00:03:04,078
+and so this example doesn't look that anomalous.
+
+96
+00:03:05,093 --> 00:03:07,037
+And so, an anomaly detection algorithm
+
+97
+00:03:07,068 --> 00:03:10,009
+will fail to flag this point as an anomaly.
+
+98
+00:03:10,055 --> 00:03:12,021
+And it turns out what
+
+99
+00:03:12,036 --> 00:03:13,061
+our anomaly detection algorithm is
+
+100
+00:03:13,087 --> 00:03:15,006
+doing is that it is
+
+101
+00:03:15,019 --> 00:03:16,069
+not realizing that this blue
+
+102
+00:03:16,090 --> 00:03:18,006
+ellipse shows the high
+
+103
+00:03:18,021 --> 00:03:19,037
+probability region, is that, one
+
+104
+00:03:19,049 --> 00:03:21,028
+of the thing is that, examples here,
+
+105
+00:03:21,071 --> 00:03:23,043
+a high probability, and the
+
+106
+00:03:23,068 --> 00:03:24,097
+examples, the next circle
+
+107
+00:03:26,016 --> 00:03:27,028
+of from a lower probably, and
+
+108
+00:03:27,037 --> 00:03:28,094
+examples here are even
+
+109
+00:03:29,021 --> 00:03:31,003
+lower probability, and somehow, here
+
+110
+00:03:31,015 --> 00:03:32,006
+are things that are, green cross
+
+111
+00:03:32,041 --> 00:03:33,043
+there, it's pretty high probability,
+
+112
+00:03:34,049 --> 00:03:35,050
+and in particular, it tends to think
+
+113
+00:03:35,099 --> 00:03:37,074
+that, you know, everything in this
+
+114
+00:03:38,000 --> 00:03:40,040
+region, everything on the
+
+115
+00:03:40,058 --> 00:03:43,038
+line that I'm circling over, has, you know, about equal probability,
+
+116
+00:03:44,015 --> 00:03:45,081
+and it doesn't realize that something
+
+117
+00:03:46,078 --> 00:03:50,090
+out here actually has
+
+118
+00:03:51,008 --> 00:03:53,012
+much lower probability than something over there.
+
+119
+00:03:55,006 --> 00:03:56,008
+So, in order to fix
+
+120
+00:03:56,027 --> 00:03:57,030
+this, we can, we're going to
+
+121
+00:03:57,058 --> 00:03:58,093
+develop a modified version of
+
+122
+00:03:58,099 --> 00:04:01,003
+the anomaly detection algorithm, using
+
+123
+00:04:01,043 --> 00:04:02,052
+something called the multivariate
+
+124
+00:04:02,058 --> 00:04:05,087
+Gaussian distribution also called the multivariate normal distribution.
+
+125
+00:04:07,033 --> 00:04:08,012
+So here's what we're going to
+
+126
+00:04:08,081 --> 00:04:10,027
+do. We have features x
+
+127
+00:04:10,046 --> 00:04:11,068
+which are in Rn and
+
+128
+00:04:11,090 --> 00:04:14,018
+instead of P of X 1, P of X 2, separately,
+
+129
+00:04:14,056 --> 00:04:15,062
+we're going to model P of
+
+130
+00:04:15,080 --> 00:04:16,083
+X, all in one go,
+
+131
+00:04:17,000 --> 00:04:18,097
+so model P of X, you know, all at the same time.
+
+132
+00:04:20,030 --> 00:04:21,055
+So the parameters of the
+
+133
+00:04:21,082 --> 00:04:24,013
+multivariate Gaussian distribution are mu,
+
+134
+00:04:24,062 --> 00:04:25,076
+which is a vector, and sigma,
+
+135
+00:04:26,049 --> 00:04:28,044
+which is an n by n matrix, called a covariance matrix,
+
+136
+00:04:29,063 --> 00:04:30,087
+and this is similar to the
+
+137
+00:04:31,000 --> 00:04:32,022
+covariance matrix that we
+
+138
+00:04:32,043 --> 00:04:33,056
+saw when we were working
+
+139
+00:04:34,007 --> 00:04:35,019
+with the PCA, with the
+
+140
+00:04:35,027 --> 00:04:36,069
+principal components analysis algorithm.
+
+141
+00:04:37,086 --> 00:04:38,097
+For the second complete is, let
+
+142
+00:04:39,006 --> 00:04:39,087
+me just write out the formula
+
+143
+00:04:40,093 --> 00:04:42,038
+for the multivariate Gaussian distribution.
+
+144
+00:04:42,081 --> 00:04:44,002
+So we say that probability of
+
+145
+00:04:44,013 --> 00:04:45,010
+X, and this is parameterized
+
+146
+00:04:46,008 --> 00:04:47,050
+by my parameters mu and
+
+147
+00:04:47,063 --> 00:04:49,027
+sigma that the
+
+148
+00:04:49,036 --> 00:04:50,010
+probability of x is equal
+
+149
+00:04:50,043 --> 00:04:52,025
+to once again
+
+150
+00:04:52,057 --> 00:04:54,081
+there's absolutely no need to memorize this formula.
+
+151
+00:04:56,002 --> 00:04:56,077
+You know, you can look it up
+
+152
+00:04:57,000 --> 00:04:58,016
+whenever you need to use
+
+153
+00:04:58,033 --> 00:04:59,012
+it, but this is what
+
+154
+00:04:59,068 --> 00:05:01,023
+the probability of X looks like.
+
+155
+00:05:03,000 --> 00:05:04,068
+Transverse, 2nd inverse, X
+
+156
+00:05:05,022 --> 00:05:06,030
+minus mu.
+
+157
+00:05:07,039 --> 00:05:08,085
+And this thing here,
+
+158
+00:05:10,038 --> 00:05:11,050
+the absolute value of sigma, this
+
+159
+00:05:11,068 --> 00:05:13,013
+thing here when you write
+
+160
+00:05:13,041 --> 00:05:14,043
+this symbol, this is called
+
+161
+00:05:14,060 --> 00:05:17,022
+the determent of sigma
+
+162
+00:05:18,014 --> 00:05:19,062
+and this is a mathematical function
+
+163
+00:05:20,020 --> 00:05:21,074
+of a matrix and you really
+
+164
+00:05:21,095 --> 00:05:22,081
+don't need to know what the
+
+165
+00:05:23,024 --> 00:05:24,025
+determinant of a matrix is,
+
+166
+00:05:24,077 --> 00:05:25,076
+but really all you need to
+
+167
+00:05:25,086 --> 00:05:27,018
+know is that you can
+
+168
+00:05:27,031 --> 00:05:29,037
+compute it in octave by using
+
+169
+00:05:29,075 --> 00:05:31,081
+the octave command DET of
+
+170
+00:05:33,056 --> 00:05:33,056
+sigma.
+
+171
+00:05:34,000 --> 00:05:36,020
+Okay, and again, just be clear, alright?
+
+172
+00:05:36,030 --> 00:05:38,024
+In this expression, these sigmas
+
+173
+00:05:38,073 --> 00:05:41,025
+here, these are just n by n matrix.
+
+174
+00:05:41,085 --> 00:05:43,014
+This is not a summation and
+
+175
+00:05:43,025 --> 00:05:45,068
+you know, the sigma there is an n by n matrix.
+
+176
+00:05:46,070 --> 00:05:47,077
+So that's the formula for P
+
+177
+00:05:48,000 --> 00:05:50,050
+of X, but it's
+
+178
+00:05:50,081 --> 00:05:52,002
+more interestingly, or more importantly,
+
+179
+00:05:53,093 --> 00:05:55,061
+what does P of X actually looks like?
+
+180
+00:05:56,018 --> 00:05:57,044
+Lets look at some examples of
+
+181
+00:05:58,001 --> 00:06:00,068
+multivariate Gaussian distributions.
+
+182
+00:06:02,035 --> 00:06:03,037
+So let's take a
+
+183
+00:06:03,050 --> 00:06:04,069
+two dimensional example, say if
+
+184
+00:06:04,081 --> 00:06:06,055
+I have N equals 2, I
+
+185
+00:06:06,070 --> 00:06:08,016
+have two features, X 1 and X 2.
+
+186
+00:06:09,025 --> 00:06:10,054
+Lets say I set MU to
+
+187
+00:06:10,064 --> 00:06:11,080
+be equal to 0 and sigma
+
+188
+00:06:12,032 --> 00:06:14,002
+to be equal to this matrix here.
+
+189
+00:06:14,019 --> 00:06:16,070
+With 1s on the diagonals and 0s on the off-diagonals,
+
+190
+00:06:17,060 --> 00:06:19,098
+this matrix is sometimes also called the identity matrix.
+
+191
+00:06:21,035 --> 00:06:22,047
+In that case, p of
+
+192
+00:06:22,058 --> 00:06:24,094
+x will look like
+
+193
+00:06:25,024 --> 00:06:27,043
+this, and what
+
+194
+00:06:27,060 --> 00:06:29,037
+I'm showing in this figure is, you know,
+
+195
+00:06:29,050 --> 00:06:30,089
+for a specific value of X1
+
+196
+00:06:31,024 --> 00:06:32,086
+and for a specific value of
+
+197
+00:06:32,097 --> 00:06:34,068
+X2, the height of
+
+198
+00:06:34,081 --> 00:06:36,047
+this surface the value
+
+199
+00:06:36,097 --> 00:06:38,032
+of p of x. And
+
+200
+00:06:38,047 --> 00:06:39,051
+so with this setting the parameters
+
+201
+00:06:40,061 --> 00:06:42,010
+p of x is highest when
+
+202
+00:06:42,030 --> 00:06:43,062
+X1 and X2 equal zero 0,
+
+203
+00:06:44,000 --> 00:06:45,070
+so that's the peak of this Gaussian distribution,
+
+204
+00:06:46,094 --> 00:06:48,075
+and the probability falls off with this
+
+205
+00:06:48,097 --> 00:06:51,032
+sort of two dimensional Gaussian or
+
+206
+00:06:51,050 --> 00:06:53,058
+this bell shaped two dimensional bell-shaped surface.
+
+207
+00:06:55,007 --> 00:06:56,039
+Down below is the same
+
+208
+00:06:56,061 --> 00:06:58,023
+thing but plotted using a
+
+209
+00:06:58,032 --> 00:07:00,097
+contour plot instead, or using different colors,
+
+210
+00:07:01,014 --> 00:07:02,001
+and so this
+
+211
+00:07:02,052 --> 00:07:04,020
+heavy intense red in the
+
+212
+00:07:04,027 --> 00:07:06,025
+middle, corresponds to the highest values,
+
+213
+00:07:06,085 --> 00:07:08,023
+and then the values decrease
+
+214
+00:07:08,079 --> 00:07:10,047
+with the yellow being slightly lower
+
+215
+00:07:10,069 --> 00:07:11,082
+values the cyan being
+
+216
+00:07:12,006 --> 00:07:13,023
+lower values and this deep
+
+217
+00:07:14,000 --> 00:07:15,043
+blue being the lowest
+
+218
+00:07:15,044 --> 00:07:17,000
+values so this is really the same figure but plotted
+
+219
+00:07:17,024 --> 00:07:19,041
+viewed from the top instead, using colors instead.
+
+220
+00:07:21,038 --> 00:07:22,050
+And so, with this distribution,
+
+221
+00:07:23,082 --> 00:07:25,000
+you see that it faces most
+
+222
+00:07:25,030 --> 00:07:27,043
+of the probability near 0,0
+
+223
+00:07:27,060 --> 00:07:28,062
+and then as you go out
+
+224
+00:07:28,070 --> 00:07:32,044
+from 0,0 the probability of X1 and X2 goes down.
+
+225
+00:07:36,000 --> 00:07:37,022
+Now lets try varying some
+
+226
+00:07:37,031 --> 00:07:38,062
+of the parameters and see
+
+227
+00:07:38,076 --> 00:07:40,014
+what happens. So let's
+
+228
+00:07:40,093 --> 00:07:42,042
+take sigma and change it
+
+229
+00:07:42,058 --> 00:07:44,072
+so let's say sigma shrinks a
+
+230
+00:07:44,087 --> 00:07:46,035
+little bit. Sigma is a
+
+231
+00:07:46,057 --> 00:07:47,070
+covariance matrix and so it
+
+232
+00:07:47,081 --> 00:07:49,002
+measures the variance or the
+
+233
+00:07:49,012 --> 00:07:50,063
+variability of the features X1 X2.
+
+234
+00:07:50,072 --> 00:07:52,007
+So if the shrink
+
+235
+00:07:52,039 --> 00:07:53,043
+sigma then what you get
+
+236
+00:07:53,077 --> 00:07:54,029
+is what you get is that the
+
+237
+00:07:54,039 --> 00:07:56,031
+width of this bump diminishes
+
+238
+00:07:57,075 --> 00:07:59,031
+and the height also
+
+239
+00:07:59,055 --> 00:08:00,062
+increases a bit, because the
+
+240
+00:08:01,008 --> 00:08:03,007
+area under the surface is equal to 1.
+
+241
+00:08:03,012 --> 00:08:04,039
+So the integral of the
+
+242
+00:08:04,094 --> 00:08:06,023
+volume under the surface is
+
+243
+00:08:06,057 --> 00:08:08,000
+equal to 1, because probability
+
+244
+00:08:08,068 --> 00:08:10,007
+distribution must integrate to one.
+
+245
+00:08:10,080 --> 00:08:11,064
+But, if you shrink the variance,
+
+246
+00:08:12,066 --> 00:08:14,029
+it's kinda like shrinking
+
+247
+00:08:14,081 --> 00:08:15,087
+sigma squared,
+
+248
+00:08:16,074 --> 00:08:20,007
+you end up with a narrower distribution, and one that's a little bit taller.
+
+249
+00:08:20,086 --> 00:08:22,014
+And so you see here also the
+
+250
+00:08:22,057 --> 00:08:27,019
+concentric ellipsis has shrunk a little bit.
+
+251
+00:08:27,033 --> 00:08:28,073
+Whereas in contrast if you were to increase sigma
+
+252
+00:08:29,076 --> 00:08:31,000
+to 2 2 on the
+
+253
+00:08:31,011 --> 00:08:32,001
+diagonals, so it is now two
+
+254
+00:08:32,022 --> 00:08:34,037
+times the identity then you end up with a
+
+255
+00:08:34,050 --> 00:08:35,087
+much wider and much flatter Gaussian.
+
+256
+00:08:36,014 --> 00:08:38,019
+And so the width of this is much wider.
+
+257
+00:08:38,092 --> 00:08:39,079
+This is hard to see but this
+
+258
+00:08:40,001 --> 00:08:41,009
+is still a bell shaped bump,
+
+259
+00:08:41,021 --> 00:08:42,053
+it's just flattened down a lot,
+
+260
+00:08:42,062 --> 00:08:44,047
+it has become much wider and
+
+261
+00:08:44,059 --> 00:08:45,072
+so the variance or the
+
+262
+00:08:45,083 --> 00:08:48,069
+variability of X1 and X2 just becomes wider.
+
+263
+00:08:50,051 --> 00:08:50,098
+Here are a few more examples.
+
+264
+00:08:51,066 --> 00:08:53,092
+Now lets try varying
+
+265
+00:08:54,007 --> 00:08:55,049
+one of the elements of sigma at the time.
+
+266
+00:08:55,084 --> 00:08:58,008
+Let's say I send sigma to
+
+267
+00:08:58,013 --> 00:09:00,001
+0.6 there, and 1 over there.
+
+268
+00:09:01,034 --> 00:09:02,037
+What this does, is this
+
+269
+00:09:02,061 --> 00:09:04,024
+reduces the variance of
+
+270
+00:09:05,077 --> 00:09:06,096
+the first feature, X 1, while
+
+271
+00:09:07,076 --> 00:09:08,088
+keeping the variance of the
+
+272
+00:09:08,096 --> 00:09:11,052
+second feature X 2, the same.
+
+273
+00:09:12,015 --> 00:09:15,014
+And so with this setting of parameters, you can model things like that.
+
+274
+00:09:15,066 --> 00:09:16,090
+X 1 has smaller variance, and
+
+275
+00:09:17,058 --> 00:09:19,012
+X 2 has larger variance.
+
+276
+00:09:20,008 --> 00:09:20,079
+Whereas if I do this,
+
+277
+00:09:21,012 --> 00:09:22,089
+if I set this
+
+278
+00:09:23,009 --> 00:09:24,038
+matrix to 2, 1
+
+279
+00:09:24,055 --> 00:09:25,089
+then you can also model
+
+280
+00:09:26,023 --> 00:09:27,047
+examples where you know here
+
+281
+00:09:28,085 --> 00:09:30,059
+we'll say X1 can have take
+
+282
+00:09:30,083 --> 00:09:31,092
+on a large range of values
+
+283
+00:09:32,022 --> 00:09:34,087
+whereas X2 takes on a relatively narrower range of values.
+
+284
+00:09:35,007 --> 00:09:37,005
+And that's reflected in this
+
+285
+00:09:37,026 --> 00:09:38,003
+figure as well, you know where,
+
+286
+00:09:38,075 --> 00:09:40,052
+the distribution falls off
+
+287
+00:09:40,083 --> 00:09:42,066
+more slowly as X 1
+
+288
+00:09:42,082 --> 00:09:43,094
+moves away from 0,
+
+289
+00:09:44,017 --> 00:09:45,037
+and falls off very
+
+290
+00:09:45,063 --> 00:09:48,008
+rapidly as X 2 moves away from 0.
+
+291
+00:09:49,019 --> 00:09:50,071
+And similarly if
+
+292
+00:09:50,079 --> 00:09:52,032
+we were to modify
+
+293
+00:09:53,000 --> 00:09:54,049
+this element of the
+
+294
+00:09:54,065 --> 00:09:55,057
+matrix instead, then similar to the previous
+
+295
+00:09:57,038 --> 00:09:58,086
+slide, except that here where
+
+296
+00:09:59,045 --> 00:10:00,089
+you know playing around here saying
+
+297
+00:10:01,024 --> 00:10:03,000
+that X2 can take on
+
+298
+00:10:03,016 --> 00:10:04,046
+a very small range of values
+
+299
+00:10:05,019 --> 00:10:06,084
+and so here if this
+
+300
+00:10:07,020 --> 00:10:08,074
+is 0.6, we notice now X2
+
+301
+00:10:09,080 --> 00:10:10,061
+tends to take on a much
+
+302
+00:10:10,075 --> 00:10:12,092
+smaller range of values than the original example,
+
+303
+00:10:14,000 --> 00:10:15,030
+whereas if we were to
+
+304
+00:10:15,067 --> 00:10:17,032
+set sigma to be equal to 2 then
+
+305
+00:10:17,040 --> 00:10:20,058
+that's like saying X2 you know, has a much larger range of values.
+
+306
+00:10:22,077 --> 00:10:23,057
+Now, one of the cool
+
+307
+00:10:23,087 --> 00:10:24,095
+things about the multivariate
+
+308
+00:10:25,019 --> 00:10:26,069
+Gaussian distribution is that
+
+309
+00:10:26,087 --> 00:10:28,004
+you can also use it to
+
+310
+00:10:28,033 --> 00:10:30,023
+model correlations between the data.
+
+311
+00:10:30,040 --> 00:10:31,092
+That is we can use it to
+
+312
+00:10:32,005 --> 00:10:33,050
+model the fact that
+
+313
+00:10:33,061 --> 00:10:34,094
+X1 and X2 tend to be
+
+314
+00:10:35,007 --> 00:10:36,075
+highly correlated with each other for example.
+
+315
+00:10:37,063 --> 00:10:38,087
+So specifically if you start
+
+316
+00:10:39,053 --> 00:10:40,072
+to change the off diagonal
+
+317
+00:10:41,034 --> 00:10:42,038
+entries of this covariance
+
+318
+00:10:42,095 --> 00:10:45,025
+matrix you can get a different type of Gaussian distribution.
+
+319
+00:10:46,061 --> 00:10:48,025
+And so as I
+
+320
+00:10:48,034 --> 00:10:49,059
+increase the off-diagonal entries
+
+321
+00:10:50,009 --> 00:10:51,029
+from .5 to .8, what
+
+322
+00:10:51,058 --> 00:10:53,008
+I get is this distribution that
+
+323
+00:10:53,037 --> 00:10:54,059
+is more and more thinly peaked
+
+324
+00:10:55,010 --> 00:10:57,048
+along this sort of x equals y line.
+
+325
+00:10:57,070 --> 00:10:59,010
+And so here the
+
+326
+00:10:59,015 --> 00:11:00,061
+contour says that x and
+
+327
+00:11:00,073 --> 00:11:03,000
+y tend to grow together and
+
+328
+00:11:03,028 --> 00:11:04,050
+the things that are with
+
+329
+00:11:04,063 --> 00:11:06,054
+large probability are if
+
+330
+00:11:06,078 --> 00:11:08,013
+either X1 is large and
+
+331
+00:11:08,025 --> 00:11:09,055
+Y2 is large or X1
+
+332
+00:11:09,088 --> 00:11:11,015
+is small and Y2 is small.
+
+333
+00:11:11,049 --> 00:11:12,048
+Or somewhere in between.
+
+334
+00:11:13,011 --> 00:11:14,070
+And as this entry,
+
+335
+00:11:15,012 --> 00:11:16,027
+0.8 gets large, you get
+
+336
+00:11:16,049 --> 00:11:18,040
+a Gaussian distribution, that's sort of
+
+337
+00:11:18,065 --> 00:11:20,057
+where all the probability lies on
+
+338
+00:11:20,076 --> 00:11:22,087
+this sort of narrow region,
+
+339
+00:11:24,035 --> 00:11:26,020
+where x is approximately equal to
+
+340
+00:11:26,041 --> 00:11:27,052
+y. This is a very
+
+341
+00:11:28,001 --> 00:11:30,028
+tall, thin distribution you know
+
+342
+00:11:30,066 --> 00:11:32,057
+line mostly along this line
+
+343
+00:11:33,086 --> 00:11:34,094
+central region where x is
+
+344
+00:11:35,000 --> 00:11:36,086
+close to y. So this
+
+345
+00:11:37,012 --> 00:11:38,035
+is if we set these
+
+346
+00:11:38,080 --> 00:11:40,036
+entries to be positive entries.
+
+347
+00:11:40,097 --> 00:11:42,012
+In contrast if we set
+
+348
+00:11:42,046 --> 00:11:43,052
+these to negative values, as
+
+349
+00:11:44,035 --> 00:11:46,034
+I decreases it to -.5
+
+350
+00:11:46,037 --> 00:11:47,091
+down to -.8, then
+
+351
+00:11:48,005 --> 00:11:49,036
+what we get is a model where
+
+352
+00:11:49,087 --> 00:11:50,092
+we put most of the probability
+
+353
+00:11:51,062 --> 00:11:53,092
+in this sort of negative X
+
+354
+00:11:54,000 --> 00:11:55,041
+one in the next 2 correlation region,
+
+355
+00:11:55,071 --> 00:11:57,033
+and so, most of the
+
+356
+00:11:57,048 --> 00:11:58,041
+probability now lies in this region,
+
+357
+00:11:58,080 --> 00:11:59,090
+where X 1 is about equal
+
+358
+00:12:00,019 --> 00:12:01,070
+to -X 2, rather than X
+
+359
+00:12:01,088 --> 00:12:03,037
+1 equals X 2.
+
+360
+00:12:04,017 --> 00:12:05,046
+And so this captures a sort
+
+361
+00:12:05,061 --> 00:12:08,004
+of negative correlation between x1
+
+362
+00:12:10,029 --> 00:12:10,064
+and x2.
+
+363
+00:12:11,000 --> 00:12:12,054
+And so this is
+
+364
+00:12:12,075 --> 00:12:13,063
+a hopefully this gives you a sense of the
+
+365
+00:12:13,075 --> 00:12:15,023
+different distributions that the
+
+366
+00:12:15,064 --> 00:12:17,039
+multivariate Gaussian distribution can capture.
+
+367
+00:12:18,067 --> 00:12:20,042
+So follow up in varying, the
+
+368
+00:12:20,073 --> 00:12:22,020
+covariance matrix sigma, the other
+
+369
+00:12:22,090 --> 00:12:23,087
+thing you can do is
+
+370
+00:12:24,002 --> 00:12:26,009
+also, vary the mean
+
+371
+00:12:26,029 --> 00:12:27,073
+parameter mu, and so
+
+372
+00:12:28,037 --> 00:12:29,074
+operationally, we have mu
+
+373
+00:12:30,026 --> 00:12:31,019
+equal 0 0, and so the
+
+374
+00:12:31,025 --> 00:12:32,082
+distribution was centered around
+
+375
+00:12:33,026 --> 00:12:34,064
+X 1 equals 0, X2 equals 0,
+
+376
+00:12:35,004 --> 00:12:35,098
+so the peak of the
+
+377
+00:12:36,007 --> 00:12:38,052
+distribution is here, whereas,
+
+378
+00:12:38,095 --> 00:12:40,042
+if we vary the values of
+
+379
+00:12:40,061 --> 00:12:42,012
+mu, then that varies the
+
+380
+00:12:42,036 --> 00:12:43,070
+peak of the distribution and so,
+
+381
+00:12:43,090 --> 00:12:45,076
+if mu equals 0, 0.5,
+
+382
+00:12:45,091 --> 00:12:47,010
+the peak is at, you know,
+
+383
+00:12:47,026 --> 00:12:49,047
+X1 equals zero, and X2
+
+384
+00:12:49,080 --> 00:12:51,042
+equals 0.5, and so the
+
+385
+00:12:51,098 --> 00:12:53,039
+peak or the center of
+
+386
+00:12:53,071 --> 00:12:55,025
+this distribution has shifted,
+
+387
+00:12:56,047 --> 00:12:57,076
+and if mu was 1.5
+
+388
+00:12:58,034 --> 00:13:00,004
+minus 0.5 then OK,
+
+389
+00:13:01,016 --> 00:13:03,035
+and similarly the peak
+
+390
+00:13:03,088 --> 00:13:05,049
+of the distribution has now
+
+391
+00:13:05,062 --> 00:13:06,075
+shifted to a different location,
+
+392
+00:13:07,066 --> 00:13:09,071
+corresponding to where, you know,
+
+393
+00:13:09,090 --> 00:13:11,001
+X1 is 1.5 and X2
+
+394
+00:13:11,035 --> 00:13:12,071
+is -0.5, and so
+
+395
+00:13:13,028 --> 00:13:15,017
+varying the mu parameter, just shifts
+
+396
+00:13:15,073 --> 00:13:17,084
+around the center of this whole distribution.
+
+397
+00:13:18,045 --> 00:13:19,066
+So, hopefully, looking at
+
+398
+00:13:19,077 --> 00:13:21,026
+all these different pictures gives you
+
+399
+00:13:21,040 --> 00:13:22,044
+a sense of the sort
+
+400
+00:13:22,070 --> 00:13:24,085
+of probability distributions that
+
+401
+00:13:25,007 --> 00:13:28,000
+the Multivariate Gaussian Distribution allows you to capture.
+
+402
+00:13:28,079 --> 00:13:29,079
+And the key advantage of it
+
+403
+00:13:29,099 --> 00:13:30,092
+is it allows you to
+
+404
+00:13:31,012 --> 00:13:32,024
+capture, when you'd expect
+
+405
+00:13:32,075 --> 00:13:33,084
+two different features to be
+
+406
+00:13:33,097 --> 00:13:36,055
+positively correlated, or maybe negatively correlated.
+
+407
+00:13:37,078 --> 00:13:39,002
+In the next video, we'll take
+
+408
+00:13:39,025 --> 00:13:40,075
+this multivariate Gaussian distribution
+
+409
+00:13:41,066 --> 00:13:43,028
+and apply it to anomaly detection.

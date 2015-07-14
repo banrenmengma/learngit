@@ -1,0 +1,1504 @@
+
+1
+00:00:00,054 --> 00:00:02,029
+For many learning algorithms, among them
+
+2
+00:00:02,050 --> 00:00:04,050
+linear regression, logistic regression and
+
+3
+00:00:04,071 --> 00:00:06,012
+neural networks, the way we
+
+4
+00:00:06,029 --> 00:00:09,007
+derive the algorithm was by coming up with a cost function or
+
+5
+00:00:09,081 --> 00:00:11,015
+coming up with an optimization objective.
+
+6
+00:00:12,026 --> 00:00:13,060
+And then using an algorithm like
+
+7
+00:00:13,083 --> 00:00:15,071
+gradient descent to minimize that cost function.
+
+8
+00:00:16,078 --> 00:00:17,083
+We have a very large training
+
+9
+00:00:18,019 --> 00:00:19,062
+set gradient descent becomes
+
+10
+00:00:20,010 --> 00:00:21,080
+a computationally very expensive procedure.
+
+11
+00:00:22,092 --> 00:00:24,000
+In this video, we'll talk about
+
+12
+00:00:24,026 --> 00:00:25,060
+a modification to the basic
+
+13
+00:00:26,012 --> 00:00:27,098
+gradient descent algorithm called Stochastic
+
+14
+00:00:28,058 --> 00:00:29,076
+gradient descent, which will
+
+15
+00:00:29,098 --> 00:00:30,094
+allow us to scale these
+
+16
+00:00:31,005 --> 00:00:38,010
+algorithms to much bigger training sets. Suppose you
+
+17
+00:00:38,021 --> 00:00:40,079
+are training a linear regression model using gradient descent.
+
+18
+00:00:42,003 --> 00:00:43,079
+As a quick recap, the hypothesis
+
+19
+00:00:44,049 --> 00:00:45,067
+will look like this, and
+
+20
+00:00:46,000 --> 00:00:47,039
+the cost function will look
+
+21
+00:00:47,049 --> 00:00:48,042
+like this, which is the sum
+
+22
+00:00:48,067 --> 00:00:49,082
+of one half of the
+
+23
+00:00:50,024 --> 00:00:52,006
+average square error of your
+
+24
+00:00:52,049 --> 00:00:53,071
+hypothesis on your m training examples,
+
+25
+00:00:54,089 --> 00:00:56,042
+and the cost function we've
+
+26
+00:00:56,064 --> 00:00:58,090
+already seen looks like this sort of bow-shaped function.
+
+27
+00:00:59,032 --> 00:01:04,004
+So, plotted as function of the parameters theta 0 and theta 1, the cost function J
+
+28
+00:01:04,045 --> 00:01:05,078
+is a sort of a bow-shaped function.
+
+29
+00:01:07,003 --> 00:01:08,051
+And gradient descent looks like
+
+30
+00:01:08,070 --> 00:01:09,098
+this, where in the inner
+
+31
+00:01:10,020 --> 00:01:11,057
+loop of gradient descent you repeatedly
+
+32
+00:01:12,040 --> 00:01:14,060
+update the parameters theta using that expression.
+
+33
+00:01:16,048 --> 00:01:17,067
+Now in the rest of
+
+34
+00:01:17,078 --> 00:01:18,079
+this video, I'm going to
+
+35
+00:01:18,089 --> 00:01:21,084
+keep using linear regression as the running example.
+
+36
+00:01:22,073 --> 00:01:24,015
+But the ideas here, the ideas
+
+37
+00:01:24,057 --> 00:01:25,068
+of Stochastic gradient descent is
+
+38
+00:01:26,000 --> 00:01:27,026
+fully general and also
+
+39
+00:01:27,068 --> 00:01:28,085
+applies to other learning algorithms
+
+40
+00:01:29,095 --> 00:01:31,068
+like logistic regression, neural networks and other
+
+41
+00:01:31,098 --> 00:01:33,023
+algorithms that are based
+
+42
+00:01:34,004 --> 00:01:35,029
+on training gradient descent on
+
+43
+00:01:35,057 --> 00:01:37,009
+a specific training set.
+
+44
+00:01:38,000 --> 00:01:39,014
+So here's a picture of what gradient descent does, if
+
+45
+00:01:47,067 --> 00:01:49,037
+the parameters are initialized to the point there then as you run gradient descent different iterations of gradient descent will take the parameters to the global minimum.
+
+46
+00:01:49,079 --> 00:01:51,031
+So take a trajectory that looks
+
+47
+00:01:51,070 --> 00:01:52,079
+like that and heads pretty directly
+
+48
+00:01:53,068 --> 00:01:54,031
+to the global minimum.
+
+49
+00:01:55,062 --> 00:01:56,090
+Now, the problem with gradient descent
+
+50
+00:01:57,093 --> 00:01:59,026
+is that if m is large.
+
+51
+00:02:00,029 --> 00:02:01,089
+Then computing this derivative
+
+52
+00:02:02,043 --> 00:02:03,090
+term can be very
+
+53
+00:02:04,015 --> 00:02:05,054
+expensive, because the surprise,
+
+54
+00:02:05,095 --> 00:02:07,051
+summing over all m examples.
+
+55
+00:02:08,058 --> 00:02:09,075
+So if m is 300
+
+56
+00:02:10,044 --> 00:02:13,038
+million, alright. So
+
+57
+00:02:13,040 --> 00:02:15,028
+in the United States, there are about 300 million people.
+
+58
+00:02:15,072 --> 00:02:16,087
+And so the US or United
+
+59
+00:02:17,025 --> 00:02:18,066
+States census data may have
+
+60
+00:02:18,099 --> 00:02:20,027
+on the order of that many records.
+
+61
+00:02:20,087 --> 00:02:21,077
+So you want to fit the linear
+
+62
+00:02:22,000 --> 00:02:25,009
+regression model to that then you need to sum over 300 million records.
+
+63
+00:02:25,043 --> 00:02:27,030
+And that's very expensive.
+
+64
+00:02:28,058 --> 00:02:29,062
+To give the algorithm a name,
+
+65
+00:02:29,088 --> 00:02:31,028
+this particular version of gradient
+
+66
+00:02:31,065 --> 00:02:35,028
+descent is also called Batch gradient descent.
+
+67
+00:02:36,055 --> 00:02:38,030
+And the term Batch refers to
+
+68
+00:02:38,034 --> 00:02:39,037
+the fact that we're looking at
+
+69
+00:02:39,050 --> 00:02:41,027
+all of the training examples at a time.
+
+70
+00:02:41,047 --> 00:02:43,075
+We call it sort of a batch of all of the training examples.
+
+71
+00:02:44,033 --> 00:02:45,069
+And it really isn't the, maybe
+
+72
+00:02:45,096 --> 00:02:47,043
+the best name but this is
+
+73
+00:02:47,078 --> 00:02:49,037
+what machine learning people call
+
+74
+00:02:49,063 --> 00:02:52,009
+this particular version of gradient descent.
+
+75
+00:02:52,019 --> 00:02:53,097
+And if you imagine really that
+
+76
+00:02:54,006 --> 00:02:56,087
+you have 300 million census records stored away on disc.
+
+77
+00:02:57,072 --> 00:02:59,005
+The way this algorithm works is
+
+78
+00:02:59,013 --> 00:03:00,040
+you need to read into
+
+79
+00:03:01,006 --> 00:03:02,034
+your computer memory all 300
+
+80
+00:03:02,084 --> 00:03:05,046
+million records in order to compute this derivative term.
+
+81
+00:03:05,080 --> 00:03:06,093
+You need to stream all of
+
+82
+00:03:07,003 --> 00:03:08,096
+these records through computer because
+
+83
+00:03:09,016 --> 00:03:12,022
+you can't store all your records in computer memory.
+
+84
+00:03:13,002 --> 00:03:15,058
+So you need to read through them and slowly, you know, accumulate the sum in order to compute the derivative.
+
+85
+00:03:16,078 --> 00:03:17,072
+And then having done all that
+
+86
+00:03:17,093 --> 00:03:19,034
+work, that allows you
+
+87
+00:03:19,050 --> 00:03:21,006
+to take one step of gradient descent.
+
+88
+00:03:21,088 --> 00:03:24,015
+And now you need to do the whole thing again.
+
+89
+00:03:24,063 --> 00:03:25,062
+You know, scan through all 300
+
+90
+00:03:26,006 --> 00:03:27,090
+million records, accumulate these sums.
+
+91
+00:03:28,087 --> 00:03:29,071
+And having done all that work,
+
+92
+00:03:30,011 --> 00:03:32,018
+you can take another little step using gradient descent.
+
+93
+00:03:32,034 --> 00:03:33,030
+And then do that again.
+
+94
+00:03:34,000 --> 00:03:36,009
+And then you take yet a third step.
+
+95
+00:03:36,030 --> 00:03:36,036
+And so on.
+
+96
+00:03:36,038 --> 00:03:37,040
+And so it's gonna take
+
+97
+00:03:37,052 --> 00:03:39,006
+a long time in order to
+
+98
+00:03:39,015 --> 00:03:40,075
+get the algorithm to converge. In contrast
+
+99
+00:03:41,033 --> 00:03:42,090
+to Batch gradient descent, what we
+
+100
+00:03:42,096 --> 00:03:44,009
+are going to do is come up
+
+101
+00:03:44,021 --> 00:03:45,087
+with a different algorithm that doesn't
+
+102
+00:03:46,016 --> 00:03:47,034
+need to look at all the
+
+103
+00:03:47,040 --> 00:03:49,016
+training examples in every
+
+104
+00:03:49,041 --> 00:03:50,093
+single iteration, but that needs
+
+105
+00:03:51,015 --> 00:03:52,003
+to look at only a single
+
+106
+00:03:52,053 --> 00:03:54,009
+training example in one iteration.
+
+107
+00:03:55,002 --> 00:03:55,083
+Before moving on to the
+
+108
+00:03:55,091 --> 00:03:57,062
+new algorithm, here's just a
+
+109
+00:03:57,075 --> 00:03:58,081
+Batch gradient descent algorithm written out
+
+110
+00:03:59,031 --> 00:04:00,072
+again with that being
+
+111
+00:04:00,093 --> 00:04:02,028
+the cost function and that being
+
+112
+00:04:02,046 --> 00:04:03,090
+the update and of
+
+113
+00:04:04,000 --> 00:04:06,056
+course this term here, that's
+
+114
+00:04:06,087 --> 00:04:09,018
+used in the gradient descent rule, that
+
+115
+00:04:09,052 --> 00:04:11,037
+is the partial derivative with respect
+
+116
+00:04:11,093 --> 00:04:13,071
+to the parameters theta J of
+
+117
+00:04:13,096 --> 00:04:16,075
+our optimization objective, J train of theta.
+
+118
+00:04:18,030 --> 00:04:19,037
+Now, let's look at the more
+
+119
+00:04:19,069 --> 00:04:20,089
+efficient algorithm that scales better
+
+120
+00:04:20,099 --> 00:04:22,085
+to large data sets.
+
+121
+00:04:23,055 --> 00:04:24,037
+In order to work off the
+
+122
+00:04:24,048 --> 00:04:26,091
+algorithms called Stochastic gradient descent,
+
+123
+00:04:27,018 --> 00:04:29,019
+this vectors the cost function in a slightly different way then they
+
+124
+00:04:29,085 --> 00:04:31,058
+define the cost of the parameter theta
+
+125
+00:04:32,010 --> 00:04:34,000
+with respect to a
+
+126
+00:04:34,057 --> 00:04:35,072
+training example x(i), y(i) to be equal
+
+127
+00:04:37,013 --> 00:04:39,010
+to one half times
+
+128
+00:04:39,044 --> 00:04:40,066
+the squared error that my
+
+129
+00:04:40,075 --> 00:04:43,022
+hypothesis incurs on that example, x(i), y(i).
+
+130
+00:04:44,091 --> 00:04:46,023
+So this cost function term really
+
+131
+00:04:46,043 --> 00:04:47,077
+measures how well is
+
+132
+00:04:48,001 --> 00:04:51,032
+my hypothesis doing on a single example x(i), y(i).
+
+133
+00:04:53,032 --> 00:04:54,089
+Now you notice that the
+
+134
+00:04:55,044 --> 00:04:58,007
+overall cost function j train can now
+
+135
+00:04:58,036 --> 00:05:00,047
+be written in this equivalent form.
+
+136
+00:05:00,082 --> 00:05:02,036
+So j train is just
+
+137
+00:05:02,076 --> 00:05:04,000
+the average over my m
+
+138
+00:05:04,016 --> 00:05:05,081
+training examples of the cost
+
+139
+00:05:06,048 --> 00:05:07,091
+of my hypothesis on that
+
+140
+00:05:08,000 --> 00:05:10,025
+example x(i), y(i). Armed
+
+141
+00:05:10,043 --> 00:05:11,069
+with this view of the cost
+
+142
+00:05:11,099 --> 00:05:13,086
+function for linear regression, let
+
+143
+00:05:13,098 --> 00:05:16,080
+me now write out what Stochastic gradient descent does.
+
+144
+00:05:19,011 --> 00:05:20,049
+The first step of Stochastic gradient
+
+145
+00:05:20,082 --> 00:05:22,067
+descent is to randomly
+
+146
+00:05:23,093 --> 00:05:26,035
+shuffle the data set.
+
+147
+00:05:26,079 --> 00:05:27,075
+So by that I just mean
+
+148
+00:05:28,029 --> 00:05:29,080
+randomly shuffle, or randomly
+
+149
+00:05:30,011 --> 00:05:32,052
+reorder your m training examples.
+
+150
+00:05:33,022 --> 00:05:36,044
+It's sort of a standard pre-processing step, come back to this in a minute.
+
+151
+00:05:37,048 --> 00:05:39,007
+But the main work of
+
+152
+00:05:39,018 --> 00:05:41,079
+Stochastic gradient descent is then done in the following.
+
+153
+00:05:42,093 --> 00:05:45,043
+We're going to repeat for i equals 1
+
+154
+00:05:45,073 --> 00:05:48,043
+through m. So we'll repeatedly scan
+
+155
+00:05:48,082 --> 00:05:52,056
+through my training examples and perform the following update.
+
+156
+00:05:53,002 --> 00:05:54,010
+Gonna update the parameter theta j
+
+157
+00:05:54,055 --> 00:05:56,086
+as theta j minus alpha
+
+158
+00:05:57,062 --> 00:05:59,037
+times h of x(i)
+
+159
+00:05:59,099 --> 00:06:01,088
+minus y(i)
+
+160
+00:06:03,044 --> 00:06:05,087
+times x(i)j.
+
+161
+00:06:07,016 --> 00:06:08,025
+And we're going to do
+
+162
+00:06:08,047 --> 00:06:10,076
+this update as usual for all
+
+163
+00:06:10,099 --> 00:06:13,052
+values of j. Now,
+
+164
+00:06:14,008 --> 00:06:16,007
+you notice that this term
+
+165
+00:06:16,045 --> 00:06:19,026
+over here is exactly
+
+166
+00:06:21,006 --> 00:06:22,045
+what we had inside the
+
+167
+00:06:22,052 --> 00:06:23,082
+summation for Batch gradient
+
+168
+00:06:25,042 --> 00:06:25,042
+descent.
+
+169
+00:06:25,088 --> 00:06:26,062
+In fact, for those of you that are
+
+170
+00:06:26,066 --> 00:06:28,019
+calculus is possible to
+
+171
+00:06:28,043 --> 00:06:30,025
+show that that term here, that's
+
+172
+00:06:30,038 --> 00:06:32,000
+this term here, is equal
+
+173
+00:06:32,037 --> 00:06:34,020
+to the partial derivative with
+
+174
+00:06:34,069 --> 00:06:35,072
+respect to my parameter theta
+
+175
+00:06:36,000 --> 00:06:37,093
+j of the cost of the
+
+176
+00:06:38,093 --> 00:06:41,010
+parameters theta on x(i),
+
+177
+00:06:41,031 --> 00:06:43,051
+y(i). Where
+
+178
+00:06:43,068 --> 00:06:46,013
+cost is of course this thing that was defined previously.
+
+179
+00:06:47,076 --> 00:06:49,000
+And just the wrap of
+
+180
+00:06:49,005 --> 00:06:50,001
+the algorithm, let me close
+
+181
+00:06:50,042 --> 00:06:51,068
+my curly braces over there.
+
+182
+00:06:53,022 --> 00:06:54,074
+So what Stochastic gradient
+
+183
+00:06:55,013 --> 00:06:56,081
+descent is doing is it is actually
+
+184
+00:06:57,055 --> 00:06:58,081
+scanning through the training examples.
+
+185
+00:06:59,076 --> 00:07:00,085
+And first it's gonna look at
+
+186
+00:07:01,012 --> 00:07:03,026
+my first training example x(1), y(1).
+
+187
+00:07:03,099 --> 00:07:05,020
+And then looking at
+
+188
+00:07:05,054 --> 00:07:07,031
+only this first example, it's
+
+189
+00:07:07,058 --> 00:07:09,082
+gonna take like a basically a little gradient descent step with
+
+190
+00:07:09,095 --> 00:07:11,007
+respect to the cost
+
+191
+00:07:11,074 --> 00:07:13,018
+of just this first training example.
+
+192
+00:07:13,051 --> 00:07:14,018
+So in other words, we're going to
+
+193
+00:07:14,029 --> 00:07:15,027
+look at the first example
+
+194
+00:07:16,025 --> 00:07:17,044
+and modify the parameters
+
+195
+00:07:17,057 --> 00:07:18,093
+a little bit to fit
+
+196
+00:07:19,031 --> 00:07:20,081
+just the first training example a little bit better.
+
+197
+00:07:21,083 --> 00:07:23,069
+Having done this inside this
+
+198
+00:07:23,093 --> 00:07:25,043
+inner for-loop is then
+
+199
+00:07:25,062 --> 00:07:27,080
+going to go on to the second training example.
+
+200
+00:07:29,022 --> 00:07:30,007
+And what it's going to do
+
+201
+00:07:30,029 --> 00:07:31,094
+there is take another
+
+202
+00:07:32,024 --> 00:07:33,045
+little step in parameter space,
+
+203
+00:07:33,089 --> 00:07:35,039
+so modify the parameters just
+
+204
+00:07:35,062 --> 00:07:36,075
+a little bit to try to
+
+205
+00:07:36,092 --> 00:07:38,087
+fit just a second training example a little bit better.
+
+206
+00:07:39,075 --> 00:07:41,048
+Having done that, is then
+
+207
+00:07:41,067 --> 00:07:43,039
+going to go onto my third training example.
+
+208
+00:07:44,099 --> 00:07:47,005
+And modify the parameters
+
+209
+00:07:47,043 --> 00:07:48,041
+to try to fit just
+
+210
+00:07:48,092 --> 00:07:50,002
+the third training example a little
+
+211
+00:07:50,007 --> 00:07:51,049
+bit better, and so on
+
+212
+00:07:51,087 --> 00:07:53,017
+until you know, you get through the entire training set.
+
+213
+00:07:55,007 --> 00:07:56,068
+And then this ultra repeat loop
+
+214
+00:07:57,012 --> 00:07:58,038
+may cause it to take
+
+215
+00:07:58,066 --> 00:08:00,030
+multiple passes over the entire training set.
+
+216
+00:08:01,014 --> 00:08:02,087
+This view of Stochastic gradient descent
+
+217
+00:08:03,033 --> 00:08:04,073
+also motivates why we wanted
+
+218
+00:08:05,020 --> 00:08:06,069
+to start by randomly shuffling the
+
+219
+00:08:06,076 --> 00:08:08,011
+data set. This doesn't show
+
+220
+00:08:08,047 --> 00:08:09,067
+us that when we scan through the
+
+221
+00:08:09,075 --> 00:08:11,002
+training site here, that we
+
+222
+00:08:11,012 --> 00:08:12,010
+end up visiting the training
+
+223
+00:08:12,038 --> 00:08:14,063
+examples in some sort of randomly sorted order.
+
+224
+00:08:15,054 --> 00:08:16,082
+Depending on whether your data
+
+225
+00:08:17,004 --> 00:08:18,070
+already came randomly sorted or whether
+
+226
+00:08:18,088 --> 00:08:20,020
+it came originally sorted in
+
+227
+00:08:20,038 --> 00:08:21,073
+some strange order, in practice
+
+228
+00:08:22,020 --> 00:08:23,082
+this would just speed up the conversions
+
+229
+00:08:24,047 --> 00:08:26,020
+to Stochastic gradient descent just a little bit.
+
+230
+00:08:26,045 --> 00:08:27,035
+So in the interest of safety,
+
+231
+00:08:27,074 --> 00:08:29,002
+it's usually better to randomly shuffle
+
+232
+00:08:29,038 --> 00:08:30,044
+the data set if you aren't
+
+233
+00:08:30,068 --> 00:08:32,062
+sure if it came to you in randomly sorted order.
+
+234
+00:08:33,088 --> 00:08:35,044
+But more importantly another view
+
+235
+00:08:35,084 --> 00:08:37,062
+of Stochastic gradient descent is
+
+236
+00:08:37,094 --> 00:08:40,047
+that it's a lot like descent but
+
+237
+00:08:40,075 --> 00:08:42,037
+rather than wait to sum up
+
+238
+00:08:42,055 --> 00:08:43,092
+these gradient terms over all
+
+239
+00:08:44,034 --> 00:08:45,086
+m training examples, what we're
+
+240
+00:08:46,015 --> 00:08:47,072
+doing is we're taking this
+
+241
+00:08:47,090 --> 00:08:49,017
+gradient term using just one
+
+242
+00:08:49,049 --> 00:08:50,082
+single training example and we're
+
+243
+00:08:50,094 --> 00:08:52,041
+starting to make progress in
+
+244
+00:08:53,000 --> 00:08:54,013
+improving the parameters already.
+
+245
+00:08:54,062 --> 00:08:55,063
+So rather than, you know,
+
+246
+00:08:55,086 --> 00:08:57,073
+waiting 'till taking a path through
+
+247
+00:08:58,023 --> 00:09:01,048
+all 300,000 United States Census
+
+248
+00:09:01,089 --> 00:09:03,016
+records, say, rather than needing
+
+249
+00:09:03,028 --> 00:09:04,046
+to scan through all of
+
+250
+00:09:04,050 --> 00:09:05,088
+the training examples before we can
+
+251
+00:09:06,035 --> 00:09:07,060
+modify the parameters a little
+
+252
+00:09:07,074 --> 00:09:09,049
+bit and make progress towards a global minimum.
+
+253
+00:09:10,074 --> 00:09:12,017
+For Stochastic gradient descent instead
+
+254
+00:09:12,071 --> 00:09:13,062
+we just need to look at
+
+255
+00:09:13,086 --> 00:09:15,037
+a single training example and we're
+
+256
+00:09:15,064 --> 00:09:16,095
+already starting to make
+
+257
+00:09:17,020 --> 00:09:19,008
+progress in this case of parameters
+
+258
+00:09:19,034 --> 00:09:21,066
+towards, moving the parameters towards the global minimum.
+
+259
+00:09:23,016 --> 00:09:24,034
+So, here's the algorithm written
+
+260
+00:09:24,059 --> 00:09:25,071
+out again where the first step
+
+261
+00:09:25,089 --> 00:09:26,096
+is to randomly shuffle the data
+
+262
+00:09:27,079 --> 00:09:28,075
+and the second step is where
+
+263
+00:09:28,084 --> 00:09:29,099
+the real work is done, where
+
+264
+00:09:30,010 --> 00:09:31,042
+that's the update with respect
+
+265
+00:09:31,078 --> 00:09:33,073
+to a single training example x(i), y(i).
+
+266
+00:09:35,014 --> 00:09:38,013
+So, let's see what
+
+267
+00:09:38,046 --> 00:09:39,087
+this algorithm does to the parameters.
+
+268
+00:09:40,063 --> 00:09:41,077
+Previously, we saw that when
+
+269
+00:09:41,089 --> 00:09:43,011
+we are using Batch gradient descent,
+
+270
+00:09:43,063 --> 00:09:44,077
+that is the algorithm that looks
+
+271
+00:09:44,085 --> 00:09:46,003
+at all the training examples in time,
+
+272
+00:09:46,063 --> 00:09:47,061
+Batch gradient descent will tend
+
+273
+00:09:47,085 --> 00:09:48,091
+to, you know, take a reasonably
+
+274
+00:09:49,099 --> 00:09:51,089
+straight line trajectory to get
+
+275
+00:09:52,016 --> 00:09:53,069
+to the global minimum like that.
+
+276
+00:09:54,073 --> 00:09:56,050
+In contrast with Stochastic
+
+277
+00:09:57,005 --> 00:09:58,095
+gradient descent every iteration is
+
+278
+00:09:59,010 --> 00:10:00,050
+going to be much faster because we
+
+279
+00:10:00,058 --> 00:10:02,045
+don't need to sum up over all the training examples.
+
+280
+00:10:03,046 --> 00:10:04,077
+But every iteration is just
+
+281
+00:10:05,002 --> 00:10:06,077
+trying to fit single training example better.
+
+282
+00:10:07,071 --> 00:10:08,084
+So, if we were to
+
+283
+00:10:09,009 --> 00:10:10,064
+start stochastic gradient descent, oh,
+
+284
+00:10:10,080 --> 00:10:13,012
+let's start stochastic gradient descent at a point like that.
+
+285
+00:10:14,075 --> 00:10:16,044
+The first iteration, you know, may take
+
+286
+00:10:16,092 --> 00:10:18,095
+the parameters in that direction and
+
+287
+00:10:19,046 --> 00:10:21,009
+maybe the second iteration looking
+
+288
+00:10:21,036 --> 00:10:22,075
+at just the second example maybe
+
+289
+00:10:23,000 --> 00:10:24,004
+just by chance, we get more unlucky
+
+290
+00:10:24,025 --> 00:10:27,023
+and actually head in a bad direction with the parameters like that.
+
+291
+00:10:27,072 --> 00:10:29,009
+In the third iteration
+
+292
+00:10:29,073 --> 00:10:31,003
+where we tried to modify the
+
+293
+00:10:31,010 --> 00:10:32,055
+parameters to fit just the third training
+
+294
+00:10:32,086 --> 00:10:35,027
+examples better, maybe we'll end up heading in that direction.
+
+295
+00:10:36,032 --> 00:10:38,035
+And then we'll look at the fourth training example and we will do that.
+
+296
+00:10:38,096 --> 00:10:40,080
+The fifth example, sixth example, 7th
+
+297
+00:10:41,076 --> 00:10:43,011
+and so on.
+
+298
+00:10:43,034 --> 00:10:44,072
+And as you run Stochastic gradient
+
+299
+00:10:45,002 --> 00:10:46,013
+descent, what you find
+
+300
+00:10:46,053 --> 00:10:48,075
+is that it will generally move the parameters
+
+301
+00:10:49,079 --> 00:10:50,091
+in the direction of the global
+
+302
+00:10:51,025 --> 00:10:52,057
+minimum, but not always.
+
+303
+00:10:54,003 --> 00:10:56,004
+And so take some more
+
+304
+00:10:56,028 --> 00:10:59,072
+random-looking, circuitous path to watch the global minimum.
+
+305
+00:11:00,087 --> 00:11:01,080
+And in fact as you run
+
+306
+00:11:02,000 --> 00:11:03,060
+Stochastic gradient descent it doesn't
+
+307
+00:11:03,099 --> 00:11:05,025
+actually converge in the same
+
+308
+00:11:05,038 --> 00:11:06,047
+same sense as Batch gradient
+
+309
+00:11:06,082 --> 00:11:08,013
+descent does and what it
+
+310
+00:11:08,022 --> 00:11:09,073
+ends up doing is wandering around
+
+311
+00:11:10,015 --> 00:11:11,082
+continuously in some region
+
+312
+00:11:12,057 --> 00:11:14,012
+that's in some region close to
+
+313
+00:11:14,022 --> 00:11:15,029
+the global minimum, but it doesn't
+
+314
+00:11:15,096 --> 00:11:17,079
+just get to the global minimum and stay there.
+
+315
+00:11:18,077 --> 00:11:20,020
+But in practice this isn't a
+
+316
+00:11:20,045 --> 00:11:21,035
+problem because, you know, so
+
+317
+00:11:21,053 --> 00:11:22,089
+long as the parameters end up
+
+318
+00:11:23,009 --> 00:11:24,047
+in some region there maybe it is
+
+319
+00:11:25,008 --> 00:11:26,012
+pretty close to the global minimum.
+
+320
+00:11:26,059 --> 00:11:28,012
+So, as parameters end
+
+321
+00:11:28,034 --> 00:11:29,020
+up pretty close to the global
+
+322
+00:11:29,047 --> 00:11:30,071
+minimum, that will be
+
+323
+00:11:30,089 --> 00:11:33,000
+a pretty good hypothesis and so
+
+324
+00:11:34,036 --> 00:11:35,095
+usually running Stochastic gradient descent
+
+325
+00:11:36,046 --> 00:11:37,088
+we get a parameter near the
+
+326
+00:11:37,096 --> 00:11:39,028
+global minimum and that's good
+
+327
+00:11:39,042 --> 00:11:40,084
+enough for, you know, essentially
+
+328
+00:11:41,040 --> 00:11:42,083
+any, most practical purposes.
+
+329
+00:11:44,007 --> 00:11:44,083
+Just one final detail.
+
+330
+00:11:45,048 --> 00:11:46,079
+In Stochastic gradient descent, we
+
+331
+00:11:46,091 --> 00:11:48,039
+had this outer loop repeat which
+
+332
+00:11:48,050 --> 00:11:50,012
+says to do this inner loop multiple times.
+
+333
+00:11:51,037 --> 00:11:53,038
+So, how many times do we repeat this outer loop?
+
+334
+00:11:53,080 --> 00:11:54,076
+Depending on the size of
+
+335
+00:11:54,082 --> 00:11:56,045
+the training set, doing this
+
+336
+00:11:57,020 --> 00:11:58,099
+loop just a single time may be enough.
+
+337
+00:11:59,037 --> 00:12:00,023
+And up to, you know, maybe
+
+338
+00:12:00,042 --> 00:12:01,044
+10 times may be typical
+
+339
+00:12:01,075 --> 00:12:03,033
+so we may end up repeating this
+
+340
+00:12:03,055 --> 00:12:05,050
+inner loop anywhere from once to ten times.
+
+341
+00:12:06,086 --> 00:12:08,030
+So if we have a you know, truly
+
+342
+00:12:08,079 --> 00:12:09,090
+massive data set like the
+
+343
+00:12:10,015 --> 00:12:11,065
+this US census gave us that example
+
+344
+00:12:12,029 --> 00:12:13,027
+that I've been talking about with
+
+345
+00:12:13,050 --> 00:12:15,045
+300 million examples, it is
+
+346
+00:12:15,076 --> 00:12:17,000
+possible that by the time
+
+347
+00:12:17,017 --> 00:12:18,038
+you've taken just a single pass
+
+348
+00:12:18,054 --> 00:12:22,095
+through your training set. So, this is for i equals 1 through 300 million.
+
+349
+00:12:23,008 --> 00:12:24,002
+It's possible that by the time
+
+350
+00:12:24,020 --> 00:12:25,025
+you've taken a single pass through
+
+351
+00:12:25,032 --> 00:12:26,041
+your data set you might already
+
+352
+00:12:27,030 --> 00:12:29,011
+have a perfectly good hypothesis.
+
+353
+00:12:30,009 --> 00:12:31,026
+In which case, you know, this
+
+354
+00:12:31,053 --> 00:12:33,015
+inner loop you might
+
+355
+00:12:33,055 --> 00:12:36,000
+need to do only once if m is very, very large.
+
+356
+00:12:36,089 --> 00:12:38,071
+But in general taking anywhere
+
+357
+00:12:39,023 --> 00:12:40,010
+from 1 through 10 passes
+
+358
+00:12:40,050 --> 00:12:42,057
+through your data set, you know, maybe fairly common.
+
+359
+00:12:43,009 --> 00:12:44,011
+But really it depends on
+
+360
+00:12:44,023 --> 00:12:46,062
+the size of your training set.
+
+361
+00:12:46,088 --> 00:12:48,096
+And if you contrast this to Batch gradient descent.
+
+362
+00:12:50,000 --> 00:12:51,034
+With Batch gradient descent, after taking
+
+363
+00:12:51,058 --> 00:12:52,057
+a pass through your entire
+
+364
+00:12:52,098 --> 00:12:53,080
+training set, you would have
+
+365
+00:12:53,092 --> 00:12:56,064
+taken just one single gradient descent steps.
+
+366
+00:12:56,098 --> 00:12:58,003
+So one of these little baby
+
+367
+00:12:58,038 --> 00:12:59,048
+steps of gradient descent where
+
+368
+00:12:59,075 --> 00:13:01,000
+you just take one small
+
+369
+00:13:01,038 --> 00:13:03,021
+gradient descent step and this
+
+370
+00:13:03,037 --> 00:13:05,035
+is why Stochastic gradient descent can be much faster.
+
+371
+00:13:07,087 --> 00:13:10,026
+So, that was the Stochastic gradient descent algorithm.
+
+372
+00:13:11,044 --> 00:13:12,086
+And if you implement it, hopefully that
+
+373
+00:13:13,003 --> 00:13:14,021
+will allow you to scale up
+
+374
+00:13:14,034 --> 00:13:15,077
+many of your learning algorithms to
+
+375
+00:13:15,090 --> 00:13:17,000
+much bigger data sets and get
+
+376
+00:13:17,037 --> 00:13:18,059
+much more performance that way.

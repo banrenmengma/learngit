@@ -1,0 +1,836 @@
+
+1
+00:00:00,009 --> 00:00:01,011
+In this video, I would
+
+2
+00:00:01,023 --> 00:00:02,023
+like to talk about how to
+
+3
+00:00:02,056 --> 00:00:05,088
+evaluate a hypothesis that has been learned by your algorithm.
+
+4
+00:00:06,096 --> 00:00:09,025
+In later videos, we will build on this to talk about
+
+5
+00:00:09,075 --> 00:00:10,089
+how to prevent in the
+
+6
+00:00:10,099 --> 00:00:12,017
+problems of overfitting
+
+7
+00:00:12,069 --> 00:00:15,076
+and underfitting as well.
+
+8
+00:00:15,097 --> 00:00:17,053
+When we fit the parameters of
+
+9
+00:00:17,064 --> 00:00:19,039
+our learning algorithm we think about
+
+10
+00:00:19,076 --> 00:00:22,053
+choosing the parameters to minimize the training error.
+
+11
+00:00:23,035 --> 00:00:24,076
+One might think that getting a
+
+12
+00:00:24,085 --> 00:00:26,096
+really low value of training error might be a
+
+13
+00:00:27,019 --> 00:00:28,032
+good thing, but we have
+
+14
+00:00:28,055 --> 00:00:29,073
+already seen that just because
+
+15
+00:00:30,007 --> 00:00:31,026
+a hypothesis has low
+
+16
+00:00:31,037 --> 00:00:34,021
+training error, that doesn't mean it is necessarily a good hypothesis.
+
+17
+00:00:35,042 --> 00:00:36,079
+And we've already seen the example
+
+18
+00:00:37,024 --> 00:00:39,027
+of how a hypothesis can overfit.
+
+19
+00:00:40,084 --> 00:00:42,035
+And therefore fail to generalize
+
+20
+00:00:42,093 --> 00:00:44,097
+the new examples not in the training set.
+
+21
+00:00:46,013 --> 00:00:48,092
+So how do you tell if the hypothesis might be overfitting.
+
+22
+00:00:50,010 --> 00:00:51,078
+In this simple example we could
+
+23
+00:00:52,010 --> 00:00:53,096
+plot the hypothesis h of
+
+24
+00:00:54,014 --> 00:00:56,043
+x and just see what was going on.
+
+25
+00:00:56,061 --> 00:00:58,014
+But in general for problems with
+
+26
+00:00:58,046 --> 00:00:59,063
+more features than just one
+
+27
+00:00:59,088 --> 00:01:01,035
+feature, for problems with a
+
+28
+00:01:01,054 --> 00:01:02,090
+large number of features like these
+
+29
+00:01:03,061 --> 00:01:05,031
+it becomes hard or may
+
+30
+00:01:05,054 --> 00:01:07,040
+be impossible to plot what
+
+31
+00:01:07,059 --> 00:01:09,003
+the hypothesis looks like
+
+32
+00:01:09,068 --> 00:01:11,084
+and so we need some other way to evaluate our hypothesis.
+
+33
+00:01:12,087 --> 00:01:14,017
+The standard way to evaluate
+
+34
+00:01:14,090 --> 00:01:16,040
+a learned hypothesis is as follows.
+
+35
+00:01:17,048 --> 00:01:18,090
+Suppose we have a data set like this.
+
+36
+00:01:19,031 --> 00:01:20,042
+Here I have just shown 10
+
+37
+00:01:20,067 --> 00:01:23,031
+training examples, but of course usually we may have
+
+38
+00:01:24,004 --> 00:01:26,034
+dozens or hundreds or maybe thousands of training examples.
+
+39
+00:01:27,042 --> 00:01:28,043
+In order to make sure we
+
+40
+00:01:28,054 --> 00:01:30,021
+can evaluate our hypothesis, what
+
+41
+00:01:30,051 --> 00:01:31,051
+we are going to do is split
+
+42
+00:01:32,090 --> 00:01:34,043
+the data we have into two portions.
+
+43
+00:01:34,089 --> 00:01:36,078
+The first portion is
+
+44
+00:01:37,003 --> 00:01:38,050
+going to be our usual
+
+45
+00:01:38,093 --> 00:01:43,034
+training set and the
+
+46
+00:01:43,043 --> 00:01:44,084
+second portion is going to
+
+47
+00:01:44,096 --> 00:01:46,045
+be our test set,
+
+48
+00:01:47,073 --> 00:01:50,001
+and a pretty typical split of
+
+49
+00:01:50,048 --> 00:01:51,056
+all the data we have into a
+
+50
+00:01:52,001 --> 00:01:53,004
+training set and test set
+
+51
+00:01:53,070 --> 00:01:55,029
+might be around say a 70%,
+
+52
+00:01:56,026 --> 00:01:57,021
+30% split.
+
+53
+00:01:57,096 --> 00:01:58,090
+Worth more today to grade
+
+54
+00:01:59,023 --> 00:02:01,045
+the training set and relatively less to the test set.
+
+55
+00:02:02,028 --> 00:02:02,095
+And so now, if
+
+56
+00:02:04,015 --> 00:02:05,087
+we have some data set, we
+
+57
+00:02:06,001 --> 00:02:07,015
+run a sine of say
+
+58
+00:02:07,045 --> 00:02:08,066
+70% of the data
+
+59
+00:02:09,022 --> 00:02:10,049
+to be our training set where
+
+60
+00:02:10,072 --> 00:02:12,015
+here "m" is as usual
+
+61
+00:02:12,071 --> 00:02:14,068
+our number of training examples and
+
+62
+00:02:14,078 --> 00:02:16,006
+the remainder of our data
+
+63
+00:02:17,000 --> 00:02:18,096
+might then be assigned to become our test set.
+
+64
+00:02:19,034 --> 00:02:20,031
+And here, I'm going to use
+
+65
+00:02:20,071 --> 00:02:22,078
+the notation m subscript test
+
+66
+00:02:23,016 --> 00:02:26,013
+to denote the number of test examples.
+
+67
+00:02:28,034 --> 00:02:30,011
+And so in general, this
+
+68
+00:02:30,087 --> 00:02:31,096
+subscript test is going
+
+69
+00:02:32,009 --> 00:02:33,075
+to denote examples that come
+
+70
+00:02:34,000 --> 00:02:35,008
+from a test set so that
+
+71
+00:02:35,072 --> 00:02:38,090
+x1 subscript test, y1 subscript
+
+72
+00:02:39,046 --> 00:02:41,003
+test is my first
+
+73
+00:02:41,049 --> 00:02:42,090
+test example which I guess
+
+74
+00:02:43,000 --> 00:02:45,046
+in this example might be this example over here.
+
+75
+00:02:47,078 --> 00:02:49,043
+So a fairly typical procedure
+
+76
+00:02:50,000 --> 00:02:51,056
+for training and testing a
+
+77
+00:02:51,068 --> 00:02:53,009
+learning algorithm, maybe linear regression,
+
+78
+00:02:53,093 --> 00:02:54,084
+would be to first learn the
+
+79
+00:02:55,015 --> 00:02:57,031
+parameter vector from the training data.
+
+80
+00:02:57,081 --> 00:02:59,008
+And here the training data is only
+
+81
+00:02:59,037 --> 00:03:02,006
+that first 70% of the dataset.
+
+82
+00:03:03,053 --> 00:03:04,090
+Finally, one last detail
+
+83
+00:03:05,049 --> 00:03:06,084
+whereas here I've drawn this
+
+84
+00:03:07,016 --> 00:03:08,025
+as though the first 70% goes
+
+85
+00:03:08,058 --> 00:03:09,096
+to the training set and
+
+86
+00:03:10,009 --> 00:03:11,047
+the last 30% to the test set.
+
+87
+00:03:12,059 --> 00:03:14,084
+If there is any sort of ordinary to the data.
+
+88
+00:03:15,050 --> 00:03:17,027
+That should be better to send
+
+89
+00:03:17,053 --> 00:03:18,084
+a random 70% of
+
+90
+00:03:19,006 --> 00:03:20,018
+your data to the training set
+
+91
+00:03:20,063 --> 00:03:22,096
+and a random 30% of your data to the test set.
+
+92
+00:03:23,056 --> 00:03:24,081
+So if your data were
+
+93
+00:03:25,000 --> 00:03:26,049
+already randomly sorted, you could
+
+94
+00:03:26,062 --> 00:03:27,086
+just take the first 70% and
+
+95
+00:03:28,080 --> 00:03:30,037
+last 30%  that if
+
+96
+00:03:30,049 --> 00:03:32,002
+your data were not randomly ordered,
+
+97
+00:03:32,013 --> 00:03:33,031
+it would be better to
+
+98
+00:03:33,058 --> 00:03:34,075
+randomly shuffle or to
+
+99
+00:03:34,081 --> 00:03:37,021
+randomly reorder the examples in your training set.
+
+100
+00:03:37,086 --> 00:03:38,084
+Before you know sending the
+
+101
+00:03:38,094 --> 00:03:40,015
+first 70% in the
+
+102
+00:03:40,044 --> 00:03:41,071
+training set and the last
+
+103
+00:03:41,094 --> 00:03:43,075
+30% of the test set.
+
+104
+00:03:44,006 --> 00:03:45,018
+Here then is a fairly typical
+
+105
+00:03:45,065 --> 00:03:47,006
+procedure for how you
+
+106
+00:03:47,015 --> 00:03:48,049
+would train and test the
+
+107
+00:03:48,080 --> 00:03:50,003
+learning algorithm and the learning regression.
+
+108
+00:03:50,086 --> 00:03:52,003
+First, you learn the
+
+109
+00:03:52,013 --> 00:03:53,084
+parameters theta from the
+
+110
+00:03:54,002 --> 00:03:54,088
+training set so you minimize
+
+111
+00:03:55,040 --> 00:03:56,081
+the usual training error objective j of
+
+112
+00:03:57,043 --> 00:03:58,081
+theta, where j of theta
+
+113
+00:03:59,015 --> 00:04:01,031
+here was defined using that
+
+114
+00:04:02,000 --> 00:04:03,013
+70% of all the data you have.
+
+115
+00:04:03,053 --> 00:04:04,063
+There is only the training data.
+
+116
+00:04:06,049 --> 00:04:08,025
+And then you would compute the test error.
+
+117
+00:04:08,069 --> 00:04:09,068
+And I am going to denote the test
+
+118
+00:04:10,015 --> 00:04:11,090
+error as j subscript test.
+
+119
+00:04:12,093 --> 00:04:13,072
+And so what you do is
+
+120
+00:04:13,088 --> 00:04:15,043
+take your parameter theta that
+
+121
+00:04:15,068 --> 00:04:16,036
+you have learned from the training
+
+122
+00:04:16,073 --> 00:04:17,083
+set, and plug it in
+
+123
+00:04:17,094 --> 00:04:20,064
+here and compute your test set error.
+
+124
+00:04:21,050 --> 00:04:23,076
+Which I am going to write as follows.
+
+125
+00:04:25,058 --> 00:04:28,061
+So this is basically the average
+
+126
+00:04:29,095 --> 00:04:33,031
+squared error as measured on your test set.
+
+127
+00:04:33,047 --> 00:04:35,080
+It's pretty much what you'd expect.
+
+128
+00:04:36,024 --> 00:04:37,012
+So if we run every test
+
+129
+00:04:37,043 --> 00:04:38,054
+example through your hypothesis
+
+130
+00:04:40,061 --> 00:04:41,094
+with parameter theta and just measure
+
+131
+00:04:42,082 --> 00:04:43,044
+the error
+
+132
+00:04:44,058 --> 00:04:46,018
+that your hypothesis has on your
+
+133
+00:04:46,060 --> 00:04:48,087
+m subscript test, test examples.
+
+134
+00:04:50,039 --> 00:04:51,055
+And of course, this is the
+
+135
+00:04:52,002 --> 00:04:54,006
+definition of the test set
+
+136
+00:04:54,043 --> 00:04:55,049
+error if we are using
+
+137
+00:04:56,006 --> 00:04:57,058
+linear regression and using
+
+138
+00:04:58,004 --> 00:04:59,063
+the squared error metric.
+
+139
+00:05:06,069 --> 00:05:09,004
+How about if we were doing a classification problem
+
+140
+00:05:09,073 --> 00:05:13,029
+and say using logistic regression instead. In that
+
+141
+00:05:13,062 --> 00:05:15,044
+case, the procedure for training
+
+142
+00:05:15,083 --> 00:05:17,062
+and testing say logistic regression is pretty similar
+
+143
+00:05:19,029 --> 00:05:20,031
+first we will do the parameters
+
+144
+00:05:21,012 --> 00:05:22,098
+from the training data, that first 70% of the data.
+
+145
+00:05:23,060 --> 00:05:26,087
+And it will compute the test error as follows.
+
+146
+00:05:27,006 --> 00:05:28,031
+It's the same objective function
+
+147
+00:05:29,025 --> 00:05:30,043
+as we always use but we
+
+148
+00:05:30,049 --> 00:05:31,080
+just leave a ration, except
+
+149
+00:05:32,018 --> 00:05:33,075
+that now is define using our
+
+150
+00:05:34,012 --> 00:05:36,049
+m subscript test, test examples.
+
+151
+00:05:37,041 --> 00:05:38,077
+While this definition of the
+
+152
+00:05:38,087 --> 00:05:41,037
+test set error test is perfectly reasonable.
+
+153
+00:05:42,041 --> 00:05:43,023
+Sometimes there is an alternative
+
+154
+00:05:44,050 --> 00:05:46,006
+test sets metric that might
+
+155
+00:05:46,026 --> 00:05:49,000
+be easier to interpret, and that's the misclassification error.
+
+156
+00:05:49,026 --> 00:05:50,066
+It's also called the
+
+157
+00:05:50,081 --> 00:05:52,098
+zero one misclassification error, with
+
+158
+00:05:53,010 --> 00:05:54,088
+zero one denoting that you
+
+159
+00:05:55,011 --> 00:05:57,079
+either get an example right or you get an example wrong.
+
+160
+00:05:58,004 --> 00:05:59,019
+Here's what I mean.
+
+161
+00:06:00,010 --> 00:06:02,051
+Let me define the error of a prediction.
+
+162
+00:06:04,050 --> 00:06:06,056
+That is h of x. And
+
+163
+00:06:06,069 --> 00:06:10,023
+given the label y as equal to
+
+164
+00:06:10,067 --> 00:06:12,092
+one if my hypothesis
+
+165
+00:06:14,004 --> 00:06:15,039
+outputs the value greater than
+
+166
+00:06:15,069 --> 00:06:17,025
+equal to five and Y
+
+167
+00:06:17,054 --> 00:06:22,022
+is equal to zero or if
+
+168
+00:06:23,017 --> 00:06:24,050
+my hypothesis outputs a value
+
+169
+00:06:24,068 --> 00:06:26,016
+of less than 0.5 and y is
+
+170
+00:06:26,037 --> 00:06:27,082
+equal to one, right, so
+
+171
+00:06:28,000 --> 00:06:29,033
+both of these cases basic respond
+
+172
+00:06:30,048 --> 00:06:32,057
+to if your hypothesis mislabeled
+
+173
+00:06:33,091 --> 00:06:37,008
+the example assuming your threshold at an 0.5.
+
+174
+00:06:37,035 --> 00:06:37,087
+So either thought it was more
+
+175
+00:06:38,004 --> 00:06:38,089
+likely to be 1, but
+
+176
+00:06:39,010 --> 00:06:40,032
+it was actually 0, or your
+
+177
+00:06:41,007 --> 00:06:42,012
+hypothesis stored
+
+178
+00:06:42,018 --> 00:06:43,016
+was more likely to be
+
+179
+00:06:43,024 --> 00:06:45,018
+0, but the label was actually 1.
+
+180
+00:06:45,093 --> 00:06:49,054
+And otherwise, we define this error function to be zero.
+
+181
+00:06:50,085 --> 00:06:52,049
+If your hypothesis
+
+182
+00:06:53,058 --> 00:06:55,098
+basically classified the example y correctly.
+
+183
+00:06:57,066 --> 00:06:59,055
+We could then define the
+
+184
+00:06:59,062 --> 00:07:01,086
+test error, using the
+
+185
+00:07:01,094 --> 00:07:03,038
+misclassification error metric to
+
+186
+00:07:03,063 --> 00:07:05,031
+be one of
+
+187
+00:07:05,038 --> 00:07:07,043
+the m tests of sum from
+
+188
+00:07:07,064 --> 00:07:09,042
+i equals one to m
+
+189
+00:07:10,010 --> 00:07:11,083
+subscript test of the
+
+190
+00:07:12,011 --> 00:07:14,081
+error of h of
+
+191
+00:07:15,074 --> 00:07:18,082
+x(i) test comma y(i).
+
+192
+00:07:19,000 --> 00:07:20,055
+And so that's
+
+193
+00:07:20,081 --> 00:07:22,014
+just my way of
+
+194
+00:07:22,022 --> 00:07:23,012
+writing out that this is
+
+195
+00:07:23,024 --> 00:07:25,030
+exactly the fraction of
+
+196
+00:07:25,062 --> 00:07:26,077
+the examples in my test
+
+197
+00:07:27,008 --> 00:07:29,036
+set that my hypothesis has mislabeled.
+
+198
+00:07:31,032 --> 00:07:32,061
+And so that's the definition of
+
+199
+00:07:32,075 --> 00:07:34,031
+the test set error using the
+
+200
+00:07:34,038 --> 00:07:35,055
+misclassification error of the
+
+201
+00:07:36,056 --> 00:07:39,076
+0, 1 misclassification metric. So that's
+
+202
+00:07:40,000 --> 00:07:41,050
+the standard technique for evaluating
+
+203
+00:07:42,014 --> 00:07:43,087
+how good a learned hypothesis is.
+
+204
+00:07:45,011 --> 00:07:46,035
+In the next video, we will
+
+205
+00:07:46,061 --> 00:07:47,081
+adapt these ideas to helping us
+
+206
+00:07:48,050 --> 00:07:50,050
+do things like choose what features like the
+
+207
+00:07:50,081 --> 00:07:52,017
+degree polynomial to use
+
+208
+00:07:52,048 --> 00:07:53,093
+with the learning algorithm or choose
+
+209
+00:07:54,031 --> 00:07:56,011
+the regularization parameter for learning algorithm.

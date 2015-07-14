@@ -1,0 +1,452 @@
+
+1
+00:00:00,012 --> 00:00:01,002
+In some of the earlier videos,
+
+2
+00:00:01,069 --> 00:00:03,029
+I was talking about PCA as
+
+3
+00:00:03,041 --> 00:00:05,026
+a compression algorithm where you
+
+4
+00:00:05,033 --> 00:00:06,075
+may have say, a thousand dimensional
+
+5
+00:00:07,026 --> 00:00:08,075
+data and compress it
+
+6
+00:00:09,009 --> 00:00:10,084
+to a hundred dimensional feature back
+
+7
+00:00:11,000 --> 00:00:12,035
+there, or have three dimensional
+
+8
+00:00:12,081 --> 00:00:14,098
+data and compress it to a two dimensional representation.
+
+9
+00:00:16,035 --> 00:00:17,042
+So, if this is a
+
+10
+00:00:17,062 --> 00:00:19,003
+compression algorithm, there should
+
+11
+00:00:19,035 --> 00:00:20,044
+be a way to go back from
+
+12
+00:00:20,066 --> 00:00:22,092
+this compressed representation, back to
+
+13
+00:00:23,003 --> 00:00:25,055
+an approximation of your original high dimensional data.
+
+14
+00:00:26,033 --> 00:00:28,007
+So, given z(i), which maybe
+
+15
+00:00:28,078 --> 00:00:30,025
+a hundred dimensional, how do
+
+16
+00:00:30,032 --> 00:00:31,071
+you go back to your original
+
+17
+00:00:32,004 --> 00:00:34,071
+representation x(i), which was maybe a thousand dimensional?
+
+18
+00:00:35,075 --> 00:00:36,082
+In this video, I'd like to
+
+19
+00:00:36,092 --> 00:00:40,035
+describe how to do that.
+
+20
+00:00:40,050 --> 00:00:43,061
+In the PCA algorithm, we may have an example like this.
+
+21
+00:00:43,093 --> 00:00:45,067
+So maybe that's my example x1
+
+22
+00:00:45,090 --> 00:00:47,081
+and maybe that's my example x2.
+
+23
+00:00:48,010 --> 00:00:49,034
+And what we do
+
+24
+00:00:49,057 --> 00:00:51,000
+is, we take these examples and
+
+25
+00:00:51,011 --> 00:00:54,015
+we project them onto this one dimensional surface.
+
+26
+00:00:55,014 --> 00:00:56,028
+And then now we need
+
+27
+00:00:56,045 --> 00:00:57,075
+to use only a real number,
+
+28
+00:00:58,035 --> 00:01:00,050
+say z1, to specify the
+
+29
+00:01:00,060 --> 00:01:01,095
+location of these points after
+
+30
+00:01:02,029 --> 00:01:04,064
+they've been projected onto this one dimensional surface. So
+
+31
+00:01:04,089 --> 00:01:06,093
+, given a point
+
+32
+00:01:07,073 --> 00:01:08,073
+like this, given a point z1,
+
+33
+00:01:08,098 --> 00:01:10,084
+how can we go back to
+
+34
+00:01:11,000 --> 00:01:12,057
+this original two-dimensional space?
+
+35
+00:01:13,029 --> 00:01:15,037
+And in particular, given the
+
+36
+00:01:15,051 --> 00:01:16,051
+point z, which is an
+
+37
+00:01:16,065 --> 00:01:17,084
+r, can we map
+
+38
+00:01:18,015 --> 00:01:19,065
+this back to some approximate
+
+39
+00:01:20,043 --> 00:01:22,006
+representation x and r2
+
+40
+00:01:22,037 --> 00:01:24,096
+of whatever the original value of the data was?
+
+41
+00:01:26,051 --> 00:01:28,009
+So, whereas z equals 0
+
+42
+00:01:28,040 --> 00:01:29,056
+reduced transverse x, if you
+
+43
+00:01:29,068 --> 00:01:30,064
+want to go in the opposite
+
+44
+00:01:30,093 --> 00:01:33,062
+direction, the equation for
+
+45
+00:01:33,078 --> 00:01:35,015
+that is, we're going
+
+46
+00:01:35,029 --> 00:01:38,021
+to write x approx equals
+
+47
+00:01:40,046 --> 00:01:43,056
+U reduce times z.
+
+48
+00:01:44,001 --> 00:01:44,087
+Again, just to check the dimensions,
+
+49
+00:01:45,095 --> 00:01:47,076
+here U reduce is
+
+50
+00:01:47,096 --> 00:01:48,098
+going to be an n by k
+
+51
+00:01:49,068 --> 00:01:51,026
+dimensional vector, z is
+
+52
+00:01:51,037 --> 00:01:53,026
+going to be a k by 1 dimensional vector.
+
+53
+00:01:54,003 --> 00:01:56,028
+So, we multiply these out and that's going to be n by one.
+
+54
+00:01:56,071 --> 00:01:58,026
+So x approx is going
+
+55
+00:01:58,045 --> 00:01:59,098
+to be an n dimensional vector.
+
+56
+00:02:00,031 --> 00:02:01,031
+And so the intent of PCA,
+
+57
+00:02:01,039 --> 00:02:03,031
+that is, the square projection error
+
+58
+00:02:03,062 --> 00:02:04,051
+is not too big, is that
+
+59
+00:02:04,073 --> 00:02:06,004
+this x approx will be
+
+60
+00:02:06,050 --> 00:02:08,063
+close to whatever was
+
+61
+00:02:08,096 --> 00:02:10,009
+the original value of x
+
+62
+00:02:10,027 --> 00:02:13,013
+that you had used to derive z in the first place.
+
+63
+00:02:14,008 --> 00:02:16,062
+To show a picture of what this looks like, this is what it looks like.
+
+64
+00:02:16,087 --> 00:02:17,081
+What you get back of this
+
+65
+00:02:17,096 --> 00:02:19,063
+procedure are points that lie
+
+66
+00:02:19,091 --> 00:02:22,086
+on the projection of that onto the green line.
+
+67
+00:02:23,050 --> 00:02:24,058
+So to take our early example,
+
+68
+00:02:24,091 --> 00:02:26,040
+if we started off with
+
+69
+00:02:26,061 --> 00:02:28,056
+this value of x1, and got
+
+70
+00:02:28,084 --> 00:02:29,068
+this z1, if you plug
+
+71
+00:02:30,031 --> 00:02:32,075
+z1 through this formula to get
+
+72
+00:02:33,043 --> 00:02:35,050
+x1 approx, then this
+
+73
+00:02:35,072 --> 00:02:37,003
+point here, that will be
+
+74
+00:02:37,059 --> 00:02:40,011
+x1 approx, which is
+
+75
+00:02:40,025 --> 00:02:41,099
+going to be r2 and so.
+
+76
+00:02:42,078 --> 00:02:44,006
+And similarly, if you
+
+77
+00:02:44,018 --> 00:02:45,063
+do the same procedure, this will
+
+78
+00:02:45,075 --> 00:02:47,084
+be x2 approx.
+
+79
+00:02:49,063 --> 00:02:50,062
+And you know, that's a pretty
+
+80
+00:02:50,078 --> 00:02:53,015
+decent approximation to the original data.
+
+81
+00:02:53,066 --> 00:02:54,087
+So, that's how you
+
+82
+00:02:55,006 --> 00:02:56,018
+go back from your low dimensional
+
+83
+00:02:56,062 --> 00:02:58,034
+representation z back to
+
+84
+00:02:58,069 --> 00:03:00,071
+an uncompressed representation of
+
+85
+00:03:00,075 --> 00:03:01,099
+the data we get back an
+
+86
+00:03:02,024 --> 00:03:03,047
+the approxiamation to your original
+
+87
+00:03:03,068 --> 00:03:05,040
+data x, and we
+
+88
+00:03:05,050 --> 00:03:07,021
+also call this process reconstruction
+
+89
+00:03:08,021 --> 00:03:08,090
+of the original data.
+
+90
+00:03:09,053 --> 00:03:10,094
+When we think of trying to reconstruct
+
+91
+00:03:11,031 --> 00:03:13,062
+the original value of x from the compressed representation.
+
+92
+00:03:16,077 --> 00:03:18,037
+So, given an unlabeled data
+
+93
+00:03:18,061 --> 00:03:19,084
+set, you now know how to
+
+94
+00:03:19,099 --> 00:03:21,071
+apply PCA and take
+
+95
+00:03:21,096 --> 00:03:23,080
+your high dimensional features x and
+
+96
+00:03:24,012 --> 00:03:25,043
+map it to this
+
+97
+00:03:25,056 --> 00:03:27,019
+lower dimensional representation z, and
+
+98
+00:03:27,040 --> 00:03:28,062
+from this video, hopefully you now
+
+99
+00:03:28,090 --> 00:03:29,066
+also know how to take
+
+100
+00:03:30,025 --> 00:03:31,068
+these low representation z and
+
+101
+00:03:31,086 --> 00:03:32,081
+map the backup to an approximation
+
+102
+00:03:33,069 --> 00:03:35,078
+of your original high dimensional data.
+
+103
+00:03:37,030 --> 00:03:38,018
+Now that you know how to
+
+104
+00:03:38,046 --> 00:03:40,028
+implement in applying PCA, what
+
+105
+00:03:40,046 --> 00:03:41,028
+we will like to do next is to
+
+106
+00:03:41,038 --> 00:03:42,025
+talk about some of the
+
+107
+00:03:42,028 --> 00:03:43,046
+mechanics of how to
+
+108
+00:03:43,099 --> 00:03:45,024
+actually use PCA well,
+
+109
+00:03:45,053 --> 00:03:46,066
+and in particular, in the next
+
+110
+00:03:46,088 --> 00:03:47,061
+video, I like to talk
+
+111
+00:03:48,009 --> 00:03:49,072
+about how to choose K, which is,
+
+112
+00:03:49,090 --> 00:03:51,013
+how to choose the dimension
+
+113
+00:03:51,056 --> 00:03:53,056
+of this reduced representation vector z.

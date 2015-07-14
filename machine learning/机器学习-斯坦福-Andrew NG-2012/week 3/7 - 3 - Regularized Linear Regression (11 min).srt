@@ -1,0 +1,1188 @@
+
+1
+00:00:00,026 --> 00:00:01,049
+For linear regression, we had
+
+2
+00:00:01,068 --> 00:00:03,012
+previously worked out two learning
+
+3
+00:00:03,049 --> 00:00:05,000
+algorithms, one based on
+
+4
+00:00:05,017 --> 00:00:07,065
+gradient descent and one based on the normal equation.
+
+5
+00:00:08,075 --> 00:00:09,074
+In this video we will take
+
+6
+00:00:09,089 --> 00:00:11,064
+those two algorithms and generalize
+
+7
+00:00:12,028 --> 00:00:13,038
+them to the case of regularized
+
+8
+00:00:14,033 --> 00:00:17,064
+linear regression. Here's the
+
+9
+00:00:18,010 --> 00:00:19,053
+optimization objective, that we
+
+10
+00:00:20,019 --> 00:00:22,037
+came up with last time for regularized linear regression.
+
+11
+00:00:23,035 --> 00:00:24,057
+This first part is our
+
+12
+00:00:24,098 --> 00:00:27,023
+usual, objective for linear regression,
+
+13
+00:00:28,017 --> 00:00:29,030
+and we now have this additional
+
+14
+00:00:30,019 --> 00:00:31,075
+regularization term, where londer
+
+15
+00:00:32,045 --> 00:00:34,096
+is our regularization parameter, and
+
+16
+00:00:35,021 --> 00:00:36,068
+we like to find parameters theta,
+
+17
+00:00:37,015 --> 00:00:38,054
+that minimizes this cost function,
+
+18
+00:00:39,003 --> 00:00:41,028
+this regularized cost function, J of theta.
+
+19
+00:00:41,084 --> 00:00:43,003
+Previously, we were using
+
+20
+00:00:43,043 --> 00:00:45,017
+gradient descent for the original
+
+21
+00:00:46,061 --> 00:00:48,006
+cost function, without the regularization
+
+22
+00:00:48,077 --> 00:00:49,082
+term, and we had
+
+23
+00:00:50,006 --> 00:00:51,099
+the following algorithm for regular
+
+24
+00:00:52,036 --> 00:00:53,061
+linear regression, without regularization.
+
+25
+00:00:54,065 --> 00:00:56,025
+We will repeatedly update the
+
+26
+00:00:56,032 --> 00:00:57,067
+parameters theta J as follows
+
+27
+00:00:58,027 --> 00:01:00,003
+for J equals 1,2 up
+
+28
+00:01:00,039 --> 00:01:02,010
+through n. Let me
+
+29
+00:01:02,053 --> 00:01:03,096
+take this and just write
+
+30
+00:01:04,023 --> 00:01:06,057
+the case for theta zero separately.
+
+31
+00:01:07,020 --> 00:01:08,040
+So, you know, I'm just gonna
+
+32
+00:01:08,071 --> 00:01:09,090
+write the update for theta
+
+33
+00:01:10,015 --> 00:01:12,050
+zero separately, then for
+
+34
+00:01:12,068 --> 00:01:14,037
+the update for the parameters
+
+35
+00:01:14,078 --> 00:01:17,009
+1, 2, 3, and so on up
+
+36
+00:01:17,037 --> 00:01:19,076
+to n. So, I haven't changed anything yet, right?
+
+37
+00:01:19,096 --> 00:01:21,006
+This is just writing the update
+
+38
+00:01:21,029 --> 00:01:23,029
+for theta zero separately from the
+
+39
+00:01:23,054 --> 00:01:25,023
+updates from theta 1, theta
+
+40
+00:01:25,051 --> 00:01:26,098
+2, theta 3, up to theta n. And
+
+41
+00:01:27,004 --> 00:01:27,090
+the reason I want to do this
+
+42
+00:01:28,023 --> 00:01:29,031
+is you may remember
+
+43
+00:01:29,087 --> 00:01:31,026
+that for our regularized linear regression,
+
+44
+00:01:32,062 --> 00:01:33,096
+we penalize the parameters theta
+
+45
+00:01:34,043 --> 00:01:35,054
+1, theta 2, and so
+
+46
+00:01:35,085 --> 00:01:38,035
+on up to theta n, but we don't penalize theta zero.
+
+47
+00:01:38,081 --> 00:01:40,025
+So when we modify this
+
+48
+00:01:40,040 --> 00:01:42,040
+algorithm for regularized
+
+49
+00:01:42,075 --> 00:01:44,004
+linear regression, we're going to
+
+50
+00:01:44,070 --> 00:01:46,087
+end up treating theta zero slightly differently.
+
+51
+00:01:48,056 --> 00:01:50,035
+Concretely, if we
+
+52
+00:01:50,050 --> 00:01:52,017
+want to take this algorithm and
+
+53
+00:01:52,029 --> 00:01:53,078
+modify it to use the
+
+54
+00:01:53,087 --> 00:01:55,062
+regularized objective, all we
+
+55
+00:01:55,073 --> 00:01:57,017
+need to do is take this
+
+56
+00:01:57,034 --> 00:02:00,001
+term at the bottom and modify as follows.
+
+57
+00:02:00,045 --> 00:02:01,085
+We're gonna take this term and add
+
+58
+00:02:02,067 --> 00:02:05,031
+minus londer M,
+
+59
+00:02:06,032 --> 00:02:08,091
+times theta J. And
+
+60
+00:02:09,009 --> 00:02:10,084
+if you implement this, then you
+
+61
+00:02:11,000 --> 00:02:13,022
+have gradient descent for trying
+
+62
+00:02:13,096 --> 00:02:15,091
+to minimize the regularized cost
+
+63
+00:02:16,015 --> 00:02:18,019
+function J of F theta, and concretely,
+
+64
+00:02:19,052 --> 00:02:20,056
+I'm not gonna do the
+
+65
+00:02:20,068 --> 00:02:22,025
+calculus to prove it, but
+
+66
+00:02:22,038 --> 00:02:23,047
+concretely if you look
+
+67
+00:02:23,068 --> 00:02:26,058
+at this term, this term that's written is square brackets.
+
+68
+00:02:27,072 --> 00:02:28,093
+If you know calculus, it's possible
+
+69
+00:02:29,037 --> 00:02:31,015
+to prove that that term is
+
+70
+00:02:31,037 --> 00:02:33,015
+the partial derivative, with respect of
+
+71
+00:02:33,097 --> 00:02:35,040
+J of theta, using the new
+
+72
+00:02:35,065 --> 00:02:37,052
+definition of J of theta
+
+73
+00:02:38,013 --> 00:02:39,033
+with the regularization term.
+
+74
+00:02:39,050 --> 00:02:42,049
+And somebody on this
+
+75
+00:02:42,075 --> 00:02:43,096
+term up on top,
+
+76
+00:02:44,075 --> 00:02:45,056
+which I guess I am
+
+77
+00:02:45,068 --> 00:02:47,024
+drawing the salient box
+
+78
+00:02:48,000 --> 00:02:49,027
+that's still the partial derivative
+
+79
+00:02:49,093 --> 00:02:52,069
+respect of theta zero for J of theta.
+
+80
+00:02:53,068 --> 00:02:54,090
+If you look at the update for
+
+81
+00:02:55,059 --> 00:02:56,071
+theta J, it's possible to
+
+82
+00:02:56,090 --> 00:02:59,018
+show's something pretty interesting, concretely
+
+83
+00:02:59,086 --> 00:03:01,009
+theta J gets updated as
+
+84
+00:03:01,028 --> 00:03:03,040
+theta J, minus alpha times,
+
+85
+00:03:04,009 --> 00:03:05,000
+and then you have this other term
+
+86
+00:03:05,037 --> 00:03:06,072
+here that depends on theta J
+
+87
+00:03:06,090 --> 00:03:08,031
+. So if you
+
+88
+00:03:08,041 --> 00:03:09,040
+group all the terms together
+
+89
+00:03:10,003 --> 00:03:11,068
+that depending on theta J. We
+
+90
+00:03:11,078 --> 00:03:13,018
+can show that this update can
+
+91
+00:03:13,066 --> 00:03:15,009
+be written equivalently as
+
+92
+00:03:15,019 --> 00:03:16,015
+follows and all I did
+
+93
+00:03:16,046 --> 00:03:17,062
+was have, you know, theta J
+
+94
+00:03:18,031 --> 00:03:20,009
+here is theta J times
+
+95
+00:03:20,044 --> 00:03:21,094
+1 and this term is
+
+96
+00:03:22,090 --> 00:03:24,083
+londer over M. There's also an alpha
+
+97
+00:03:25,013 --> 00:03:25,099
+here, so you end up
+
+98
+00:03:26,018 --> 00:03:27,065
+with alpha londer over
+
+99
+00:03:27,096 --> 00:03:31,044
+m, multiply them to
+
+100
+00:03:31,081 --> 00:03:33,065
+theta J and this term here, one minus
+
+101
+00:03:34,022 --> 00:03:36,030
+alpha times londer M, is
+
+102
+00:03:36,059 --> 00:03:39,046
+a pretty interesting term, it has a pretty interesting effect.
+
+103
+00:03:42,031 --> 00:03:43,071
+Concretely, this term one
+
+104
+00:03:43,088 --> 00:03:45,031
+minus alpha times londer over
+
+105
+00:03:45,072 --> 00:03:46,078
+M, is going to be
+
+106
+00:03:46,087 --> 00:03:48,074
+a number that's, you know, usually a number
+
+107
+00:03:48,080 --> 00:03:50,038
+that's a loop and less than 1,
+
+108
+00:03:50,061 --> 00:03:51,066
+right? Because of
+
+109
+00:03:51,091 --> 00:03:53,058
+alpha times londer over M is
+
+110
+00:03:54,006 --> 00:03:55,091
+going to be positive and usually, if you're learning rate is small and M is large.
+
+111
+00:03:56,012 --> 00:03:57,066
+
+
+112
+00:03:58,065 --> 00:03:58,086
+That's usually pretty small.
+
+113
+00:03:59,065 --> 00:04:00,068
+So this term here, it's going
+
+114
+00:04:00,074 --> 00:04:03,006
+to be a number, it's usually, you know, a little bit less than one.
+
+115
+00:04:03,034 --> 00:04:04,015
+So think of it as
+
+116
+00:04:04,033 --> 00:04:05,086
+a number like 0.99, let's say
+
+117
+00:04:07,037 --> 00:04:08,080
+and so, the effect of our
+
+118
+00:04:09,012 --> 00:04:10,055
+updates of theta J is we're
+
+119
+00:04:10,068 --> 00:04:11,094
+going to say that theta J
+
+120
+00:04:12,040 --> 00:04:15,041
+gets replaced by thetata J times 0.99.
+
+121
+00:04:15,077 --> 00:04:17,050
+Alright so theta J
+
+122
+00:04:18,049 --> 00:04:20,093
+times 0.99 has the effect of
+
+123
+00:04:21,027 --> 00:04:23,056
+shrinking theta J a little bit towards 0.
+
+124
+00:04:23,067 --> 00:04:25,068
+So this makes theta J a bit smaller.
+
+125
+00:04:26,022 --> 00:04:28,007
+More formally, this you know, this
+
+126
+00:04:28,042 --> 00:04:29,075
+square norm of theta J
+
+127
+00:04:29,087 --> 00:04:31,057
+is smaller and then
+
+128
+00:04:31,072 --> 00:04:33,043
+after that the second
+
+129
+00:04:33,091 --> 00:04:35,039
+term here, that's actually
+
+130
+00:04:35,098 --> 00:04:37,093
+exactly the same as the
+
+131
+00:04:38,005 --> 00:04:40,026
+original gradient descent updated that we had.
+
+132
+00:04:40,075 --> 00:04:42,083
+Before we added all this regularization stuff.
+
+133
+00:04:44,026 --> 00:04:46,092
+So, hopefully this gradient
+
+134
+00:04:47,037 --> 00:04:48,062
+descent, hopefully this update makes
+
+135
+00:04:48,087 --> 00:04:51,035
+sense, when we're using regularized linear
+
+136
+00:04:51,055 --> 00:04:52,092
+regression what we're doing is on
+
+137
+00:04:53,031 --> 00:04:55,020
+every regularization were multiplying data
+
+138
+00:04:55,042 --> 00:04:56,031
+J by a number that
+
+139
+00:04:56,039 --> 00:04:57,030
+is a little bit less than one, so
+
+140
+00:04:57,039 --> 00:04:58,089
+we're shrinking the parameter a
+
+141
+00:04:59,023 --> 00:05:00,033
+little bit, and then we're
+
+142
+00:05:00,050 --> 00:05:03,000
+performing a, you know, similar update as before.
+
+143
+00:05:04,017 --> 00:05:05,045
+Of course that's just the
+
+144
+00:05:05,061 --> 00:05:08,031
+intuition behind what this particular update is doing.
+
+145
+00:05:08,091 --> 00:05:10,012
+Mathematically, what it's doing
+
+146
+00:05:10,057 --> 00:05:12,094
+is exactly gradient descent on
+
+147
+00:05:13,012 --> 00:05:14,032
+the cost function J of theta
+
+148
+00:05:15,014 --> 00:05:16,001
+that we defined on the previous
+
+149
+00:05:16,048 --> 00:05:18,081
+slide that uses the regularization term.
+
+150
+00:05:19,077 --> 00:05:21,020
+Gradient descent was just
+
+151
+00:05:21,047 --> 00:05:23,005
+one our two algorithms for
+
+152
+00:05:24,047 --> 00:05:25,052
+fitting a linear regression model.
+
+153
+00:05:26,062 --> 00:05:28,008
+The second algorithm was the
+
+154
+00:05:28,016 --> 00:05:29,012
+one based on the normal
+
+155
+00:05:29,068 --> 00:05:31,064
+equation where, what we
+
+156
+00:05:31,074 --> 00:05:32,098
+did was we created the
+
+157
+00:05:33,006 --> 00:05:34,076
+design matrix "x" where each
+
+158
+00:05:35,007 --> 00:05:37,082
+row corresponded to a separate training example.
+
+159
+00:05:38,051 --> 00:05:39,079
+And we created a vector
+
+160
+00:05:40,017 --> 00:05:41,077
+Y, so this is
+
+161
+00:05:41,093 --> 00:05:43,031
+a vector that is an
+
+162
+00:05:43,058 --> 00:05:45,051
+M dimensional vector and that
+
+163
+00:05:46,000 --> 00:05:47,075
+contain the labels from a training set.
+
+164
+00:05:48,047 --> 00:05:49,060
+So whereas X is an
+
+165
+00:05:49,082 --> 00:05:52,066
+M by N plus 1 dimensional matrix.
+
+166
+00:05:53,058 --> 00:05:55,022
+Y is an M dimensional
+
+167
+00:05:55,077 --> 00:05:57,055
+vector and in order
+
+168
+00:05:58,002 --> 00:05:59,019
+to minimize the cost
+
+169
+00:05:59,047 --> 00:06:00,093
+function change we found
+
+170
+00:06:01,047 --> 00:06:03,000
+that of one way
+
+171
+00:06:03,023 --> 00:06:04,043
+to do is to set
+
+172
+00:06:04,067 --> 00:06:06,079
+theta to be equal to this.
+
+173
+00:06:07,054 --> 00:06:09,004
+We have X transpose X,
+
+174
+00:06:10,086 --> 00:06:12,076
+inverse X transpose Y.
+
+175
+00:06:13,001 --> 00:06:13,092
+I am leaving room here, to fill
+
+176
+00:06:14,012 --> 00:06:17,016
+in stuff of course. And what this
+
+177
+00:06:17,064 --> 00:06:18,081
+value for theta does, is
+
+178
+00:06:19,018 --> 00:06:20,098
+this minimizes the cost
+
+179
+00:06:21,025 --> 00:06:22,070
+function J of theta when
+
+180
+00:06:22,083 --> 00:06:26,027
+we were not using regularization. Now
+
+181
+00:06:26,045 --> 00:06:28,057
+that we are using regularization, if
+
+182
+00:06:28,077 --> 00:06:30,029
+you were to derive what the
+
+183
+00:06:30,051 --> 00:06:31,081
+minimum is, and just to
+
+184
+00:06:31,091 --> 00:06:32,075
+give you a sense of how to
+
+185
+00:06:32,098 --> 00:06:34,011
+derive the minimum, the way
+
+186
+00:06:34,022 --> 00:06:35,022
+you derive it is you know,
+
+187
+00:06:35,093 --> 00:06:37,091
+take partial derivatives in respect
+
+188
+00:06:38,033 --> 00:06:40,060
+to each parameter, set this
+
+189
+00:06:40,082 --> 00:06:41,091
+to zero, and then do
+
+190
+00:06:42,006 --> 00:06:42,092
+a bunch of math, and you can
+
+191
+00:06:43,010 --> 00:06:45,006
+then show that is a formula
+
+192
+00:06:45,055 --> 00:06:47,063
+like this that minimizes the cost function.
+
+193
+00:06:48,058 --> 00:06:52,012
+And concretely, if you
+
+194
+00:06:52,024 --> 00:06:54,007
+are using regularization then this
+
+195
+00:06:54,025 --> 00:06:56,031
+formula changes as follows. Inside this
+
+196
+00:06:56,048 --> 00:06:59,012
+parenthesis, you end up with a matrix like this.
+
+197
+00:06:59,045 --> 00:07:00,093
+Zero, one, one, one
+
+198
+00:07:01,080 --> 00:07:03,051
+and so on, one until the bottom.
+
+199
+00:07:04,050 --> 00:07:05,050
+So this thing over here is
+
+200
+00:07:05,062 --> 00:07:07,081
+a matrix, who's upper leftmost entry is zero.
+
+201
+00:07:08,056 --> 00:07:10,007
+There's ones on the diagonals and
+
+202
+00:07:10,018 --> 00:07:11,095
+then the zeros everywhere else on this matrix.
+
+203
+00:07:13,005 --> 00:07:14,001
+Because I am drawing this a little bit sloppy.
+
+204
+00:07:15,018 --> 00:07:16,079
+But as a concrete
+
+205
+00:07:17,006 --> 00:07:18,020
+example if N equals 2,
+
+206
+00:07:19,008 --> 00:07:21,011
+then this matrix
+
+207
+00:07:21,083 --> 00:07:23,050
+is going to be a three by three matrix.
+
+208
+00:07:24,030 --> 00:07:26,020
+More generally, this matrix is
+
+209
+00:07:26,036 --> 00:07:27,066
+a N plus one
+
+210
+00:07:28,026 --> 00:07:30,029
+by N plus one dimensional matrix.
+
+211
+00:07:31,062 --> 00:07:33,014
+So then N equals two then that
+
+212
+00:07:33,037 --> 00:07:35,041
+matrix becomes something that looks like this.
+
+213
+00:07:35,098 --> 00:07:37,036
+Zero, and then ones
+
+214
+00:07:37,063 --> 00:07:39,001
+on the diagonals, and then
+
+215
+00:07:39,016 --> 00:07:41,010
+zeros on the rest of the diagonals.
+
+216
+00:07:42,038 --> 00:07:43,099
+And once again, you know, I'm not going to those this derivation.
+
+217
+00:07:44,062 --> 00:07:46,027
+Which is frankly somewhat long and involved.
+
+218
+00:07:46,062 --> 00:07:47,052
+But it is possible to prove
+
+219
+00:07:47,097 --> 00:07:49,055
+that if you are
+
+220
+00:07:49,093 --> 00:07:50,076
+using the new definition of
+
+221
+00:07:51,025 --> 00:07:53,073
+J of theta, with the regularization objective.
+
+222
+00:07:54,077 --> 00:07:56,006
+Then this new formula for
+
+223
+00:07:56,022 --> 00:07:57,018
+theta is the one
+
+224
+00:07:57,038 --> 00:08:00,007
+that will give you the global minimum of J of theta.
+
+225
+00:08:01,042 --> 00:08:02,045
+So finally, I want to
+
+226
+00:08:02,061 --> 00:08:05,045
+just quickly describe the issue of non-invertibility.
+
+227
+00:08:06,080 --> 00:08:08,011
+This is relatively advanced material.
+
+228
+00:08:08,060 --> 00:08:09,052
+So you should consider this as
+
+229
+00:08:09,076 --> 00:08:11,060
+optional and feel free
+
+230
+00:08:11,075 --> 00:08:12,051
+to skip it or if you
+
+231
+00:08:12,066 --> 00:08:14,018
+listen to it and you know, possibly it
+
+232
+00:08:14,031 --> 00:08:15,068
+don't really make sense, don't worry about it either.
+
+233
+00:08:16,039 --> 00:08:18,094
+But earlier when I talked the normal equation method.
+
+234
+00:08:19,069 --> 00:08:20,092
+We also had an optional video
+
+235
+00:08:21,080 --> 00:08:22,095
+on the non-invertability issue.
+
+236
+00:08:23,069 --> 00:08:25,074
+So this is another optional part,
+
+237
+00:08:26,017 --> 00:08:27,006
+that is sort of add on
+
+238
+00:08:27,069 --> 00:08:30,010
+earlier optional video on non-invertibility.
+
+239
+00:08:31,061 --> 00:08:33,035
+Now considering setting where M
+
+240
+00:08:33,085 --> 00:08:35,034
+the number of examples is less
+
+241
+00:08:35,069 --> 00:08:37,052
+than or equal to N the number features.
+
+242
+00:08:38,064 --> 00:08:40,008
+If you have fewer examples then
+
+243
+00:08:40,020 --> 00:08:41,048
+features then this matrix
+
+244
+00:08:42,016 --> 00:08:43,087
+X transpose X will be
+
+245
+00:08:44,007 --> 00:08:47,076
+non-invertible or singular, or
+
+246
+00:08:48,005 --> 00:08:50,012
+the other term
+
+247
+00:08:50,036 --> 00:08:51,047
+for this is the matrix will
+
+248
+00:08:51,052 --> 00:08:53,038
+be degenerate and if
+
+249
+00:08:53,086 --> 00:08:54,077
+you implement this in Octave
+
+250
+00:08:55,029 --> 00:08:56,037
+anyway, and you use the
+
+251
+00:08:56,062 --> 00:08:58,057
+P in function to take the psuedo inverse.
+
+252
+00:08:58,085 --> 00:08:59,079
+It will kind of do the
+
+253
+00:09:00,008 --> 00:09:01,089
+right thing that is not
+
+254
+00:09:02,024 --> 00:09:03,045
+clear that it will
+
+255
+00:09:03,055 --> 00:09:04,057
+give you a very good hypothesis
+
+256
+00:09:05,040 --> 00:09:07,072
+even though numerically the octave
+
+257
+00:09:08,037 --> 00:09:09,066
+P in function
+
+258
+00:09:10,001 --> 00:09:11,004
+will give you a result that
+
+259
+00:09:11,034 --> 00:09:13,021
+kind of makes sense.
+
+260
+00:09:13,044 --> 00:09:15,046
+But, if you were doing this in a different language.
+
+261
+00:09:16,026 --> 00:09:17,059
+And if you were
+
+262
+00:09:17,071 --> 00:09:19,002
+taking just the regular inverse
+
+263
+00:09:20,047 --> 00:09:22,007
+which an octave is denoted with the function INV.
+
+264
+00:09:23,024 --> 00:09:24,000
+We're trying to take the regular
+
+265
+00:09:24,033 --> 00:09:25,062
+inverse of X transpose X,
+
+266
+00:09:26,029 --> 00:09:28,002
+then in this setting you
+
+267
+00:09:28,014 --> 00:09:30,034
+find that X transpose X
+
+268
+00:09:30,045 --> 00:09:32,075
+is singular, is non-invertible and
+
+269
+00:09:32,078 --> 00:09:33,074
+if you're doing this in a different
+
+270
+00:09:33,099 --> 00:09:35,083
+programming language and using some
+
+271
+00:09:36,023 --> 00:09:39,015
+linear algebra library try to take the inverse of this matrix.
+
+272
+00:09:39,084 --> 00:09:41,008
+It just might not work because that
+
+273
+00:09:41,022 --> 00:09:43,005
+matrix is non-invertible or singular.
+
+274
+00:09:44,064 --> 00:09:47,011
+Fortunately, regularization also takes
+
+275
+00:09:47,011 --> 00:09:49,085
+care of this for us, and concretely, so
+
+276
+00:09:50,000 --> 00:09:53,037
+long as the regularization parameter is strictly greater than zero.
+
+277
+00:09:53,087 --> 00:09:55,022
+It is actually possible to
+
+278
+00:09:55,029 --> 00:09:56,084
+prove that this matrix X
+
+279
+00:09:57,008 --> 00:09:58,069
+transpose X plus parameter time, you know,s
+
+280
+00:09:59,008 --> 00:10:00,039
+this funny matrix here,
+
+281
+00:10:00,097 --> 00:10:02,025
+is possible to prove that this
+
+282
+00:10:02,047 --> 00:10:03,064
+matrix will not be
+
+283
+00:10:03,075 --> 00:10:05,071
+singular and that this matrix will be invertible.
+
+284
+00:10:07,045 --> 00:10:09,042
+So using regularization also takes
+
+285
+00:10:09,070 --> 00:10:11,090
+care of any non-invertibility issues
+
+286
+00:10:12,058 --> 00:10:14,047
+of the X transpose X matrix as well.
+
+287
+00:10:15,025 --> 00:10:18,000
+So, you now know how to implement regularize linear regression.
+
+288
+00:10:18,087 --> 00:10:19,090
+Using this, you'll be able
+
+289
+00:10:20,029 --> 00:10:21,097
+to avoid overfitting, even
+
+290
+00:10:22,021 --> 00:10:24,072
+if you have lots of features in a relatively small training set.
+
+291
+00:10:25,036 --> 00:10:26,062
+And this should let you get
+
+292
+00:10:26,098 --> 00:10:29,000
+linear regression to work much better for many problems.
+
+293
+00:10:30,005 --> 00:10:31,019
+In the next video, we'll take
+
+294
+00:10:31,038 --> 00:10:34,030
+this regularization idea and apply it to logistic regression.
+
+295
+00:10:35,013 --> 00:10:36,016
+So that you'll be able to
+
+296
+00:10:36,027 --> 00:10:37,062
+get logistic impression to avoid
+
+297
+00:10:37,091 --> 00:10:39,083
+overfitting and perform much better as well.

@@ -1,0 +1,956 @@
+
+1
+00:00:00,017 --> 00:00:01,072
+Neural Networks are a pretty old
+
+2
+00:00:02,006 --> 00:00:03,095
+algorithm that was originally motivated
+
+3
+00:00:05,003 --> 00:00:07,033
+by the goal of having machines that can mimic the brain.
+
+4
+00:00:08,025 --> 00:00:09,033
+Now in this class, of course
+
+5
+00:00:09,061 --> 00:00:11,000
+I'm teaching Neural Networks to you
+
+6
+00:00:11,016 --> 00:00:12,016
+because they work really well
+
+7
+00:00:12,046 --> 00:00:14,007
+for different machine learning problems and
+
+8
+00:00:14,025 --> 00:00:16,091
+not, certainly not because they're logically motivated.
+
+9
+00:00:18,005 --> 00:00:19,026
+In this video, I'd like
+
+10
+00:00:19,044 --> 00:00:21,064
+to give you some of the background on Neural Networks.
+
+11
+00:00:22,051 --> 00:00:25,042
+So that we can get a sense of what we can expect them to do.
+
+12
+00:00:26,019 --> 00:00:27,017
+Both in the sense of
+
+13
+00:00:27,032 --> 00:00:28,032
+applying them to modern day
+
+14
+00:00:28,044 --> 00:00:30,046
+machinery problems, as well as for
+
+15
+00:00:30,064 --> 00:00:32,000
+those of you that might
+
+16
+00:00:32,018 --> 00:00:33,086
+be interested in maybe the
+
+17
+00:00:34,000 --> 00:00:35,013
+big AI dream of someday
+
+18
+00:00:35,071 --> 00:00:36,067
+building truly intelligent machines.
+
+19
+00:00:37,078 --> 00:00:40,064
+Also, how Neural Networks might pertain to that.
+
+20
+00:00:42,039 --> 00:00:44,025
+The origins of Neural Networks was
+
+21
+00:00:44,089 --> 00:00:46,032
+as algorithms that try
+
+22
+00:00:46,060 --> 00:00:47,088
+to mimic the brain and
+
+23
+00:00:47,089 --> 00:00:49,002
+those a sense that if we
+
+24
+00:00:49,014 --> 00:00:50,075
+want to build learning systems
+
+25
+00:00:51,031 --> 00:00:53,010
+while why not mimic perhaps the
+
+26
+00:00:53,017 --> 00:00:54,096
+most amazing learning machine we
+
+27
+00:00:55,007 --> 00:00:56,007
+know about, which is perhaps the
+
+28
+00:00:56,084 --> 00:00:58,071
+brain. Neural Networks came to
+
+29
+00:00:58,082 --> 00:01:00,071
+be very widely used throughout the
+
+30
+00:01:00,096 --> 00:01:03,025
+1980's and 1990's and
+
+31
+00:01:03,075 --> 00:01:04,084
+for various reasons as popularity
+
+32
+00:01:05,064 --> 00:01:06,068
+diminished in the late
+
+33
+00:01:06,089 --> 00:01:08,040
+90's. But more recently,
+
+34
+00:01:09,017 --> 00:01:10,051
+Neural Networks  have had a
+
+35
+00:01:10,076 --> 00:01:12,006
+major recent resurgence.
+
+36
+00:01:13,034 --> 00:01:14,053
+One of the reasons for this
+
+37
+00:01:14,076 --> 00:01:16,064
+resurgence is that Neural Networks
+
+38
+00:01:17,054 --> 00:01:19,001
+are computationally some what
+
+39
+00:01:19,012 --> 00:01:20,059
+more expensive algorithm and
+
+40
+00:01:20,095 --> 00:01:22,010
+so, it was only, you know,
+
+41
+00:01:22,029 --> 00:01:23,082
+maybe somewhat more recently that
+
+42
+00:01:24,043 --> 00:01:26,018
+computers became fast enough
+
+43
+00:01:26,051 --> 00:01:27,054
+to really run large scale
+
+44
+00:01:27,090 --> 00:01:29,060
+Neural Networks and because of
+
+45
+00:01:29,068 --> 00:01:30,095
+that as well as a
+
+46
+00:01:30,098 --> 00:01:32,093
+few other technical reasons which we'll
+
+47
+00:01:33,007 --> 00:01:34,084
+talk about later, modern Neural
+
+48
+00:01:35,010 --> 00:01:36,039
+Networks today are the state
+
+49
+00:01:36,062 --> 00:01:38,062
+of the art technique for many applications.
+
+50
+00:01:39,081 --> 00:01:41,000
+So, when you think about mimicking
+
+51
+00:01:41,043 --> 00:01:42,059
+the brain while one of
+
+52
+00:01:42,062 --> 00:01:44,085
+the human brain does tell me same things, right?
+
+53
+00:01:45,003 --> 00:01:46,065
+The brain can learn to
+
+54
+00:01:46,075 --> 00:01:48,017
+see process images than to
+
+55
+00:01:48,040 --> 00:01:50,032
+hear, learn to process our sense of touch.
+
+56
+00:01:50,056 --> 00:01:51,035
+We can, you know, learn to
+
+57
+00:01:51,051 --> 00:01:52,037
+do math, learn to do
+
+58
+00:01:52,070 --> 00:01:53,096
+calculus, and the brain
+
+59
+00:01:54,010 --> 00:01:55,056
+does so many different and amazing things.
+
+60
+00:01:55,093 --> 00:01:56,073
+It seems like if you want
+
+61
+00:01:57,000 --> 00:01:58,028
+to mimic the brain it seems
+
+62
+00:01:58,040 --> 00:01:59,062
+like you have to write lots of different
+
+63
+00:01:59,095 --> 00:02:01,034
+pieces of software to mimic all
+
+64
+00:02:01,062 --> 00:02:03,054
+of these different fascinating, amazing things
+
+65
+00:02:03,081 --> 00:02:05,057
+that the brain tell us, but does
+
+66
+00:02:05,081 --> 00:02:07,078
+is this fascinating hypothesis that the
+
+67
+00:02:08,009 --> 00:02:09,009
+way the brain does all of
+
+68
+00:02:09,016 --> 00:02:10,040
+these different things is not
+
+69
+00:02:10,078 --> 00:02:12,008
+worth like a thousand different programs,
+
+70
+00:02:13,006 --> 00:02:14,081
+but instead, the way the
+
+71
+00:02:14,093 --> 00:02:16,002
+brain does it is worth
+
+72
+00:02:16,043 --> 00:02:18,088
+just a single learning algorithm.
+
+73
+00:02:19,031 --> 00:02:20,084
+This is just a hypothesis but
+
+74
+00:02:21,008 --> 00:02:22,024
+let me share with you
+
+75
+00:02:22,065 --> 00:02:24,043
+some of the evidence for this.
+
+76
+00:02:24,075 --> 00:02:25,084
+This part of the brain, that little
+
+77
+00:02:26,006 --> 00:02:27,027
+red part of the brain, is
+
+78
+00:02:27,052 --> 00:02:29,015
+your auditory cortex and
+
+79
+00:02:29,024 --> 00:02:30,062
+the way you're understanding my voice
+
+80
+00:02:30,099 --> 00:02:33,034
+now is your ear is
+
+81
+00:02:33,050 --> 00:02:34,093
+taking the sound signal and routing
+
+82
+00:02:35,022 --> 00:02:36,093
+the sound signal to your auditory
+
+83
+00:02:36,097 --> 00:02:38,018
+cortex and that's what's
+
+84
+00:02:38,043 --> 00:02:40,009
+allowing you to understand my words.
+
+85
+00:02:41,033 --> 00:02:42,059
+Neuroscientists have done the
+
+86
+00:02:42,075 --> 00:02:44,056
+following fascinating experiments where
+
+87
+00:02:44,078 --> 00:02:46,030
+you cut the wire from
+
+88
+00:02:46,050 --> 00:02:47,043
+the ears to the auditory
+
+89
+00:02:47,062 --> 00:02:49,009
+cortex and you re-wire,
+
+90
+00:02:50,013 --> 00:02:52,000
+in this case an animal's brain, so
+
+91
+00:02:52,019 --> 00:02:53,031
+that the signal from the eyes
+
+92
+00:02:53,062 --> 00:02:56,088
+to the optic nerve eventually gets routed to the auditory cortex.
+
+93
+00:02:58,003 --> 00:02:59,013
+If you do this it turns out,
+
+94
+00:02:59,034 --> 00:03:00,062
+the auditory cortex will learn
+
+95
+00:03:02,012 --> 00:03:02,040
+to see.
+
+96
+00:03:02,072 --> 00:03:04,000
+And this is in every single sense
+
+97
+00:03:04,043 --> 00:03:06,027
+of the word see as we know it.
+
+98
+00:03:06,038 --> 00:03:07,046
+So, if you do this to the animals,
+
+99
+00:03:07,077 --> 00:03:09,078
+the animals can perform visual discrimination
+
+100
+00:03:10,031 --> 00:03:12,025
+task and as they can
+
+101
+00:03:12,046 --> 00:03:13,056
+look at images and make appropriate
+
+102
+00:03:14,009 --> 00:03:15,018
+decisions based on the
+
+103
+00:03:15,046 --> 00:03:16,046
+images and they're doing
+
+104
+00:03:16,078 --> 00:03:18,030
+it with that piece of brain tissue.
+
+105
+00:03:19,059 --> 00:03:20,015
+Here's another example.
+
+106
+00:03:21,027 --> 00:03:23,043
+That red piece of brain tissue is your somatosensory cortex.
+
+107
+00:03:24,006 --> 00:03:26,068
+That's how you process your sense of touch.
+
+108
+00:03:27,043 --> 00:03:29,002
+If you do a similar re-wiring process
+
+109
+00:03:30,006 --> 00:03:32,074
+then the somatosensory cortex will learn to see.
+
+110
+00:03:33,037 --> 00:03:34,071
+Because of this and other
+
+111
+00:03:35,015 --> 00:03:36,066
+similar experiments, these are
+
+112
+00:03:36,075 --> 00:03:38,019
+called neuro-rewiring experiments.
+
+113
+00:03:39,046 --> 00:03:40,055
+There's this sense that if
+
+114
+00:03:40,066 --> 00:03:41,066
+the same piece of physical
+
+115
+00:03:42,018 --> 00:03:44,002
+brain tissue can process sight
+
+116
+00:03:44,050 --> 00:03:45,096
+or sound or touch then
+
+117
+00:03:46,018 --> 00:03:47,047
+maybe there is one learning
+
+118
+00:03:47,078 --> 00:03:48,087
+algorithm that can process
+
+119
+00:03:49,028 --> 00:03:50,052
+sight or sound or touch.
+
+120
+00:03:51,044 --> 00:03:52,065
+And instead of needing to
+
+121
+00:03:52,084 --> 00:03:54,053
+implement a thousand different programs
+
+122
+00:03:55,012 --> 00:03:56,052
+or a thousand different algorithms to
+
+123
+00:03:56,065 --> 00:03:58,043
+do, you know, the thousand wonderful things
+
+124
+00:03:58,078 --> 00:04:00,050
+that the brain does, maybe what
+
+125
+00:04:00,066 --> 00:04:01,097
+we need to do is figure out
+
+126
+00:04:02,021 --> 00:04:04,090
+some approximation or to whatever
+
+127
+00:04:05,015 --> 00:04:07,021
+the brain's learning algorithm is and
+
+128
+00:04:07,034 --> 00:04:08,046
+implement that and that the
+
+129
+00:04:08,068 --> 00:04:10,012
+brain learned by itself how to
+
+130
+00:04:10,024 --> 00:04:11,086
+process these different types of data.
+
+131
+00:04:13,000 --> 00:04:14,018
+To a surprisingly large extent,
+
+132
+00:04:14,063 --> 00:04:15,072
+it seems as if we can
+
+133
+00:04:16,026 --> 00:04:17,043
+plug in almost any sensor
+
+134
+00:04:17,088 --> 00:04:19,001
+to almost any part of
+
+135
+00:04:19,007 --> 00:04:21,002
+the brain and so, within the
+
+136
+00:04:21,010 --> 00:04:22,099
+reason, the brain will learn to deal with it.
+
+137
+00:04:25,073 --> 00:04:26,047
+Here are a few more examples.
+
+138
+00:04:26,066 --> 00:04:28,068
+On the upper left is
+
+139
+00:04:29,000 --> 00:04:31,022
+an example of learning to see with your tongue.
+
+140
+00:04:32,010 --> 00:04:33,062
+The way it works is--this is
+
+141
+00:04:33,082 --> 00:04:35,069
+actually a system called BrainPort undergoing
+
+142
+00:04:36,050 --> 00:04:37,069
+FDA trials now to help
+
+143
+00:04:37,087 --> 00:04:39,037
+blind people see--but the
+
+144
+00:04:39,047 --> 00:04:41,030
+way it works is, you strap
+
+145
+00:04:42,007 --> 00:04:43,036
+a grayscale camera to your
+
+146
+00:04:43,057 --> 00:04:45,031
+forehead, facing forward, that takes
+
+147
+00:04:45,062 --> 00:04:47,068
+the low resolution grayscale image
+
+148
+00:04:48,012 --> 00:04:49,023
+of what's in front of you
+
+149
+00:04:49,052 --> 00:04:50,062
+and you then run a wire
+
+150
+00:04:51,075 --> 00:04:52,070
+to an array of electrodes
+
+151
+00:04:53,042 --> 00:04:54,054
+that you place on your tongue
+
+152
+00:04:55,008 --> 00:04:56,037
+so that each pixel gets mapped
+
+153
+00:04:56,073 --> 00:04:58,072
+to a location on your
+
+154
+00:04:58,082 --> 00:05:00,030
+tongue where maybe a
+
+155
+00:05:00,043 --> 00:05:01,085
+high voltage corresponds to a
+
+156
+00:05:02,001 --> 00:05:03,062
+dark pixel and a low voltage
+
+157
+00:05:04,016 --> 00:05:05,077
+corresponds to a bright
+
+158
+00:05:06,013 --> 00:05:08,031
+pixel and, even as
+
+159
+00:05:08,048 --> 00:05:09,057
+it does today, with this sort
+
+160
+00:05:09,087 --> 00:05:10,083
+of system you and I will
+
+161
+00:05:10,089 --> 00:05:12,024
+be able to learn to see, you know,
+
+162
+00:05:12,049 --> 00:05:15,012
+in tens of minutes with our tongues.
+
+163
+00:05:15,026 --> 00:05:16,079
+Here's a second example of human
+
+164
+00:05:17,020 --> 00:05:18,060
+echo location or human sonar.
+
+165
+00:05:19,079 --> 00:05:20,099
+So there are two ways you can do this.
+
+166
+00:05:21,032 --> 00:05:22,081
+You can either snap your fingers,
+
+167
+00:05:24,049 --> 00:05:27,060
+or click your tongue.
+
+168
+00:05:28,012 --> 00:05:28,056
+I can't do that very well.
+
+169
+00:05:29,043 --> 00:05:30,048
+But there are blind people
+
+170
+00:05:30,075 --> 00:05:31,097
+today that are actually being
+
+171
+00:05:32,013 --> 00:05:33,042
+trained in schools to do this
+
+172
+00:05:33,091 --> 00:05:35,060
+and learn to interpret the pattern
+
+173
+00:05:36,004 --> 00:05:38,037
+of sounds bouncing off your environment - that's sonar.
+
+174
+00:05:39,018 --> 00:05:39,086
+So, if after you search
+
+175
+00:05:39,093 --> 00:05:42,031
+on YouTube, there are
+
+176
+00:05:42,042 --> 00:05:44,004
+actually videos of this amazing kid who
+
+177
+00:05:44,031 --> 00:05:45,076
+tragically because of cancer
+
+178
+00:05:46,041 --> 00:05:49,001
+had his eyeballs removed, so this is a kid with no eyeballs.
+
+179
+00:05:49,088 --> 00:05:51,074
+But by snapping his fingers, he
+
+180
+00:05:51,088 --> 00:05:53,066
+can walk around and never hit anything.
+
+181
+00:05:54,043 --> 00:05:55,038
+He can ride a skateboard.
+
+182
+00:05:56,031 --> 00:05:57,048
+He can shoot a basketball into a
+
+183
+00:05:57,055 --> 00:05:59,036
+hoop and this is a kid with no eyeballs.
+
+184
+00:06:00,050 --> 00:06:02,012
+Third example is the
+
+185
+00:06:02,037 --> 00:06:05,000
+Haptic Belt where if
+
+186
+00:06:05,024 --> 00:06:07,025
+you have a strap
+
+187
+00:06:07,050 --> 00:06:08,089
+around your waist, ring up
+
+188
+00:06:09,006 --> 00:06:11,070
+buzzers and always have the northmost one buzzing.
+
+189
+00:06:12,008 --> 00:06:13,044
+You can give a human a
+
+190
+00:06:13,056 --> 00:06:14,077
+direction sense similar to
+
+191
+00:06:15,024 --> 00:06:18,075
+maybe how birds can, you know, sense where north is.
+
+192
+00:06:19,056 --> 00:06:21,052
+And, some of the bizarre example, but
+
+193
+00:06:21,068 --> 00:06:22,081
+if you plug a third eye
+
+194
+00:06:23,011 --> 00:06:24,007
+into a frog, the frog
+
+195
+00:06:24,045 --> 00:06:25,082
+will learn to use that eye as well.
+
+196
+00:06:27,041 --> 00:06:29,022
+So, it's pretty amazing to
+
+197
+00:06:29,043 --> 00:06:31,030
+what extent is as if
+
+198
+00:06:31,036 --> 00:06:32,063
+you can plug in almost any sensor
+
+199
+00:06:32,082 --> 00:06:34,014
+to the brain and the brain's
+
+200
+00:06:34,056 --> 00:06:35,093
+learning algorithm will just figure
+
+201
+00:06:36,017 --> 00:06:37,051
+out how to learn from that
+
+202
+00:06:37,070 --> 00:06:39,017
+data and deal with that data.
+
+203
+00:06:40,029 --> 00:06:41,027
+And there's a sense that
+
+204
+00:06:41,056 --> 00:06:42,083
+if we can figure out what
+
+205
+00:06:43,006 --> 00:06:45,036
+the brain's learning algorithm is, and,
+
+206
+00:06:45,050 --> 00:06:46,077
+you know, implement it or implement some approximation
+
+207
+00:06:47,055 --> 00:06:49,039
+to that algorithm on a computer, maybe
+
+208
+00:06:49,069 --> 00:06:50,075
+that would be our best shot
+
+209
+00:06:51,018 --> 00:06:52,006
+at, you know, making real progress
+
+210
+00:06:52,068 --> 00:06:54,031
+towards the AI, the
+
+211
+00:06:54,037 --> 00:06:55,092
+artificial intelligence dream of
+
+212
+00:06:55,099 --> 00:06:58,006
+someday building truly intelligent machines.
+
+213
+00:06:59,037 --> 00:07:00,041
+Now, of course, I'm not
+
+214
+00:07:00,082 --> 00:07:02,031
+teaching Neural Networks, you know,
+
+215
+00:07:02,041 --> 00:07:03,058
+just because they might give us
+
+216
+00:07:03,070 --> 00:07:04,074
+a window into this far-off
+
+217
+00:07:05,019 --> 00:07:06,018
+AI dream, even though I'm
+
+218
+00:07:06,029 --> 00:07:07,050
+personally, that's one of the things
+
+219
+00:07:07,075 --> 00:07:09,088
+that I personally work on in my research life.
+
+220
+00:07:10,064 --> 00:07:11,068
+But the main reason I'm
+
+221
+00:07:11,083 --> 00:07:12,088
+teaching Neural Networks in this
+
+222
+00:07:13,013 --> 00:07:14,051
+class is because it's actually a
+
+223
+00:07:14,067 --> 00:07:15,082
+very effective state of the
+
+224
+00:07:16,005 --> 00:07:18,033
+art technique for modern day machine learning applications.
+
+225
+00:07:18,099 --> 00:07:20,033
+So, in the next
+
+226
+00:07:20,062 --> 00:07:22,016
+few videos, we'll start diving into
+
+227
+00:07:22,045 --> 00:07:23,082
+the technical details of Neural
+
+228
+00:07:24,012 --> 00:07:25,027
+Networks so that you
+
+229
+00:07:25,045 --> 00:07:26,045
+can apply them to modern-day
+
+230
+00:07:26,049 --> 00:07:28,056
+machine learning applications and get
+
+231
+00:07:28,073 --> 00:07:30,086
+them to work well on problems.
+
+232
+00:07:31,016 --> 00:07:32,018
+But for me, you know, one
+
+233
+00:07:32,043 --> 00:07:33,072
+of the reasons the excite me  is
+
+234
+00:07:33,085 --> 00:07:35,044
+that maybe they give
+
+235
+00:07:35,055 --> 00:07:37,000
+us this window into
+
+236
+00:07:37,055 --> 00:07:38,066
+what we might do if
+
+237
+00:07:38,088 --> 00:07:41,069
+we're also thinking of
+
+238
+00:07:41,092 --> 00:07:43,060
+what algorithms might someday be
+
+239
+00:07:43,073 --> 00:07:46,000
+able to learn in a manner similar to humankind.

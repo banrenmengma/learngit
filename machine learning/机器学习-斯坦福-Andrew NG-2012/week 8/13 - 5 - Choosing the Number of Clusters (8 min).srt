@@ -1,0 +1,1044 @@
+
+1
+00:00:00,020 --> 00:00:01,038
+In this video I'd like to
+
+2
+00:00:01,057 --> 00:00:02,077
+talk about one last detail
+
+3
+00:00:03,035 --> 00:00:04,095
+of K-means clustering which is
+
+4
+00:00:05,045 --> 00:00:06,067
+how to choose the number of
+
+5
+00:00:06,076 --> 00:00:07,088
+clusters, or how to choose
+
+6
+00:00:08,028 --> 00:00:09,016
+the value of the parameter
+
+7
+00:00:10,023 --> 00:00:12,031
+capsule K. To be
+
+8
+00:00:12,039 --> 00:00:13,068
+honest, there actually isn't a
+
+9
+00:00:13,075 --> 00:00:15,041
+great way of answering this
+
+10
+00:00:15,067 --> 00:00:17,014
+or doing this automatically and
+
+11
+00:00:17,082 --> 00:00:18,092
+by far the most common way
+
+12
+00:00:19,010 --> 00:00:20,037
+of choosing the number of clusters,
+
+13
+00:00:20,051 --> 00:00:22,003
+is still choosing it manually
+
+14
+00:00:22,071 --> 00:00:24,037
+by looking at visualizations or by
+
+15
+00:00:24,044 --> 00:00:26,007
+looking at the output of the clustering algorithm or something else.
+
+16
+00:00:27,033 --> 00:00:28,026
+But I do get asked
+
+17
+00:00:28,060 --> 00:00:29,046
+this question quite a lot of
+
+18
+00:00:29,064 --> 00:00:30,051
+how do you choose the number of
+
+19
+00:00:30,080 --> 00:00:31,092
+clusters, and so I just want
+
+20
+00:00:32,024 --> 00:00:33,064
+to tell you know what
+
+21
+00:00:33,085 --> 00:00:35,002
+are peoples' current thinking on
+
+22
+00:00:35,022 --> 00:00:36,047
+it although, the most
+
+23
+00:00:36,074 --> 00:00:38,006
+common thing is actually to
+
+24
+00:00:38,017 --> 00:00:40,013
+choose the number of clusters by hand.
+
+25
+00:00:42,022 --> 00:00:43,067
+A large part of
+
+26
+00:00:43,079 --> 00:00:45,002
+y, it might not always
+
+27
+00:00:45,039 --> 00:00:46,053
+be easy to choose the
+
+28
+00:00:46,064 --> 00:00:47,093
+number of clusters is that
+
+29
+00:00:48,018 --> 00:00:51,092
+it is often generally ambiguous how many clusters there are in the data.
+
+30
+00:00:52,093 --> 00:00:53,089
+Looking at this data set
+
+31
+00:00:54,007 --> 00:00:55,010
+some of you may see
+
+32
+00:00:55,038 --> 00:00:56,082
+four clusters and that
+
+33
+00:00:57,002 --> 00:00:59,043
+would suggest using K equals 4.
+
+34
+00:00:59,061 --> 00:01:00,064
+Or some of you may
+
+35
+00:01:00,086 --> 00:01:02,061
+see two clusters and
+
+36
+00:01:02,072 --> 00:01:04,045
+that will suggest K equals
+
+37
+00:01:04,087 --> 00:01:06,062
+2 and now this may see three clusters.
+
+38
+00:01:08,006 --> 00:01:09,070
+And so, looking at the
+
+39
+00:01:09,081 --> 00:01:10,075
+data set like this, the
+
+40
+00:01:10,092 --> 00:01:12,039
+true number of clusters, it actually
+
+41
+00:01:12,081 --> 00:01:14,056
+seems genuinely ambiguous to me,
+
+42
+00:01:14,068 --> 00:01:17,015
+and I don't think there is one right answer.
+
+43
+00:01:18,009 --> 00:01:19,050
+And this is part of our supervised learning.
+
+44
+00:01:20,025 --> 00:01:21,045
+We are aren't given labels, and
+
+45
+00:01:21,054 --> 00:01:23,095
+so there isn't always a clear cut answer.
+
+46
+00:01:24,082 --> 00:01:25,073
+And this is one of the
+
+47
+00:01:25,084 --> 00:01:26,070
+things that makes it more difficult
+
+48
+00:01:27,034 --> 00:01:28,053
+to say, have an automatic
+
+49
+00:01:29,015 --> 00:01:30,085
+algorithm for choosing how many clusters to have.
+
+50
+00:01:32,009 --> 00:01:33,025
+When people talk about ways of
+
+51
+00:01:33,031 --> 00:01:34,026
+choosing the number of clusters,
+
+52
+00:01:34,084 --> 00:01:36,004
+one method that people sometimes
+
+53
+00:01:36,043 --> 00:01:39,015
+talk about is something called the Elbow Method.
+
+54
+00:01:39,062 --> 00:01:40,048
+Let me just tell you a little bit about that,
+
+55
+00:01:40,079 --> 00:01:43,076
+and then mention some of its advantages but also shortcomings.
+
+56
+00:01:44,068 --> 00:01:45,098
+So the Elbow Method,
+
+57
+00:01:46,042 --> 00:01:47,056
+what we're going to do is vary
+
+58
+00:01:48,034 --> 00:01:49,085
+K, which is the total number of clusters.
+
+59
+00:01:50,025 --> 00:01:51,056
+So, we're going to run K-means
+
+60
+00:01:52,004 --> 00:01:53,034
+with one cluster, that means really,
+
+61
+00:01:53,062 --> 00:01:54,084
+everything gets grouped into a
+
+62
+00:01:54,098 --> 00:01:56,053
+single cluster and compute the
+
+63
+00:01:56,065 --> 00:01:57,084
+cost function or compute the distortion
+
+64
+00:01:58,045 --> 00:01:59,048
+J and plot that here.
+
+65
+00:02:00,040 --> 00:02:01,009
+And then we're going to run K
+
+66
+00:02:01,031 --> 00:02:03,026
+means with two clusters, maybe
+
+67
+00:02:03,060 --> 00:02:05,043
+with multiple random initial agents, maybe not.
+
+68
+00:02:06,014 --> 00:02:07,015
+But then, you know,
+
+69
+00:02:07,028 --> 00:02:08,028
+with two clusters we should
+
+70
+00:02:08,050 --> 00:02:09,050
+get, hopefully, a smaller distortion,
+
+71
+00:02:10,071 --> 00:02:11,081
+and so plot that there.
+
+72
+00:02:11,094 --> 00:02:13,009
+And then run K-means with three
+
+73
+00:02:13,031 --> 00:02:14,059
+clusters, hopefully, you get even
+
+74
+00:02:14,075 --> 00:02:16,068
+smaller distortion and plot that there.
+
+75
+00:02:16,099 --> 00:02:19,071
+I'm gonna run K-means with four, five and so on.
+
+76
+00:02:19,078 --> 00:02:20,078
+And so we end up with
+
+77
+00:02:20,096 --> 00:02:22,084
+a curve showing how the
+
+78
+00:02:23,024 --> 00:02:24,056
+distortion, you know, goes
+
+79
+00:02:24,080 --> 00:02:27,016
+down as we increase the number of clusters.
+
+80
+00:02:27,043 --> 00:02:29,087
+And so we get a curve that maybe looks like this.
+
+81
+00:02:31,038 --> 00:02:32,021
+And if you look at this
+
+82
+00:02:32,030 --> 00:02:33,040
+curve, what the Elbow Method does
+
+83
+00:02:33,071 --> 00:02:35,077
+it says "Well, let's look at this plot.
+
+84
+00:02:36,044 --> 00:02:39,034
+Looks like there's a clear elbow there".
+
+85
+00:02:40,022 --> 00:02:41,062
+Right, this is, would be by
+
+86
+00:02:41,083 --> 00:02:43,021
+analogy to the human arm where,
+
+87
+00:02:43,055 --> 00:02:44,062
+you know, if you imagine that
+
+88
+00:02:45,037 --> 00:02:46,046
+you reach out your arm,
+
+89
+00:02:47,024 --> 00:02:48,093
+then, this is your
+
+90
+00:02:49,015 --> 00:02:50,034
+shoulder joint, this is your
+
+91
+00:02:50,055 --> 00:02:52,096
+elbow joint and I guess, your hand is at the end over here.
+
+92
+00:02:53,025 --> 00:02:54,016
+And so this is the Elbow Method.
+
+93
+00:02:54,049 --> 00:02:55,093
+Then you find this sort of pattern
+
+94
+00:02:56,025 --> 00:02:57,062
+where the distortion goes down rapidly
+
+95
+00:02:58,055 --> 00:02:59,012
+from 1 to 2, and 2 to
+
+96
+00:02:59,028 --> 00:03:01,033
+3, and then you reach an
+
+97
+00:03:01,052 --> 00:03:03,015
+elbow at 3, and then
+
+98
+00:03:03,033 --> 00:03:05,025
+the distortion goes down very slowly after that.
+
+99
+00:03:05,043 --> 00:03:06,052
+And then it looks like, you
+
+100
+00:03:06,058 --> 00:03:08,069
+know what, maybe using three
+
+101
+00:03:08,096 --> 00:03:09,091
+clusters is the right
+
+102
+00:03:10,003 --> 00:03:11,034
+number of clusters, because that's
+
+103
+00:03:12,002 --> 00:03:14,043
+the elbow of this curve, right?
+
+104
+00:03:14,069 --> 00:03:16,003
+That it goes down, distortion goes
+
+105
+00:03:16,025 --> 00:03:17,028
+down rapidly until K equals
+
+106
+00:03:17,061 --> 00:03:19,069
+3, really goes down very slowly after that.
+
+107
+00:03:19,081 --> 00:03:20,084
+So let's pick K equals 3.
+
+108
+00:03:23,046 --> 00:03:24,056
+If you apply the Elbow Method,
+
+109
+00:03:25,011 --> 00:03:26,024
+and if you get a plot
+
+110
+00:03:26,053 --> 00:03:27,044
+that actually looks like this,
+
+111
+00:03:27,088 --> 00:03:29,012
+then, that's pretty good, and
+
+112
+00:03:29,024 --> 00:03:30,015
+this would be a reasonable way
+
+113
+00:03:30,069 --> 00:03:32,059
+of choosing the number of clusters.
+
+114
+00:03:33,062 --> 00:03:34,059
+It turns out the Elbow Method
+
+115
+00:03:35,003 --> 00:03:37,016
+isn't used that often, and one
+
+116
+00:03:37,034 --> 00:03:38,027
+reason is that, if you
+
+117
+00:03:38,034 --> 00:03:39,046
+actually use this on
+
+118
+00:03:39,071 --> 00:03:41,006
+a clustering problem, it turns out that
+
+119
+00:03:41,021 --> 00:03:42,063
+fairly often, you know,
+
+120
+00:03:42,074 --> 00:03:43,061
+you end up with a curve
+
+121
+00:03:43,090 --> 00:03:46,093
+that looks much more ambiguous, maybe something like this.
+
+122
+00:03:47,069 --> 00:03:48,037
+And if you look at this,
+
+123
+00:03:48,091 --> 00:03:50,021
+I don't know, maybe there's
+
+124
+00:03:50,038 --> 00:03:51,058
+no clear elbow, but it
+
+125
+00:03:51,071 --> 00:03:53,009
+looks like distortion continuously goes down,
+
+126
+00:03:53,043 --> 00:03:54,056
+maybe 3 is a
+
+127
+00:03:54,062 --> 00:03:55,068
+good number, maybe 4 is
+
+128
+00:03:55,075 --> 00:03:58,018
+a good number, maybe 5 is also not bad.
+
+129
+00:03:58,038 --> 00:03:59,018
+And so, if you actually
+
+130
+00:03:59,059 --> 00:04:00,071
+do this in a practice, you know,
+
+131
+00:04:00,081 --> 00:04:02,068
+if your plot looks like the one on the left and that's great.
+
+132
+00:04:03,040 --> 00:04:04,099
+It gives you a clear answer, but
+
+133
+00:04:05,049 --> 00:04:06,055
+just as often, you end
+
+134
+00:04:06,074 --> 00:04:07,058
+up with a plot that looks
+
+135
+00:04:07,075 --> 00:04:09,002
+like the one on the right and
+
+136
+00:04:09,011 --> 00:04:11,000
+is not clear where the
+
+137
+00:04:11,078 --> 00:04:13,022
+ready location of the elbow
+
+138
+00:04:13,049 --> 00:04:14,043
+is. It  makes it harder to
+
+139
+00:04:14,063 --> 00:04:16,069
+choose a number of clusters using this method.
+
+140
+00:04:17,037 --> 00:04:18,022
+So maybe the quick summary
+
+141
+00:04:18,069 --> 00:04:20,050
+of the Elbow Method is that is worth the shot
+
+142
+00:04:21,000 --> 00:04:22,035
+but I wouldn't necessarily,
+
+143
+00:04:23,061 --> 00:04:24,069
+you know, have a very high
+
+144
+00:04:24,087 --> 00:04:27,036
+expectation of it working for any particular problem.
+
+145
+00:04:29,087 --> 00:04:31,002
+Finally, here's one other way
+
+146
+00:04:31,030 --> 00:04:32,085
+of how, thinking about how
+
+147
+00:04:32,099 --> 00:04:33,098
+you choose the value of K,
+
+148
+00:04:34,093 --> 00:04:36,002
+very often people are running
+
+149
+00:04:36,031 --> 00:04:37,037
+K-means in order you
+
+150
+00:04:37,052 --> 00:04:38,076
+get clusters for some later
+
+151
+00:04:39,024 --> 00:04:40,087
+purpose, or for some sort of downstream purpose.
+
+152
+00:04:41,045 --> 00:04:42,089
+Maybe you want to use K-means
+
+153
+00:04:43,037 --> 00:04:44,045
+in order to do market segmentation,
+
+154
+00:04:45,031 --> 00:04:47,060
+like in the T-shirt sizing example that we talked about.
+
+155
+00:04:48,013 --> 00:04:50,056
+Maybe you want K-means to organize
+
+156
+00:04:51,012 --> 00:04:52,030
+a computer cluster better, or
+
+157
+00:04:52,048 --> 00:04:53,043
+maybe a learning cluster for some
+
+158
+00:04:53,062 --> 00:04:55,006
+different purpose, and so,
+
+159
+00:04:55,044 --> 00:04:57,001
+if that later, downstream purpose,
+
+160
+00:04:57,050 --> 00:04:59,005
+such as market segmentation. If
+
+161
+00:04:59,018 --> 00:05:00,042
+that gives you an evaluation metric,
+
+162
+00:05:01,031 --> 00:05:02,067
+then often, a better
+
+163
+00:05:02,080 --> 00:05:03,088
+way to determine the number of
+
+164
+00:05:03,095 --> 00:05:05,068
+clusters, is to see
+
+165
+00:05:06,000 --> 00:05:07,074
+how well different numbers of
+
+166
+00:05:07,093 --> 00:05:10,013
+clusters serve that later downstream purpose.
+
+167
+00:05:11,023 --> 00:05:13,005
+Let me step through a specific example.
+
+168
+00:05:14,018 --> 00:05:15,007
+Let me go through the T-shirt
+
+169
+00:05:15,043 --> 00:05:17,042
+size example again, and I'm
+
+170
+00:05:17,056 --> 00:05:19,069
+trying to decide, do I want three T-shirt sizes?
+
+171
+00:05:20,032 --> 00:05:22,031
+So, I choose K equals 3, then
+
+172
+00:05:22,056 --> 00:05:25,036
+I might have small, medium and large T-shirts.
+
+173
+00:05:26,031 --> 00:05:27,025
+Or maybe, I want to choose
+
+174
+00:05:27,047 --> 00:05:28,024
+K equals 5, and then I
+
+175
+00:05:29,002 --> 00:05:30,013
+might have, you know, extra
+
+176
+00:05:30,038 --> 00:05:33,012
+small, small, medium, large
+
+177
+00:05:33,062 --> 00:05:35,006
+and extra large T-shirt sizes.
+
+178
+00:05:35,086 --> 00:05:38,057
+So, you can have like 3 T-shirt sizes or four or five T-shirt sizes.
+
+179
+00:05:39,026 --> 00:05:40,010
+We could also have four T-shirt
+
+180
+00:05:40,043 --> 00:05:41,074
+sizes, but I'm just
+
+181
+00:05:41,093 --> 00:05:43,024
+showing three and five here,
+
+182
+00:05:43,049 --> 00:05:45,067
+just to simplify this slide for now.
+
+183
+00:05:46,093 --> 00:05:49,001
+So, if I run K-means with
+
+184
+00:05:49,012 --> 00:05:50,029
+K equals 3, maybe I end
+
+185
+00:05:50,067 --> 00:05:51,086
+up with, that's my small
+
+186
+00:05:53,010 --> 00:05:55,001
+and that's my
+
+187
+00:05:55,013 --> 00:05:56,072
+medium and that's my large.
+
+188
+00:05:58,057 --> 00:06:00,037
+Whereas, if I run K-means with
+
+189
+00:06:00,064 --> 00:06:03,054
+5 clusters, maybe I
+
+190
+00:06:03,069 --> 00:06:05,017
+end up with, those are
+
+191
+00:06:05,032 --> 00:06:07,039
+my extra small T-shirts, these
+
+192
+00:06:07,074 --> 00:06:10,092
+are my small, these are
+
+193
+00:06:11,005 --> 00:06:13,074
+my medium, these are my
+
+194
+00:06:13,099 --> 00:06:17,011
+large and these are my extra large.
+
+195
+00:06:19,031 --> 00:06:20,014
+And the nice thing about this
+
+196
+00:06:20,031 --> 00:06:21,050
+example is that, this then
+
+197
+00:06:21,081 --> 00:06:22,093
+maybe gives us another way
+
+198
+00:06:23,055 --> 00:06:24,073
+to choose whether we want
+
+199
+00:06:24,097 --> 00:06:26,006
+3 or 4 or 5 clusters,
+
+200
+00:06:28,056 --> 00:06:29,062
+and in particular, what you can
+
+201
+00:06:29,073 --> 00:06:30,062
+do is, you know, think
+
+202
+00:06:30,081 --> 00:06:31,076
+about this from the perspective
+
+203
+00:06:32,037 --> 00:06:33,081
+of the T-shirt business and
+
+204
+00:06:34,031 --> 00:06:35,014
+ask: "Well if I have
+
+205
+00:06:35,062 --> 00:06:37,018
+five segments, then how well
+
+206
+00:06:38,006 --> 00:06:39,061
+will my T-shirts fit my
+
+207
+00:06:39,077 --> 00:06:42,010
+customers and so, how many T-shirts can I sell?
+
+208
+00:06:42,042 --> 00:06:44,038
+How happy will my customers be?"
+
+209
+00:06:44,055 --> 00:06:45,092
+What really makes sense, from the
+
+210
+00:06:46,007 --> 00:06:47,052
+perspective of the T-shirt business,
+
+211
+00:06:47,058 --> 00:06:49,038
+in terms of whether, I
+
+212
+00:06:49,051 --> 00:06:51,048
+want to have Goer T-shirt sizes
+
+213
+00:06:51,099 --> 00:06:54,004
+so that my T-shirts fit my customers better.
+
+214
+00:06:54,097 --> 00:06:56,012
+Or do I want to have fewer
+
+215
+00:06:56,036 --> 00:06:57,056
+T-shirt sizes so that
+
+216
+00:06:58,041 --> 00:07:00,022
+I make fewer sizes of T-shirts.
+
+217
+00:07:00,061 --> 00:07:02,029
+And I can sell them to the customers more cheaply.
+
+218
+00:07:02,083 --> 00:07:04,069
+And so, the t-shirt selling
+
+219
+00:07:05,004 --> 00:07:06,014
+business, that might give you
+
+220
+00:07:06,066 --> 00:07:09,025
+a way to decide, between three clusters versus five clusters.
+
+221
+00:07:10,077 --> 00:07:12,000
+So, that gives you an
+
+222
+00:07:12,048 --> 00:07:13,087
+example of how a
+
+223
+00:07:14,012 --> 00:07:15,081
+later downstream purpose like
+
+224
+00:07:16,000 --> 00:07:17,025
+the problem of deciding what
+
+225
+00:07:17,038 --> 00:07:19,023
+T-shirts to manufacture, how that
+
+226
+00:07:19,037 --> 00:07:21,098
+can give you an evaluation metric for choosing the number of clusters.
+
+227
+00:07:22,089 --> 00:07:23,080
+For those of you that are
+
+228
+00:07:23,087 --> 00:07:25,049
+doing the program exercises, if
+
+229
+00:07:25,067 --> 00:07:27,006
+you look at this week's
+
+230
+00:07:27,029 --> 00:07:29,054
+program exercise associative K-means, that's
+
+231
+00:07:29,079 --> 00:07:32,000
+an example there of using K-means for image compression.
+
+232
+00:07:32,091 --> 00:07:33,095
+And so if you were trying to
+
+233
+00:07:34,006 --> 00:07:35,017
+choose how many clusters
+
+234
+00:07:35,041 --> 00:07:36,094
+to use for that problem, you could
+
+235
+00:07:37,025 --> 00:07:38,055
+also, again use the
+
+236
+00:07:39,002 --> 00:07:40,032
+evaluation metric of image compression
+
+237
+00:07:40,088 --> 00:07:42,047
+to choose the number of clusters, K?
+
+238
+00:07:43,012 --> 00:07:43,087
+So, how good do you want the
+
+239
+00:07:44,000 --> 00:07:45,043
+image to look versus, how much
+
+240
+00:07:45,068 --> 00:07:46,068
+do you want to compress the file
+
+241
+00:07:46,097 --> 00:07:48,038
+size of the image, and,
+
+242
+00:07:48,061 --> 00:07:49,082
+you know, if you do the
+
+243
+00:07:50,005 --> 00:07:50,098
+programming exercise, what I've just
+
+244
+00:07:51,016 --> 00:07:52,048
+said will make more sense at that time.
+
+245
+00:07:53,075 --> 00:07:56,050
+So, just summarize, for the
+
+246
+00:07:56,058 --> 00:07:57,080
+most part, the number of
+
+247
+00:07:58,002 --> 00:07:59,056
+customers K is still chosen
+
+248
+00:08:00,014 --> 00:08:01,089
+by hand by human input or human insight.
+
+249
+00:08:02,080 --> 00:08:03,081
+One way to try to
+
+250
+00:08:03,094 --> 00:08:05,000
+do so is to use
+
+251
+00:08:05,017 --> 00:08:06,036
+the Elbow Method, but I
+
+252
+00:08:06,051 --> 00:08:07,066
+wouldn't always expect that to
+
+253
+00:08:07,075 --> 00:08:08,062
+work well, but I think
+
+254
+00:08:08,081 --> 00:08:09,073
+the better way to think about
+
+255
+00:08:09,097 --> 00:08:10,080
+how to choose the number of
+
+256
+00:08:10,092 --> 00:08:12,031
+clusters is to ask, for
+
+257
+00:08:12,051 --> 00:08:13,088
+what purpose are you running K-means?
+
+258
+00:08:15,049 --> 00:08:16,061
+And then to think, what is
+
+259
+00:08:16,082 --> 00:08:18,020
+the number of clusters K that
+
+260
+00:08:18,035 --> 00:08:19,049
+serves that, you know, whatever
+
+261
+00:08:19,067 --> 00:08:21,070
+later purpose that you actually run the K-means for.

@@ -1,0 +1,1455 @@
+
+1
+00:00:00,033 --> 00:00:01,041
+In the last video we talked
+
+2
+00:00:01,075 --> 00:00:03,050
+about the Multivariate Gaussian Distribution
+
+3
+00:00:04,071 --> 00:00:06,099
+and saw some examples of the
+
+4
+00:00:07,023 --> 00:00:08,083
+sorts of distributions you can model, as
+
+5
+00:00:08,096 --> 00:00:10,088
+you vary the parameters, mu and sigma.
+
+6
+00:00:11,083 --> 00:00:13,018
+In this video, let's take those
+
+7
+00:00:13,041 --> 00:00:14,068
+ideas, and apply them
+
+8
+00:00:14,089 --> 00:00:17,055
+to develop a different anomaly detection algorithm.
+
+9
+00:00:19,087 --> 00:00:21,089
+To recap the multivariate Gaussian
+
+10
+00:00:22,026 --> 00:00:23,007
+distribution and the multivariate normal
+
+11
+00:00:23,076 --> 00:00:26,064
+distribution has two parameters, mu and sigma.
+
+12
+00:00:27,021 --> 00:00:28,085
+Where mu this an n
+
+13
+00:00:28,098 --> 00:00:31,010
+dimensional vector and sigma,
+
+14
+00:00:32,010 --> 00:00:34,042
+the covariance matrix, is an
+
+15
+00:00:34,081 --> 00:00:36,010
+n by n matrix.
+
+16
+00:00:37,032 --> 00:00:38,071
+And here's the formula for
+
+17
+00:00:38,074 --> 00:00:39,078
+the probability of X, as
+
+18
+00:00:40,047 --> 00:00:41,086
+parameterized by mu and
+
+19
+00:00:42,024 --> 00:00:43,077
+sigma, and as you
+
+20
+00:00:43,089 --> 00:00:45,000
+vary mu and sigma, you
+
+21
+00:00:45,010 --> 00:00:45,082
+can get a range of different
+
+22
+00:00:46,024 --> 00:00:47,070
+distributions, like, you know,
+
+23
+00:00:47,075 --> 00:00:48,099
+these are three examples of the
+
+24
+00:00:49,006 --> 00:00:50,065
+ones that we saw in the previous video.
+
+25
+00:00:51,079 --> 00:00:53,010
+So let's talk about the
+
+26
+00:00:53,025 --> 00:00:54,060
+parameter fitting or the
+
+27
+00:00:54,067 --> 00:00:56,025
+parameter estimation problem. The
+
+28
+00:00:56,079 --> 00:00:58,047
+question, as usual, is if
+
+29
+00:00:58,060 --> 00:00:59,089
+I have a set of examples
+
+30
+00:01:00,050 --> 00:01:02,014
+X1 through XM and here each
+
+31
+00:01:02,040 --> 00:01:03,075
+of these examples is an
+
+32
+00:01:04,042 --> 00:01:05,081
+n dimensional vector and I think my
+
+33
+00:01:06,000 --> 00:01:08,028
+examples come from a multivariate Gaussian distribution.
+
+34
+00:01:09,046 --> 00:01:12,045
+How do I try to estimate my parameters mu and sigma?
+
+35
+00:01:13,043 --> 00:01:15,006
+Well the standard formulas for
+
+36
+00:01:15,026 --> 00:01:17,017
+estimating them is you
+
+37
+00:01:17,032 --> 00:01:18,026
+set mu to be just
+
+38
+00:01:18,057 --> 00:01:19,095
+the average of your training examples.
+
+39
+00:01:21,001 --> 00:01:22,076
+And you set sigma to be equal to this.
+
+40
+00:01:23,012 --> 00:01:24,012
+And this is actually just
+
+41
+00:01:24,025 --> 00:01:25,020
+like the sigma that we had
+
+42
+00:01:25,048 --> 00:01:26,085
+written out, when we were
+
+43
+00:01:27,015 --> 00:01:28,073
+using the PCA or
+
+44
+00:01:28,084 --> 00:01:30,075
+the Principal Components Analysis algorithm.
+
+45
+00:01:31,081 --> 00:01:32,073
+So you just plug in these
+
+46
+00:01:32,084 --> 00:01:34,029
+two formulas and this
+
+47
+00:01:34,056 --> 00:01:36,071
+would give you your estimated parameter
+
+48
+00:01:37,015 --> 00:01:39,043
+mu and your estimated parameter sigma.
+
+49
+00:01:41,057 --> 00:01:43,085
+So given the data set here is how you estimate mu and sigma.
+
+50
+00:01:44,026 --> 00:01:45,034
+Let's take this method
+
+51
+00:01:46,001 --> 00:01:47,040
+and just plug it
+
+52
+00:01:47,060 --> 00:01:49,012
+into an anomaly detection algorithm.
+
+53
+00:01:50,004 --> 00:01:51,001
+So how do we
+
+54
+00:01:51,007 --> 00:01:52,020
+put all of this together to
+
+55
+00:01:52,042 --> 00:01:54,015
+develop an anomaly detection algorithm?
+
+56
+00:01:54,064 --> 00:01:55,078
+Here 's what we do.
+
+57
+00:01:56,057 --> 00:01:57,048
+First we take our training
+
+58
+00:01:57,095 --> 00:01:59,010
+set, and we fit the
+
+59
+00:01:59,017 --> 00:02:00,020
+model, we fit P
+
+60
+00:02:00,039 --> 00:02:01,064
+of X, by, you know, setting
+
+61
+00:02:02,009 --> 00:02:02,071
+mu and sigma as described
+
+62
+00:02:03,078 --> 00:02:05,040
+on the previous slide.
+
+63
+00:02:07,037 --> 00:02:08,050
+Next when you are given
+
+64
+00:02:08,071 --> 00:02:10,016
+a new example X. So
+
+65
+00:02:10,050 --> 00:02:11,043
+if you are given a test example,
+
+66
+00:02:12,044 --> 00:02:15,024
+lets take an earlier example to have a new example out here.
+
+67
+00:02:15,087 --> 00:02:16,078
+And that is my test example.
+
+68
+00:02:18,021 --> 00:02:19,066
+Given the new example X, what
+
+69
+00:02:19,081 --> 00:02:21,021
+we are going to do is compute
+
+70
+00:02:21,077 --> 00:02:23,041
+P of X, using this
+
+71
+00:02:23,068 --> 00:02:26,025
+formula for the multivariate Gaussian distribution.
+
+72
+00:02:27,071 --> 00:02:29,021
+And then, if P of
+
+73
+00:02:29,046 --> 00:02:30,084
+X is very small, then we
+
+74
+00:02:30,094 --> 00:02:31,080
+flagged it as an anomaly,
+
+75
+00:02:32,043 --> 00:02:33,056
+whereas, if P of X is greater
+
+76
+00:02:33,075 --> 00:02:35,052
+than that parameter epsilon, then
+
+77
+00:02:35,066 --> 00:02:39,018
+we don't flag it as an anomaly.
+
+78
+00:02:39,040 --> 00:02:42,024
+So it turns out, if we were to fit a multivariate Gaussian distribution to this data set,
+
+79
+00:02:42,056 --> 00:02:44,021
+so just the red crosses, not the green example,
+
+80
+00:02:45,018 --> 00:02:46,009
+you end up with a Gaussian
+
+81
+00:02:46,030 --> 00:02:48,008
+distribution that places lots
+
+82
+00:02:48,034 --> 00:02:49,068
+of probability in the central
+
+83
+00:02:49,090 --> 00:02:51,084
+region, slightly less probability here,
+
+84
+00:02:52,043 --> 00:02:53,036
+slightly less probability here,
+
+85
+00:02:54,011 --> 00:02:55,000
+slightly less probability here,
+
+86
+00:02:56,002 --> 00:02:59,028
+and very low probability at the point that is way out here.
+
+87
+00:03:01,025 --> 00:03:02,034
+And so, if you apply
+
+88
+00:03:02,084 --> 00:03:04,072
+the multivariate Gaussian distribution to
+
+89
+00:03:04,091 --> 00:03:06,053
+this example, it will actually
+
+90
+00:03:06,093 --> 00:03:08,061
+correctly flag that example.
+
+91
+00:03:09,052 --> 00:03:09,091
+as an anomaly.
+
+92
+00:03:16,086 --> 00:03:18,008
+Finally it's worth saying
+
+93
+00:03:18,043 --> 00:03:19,063
+a few words about what is
+
+94
+00:03:19,075 --> 00:03:21,090
+the relationship between the
+
+95
+00:03:21,094 --> 00:03:23,081
+multivariate Gaussian distribution model, and
+
+96
+00:03:24,003 --> 00:03:25,043
+the original model, where we
+
+97
+00:03:25,050 --> 00:03:26,087
+were modeling P of
+
+98
+00:03:26,093 --> 00:03:28,000
+X as a product of this
+
+99
+00:03:28,011 --> 00:03:28,088
+P of X1, P of X2,
+
+100
+00:03:29,015 --> 00:03:31,041
+up to P of Xn.
+
+101
+00:03:32,075 --> 00:03:33,088
+It turns out that you can
+
+102
+00:03:34,009 --> 00:03:35,031
+prove mathematically, I'm not
+
+103
+00:03:35,059 --> 00:03:36,046
+going to do the proof here, but
+
+104
+00:03:36,053 --> 00:03:38,012
+you can prove mathematically that this
+
+105
+00:03:38,030 --> 00:03:40,061
+relationship, between the
+
+106
+00:03:40,065 --> 00:03:42,024
+multivariate Gaussian model and
+
+107
+00:03:42,040 --> 00:03:44,003
+this original one. And in
+
+108
+00:03:44,011 --> 00:03:45,041
+particular, it turns out
+
+109
+00:03:45,065 --> 00:03:47,050
+that the original model corresponds
+
+110
+00:03:48,043 --> 00:03:50,033
+to multivariate Gaussians, where
+
+111
+00:03:50,065 --> 00:03:51,097
+the contours of the
+
+112
+00:03:52,003 --> 00:03:54,006
+Gaussian are always axis aligned.
+
+113
+00:03:55,040 --> 00:03:57,034
+So all three of
+
+114
+00:03:57,046 --> 00:03:59,038
+these are examples of
+
+115
+00:03:59,050 --> 00:04:01,030
+Gaussian distributions that you
+
+116
+00:04:01,047 --> 00:04:02,093
+can fit using the original model.
+
+117
+00:04:03,018 --> 00:04:04,009
+It turns out that that corresponds
+
+118
+00:04:05,003 --> 00:04:06,091
+to multivariate Gaussian, where, you
+
+119
+00:04:07,030 --> 00:04:09,083
+know, the ellipsis here, the contours
+
+120
+00:04:10,072 --> 00:04:13,059
+of this distribution--it
+
+121
+00:04:13,080 --> 00:04:15,018
+turns out that this model actually
+
+122
+00:04:15,046 --> 00:04:17,002
+corresponds to a special
+
+123
+00:04:17,049 --> 00:04:19,016
+case of a multivariate Gaussian distribution.
+
+124
+00:04:19,074 --> 00:04:21,011
+And in particular, this special
+
+125
+00:04:21,041 --> 00:04:22,093
+case is defined by constraining
+
+126
+00:04:24,045 --> 00:04:25,070
+the distribution of p
+
+127
+00:04:25,087 --> 00:04:27,011
+of x, the multivariate a Gaussian
+
+128
+00:04:27,026 --> 00:04:28,006
+distribution of p of x,
+
+129
+00:04:28,098 --> 00:04:30,074
+so that the contours of
+
+130
+00:04:30,092 --> 00:04:32,033
+the probability density function, of
+
+131
+00:04:32,043 --> 00:04:35,000
+the probability distribution function, are axis aligned.
+
+132
+00:04:35,069 --> 00:04:37,039
+And so you can get a p
+
+133
+00:04:37,093 --> 00:04:39,055
+of x with a
+
+134
+00:04:39,086 --> 00:04:41,043
+multivariate Gaussian that looks like
+
+135
+00:04:41,062 --> 00:04:43,085
+this, or like this, or like this.
+
+136
+00:04:44,005 --> 00:04:44,099
+And you notice, that in all
+
+137
+00:04:45,020 --> 00:04:47,081
+3 of these examples, these ellipses,
+
+138
+00:04:48,074 --> 00:04:50,049
+or these ovals that I'm drawing, have
+
+139
+00:04:50,068 --> 00:04:53,018
+their axes aligned with the X1 X2 axes.
+
+140
+00:04:54,025 --> 00:04:55,092
+And what we do not have, is
+
+141
+00:04:56,019 --> 00:04:57,031
+a set of contours
+
+142
+00:04:58,005 --> 00:05:00,044
+that are at an angle, right?
+
+143
+00:05:00,079 --> 00:05:02,062
+And this corresponded to examples where
+
+144
+00:05:02,079 --> 00:05:06,077
+sigma is equal to 1 1, 0.8, 0.8.
+
+145
+00:05:06,083 --> 00:05:08,079
+Let's say, with non-0 elements on the
+
+146
+00:05:09,006 --> 00:05:10,077
+off diagonals.
+
+147
+00:05:11,018 --> 00:05:11,097
+So, it turns out that
+
+148
+00:05:12,037 --> 00:05:13,098
+it's possible to show mathematically that
+
+149
+00:05:14,025 --> 00:05:16,039
+this model actually is the
+
+150
+00:05:16,048 --> 00:05:18,030
+same as a multivariate Gaussian
+
+151
+00:05:18,075 --> 00:05:20,056
+distribution but with a constraint.
+
+152
+00:05:21,025 --> 00:05:24,039
+And the constraint is that the
+
+153
+00:05:24,048 --> 00:05:26,070
+covariance matrix sigma must
+
+154
+00:05:27,024 --> 00:05:28,089
+have 0's on the off diagonal elements.
+
+155
+00:05:29,036 --> 00:05:30,082
+In particular, the covariance matrix sigma,
+
+156
+00:05:31,024 --> 00:05:32,044
+this thing here, it would
+
+157
+00:05:32,055 --> 00:05:33,093
+be sigma squared 1, sigma
+
+158
+00:05:34,018 --> 00:05:36,005
+squared 2, down to sigma
+
+159
+00:05:36,035 --> 00:05:38,066
+squared n, and then
+
+160
+00:05:39,052 --> 00:05:40,055
+everything on the off diagonal
+
+161
+00:05:41,001 --> 00:05:42,020
+entries, all of these elements
+
+162
+00:05:43,063 --> 00:05:45,011
+above and below the diagonal of the matrix,
+
+163
+00:05:45,063 --> 00:05:46,085
+all of those are going to be zero.
+
+164
+00:05:47,089 --> 00:05:49,037
+And in fact if you take
+
+165
+00:05:49,068 --> 00:05:50,098
+these values of sigma, sigma
+
+166
+00:05:51,032 --> 00:05:52,027
+squared 1, sigma squared 2,
+
+167
+00:05:52,031 --> 00:05:53,037
+down to sigma squared n,
+
+168
+00:05:53,093 --> 00:05:56,037
+and plug them into here, and
+
+169
+00:05:56,068 --> 00:05:57,063
+you know, plug them into this
+
+170
+00:05:57,075 --> 00:05:59,057
+covariance matrix, then the
+
+171
+00:05:59,099 --> 00:06:01,012
+two models are actually identical.
+
+172
+00:06:01,062 --> 00:06:02,056
+That is, this new model,
+
+173
+00:06:06,020 --> 00:06:07,052
+using a multivariate Gaussian distribution,
+
+174
+00:06:08,081 --> 00:06:10,033
+corresponds exactly to the
+
+175
+00:06:10,039 --> 00:06:11,050
+old model, if the covariance
+
+176
+00:06:12,004 --> 00:06:13,069
+matrix sigma, has only
+
+177
+00:06:14,023 --> 00:06:15,049
+0 elements off the diagonals,
+
+178
+00:06:15,057 --> 00:06:17,069
+and in pictures that
+
+179
+00:06:18,018 --> 00:06:19,056
+corresponds to having Gaussian distributions,
+
+180
+00:06:20,072 --> 00:06:22,025
+where the contours of this
+
+181
+00:06:22,094 --> 00:06:25,062
+distribution function are axis aligned.
+
+182
+00:06:25,093 --> 00:06:28,050
+So you aren't allowed to model the correlations between the diffrent features.
+
+183
+00:06:30,099 --> 00:06:32,051
+So in that sense the original model
+
+184
+00:06:33,002 --> 00:06:35,083
+is actually a special case of this multivariate Gaussian model.
+
+185
+00:06:38,037 --> 00:06:40,037
+So when would you use each of these two models?
+
+186
+00:06:40,082 --> 00:06:41,075
+So when would you the original
+
+187
+00:06:42,006 --> 00:06:42,087
+model and when would you use
+
+188
+00:06:43,004 --> 00:06:45,017
+the multivariate Gaussian model?
+
+189
+00:06:52,011 --> 00:06:53,067
+The original model is probably
+
+190
+00:06:54,024 --> 00:06:55,083
+used somewhat more often,
+
+191
+00:06:58,080 --> 00:07:03,016
+and whereas the multivariate Gaussian
+
+192
+00:07:03,016 --> 00:07:04,047
+distribution is used somewhat
+
+193
+00:07:04,080 --> 00:07:06,067
+less but it has the advantage of being
+
+194
+00:07:07,000 --> 00:07:08,029
+able to capture correlations between features. So
+
+195
+00:07:10,049 --> 00:07:11,060
+suppose you want to
+
+196
+00:07:11,076 --> 00:07:13,010
+capture anomalies where you
+
+197
+00:07:13,020 --> 00:07:14,043
+have different features say where
+
+198
+00:07:14,063 --> 00:07:16,056
+features x1, x2 take
+
+199
+00:07:16,079 --> 00:07:19,075
+on unusual combinations of values
+
+200
+00:07:20,006 --> 00:07:21,031
+so in the earlier
+
+201
+00:07:21,073 --> 00:07:27,031
+example, we had that example where the anomaly was with the CPU load and the memory use taking on unusual combinations of values, if
+
+202
+00:07:30,024 --> 00:07:31,022
+you want to use the original
+
+203
+00:07:31,049 --> 00:07:33,050
+model to capture that, then what you
+
+204
+00:07:33,064 --> 00:07:34,064
+need to do is create an
+
+205
+00:07:34,079 --> 00:07:36,077
+extra feature, such as X3
+
+206
+00:07:37,001 --> 00:07:40,070
+equals X1/X2, you know
+
+207
+00:07:40,086 --> 00:07:46,048
+equals maybe the CPU load divided by the memory used, or something, and you
+
+208
+00:07:47,091 --> 00:07:49,002
+need to create extra features
+
+209
+00:07:49,055 --> 00:07:51,043
+if there's unusual combinations of values
+
+210
+00:07:51,054 --> 00:07:52,093
+where X1 and X2 take
+
+211
+00:07:53,022 --> 00:07:54,089
+on an unusual combination of
+
+212
+00:07:55,000 --> 00:07:56,036
+values even though X1 by
+
+213
+00:07:56,052 --> 00:07:58,061
+itself and X2 by itself
+
+214
+00:07:59,085 --> 00:08:03,052
+looks like it's taking a perfectly normal value. But if you're willing to spend the time to manually
+
+215
+00:08:04,002 --> 00:08:05,024
+create an extra feature like this,
+
+216
+00:08:05,092 --> 00:08:07,067
+then the original model will work
+
+217
+00:08:07,088 --> 00:08:14,017
+fine. 
+Whereas in contrast, the multivariate Gaussian model can automatically capture
+
+218
+00:08:14,077 --> 00:08:23,036
+correlations between different features. But the original model has some other more significant advantages, too, and one huge
+
+219
+00:08:23,074 --> 00:08:24,099
+advantage of the original model
+
+220
+00:08:28,019 --> 00:08:29,039
+is that it is computationally cheaper, and another view on this
+
+221
+00:08:29,064 --> 00:08:31,017
+is that is scales better to
+
+222
+00:08:31,029 --> 00:08:32,072
+very large values of n
+
+223
+00:08:32,079 --> 00:08:34,026
+and very large numbers of
+
+224
+00:08:34,046 --> 00:08:36,025
+features, and so even
+
+225
+00:08:36,050 --> 00:08:38,009
+if n were ten thousand,
+
+226
+00:08:39,047 --> 00:08:40,035
+or even if n were equal
+
+227
+00:08:40,099 --> 00:08:42,060
+to a hundred thousand, the original
+
+228
+00:08:42,082 --> 00:08:47,012
+model will usually work just fine.
+
+229
+00:08:47,094 --> 00:08:48,092
+Whereas in contrast for the multivariate Gaussian model notice here, for
+
+230
+00:08:49,007 --> 00:08:49,094
+example, that we need to
+
+231
+00:08:50,044 --> 00:08:51,073
+compute the inverse of the matrix
+
+232
+00:08:52,011 --> 00:08:53,075
+sigma where sigma is
+
+233
+00:08:54,010 --> 00:08:55,023
+an n by n matrix
+
+234
+00:08:56,029 --> 00:08:57,083
+and so computing sigma if
+
+235
+00:08:58,015 --> 00:08:59,095
+sigma is a hundred thousand by a
+
+236
+00:09:00,019 --> 00:09:02,090
+hundred thousand matrix that is going to be very computationally expensive.
+
+237
+00:09:03,044 --> 00:09:04,064
+And so the multivariate Gaussian model
+
+238
+00:09:05,035 --> 00:09:06,089
+scales less well to large
+
+239
+00:09:07,017 --> 00:09:09,021
+values of N. And
+
+240
+00:09:09,049 --> 00:09:11,002
+finally for the original
+
+241
+00:09:11,025 --> 00:09:12,062
+model, it turns out
+
+242
+00:09:12,076 --> 00:09:13,085
+to work out ok even if
+
+243
+00:09:14,009 --> 00:09:15,051
+you have a relatively small training
+
+244
+00:09:15,096 --> 00:09:17,000
+set this is the small unlabeled
+
+245
+00:09:17,040 --> 00:09:19,012
+examples that we use to model p of x
+
+246
+00:09:20,040 --> 00:09:21,060
+of course, and this works fine, even if
+
+247
+00:09:21,072 --> 00:09:23,039
+M is, you
+
+248
+00:09:24,052 --> 00:09:25,014
+know, maybe 50, 100, works fine.
+
+249
+00:09:25,086 --> 00:09:27,074
+Whereas for the multivariate Gaussian, it
+
+250
+00:09:27,088 --> 00:09:29,034
+is sort of a mathematical property
+
+251
+00:09:29,098 --> 00:09:31,023
+of the algorithm that you must have m
+
+252
+00:09:32,010 --> 00:09:38,080
+greater than n, so that the number of examples is greater than the number of features you have. And there's a mathematical property of the way we estimate the parameters
+
+253
+00:09:41,084 --> 00:09:43,085
+that if this is not true, so if m is less than or equal to n,
+
+254
+00:09:44,073 --> 00:09:51,061
+then this matrix isn't even invertible, that is this matrix is singular, and so you can't even use the
+
+255
+00:09:51,080 --> 00:09:53,023
+multivariate Gaussian model unless you make some changes to it. But a
+
+256
+00:09:54,062 --> 00:09:55,082
+typical rule of thumb
+
+257
+00:09:56,002 --> 00:09:58,075
+that I use is, I will use the
+
+258
+00:09:58,086 --> 00:10:00,050
+multivariate Gaussian model only if m is much greater than n, so this is sort of the
+
+259
+00:10:04,004 --> 00:10:05,075
+narrow mathematical requirement, but
+
+260
+00:10:05,089 --> 00:10:07,029
+in practice, I would use
+
+261
+00:10:07,048 --> 00:10:08,090
+the multivariate Gaussian model, only
+
+262
+00:10:09,027 --> 00:10:10,041
+if m were quite a bit
+
+263
+00:10:10,075 --> 00:10:11,087
+bigger than n. 
+So if
+
+264
+00:10:12,003 --> 00:10:13,032
+m were greater than or
+
+265
+00:10:13,047 --> 00:10:14,077
+equal to 10 times n, let's
+
+266
+00:10:14,099 --> 00:10:16,046
+say, might be a reasonable rule of thumb, and if
+
+267
+00:10:18,097 --> 00:10:20,088
+it doesn't satisfy this, then the multivariate Gaussian model
+
+268
+00:10:21,029 --> 00:10:23,032
+has a lot
+
+269
+00:10:23,070 --> 00:10:25,085
+of parameters, right, so this covariance matrix sigma is an n by n matrix,
+
+270
+00:10:26,050 --> 00:10:27,059
+so it has, you know, roughly
+
+271
+00:10:27,082 --> 00:10:31,023
+n squared parameters, because it's a symmetric matrix,
+
+272
+00:10:31,071 --> 00:10:33,003
+it's actually closer to n squared
+
+273
+00:10:33,042 --> 00:10:35,023
+over 2 parameters, but this is a
+
+274
+00:10:35,066 --> 00:10:37,022
+lot of parameters, so you need
+
+275
+00:10:37,060 --> 00:10:38,072
+make sure you have a fairly
+
+276
+00:10:38,092 --> 00:10:48,035
+large value for m, make sure you have enough data to fit all these parameters. And m greater than
+
+277
+00:10:49,000 --> 00:10:52,022
+or equal to 10 n would be a reasonable rule of thumb to make sure that you can estimate this covariance matrix sigma reasonably well.
+
+278
+00:10:55,009 --> 00:10:56,024
+So in practice the original
+
+279
+00:10:56,075 --> 00:10:58,094
+model shown on the left that is used more often.
+
+280
+00:10:59,051 --> 00:11:00,084
+And if you suspect that you
+
+281
+00:11:01,005 --> 00:11:02,067
+need to capture correlations between features
+
+282
+00:11:03,045 --> 00:11:08,014
+what people will often do is just manually design extra features like these to capture specific
+
+283
+00:11:08,077 --> 00:11:13,001
+unusual combinations of values. But in problems where you
+
+284
+00:11:13,012 --> 00:11:15,030
+have a very large training set or m is very large and n is
+
+285
+00:11:17,070 --> 00:11:20,015
+not too large, then the multivariate Gaussian
+
+286
+00:11:20,051 --> 00:11:21,072
+model is well worth considering and may work better as well, and can
+
+287
+00:11:24,036 --> 00:11:25,096
+save you from having to
+
+288
+00:11:26,007 --> 00:11:27,039
+spend your time to manually
+
+289
+00:11:28,007 --> 00:11:30,035
+create extra features in case
+
+290
+00:11:31,037 --> 00:11:33,051
+the anomalies turn out to be captured by unusual
+
+291
+00:11:34,003 --> 00:11:35,078
+combinations of values of the features.
+
+292
+00:11:37,042 --> 00:11:38,033
+Finally I just want to
+
+293
+00:11:38,060 --> 00:11:40,022
+briefly mention one somewhat technical
+
+294
+00:11:40,076 --> 00:11:42,020
+property, but if you're
+
+295
+00:11:42,037 --> 00:11:43,021
+fitting multivariate Gaussian
+
+296
+00:11:43,069 --> 00:11:44,059
+model, and if you find
+
+297
+00:11:44,090 --> 00:11:46,034
+that the covariance matrix sigma
+
+298
+00:11:47,014 --> 00:11:48,015
+is singular, or you find
+
+299
+00:11:48,034 --> 00:11:51,034
+it's non-invertible, they're usually 2 cases for this.
+
+300
+00:11:51,067 --> 00:11:52,099
+One is if it's failing to
+
+301
+00:11:53,010 --> 00:11:54,026
+satisfy this m greater than
+
+302
+00:11:54,063 --> 00:11:56,020
+n condition, and the
+
+303
+00:11:56,057 --> 00:11:58,097
+second case is if you have redundant features.
+
+304
+00:11:59,057 --> 00:12:00,098
+So by redundant features, I mean,
+
+305
+00:12:01,051 --> 00:12:02,075
+if you have 2 features that are the same.
+
+306
+00:12:02,098 --> 00:12:04,070
+Somehow you accidentally made two
+
+307
+00:12:04,083 --> 00:12:11,022
+copies of the feature, so your x1 is just equal to x2. Or if you have redundant features like maybe
+
+308
+00:12:12,086 --> 00:12:14,091
+your features X3 is equal to feature X4, plus feature X5.
+
+309
+00:12:15,087 --> 00:12:16,096
+Okay, so if you have highly
+
+310
+00:12:17,025 --> 00:12:18,050
+redundant features like these, you
+
+311
+00:12:18,067 --> 00:12:20,011
+know, where if X3 is equal
+
+312
+00:12:20,037 --> 00:12:21,084
+to X4 plus X5, well X3
+
+313
+00:12:22,035 --> 00:12:24,041
+doesn't contain any extra information, right?
+
+314
+00:12:24,059 --> 00:12:26,046
+You just take these 2 other features, and add them together.
+
+315
+00:12:27,059 --> 00:12:28,089
+And if you have this
+
+316
+00:12:29,002 --> 00:12:30,096
+sort of redundant features, duplicated features,
+
+317
+00:12:31,051 --> 00:12:34,002
+or this sort of features, than sigma may be non-invertible.
+
+318
+00:12:35,005 --> 00:12:37,000
+And so there's a debugging set--
+
+319
+00:12:37,034 --> 00:12:38,026
+this should very rarely happen,
+
+320
+00:12:38,075 --> 00:12:40,019
+so you probably won't run into this,
+
+321
+00:12:40,025 --> 00:12:42,077
+it is very unlikely that you have to worry about this--
+
+322
+00:12:42,094 --> 00:12:44,048
+but in case you implement a
+
+323
+00:12:44,077 --> 00:12:46,085
+multivariate Gaussian model you find that sigma is non-invertible.
+
+324
+00:12:48,024 --> 00:12:49,035
+What I would do is first
+
+325
+00:12:49,087 --> 00:12:51,029
+make sure that M is quite
+
+326
+00:12:51,053 --> 00:12:53,051
+a bit bigger than N, and if it
+
+327
+00:12:53,066 --> 00:12:54,063
+is then, the second thing I
+
+328
+00:12:54,075 --> 00:12:56,055
+do, is just check for redundant features.
+
+329
+00:12:57,036 --> 00:12:58,007
+And so if there are 2 features
+
+330
+00:12:58,014 --> 00:12:59,036
+that are equal, just get rid
+
+331
+00:12:59,048 --> 00:13:00,059
+of one of them, or if
+
+332
+00:13:00,097 --> 00:13:02,058
+you have redundant if these
+
+333
+00:13:02,087 --> 00:13:04,010
+, X3 equals X4 plus X5,
+
+334
+00:13:04,049 --> 00:13:05,015
+just get rid of the redundant
+
+335
+00:13:05,072 --> 00:13:08,064
+feature, and then it should work fine again.
+
+336
+00:13:08,084 --> 00:13:09,061
+As an aside for those of you
+
+337
+00:13:09,084 --> 00:13:11,021
+who are experts in linear algebra,
+
+338
+00:13:11,080 --> 00:13:13,027
+by redundant features, what I
+
+339
+00:13:13,040 --> 00:13:14,097
+mean is the formal term is
+
+340
+00:13:15,029 --> 00:13:17,067
+features that are linearly dependent.
+
+341
+00:13:18,046 --> 00:13:19,017
+But in practice what that really means
+
+342
+00:13:19,062 --> 00:13:21,071
+is one of these problems tripping
+
+343
+00:13:22,003 --> 00:13:24,012
+up the algorithm if you just make you features non-redundant.,
+
+344
+00:13:24,078 --> 00:13:26,038
+that should solve the problem of sigma being non-invertable.
+
+345
+00:13:26,072 --> 00:13:29,010
+But once again
+
+346
+00:13:29,052 --> 00:13:30,062
+the odds of your running into this
+
+347
+00:13:30,085 --> 00:13:32,019
+at all are pretty low so
+
+348
+00:13:32,053 --> 00:13:33,079
+chances are, you can
+
+349
+00:13:34,012 --> 00:13:35,046
+just apply the multivariate Gaussian
+
+350
+00:13:35,099 --> 00:13:37,024
+model, without having to
+
+351
+00:13:37,045 --> 00:13:39,014
+worry about sigma being non-invertible,
+
+352
+00:13:40,009 --> 00:13:41,017
+so long as m is greater
+
+353
+00:13:41,047 --> 00:13:42,077
+than or equal to n.
+So
+
+354
+00:13:43,020 --> 00:13:45,017
+that's it for anomaly detection,
+
+355
+00:13:45,080 --> 00:13:47,023
+with the multivariate Gaussian distribution.
+
+356
+00:13:48,022 --> 00:13:49,024
+And if you apply this method
+
+357
+00:13:49,095 --> 00:13:51,015
+you would be able to have an
+
+358
+00:13:51,030 --> 00:13:53,025
+anomaly detection algorithm that automatically
+
+359
+00:13:54,000 --> 00:13:55,042
+captures positive and negative
+
+360
+00:13:55,061 --> 00:13:56,069
+correlations between your different
+
+361
+00:13:57,002 --> 00:13:58,051
+features and flags an anomaly
+
+362
+00:13:59,045 --> 00:14:00,082
+if it sees is unusual combination
+
+363
+00:14:01,062 --> 00:14:02,076
+of the values of the features.

@@ -1,0 +1,668 @@
+
+1
+00:00:00,020 --> 00:00:02,081
+In the next few videos, we'll talk about large scale machine learning.
+
+2
+00:00:04,042 --> 00:00:07,051
+That is algorithms but viewing with big data sets.
+
+3
+00:00:08,043 --> 00:00:09,055
+If you look back and a
+
+4
+00:00:09,073 --> 00:00:12,015
+recent 5 or 10-year history of machine learning.
+
+5
+00:00:12,092 --> 00:00:14,009
+One of the reasons that learning
+
+6
+00:00:14,044 --> 00:00:15,051
+albums works so much better
+
+7
+00:00:15,077 --> 00:00:16,091
+now than even say, 5-years
+
+8
+00:00:17,044 --> 00:00:18,057
+ago, is just the sheer
+
+9
+00:00:19,003 --> 00:00:20,016
+amount of data that we
+
+10
+00:00:20,025 --> 00:00:22,025
+have now and that we can trade our algorithms on.
+
+11
+00:00:22,085 --> 00:00:23,073
+In these next few videos,
+
+12
+00:00:24,019 --> 00:00:25,064
+we'll talk about algorithms for dealing
+
+13
+00:00:25,096 --> 00:00:27,051
+when we have such massive
+
+14
+00:00:27,091 --> 00:00:33,020
+data sets. So why
+
+15
+00:00:33,050 --> 00:00:35,022
+do we want to use such large data sets?
+
+16
+00:00:35,090 --> 00:00:37,017
+We've already seen that one
+
+17
+00:00:37,034 --> 00:00:38,028
+of the best ways to get
+
+18
+00:00:38,050 --> 00:00:39,086
+a high performance machine learning
+
+19
+00:00:40,017 --> 00:00:41,036
+system, is if you
+
+20
+00:00:41,053 --> 00:00:43,059
+take a low-bias learning algorithm, and
+
+21
+00:00:44,022 --> 00:00:45,081
+train that on a lot of data.
+
+22
+00:00:46,063 --> 00:00:47,071
+And so, one early
+
+23
+00:00:47,095 --> 00:00:49,020
+example already seen was
+
+24
+00:00:49,047 --> 00:00:53,010
+this example of cos sin between confusable words.
+
+25
+00:00:53,050 --> 00:00:55,050
+So, for breakfast, I ate two
+
+26
+00:00:56,021 --> 00:00:58,004
+eggs and we saw in
+
+27
+00:00:58,013 --> 00:00:59,092
+this example, these sorts
+
+28
+00:01:00,025 --> 00:01:02,047
+of results, where, you know, so long
+
+29
+00:01:02,085 --> 00:01:04,021
+as you feed the algorithm a lot
+
+30
+00:01:04,037 --> 00:01:06,003
+of data, it seems to do very well.
+
+31
+00:01:06,070 --> 00:01:07,079
+And so it's results like these
+
+32
+00:01:08,010 --> 00:01:08,087
+that has led to the saying
+
+33
+00:01:09,040 --> 00:01:10,085
+in machine learning that often it's
+
+34
+00:01:11,006 --> 00:01:12,048
+not who has the best algorithm that wins.
+
+35
+00:01:12,093 --> 00:01:14,009
+It's who has the most data.
+
+36
+00:01:15,006 --> 00:01:15,098
+So you want to learn
+
+37
+00:01:16,032 --> 00:01:17,050
+from large data sets, at
+
+38
+00:01:17,064 --> 00:01:19,015
+least when we can get such large data sets.
+
+39
+00:01:20,073 --> 00:01:21,096
+But learning with large data sets
+
+40
+00:01:22,034 --> 00:01:23,051
+comes with its own unique
+
+41
+00:01:23,085 --> 00:01:26,029
+problems, specifically, computational problems.
+
+42
+00:01:27,065 --> 00:01:28,078
+Let's say your training set size
+
+43
+00:01:31,096 --> 00:01:32,034
+is M equals 100,000,000.
+
+44
+00:01:33,087 --> 00:01:34,095
+And this is actually pretty
+
+45
+00:01:35,062 --> 00:01:37,046
+realistic for many modern data sets.
+
+46
+00:01:37,085 --> 00:01:38,081
+If you look at the US Census
+
+47
+00:01:39,026 --> 00:01:40,071
+data set, if there
+
+48
+00:01:40,076 --> 00:01:41,095
+are, you know, 300 million people in the
+
+49
+00:01:42,059 --> 00:01:44,018
+US, you can usually get hundreds of millions of records.
+
+50
+00:01:44,068 --> 00:01:45,070
+If you look at the amount of
+
+51
+00:01:45,095 --> 00:01:47,084
+traffic that popular websites get, you
+
+52
+00:01:48,010 --> 00:01:50,078
+easily get training sets that are much larger than hundreds of millions of examples.
+
+53
+00:01:52,060 --> 00:01:53,054
+And let's say you want
+
+54
+00:01:53,070 --> 00:01:55,043
+to train a linear regression model
+
+55
+00:01:55,089 --> 00:01:57,007
+or maybe a logistic regression model,
+
+56
+00:01:58,023 --> 00:02:01,090
+in which case this is the gradient descent rule.
+
+57
+00:02:02,039 --> 00:02:03,020
+And if you look at what
+
+58
+00:02:03,037 --> 00:02:04,018
+you need to do to compute
+
+59
+00:02:04,067 --> 00:02:05,079
+the gradient, which is this
+
+60
+00:02:05,090 --> 00:02:07,075
+term over here, then when
+
+61
+00:02:08,011 --> 00:02:09,013
+M is a hundred million,
+
+62
+00:02:09,099 --> 00:02:11,025
+you need to carry out a summation
+
+63
+00:02:11,038 --> 00:02:13,019
+over a hundred million terms,
+
+64
+00:02:14,027 --> 00:02:15,072
+in order to compute these derivatives
+
+65
+00:02:16,028 --> 00:02:18,038
+terms and to perform a single step of decent.
+
+66
+00:02:20,018 --> 00:02:22,028
+Because of the computational expense of
+
+67
+00:02:22,071 --> 00:02:24,009
+summing over a hundred million
+
+68
+00:02:24,096 --> 00:02:26,003
+entries in order to
+
+69
+00:02:26,013 --> 00:02:27,058
+compute just one step of
+
+70
+00:02:27,071 --> 00:02:29,012
+gradient descent, in the next
+
+71
+00:02:29,041 --> 00:02:30,075
+few videos we've spoken about techniques
+
+72
+00:02:31,041 --> 00:02:32,078
+for either replacing this with
+
+73
+00:02:33,018 --> 00:02:34,047
+something else or to
+
+74
+00:02:34,062 --> 00:02:36,087
+find more efficient ways to compute this derivative.
+
+75
+00:02:38,040 --> 00:02:39,027
+By the end of this sequence
+
+76
+00:02:39,084 --> 00:02:41,000
+of videos on large scale machine
+
+77
+00:02:41,031 --> 00:02:42,046
+learning, you know how
+
+78
+00:02:42,074 --> 00:02:47,015
+to fit models, linear regression, logistic regression, neural networks and so on even
+
+79
+00:02:47,043 --> 00:02:49,037
+two data sets with, say, a hundred million examples.
+
+80
+00:02:50,012 --> 00:02:51,081
+Of course, before we
+
+81
+00:02:51,093 --> 00:02:53,034
+put in the effort into training
+
+82
+00:02:53,096 --> 00:02:55,006
+a model with a hundred million
+
+83
+00:02:55,049 --> 00:02:56,053
+examples, We should also ask
+
+84
+00:02:56,081 --> 00:02:57,093
+ourselves, well, why not
+
+85
+00:02:58,053 --> 00:03:00,047
+use just a thousand examples.
+
+86
+00:03:01,009 --> 00:03:02,096
+Maybe we can randomly pick the
+
+87
+00:03:03,006 --> 00:03:04,037
+subsets of a thousand examples
+
+88
+00:03:05,000 --> 00:03:05,087
+out of a hundred million
+
+89
+00:03:06,061 --> 00:03:07,094
+examples and train our algorithm
+
+90
+00:03:08,065 --> 00:03:09,046
+on just a thousand examples.
+
+91
+00:03:10,058 --> 00:03:11,099
+So before investing the effort
+
+92
+00:03:12,028 --> 00:03:14,002
+into actually developing and
+
+93
+00:03:14,009 --> 00:03:15,024
+the software needed to train these
+
+94
+00:03:15,043 --> 00:03:16,068
+massive models is often a
+
+95
+00:03:16,086 --> 00:03:18,033
+good sanity check, if
+
+96
+00:03:19,006 --> 00:03:20,027
+training on just a thousand
+
+97
+00:03:20,046 --> 00:03:22,012
+examples might do just as well.
+
+98
+00:03:24,083 --> 00:03:26,015
+The way to sanity check of
+
+99
+00:03:26,022 --> 00:03:28,000
+using a much smaller training
+
+100
+00:03:28,033 --> 00:03:29,040
+set might do just as
+
+101
+00:03:29,049 --> 00:03:30,078
+well, that is if using
+
+102
+00:03:31,012 --> 00:03:33,015
+a much smaller n equals 1000 size
+
+103
+00:03:33,037 --> 00:03:34,025
+training set, that might do just
+
+104
+00:03:34,046 --> 00:03:35,050
+as well, it is the usual
+
+105
+00:03:35,087 --> 00:03:37,006
+method of plotting the learning
+
+106
+00:03:37,040 --> 00:03:38,071
+curves, so if you
+
+107
+00:03:38,090 --> 00:03:39,083
+were to plot the learning
+
+108
+00:03:40,009 --> 00:03:43,031
+curves and if your training
+
+109
+00:03:43,074 --> 00:03:45,091
+objective were to look
+
+110
+00:03:46,000 --> 00:03:48,058
+like this, that's J train theta.
+
+111
+00:03:49,053 --> 00:03:52,022
+And if your cross-validation set
+
+112
+00:03:52,050 --> 00:03:55,005
+objective, Jcv of theta
+
+113
+00:03:55,046 --> 00:03:56,075
+would look like this, then this
+
+114
+00:03:56,083 --> 00:03:58,069
+looks like a high-variance learning
+
+115
+00:03:59,041 --> 00:04:00,066
+algorithm, and we will
+
+116
+00:04:00,084 --> 00:04:02,033
+be more confident that adding
+
+117
+00:04:02,061 --> 00:04:05,034
+extra training examples would improve performance.
+
+118
+00:04:06,053 --> 00:04:07,062
+Whereas in contrast if you
+
+119
+00:04:07,069 --> 00:04:09,006
+were to plot the learning
+
+120
+00:04:09,037 --> 00:04:12,043
+curves, if your training
+
+121
+00:04:12,097 --> 00:04:14,003
+objective were to look like
+
+122
+00:04:14,021 --> 00:04:15,043
+this, and if your
+
+123
+00:04:17,041 --> 00:04:19,044
+trans-validation objective were to
+
+124
+00:04:19,058 --> 00:04:20,081
+look like that, then this looks
+
+125
+00:04:21,006 --> 00:04:23,061
+like the classical high-bias learning algorithm.
+
+126
+00:04:24,018 --> 00:04:25,069
+And in the latter case, you know, if
+
+127
+00:04:26,076 --> 00:04:27,097
+you were to plot this up to,
+
+128
+00:04:28,014 --> 00:04:29,037
+say, m equals 1000 and so
+
+129
+00:04:29,052 --> 00:04:31,031
+that is m equals 500 up
+
+130
+00:04:31,050 --> 00:04:33,072
+to m equals 1000, then it
+
+131
+00:04:33,083 --> 00:04:35,094
+seems unlikely that increasing m
+
+132
+00:04:36,056 --> 00:04:38,050
+to a hundred million will
+
+133
+00:04:38,092 --> 00:04:40,007
+do much better and then you'd
+
+134
+00:04:40,033 --> 00:04:42,006
+be just fine sticking to n equals 1000,
+
+135
+00:04:42,025 --> 00:04:43,070
+rather than investing a lot
+
+136
+00:04:43,087 --> 00:04:45,095
+of effort to figure out how the scale of the algorithm.
+
+137
+00:04:46,094 --> 00:04:48,007
+Of course, if you were in
+
+138
+00:04:48,023 --> 00:04:49,098
+the situation shown by the
+
+139
+00:04:50,005 --> 00:04:50,083
+figure on the right, then one
+
+140
+00:04:50,093 --> 00:04:51,079
+natural thing to do would
+
+141
+00:04:52,000 --> 00:04:53,043
+be to add extra features,
+
+142
+00:04:54,035 --> 00:04:55,080
+or add extra hidden units
+
+143
+00:04:56,017 --> 00:04:57,069
+to your neural network and
+
+144
+00:04:57,081 --> 00:04:58,098
+so on, so that you
+
+145
+00:04:59,010 --> 00:05:00,029
+end up with a situation
+
+146
+00:05:00,087 --> 00:05:02,066
+closer to that on the
+
+147
+00:05:02,074 --> 00:05:03,047
+left, where maybe this is up to
+
+148
+00:05:04,007 --> 00:05:05,012
+n equals 1000, and this then
+
+149
+00:05:05,029 --> 00:05:06,062
+gives you more confidence that trying
+
+150
+00:05:06,088 --> 00:05:08,079
+to add infrastructure to
+
+151
+00:05:08,095 --> 00:05:09,072
+change the algorithm to use
+
+152
+00:05:10,006 --> 00:05:11,025
+much more than a thousand examples
+
+153
+00:05:11,089 --> 00:05:13,085
+that might actually be a good use of your time.
+
+154
+00:05:14,060 --> 00:05:15,098
+So in large-scale machine learning,
+
+155
+00:05:16,077 --> 00:05:17,079
+we like to come up with
+
+156
+00:05:17,094 --> 00:05:19,070
+computationally reasonable ways, or
+
+157
+00:05:20,031 --> 00:05:23,037
+computationally efficient ways, to deal with very big data sets.
+
+158
+00:05:24,012 --> 00:05:26,014
+In the next few videos, we'll see two main ideas.
+
+159
+00:05:26,067 --> 00:05:28,010
+The first is called cost and
+
+160
+00:05:28,041 --> 00:05:29,068
+gradient descent and the second
+
+161
+00:05:29,094 --> 00:05:32,087
+is called Map Reduce, for viewing with very big data sets.
+
+162
+00:05:33,067 --> 00:05:35,014
+And after you've learned about
+
+163
+00:05:35,041 --> 00:05:36,082
+these methods, hopefully that will
+
+164
+00:05:36,098 --> 00:05:38,026
+allow you to scale up your
+
+165
+00:05:38,043 --> 00:05:39,063
+learning algorithms to big data
+
+166
+00:05:40,036 --> 00:05:41,043
+and allow you to get much
+
+167
+00:05:41,072 --> 00:05:44,000
+better performance on many different applications.

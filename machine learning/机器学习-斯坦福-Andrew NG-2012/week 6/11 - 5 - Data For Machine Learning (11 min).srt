@@ -1,0 +1,1348 @@
+
+1
+00:00:00,039 --> 00:00:03,056
+In the previous video, we talked about evaluation metrics.
+
+2
+00:00:04,073 --> 00:00:05,083
+In this video, I'd like
+
+3
+00:00:06,008 --> 00:00:07,023
+to switch tracks a bit and
+
+4
+00:00:07,048 --> 00:00:08,090
+touch on another important aspect of
+
+5
+00:00:09,057 --> 00:00:10,099
+machine learning system design,
+
+6
+00:00:11,080 --> 00:00:13,028
+which will often come up, which
+
+7
+00:00:13,047 --> 00:00:14,099
+is the issue of how much
+
+8
+00:00:15,026 --> 00:00:17,010
+data to train on.
+
+9
+00:00:17,030 --> 00:00:18,044
+Now, in some earlier videos, I
+
+10
+00:00:18,062 --> 00:00:20,032
+had cautioned against blindly
+
+11
+00:00:20,069 --> 00:00:21,066
+going out and just spending
+
+12
+00:00:21,098 --> 00:00:23,030
+lots of time collecting lots of
+
+13
+00:00:23,042 --> 00:00:24,073
+data, because it's only
+
+14
+00:00:25,003 --> 00:00:26,035
+sometimes that that would actually help.
+
+15
+00:00:27,051 --> 00:00:28,057
+But it turns out that under
+
+16
+00:00:28,082 --> 00:00:30,026
+certain conditions, and I
+
+17
+00:00:30,055 --> 00:00:31,057
+will say in this video what those
+
+18
+00:00:31,076 --> 00:00:33,059
+conditions are, getting a
+
+19
+00:00:33,082 --> 00:00:35,043
+lot of data and training on
+
+20
+00:00:35,072 --> 00:00:36,072
+a certain type of learning
+
+21
+00:00:37,000 --> 00:00:38,015
+algorithm, can be a
+
+22
+00:00:38,024 --> 00:00:39,046
+very effective way to get
+
+23
+00:00:39,077 --> 00:00:41,032
+a learning algorithm to do very good performance.
+
+24
+00:00:42,081 --> 00:00:44,028
+And this arises often enough
+
+25
+00:00:44,071 --> 00:00:45,092
+that if those conditions hold true
+
+26
+00:00:46,031 --> 00:00:47,085
+for your problem and if
+
+27
+00:00:47,096 --> 00:00:48,077
+you're able to get a lot
+
+28
+00:00:48,097 --> 00:00:50,007
+of data, this could be
+
+29
+00:00:50,021 --> 00:00:51,032
+a very good way to get
+
+30
+00:00:51,056 --> 00:00:52,096
+a very high performance learning algorithm.
+
+31
+00:00:53,099 --> 00:00:55,061
+So in this video, let's
+
+32
+00:00:56,032 --> 00:00:58,096
+talk more about that.
+
+33
+00:00:59,010 --> 00:00:59,082
+Let me start with a story.
+
+34
+00:01:01,007 --> 00:01:02,061
+Many, many years ago, two researchers
+
+35
+00:01:03,039 --> 00:01:05,037
+that I know, Michelle Banko and
+
+36
+00:01:05,051 --> 00:01:08,010
+Eric Broule ran the following fascinating study.
+
+37
+00:01:09,081 --> 00:01:11,029
+They were interested in studying the
+
+38
+00:01:11,054 --> 00:01:12,090
+effect of using different learning
+
+39
+00:01:13,029 --> 00:01:15,020
+algorithms versus trying them
+
+40
+00:01:15,037 --> 00:01:17,042
+out on different training set sciences,
+
+41
+00:01:18,001 --> 00:01:19,054
+they were considering the problem
+
+42
+00:01:20,017 --> 00:01:22,012
+of classifying between confusable words,
+
+43
+00:01:22,054 --> 00:01:23,060
+so for example, in the sentence:
+
+44
+00:01:24,040 --> 00:01:26,098
+for breakfast I ate, should it be to, two or too?
+
+45
+00:01:27,093 --> 00:01:28,089
+Well, for this example,
+
+46
+00:01:29,045 --> 00:01:32,039
+for breakfast I ate two, 2 eggs.
+
+47
+00:01:33,051 --> 00:01:34,053
+So, this is one example
+
+48
+00:01:35,031 --> 00:01:37,079
+of a set of confusable words and that's a different set.
+
+49
+00:01:38,023 --> 00:01:39,065
+So they took machine learning
+
+50
+00:01:39,095 --> 00:01:41,057
+problems like these, sort of supervised learning
+
+51
+00:01:41,078 --> 00:01:43,018
+problems to try to categorize
+
+52
+00:01:43,096 --> 00:01:45,020
+what is the appropriate word to
+
+53
+00:01:45,040 --> 00:01:46,056
+go into a certain position
+
+54
+00:01:47,054 --> 00:01:48,014
+in an English sentence.
+
+55
+00:01:51,001 --> 00:01:52,010
+They took a few different learning
+
+56
+00:01:52,034 --> 00:01:53,051
+algorithms which were, you know,
+
+57
+00:01:53,073 --> 00:01:55,020
+sort of considered state of
+
+58
+00:01:55,031 --> 00:01:56,010
+the art back in the day,
+
+59
+00:01:56,040 --> 00:01:57,067
+when they ran the study in
+
+60
+00:01:57,073 --> 00:01:59,021
+2001, so they took a
+
+61
+00:01:59,075 --> 00:02:01,014
+variance, roughly a variance
+
+62
+00:02:01,062 --> 00:02:03,018
+on logistic regression called the Perceptron.
+
+63
+00:02:03,076 --> 00:02:05,015
+They also took some of
+
+64
+00:02:05,025 --> 00:02:06,070
+their algorithms that were fairly
+
+65
+00:02:07,009 --> 00:02:08,062
+out back then but somewhat less
+
+66
+00:02:08,083 --> 00:02:10,059
+used now so when the
+
+67
+00:02:10,075 --> 00:02:11,097
+algorithm also very similar
+
+68
+00:02:12,037 --> 00:02:13,040
+to which is a regression
+
+69
+00:02:13,065 --> 00:02:15,058
+but different in some ways, much
+
+70
+00:02:16,013 --> 00:02:18,021
+used somewhat less, used
+
+71
+00:02:18,047 --> 00:02:19,037
+not too much right now
+
+72
+00:02:20,018 --> 00:02:21,018
+took what's called a memory based
+
+73
+00:02:21,043 --> 00:02:23,024
+learning algorithm again used somewhat less now.
+
+74
+00:02:23,061 --> 00:02:25,093
+But I'll talk a little bit about that later.
+
+75
+00:02:26,022 --> 00:02:27,022
+And they used a naive based
+
+76
+00:02:27,068 --> 00:02:29,024
+algorithm, which is something they'll
+
+77
+00:02:29,040 --> 00:02:32,037
+actually talk about in this course.
+
+78
+00:02:32,068 --> 00:02:34,040
+The exact algorithms of these details aren't important.
+
+79
+00:02:35,003 --> 00:02:36,008
+Think of this as, you know, just picking
+
+80
+00:02:36,043 --> 00:02:40,037
+four different classification algorithms and really the exact algorithms aren't important.
+
+81
+00:02:41,097 --> 00:02:42,099
+But what they did was they
+
+82
+00:02:43,013 --> 00:02:44,015
+varied the training set size
+
+83
+00:02:44,050 --> 00:02:45,038
+and tried out these learning
+
+84
+00:02:45,044 --> 00:02:47,006
+algorithms on the range of
+
+85
+00:02:47,021 --> 00:02:49,063
+training set sizes and that's the result they got.
+
+86
+00:02:50,030 --> 00:02:51,031
+And the trends are very
+
+87
+00:02:51,046 --> 00:02:53,016
+clear right first most of
+
+88
+00:02:53,028 --> 00:02:55,046
+these outer rooms give remarkably similar performance.
+
+89
+00:02:56,019 --> 00:02:57,075
+And second, as the training
+
+90
+00:02:58,015 --> 00:02:59,075
+set size increases, on the
+
+91
+00:02:59,086 --> 00:03:00,096
+horizontal axis is the
+
+92
+00:03:01,028 --> 00:03:02,050
+training set size in millions
+
+93
+00:03:04,006 --> 00:03:05,036
+go from you know a
+
+94
+00:03:05,041 --> 00:03:07,043
+hundred thousand up to a
+
+95
+00:03:07,071 --> 00:03:09,006
+thousand million that is a
+
+96
+00:03:09,033 --> 00:03:10,097
+billion training examples. The
+
+97
+00:03:11,009 --> 00:03:11,086
+performance of the algorithms
+
+98
+00:03:12,087 --> 00:03:15,036
+all pretty much monotonically increase
+
+99
+00:03:15,074 --> 00:03:16,061
+and the fact that if
+
+100
+00:03:16,065 --> 00:03:18,059
+you pick any algorithm may be
+
+101
+00:03:19,000 --> 00:03:21,031
+pick a "inferior algorithm" but
+
+102
+00:03:21,049 --> 00:03:22,065
+if you give that "inferior
+
+103
+00:03:23,018 --> 00:03:26,015
+algorithm" more data, then from
+
+104
+00:03:26,038 --> 00:03:27,056
+these examples, it looks like
+
+105
+00:03:27,066 --> 00:03:30,033
+it will most likely beat even a "superior algorithm".
+
+106
+00:03:32,019 --> 00:03:33,027
+So since this original study
+
+107
+00:03:33,071 --> 00:03:35,084
+which is very influential, there's been
+
+108
+00:03:36,036 --> 00:03:37,050
+a range of many different
+
+109
+00:03:37,083 --> 00:03:39,002
+studies showing similar results
+
+110
+00:03:39,055 --> 00:03:40,084
+that show that many different learning
+
+111
+00:03:41,015 --> 00:03:42,027
+algorithms you know tend
+
+112
+00:03:42,062 --> 00:03:44,028
+to, can sometimes, depending on
+
+113
+00:03:44,046 --> 00:03:46,006
+details, can give pretty similar ranges
+
+114
+00:03:46,049 --> 00:03:48,031
+of performance, but what can
+
+115
+00:03:48,052 --> 00:03:51,056
+really drive performance is you can give the algorithm a ton of training data.
+
+116
+00:03:53,018 --> 00:03:54,063
+And this is, results like these
+
+117
+00:03:55,000 --> 00:03:56,003
+has led to a saying in
+
+118
+00:03:56,012 --> 00:03:57,036
+machine learning that often in
+
+119
+00:03:57,050 --> 00:03:58,091
+machine learning it's not
+
+120
+00:03:59,018 --> 00:04:00,046
+who has the best algorithm that
+
+121
+00:04:00,059 --> 00:04:01,071
+wins, it's who has the
+
+122
+00:04:02,081 --> 00:04:04,025
+most data So when is this
+
+123
+00:04:04,046 --> 00:04:06,024
+true and when is this not true?
+
+124
+00:04:06,056 --> 00:04:07,071
+Because we have a learning
+
+125
+00:04:07,084 --> 00:04:09,000
+algorithm for which this is
+
+126
+00:04:09,015 --> 00:04:10,059
+true then getting a
+
+127
+00:04:10,081 --> 00:04:11,096
+lot of data is often
+
+128
+00:04:12,062 --> 00:04:13,083
+maybe the best way to ensure
+
+129
+00:04:14,018 --> 00:04:15,069
+that we have an algorithm with
+
+130
+00:04:15,090 --> 00:04:17,036
+very high performance rather than
+
+131
+00:04:17,051 --> 00:04:20,007
+you know, debating worrying about exactly which of these items to use.
+
+132
+00:04:21,070 --> 00:04:23,019
+Let's try to lay out a
+
+133
+00:04:23,032 --> 00:04:25,012
+set of assumptions under which having
+
+134
+00:04:25,066 --> 00:04:28,023
+a massive training set we think will be able to help.
+
+135
+00:04:29,077 --> 00:04:31,031
+Let's assume that in our
+
+136
+00:04:31,041 --> 00:04:33,020
+machine learning problem, the features
+
+137
+00:04:34,007 --> 00:04:36,056
+x have sufficient information with which
+
+138
+00:04:36,082 --> 00:04:38,060
+we can use to predict y accurately.
+
+139
+00:04:40,037 --> 00:04:41,049
+For example, if we take
+
+140
+00:04:41,079 --> 00:04:44,086
+the confusable words all of them that we had on the previous slide.
+
+141
+00:04:45,074 --> 00:04:47,004
+Let's say that it features x
+
+142
+00:04:47,051 --> 00:04:48,036
+capture what are the surrounding
+
+143
+00:04:49,008 --> 00:04:51,062
+words around the blank that we're trying to fill in.
+
+144
+00:04:51,083 --> 00:04:53,062
+So the features capture then we
+
+145
+00:04:54,022 --> 00:04:56,043
+want to have, sometimes for breakfast I have black eggs.
+
+146
+00:04:57,035 --> 00:04:58,022
+Then yeah that is pretty
+
+147
+00:04:58,048 --> 00:04:59,097
+much information to tell me
+
+148
+00:05:00,017 --> 00:05:01,005
+that the word I want
+
+149
+00:05:01,042 --> 00:05:03,063
+in the middle is TWO and that
+
+150
+00:05:03,085 --> 00:05:06,063
+is not word TO and its not the word TOO. So
+
+151
+00:05:09,064 --> 00:05:11,026
+the features capture, you know, one
+
+152
+00:05:11,062 --> 00:05:13,038
+of these surrounding words then that
+
+153
+00:05:13,056 --> 00:05:15,036
+gives me enough information to pretty
+
+154
+00:05:15,079 --> 00:05:17,063
+unambiguously decide what is
+
+155
+00:05:17,077 --> 00:05:18,082
+the label y or in
+
+156
+00:05:19,030 --> 00:05:20,018
+other words what is the word
+
+157
+00:05:20,075 --> 00:05:21,075
+that I should be using to fill
+
+158
+00:05:22,010 --> 00:05:23,051
+in that blank out of
+
+159
+00:05:23,093 --> 00:05:25,061
+this set of three confusable words.
+
+160
+00:05:27,011 --> 00:05:28,031
+So that's an example what
+
+161
+00:05:28,045 --> 00:05:29,083
+the future ex has sufficient information
+
+162
+00:05:30,041 --> 00:05:32,026
+for specific y. For
+
+163
+00:05:32,047 --> 00:05:33,024
+a counter example.
+
+164
+00:05:34,068 --> 00:05:36,000
+Consider a problem of predicting
+
+165
+00:05:36,047 --> 00:05:38,008
+the price of a house from
+
+166
+00:05:38,033 --> 00:05:39,032
+only the size of the
+
+167
+00:05:39,038 --> 00:05:40,035
+house and from no other
+
+168
+00:05:42,006 --> 00:05:42,006
+features. So
+
+169
+00:05:42,081 --> 00:05:43,088
+if you imagine I tell you
+
+170
+00:05:44,014 --> 00:05:45,026
+that a house is, you
+
+171
+00:05:45,037 --> 00:05:48,010
+know, 500 square feet but I don't give you any other features.
+
+172
+00:05:48,052 --> 00:05:49,051
+I don't tell you that the
+
+173
+00:05:49,058 --> 00:05:51,099
+house is in an expensive part of the city.
+
+174
+00:05:52,058 --> 00:05:53,070
+Or if I don't tell you that
+
+175
+00:05:53,083 --> 00:05:55,029
+the house, the number of
+
+176
+00:05:55,050 --> 00:05:57,002
+rooms in the house, or how
+
+177
+00:05:57,018 --> 00:05:58,039
+nicely furnished the house
+
+178
+00:05:58,079 --> 00:06:00,054
+is, or whether the house is new or old.
+
+179
+00:06:01,008 --> 00:06:02,029
+If I don't tell you anything other
+
+180
+00:06:02,054 --> 00:06:03,036
+than that this is a
+
+181
+00:06:03,051 --> 00:06:05,043
+500 square foot house, well there's
+
+182
+00:06:05,072 --> 00:06:07,016
+so many other factors that would
+
+183
+00:06:07,033 --> 00:06:08,027
+affect the price of a
+
+184
+00:06:08,047 --> 00:06:09,093
+house other than just the size
+
+185
+00:06:10,031 --> 00:06:11,032
+of a house that if all
+
+186
+00:06:11,043 --> 00:06:12,091
+you know is the size, it's actually
+
+187
+00:06:13,005 --> 00:06:14,061
+very difficult to predict the price accurately.
+
+188
+00:06:16,022 --> 00:06:16,086
+So that would be a counter
+
+189
+00:06:17,027 --> 00:06:18,023
+example to this assumption
+
+190
+00:06:18,087 --> 00:06:20,030
+that the features have sufficient information
+
+191
+00:06:20,080 --> 00:06:23,025
+to predict the price to the desired level of accuracy.
+
+192
+00:06:24,008 --> 00:06:25,018
+The way I think about testing
+
+193
+00:06:25,054 --> 00:06:26,073
+this assumption, one way I
+
+194
+00:06:26,093 --> 00:06:29,016
+often think about it is, how often I ask myself.
+
+195
+00:06:30,025 --> 00:06:31,066
+Given the input features x,
+
+196
+00:06:32,018 --> 00:06:33,031
+given the features, given the
+
+197
+00:06:33,037 --> 00:06:35,043
+same information available as well as learning algorithm.
+
+198
+00:06:36,050 --> 00:06:38,068
+If we were to go to human expert in this domain.
+
+199
+00:06:39,068 --> 00:06:41,056
+Can a human experts actually or
+
+200
+00:06:41,072 --> 00:06:43,016
+can human expert confidently predict
+
+201
+00:06:43,049 --> 00:06:45,038
+the value of y. For this
+
+202
+00:06:45,062 --> 00:06:46,073
+first example if we go
+
+203
+00:06:46,098 --> 00:06:49,042
+to, you know an expert human English speaker.
+
+204
+00:06:49,081 --> 00:06:51,025
+You go to someone that
+
+205
+00:06:51,038 --> 00:06:53,074
+speaks English well, right, then
+
+206
+00:06:53,093 --> 00:06:55,023
+a human expert in English
+
+207
+00:06:55,093 --> 00:06:57,025
+just read most people like
+
+208
+00:06:57,044 --> 00:06:59,073
+you and me will probably we
+
+209
+00:07:00,016 --> 00:07:01,007
+would probably be able to
+
+210
+00:07:01,017 --> 00:07:02,037
+predict what word should go in
+
+211
+00:07:02,062 --> 00:07:03,095
+here, to a good English
+
+212
+00:07:04,029 --> 00:07:05,055
+speaker can predict this well,
+
+213
+00:07:05,085 --> 00:07:06,070
+and so this gives me confidence
+
+214
+00:07:07,047 --> 00:07:08,063
+that x allows us to predict
+
+215
+00:07:08,081 --> 00:07:10,055
+y accurately, but in contrast
+
+216
+00:07:11,024 --> 00:07:13,055
+if we go to an expert in human prices.
+
+217
+00:07:14,004 --> 00:07:16,038
+Like maybe an expert realtor, right, someone
+
+218
+00:07:16,094 --> 00:07:18,008
+who sells houses for a living.
+
+219
+00:07:18,061 --> 00:07:19,044
+If I just tell them the
+
+220
+00:07:19,055 --> 00:07:20,043
+size of a house and I
+
+221
+00:07:20,052 --> 00:07:21,086
+tell them what the price
+
+222
+00:07:22,024 --> 00:07:23,041
+is well even an expert
+
+223
+00:07:23,060 --> 00:07:25,020
+in pricing or selling
+
+224
+00:07:25,060 --> 00:07:26,051
+houses wouldn't be able
+
+225
+00:07:26,055 --> 00:07:28,027
+to tell me and so this is fine that
+
+226
+00:07:29,000 --> 00:07:31,006
+for the housing price example knowing
+
+227
+00:07:31,060 --> 00:07:33,030
+only the size doesn't give
+
+228
+00:07:33,045 --> 00:07:34,095
+me enough information to predict
+
+229
+00:07:35,092 --> 00:07:36,087
+the price of the house.
+
+230
+00:07:37,068 --> 00:07:39,088
+So, let's say, this assumption holds.
+
+231
+00:07:41,019 --> 00:07:42,064
+Let's see then, when having
+
+232
+00:07:43,004 --> 00:07:44,023
+a lot of data could help.
+
+233
+00:07:45,001 --> 00:07:46,037
+Suppose the features have enough
+
+234
+00:07:46,064 --> 00:07:47,087
+information to predict the
+
+235
+00:07:48,005 --> 00:07:49,037
+value of y.
+
+236
+00:07:49,054 --> 00:07:50,075
+And let's suppose we use a
+
+237
+00:07:50,095 --> 00:07:52,037
+learning algorithm with a
+
+238
+00:07:52,060 --> 00:07:54,043
+large number of parameters so
+
+239
+00:07:54,057 --> 00:07:56,001
+maybe logistic regression or linear
+
+240
+00:07:56,027 --> 00:07:58,008
+regression with a large number of features.
+
+241
+00:07:58,055 --> 00:07:59,049
+Or one thing that I sometimes
+
+242
+00:07:59,094 --> 00:08:00,074
+do, one thing that I often
+
+243
+00:08:00,095 --> 00:08:03,030
+do actually is using neural network with many hidden units.
+
+244
+00:08:03,086 --> 00:08:05,023
+That would be another learning
+
+245
+00:08:05,050 --> 00:08:07,042
+algorithm with a lot of parameters.
+
+246
+00:08:08,047 --> 00:08:10,027
+So these are all powerful learning
+
+247
+00:08:10,035 --> 00:08:12,035
+algorithms with a lot of parameters that
+
+248
+00:08:13,004 --> 00:08:14,081
+can fit very complex functions.
+
+249
+00:08:16,075 --> 00:08:17,055
+So, I'm going to call these, I'm
+
+250
+00:08:18,062 --> 00:08:19,072
+going to think of these as
+
+251
+00:08:20,050 --> 00:08:21,097
+low-bias algorithms because you
+
+252
+00:08:22,013 --> 00:08:23,054
+know we can fit very complex functions
+
+253
+00:08:25,048 --> 00:08:26,074
+and because we have
+
+254
+00:08:27,025 --> 00:08:28,092
+a very powerful learning algorithm,
+
+255
+00:08:29,037 --> 00:08:30,058
+they can fit very complex functions.
+
+256
+00:08:31,068 --> 00:08:33,047
+Chances are, if we
+
+257
+00:08:34,007 --> 00:08:35,078
+run these algorithms on
+
+258
+00:08:35,094 --> 00:08:37,025
+the data sets, it will
+
+259
+00:08:37,042 --> 00:08:38,076
+be able to fit the training
+
+260
+00:08:39,020 --> 00:08:40,067
+set well, and so
+
+261
+00:08:40,094 --> 00:08:43,023
+hopefully the training error will be slow.
+
+262
+00:08:44,051 --> 00:08:45,051
+Now let's say, we use
+
+263
+00:08:46,001 --> 00:08:47,078
+a massive, massive training set,
+
+264
+00:08:48,019 --> 00:08:49,037
+in that case, if we
+
+265
+00:08:49,042 --> 00:08:51,046
+have a huge training set, then
+
+266
+00:08:51,062 --> 00:08:53,049
+hopefully even though we have a lot of parameters
+
+267
+00:08:53,075 --> 00:08:56,008
+but if the training set is sort of even much
+
+268
+00:08:56,036 --> 00:08:57,045
+larger than the number of
+
+269
+00:08:57,084 --> 00:08:59,045
+parameters then hopefully these
+
+270
+00:08:59,063 --> 00:09:01,049
+albums will be unlikely to overfit.
+
+271
+00:09:02,059 --> 00:09:03,065
+Right because we have such a
+
+272
+00:09:03,071 --> 00:09:05,067
+massive training set and by
+
+273
+00:09:06,007 --> 00:09:07,087
+unlikely to overfit what that
+
+274
+00:09:08,007 --> 00:09:09,009
+means is that the training
+
+275
+00:09:09,038 --> 00:09:10,086
+error will hopefully be
+
+276
+00:09:11,004 --> 00:09:13,026
+close to the test error.
+
+277
+00:09:13,096 --> 00:09:15,015
+Finally putting these two
+
+278
+00:09:15,035 --> 00:09:16,076
+together that the train
+
+279
+00:09:16,099 --> 00:09:18,059
+set error is small and
+
+280
+00:09:18,070 --> 00:09:19,087
+the test set error is close
+
+281
+00:09:20,036 --> 00:09:22,028
+to the training error what
+
+282
+00:09:22,046 --> 00:09:24,050
+this two together imply is
+
+283
+00:09:24,071 --> 00:09:26,062
+that hopefully the test set error
+
+284
+00:09:27,077 --> 00:09:28,045
+will also be small.
+
+285
+00:09:30,000 --> 00:09:32,061
+Another way to
+
+286
+00:09:32,072 --> 00:09:33,092
+think about this is that
+
+287
+00:09:34,070 --> 00:09:35,074
+in order to have a high
+
+288
+00:09:35,087 --> 00:09:37,062
+performance learning algorithm we want
+
+289
+00:09:37,092 --> 00:09:40,047
+it not to have high bias and not to have high variance.
+
+290
+00:09:42,005 --> 00:09:43,026
+So the bias problem we're going
+
+291
+00:09:43,035 --> 00:09:44,070
+to address by making sure we
+
+292
+00:09:44,087 --> 00:09:45,090
+have a learning algorithm with many
+
+293
+00:09:46,016 --> 00:09:47,066
+parameters and so that
+
+294
+00:09:47,084 --> 00:09:48,092
+gives us a low bias alorithm
+
+295
+00:09:50,011 --> 00:09:51,046
+and by using a
+
+296
+00:09:51,061 --> 00:09:53,024
+very large training set, this ensures
+
+297
+00:09:53,075 --> 00:09:55,059
+that we don't have a variance problem here.
+
+298
+00:09:55,084 --> 00:09:57,027
+So hopefully our algorithm will
+
+299
+00:09:57,042 --> 00:09:59,010
+have no variance and so
+
+300
+00:09:59,034 --> 00:10:00,094
+is by pulling these two together,
+
+301
+00:10:01,087 --> 00:10:02,083
+that we end up with a low
+
+302
+00:10:02,089 --> 00:10:03,099
+bias and a low variance
+
+303
+00:10:04,099 --> 00:10:06,091
+learning algorithm and this
+
+304
+00:10:07,013 --> 00:10:08,029
+allows us to do well
+
+305
+00:10:08,071 --> 00:10:10,014
+on the test set.
+
+306
+00:10:10,042 --> 00:10:12,013
+And fundamentally it's a key ingredients
+
+307
+00:10:13,001 --> 00:10:14,055
+of assuming that the features
+
+308
+00:10:14,094 --> 00:10:16,075
+have enough information and we
+
+309
+00:10:16,089 --> 00:10:17,096
+have a rich class of functions
+
+310
+00:10:18,039 --> 00:10:19,058
+that's why it guarantees low bias,
+
+311
+00:10:20,075 --> 00:10:21,075
+and then it having a massive
+
+312
+00:10:22,011 --> 00:10:25,000
+training set that that's what guarantees more variance.
+
+313
+00:10:27,014 --> 00:10:28,030
+So this gives us a
+
+314
+00:10:28,040 --> 00:10:29,082
+set of conditions rather hopefully
+
+315
+00:10:30,009 --> 00:10:31,061
+some understanding of what's the
+
+316
+00:10:31,087 --> 00:10:33,073
+sort of problem where if
+
+317
+00:10:33,086 --> 00:10:34,078
+you have a lot of data
+
+318
+00:10:34,096 --> 00:10:36,014
+and you train a learning
+
+319
+00:10:36,037 --> 00:10:38,092
+algorithm with lot of parameters, that might
+
+320
+00:10:39,012 --> 00:10:39,087
+be a good way to give
+
+321
+00:10:40,005 --> 00:10:42,049
+a high performance learning algorithm
+
+322
+00:10:43,048 --> 00:10:44,013
+and really, I think the key test that
+
+323
+00:10:44,023 --> 00:10:45,051
+I often ask myself are
+
+324
+00:10:45,082 --> 00:10:47,010
+first, can a human experts
+
+325
+00:10:47,020 --> 00:10:48,036
+look at the features x and
+
+326
+00:10:48,087 --> 00:10:49,088
+confidently predict the value of
+
+327
+00:10:50,002 --> 00:10:51,008
+y. Because that's sort of
+
+328
+00:10:51,021 --> 00:10:53,004
+a certification that y
+
+329
+00:10:53,032 --> 00:10:55,003
+can be predicted accurately from
+
+330
+00:10:55,013 --> 00:10:57,000
+the features x and second,
+
+331
+00:10:57,050 --> 00:10:58,062
+can we actually get a large
+
+332
+00:10:58,082 --> 00:11:00,014
+training set, and train the
+
+333
+00:11:00,035 --> 00:11:01,047
+learning algorithm with a lot of
+
+334
+00:11:01,053 --> 00:11:03,028
+parameters in the training
+
+335
+00:11:03,051 --> 00:11:04,041
+set and if you can't do both
+
+336
+00:11:04,087 --> 00:11:06,029
+then that's more often give
+
+337
+00:11:06,046 --> 00:11:08,057
+you a very kind performance learning algorithm.

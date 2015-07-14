@@ -1,0 +1,1356 @@
+
+1
+00:00:00,041 --> 00:00:03,006
+You now know about the stochastic gradient descent algorithm.
+
+2
+00:00:03,097 --> 00:00:05,020
+But when you're running the algorithm,
+
+3
+00:00:05,046 --> 00:00:06,038
+how do you make sure that
+
+4
+00:00:06,069 --> 00:00:09,033
+it's completely debugged and is converging okay?
+
+5
+00:00:10,065 --> 00:00:12,014
+Equally important, how do
+
+6
+00:00:12,024 --> 00:00:13,075
+you tune the learning rate alpha
+
+7
+00:00:14,042 --> 00:00:15,053
+with Stochastic Gradient Descent.
+
+8
+00:00:16,025 --> 00:00:17,039
+In this video we talk about
+
+9
+00:00:18,048 --> 00:00:19,035
+some techniques for doing these things,
+
+10
+00:00:19,066 --> 00:00:21,039
+for making sure it's converging and
+
+11
+00:00:21,060 --> 00:00:22,091
+for picking the learning
+
+12
+00:00:23,023 --> 00:00:25,019
+rate alpha.
+
+13
+00:00:26,051 --> 00:00:27,055
+Back when we were using batch
+
+14
+00:00:27,096 --> 00:00:29,044
+gradient descent our standard way
+
+15
+00:00:29,069 --> 00:00:31,001
+for making sure that when the
+
+16
+00:00:31,008 --> 00:00:32,040
+set was converging was we
+
+17
+00:00:32,052 --> 00:00:34,014
+would plot the authorization cost
+
+18
+00:00:34,040 --> 00:00:35,085
+function as a function of the number of iterations.
+
+19
+00:00:37,011 --> 00:00:38,078
+So that was the cost function
+
+20
+00:00:39,043 --> 00:00:40,074
+and we would make sure that
+
+21
+00:00:41,025 --> 00:00:43,079
+this cost function is decreasing on every iteration.
+
+22
+00:00:44,078 --> 00:00:45,099
+When the training set sizes were
+
+23
+00:00:46,021 --> 00:00:47,035
+small we could do that because
+
+24
+00:00:47,077 --> 00:00:49,050
+we could compute the sum pretty
+
+25
+00:00:49,084 --> 00:00:51,025
+efficiently when you have
+
+26
+00:00:51,064 --> 00:00:53,006
+a massive training set size
+
+27
+00:00:54,011 --> 00:00:55,018
+then you don't want to have
+
+28
+00:00:55,042 --> 00:00:56,082
+to pause your algorithm periodically.
+
+29
+00:00:58,007 --> 00:00:59,028
+You don't want to have to stochastic
+
+30
+00:01:00,018 --> 00:01:02,003
+gradient descent periodically in order
+
+31
+00:01:02,043 --> 00:01:03,071
+to compute this cost function
+
+32
+00:01:04,026 --> 00:01:07,009
+since it requires a sum of your entire training set size.
+
+33
+00:01:07,098 --> 00:01:09,006
+And the whole point of stochastic
+
+34
+00:01:09,035 --> 00:01:10,081
+gradient was that you
+
+35
+00:01:10,089 --> 00:01:13,026
+wanted to start [XX] after
+
+36
+00:01:13,042 --> 00:01:14,093
+just looking at a single example without
+
+37
+00:01:15,023 --> 00:01:17,032
+needing to occasionally scan through
+
+38
+00:01:17,065 --> 00:01:19,050
+your entire training set right
+
+39
+00:01:19,070 --> 00:01:20,070
+in the middle of the algorithm
+
+40
+00:01:21,046 --> 00:01:23,012
+just to confuse things like the
+
+41
+00:01:23,028 --> 00:01:26,070
+cost function of the
+
+42
+00:01:27,034 --> 00:01:30,029
+entire training set converging,
+
+43
+00:01:31,034 --> 00:01:32,006
+here's what we can do instead.
+
+44
+00:01:33,006 --> 00:01:35,048
+Let's take the definition of the cost that we had previously.
+
+45
+00:01:36,007 --> 00:01:36,079
+So the cost of the parameters
+
+46
+00:01:37,020 --> 00:01:38,039
+theta with respect to a
+
+47
+00:01:38,059 --> 00:01:40,001
+single training example is just
+
+48
+00:01:40,031 --> 00:01:42,039
+one half of the square error on that training example.
+
+49
+00:01:43,084 --> 00:01:45,043
+Then, while stochastic gradient descent
+
+50
+00:01:45,079 --> 00:01:47,017
+is learning, right before
+
+51
+00:01:48,004 --> 00:01:49,028
+we we train on a specific example.
+
+52
+00:01:49,085 --> 00:01:51,006
+So, in stochastic gradient descent
+
+53
+00:01:51,034 --> 00:01:52,034
+we're going to look at the examples
+
+54
+00:01:52,084 --> 00:01:54,037
+xi, yi, in order, and
+
+55
+00:01:54,054 --> 00:01:56,085
+then sort of take a little update with respect to this example.
+
+56
+00:01:57,084 --> 00:01:58,056
+And we go on to the next
+
+57
+00:01:58,079 --> 00:02:00,073
+example, xi plus 1,
+
+58
+00:02:01,034 --> 00:02:03,084
+yi plus 1, and so on, right?
+
+59
+00:02:04,020 --> 00:02:05,053
+That's what stochastic gradient descent does.
+
+60
+00:02:06,076 --> 00:02:07,076
+So, while the algorithm
+
+61
+00:02:08,066 --> 00:02:09,090
+is looking at the example
+
+62
+00:02:10,024 --> 00:02:11,081
+xi, yi, but before
+
+63
+00:02:13,015 --> 00:02:14,034
+it has updated the parameters
+
+64
+00:02:14,088 --> 00:02:17,006
+theta using that um, example,
+
+65
+00:02:18,003 --> 00:02:19,078
+let's compute the cost of that example.
+
+66
+00:02:20,093 --> 00:02:23,028
+Just to say the same thing again, but using slightly different words.
+
+67
+00:02:24,028 --> 00:02:25,084
+stochastic gradient descent is
+
+68
+00:02:26,005 --> 00:02:27,043
+scanning through our training set
+
+69
+00:02:28,055 --> 00:02:29,078
+right before we have updated
+
+70
+00:02:30,030 --> 00:02:31,055
+theta using a specific training
+
+71
+00:02:31,080 --> 00:02:32,075
+example x i comma y
+
+72
+00:02:33,019 --> 00:02:34,080
+i let's compute how well
+
+73
+00:02:35,034 --> 00:02:38,058
+our hypothesis is doing on that training example.
+
+74
+00:02:38,090 --> 00:02:39,093
+And we want to do this before updating
+
+75
+00:02:40,031 --> 00:02:41,066
+theta because if we've
+
+76
+00:02:41,083 --> 00:02:43,058
+just updated theta using example,
+
+77
+00:02:44,046 --> 00:02:45,031
+you know, that it might be doing
+
+78
+00:02:45,069 --> 00:02:47,084
+better on that example than what would be representative.
+
+79
+00:02:49,049 --> 00:02:50,084
+Finally, in order to
+
+80
+00:02:50,097 --> 00:02:52,037
+check for the convergence [xx]  stochastic
+
+81
+00:02:52,065 --> 00:02:53,083
+gradient descent, what we can
+
+82
+00:02:54,000 --> 00:02:56,025
+do is every, say, every
+
+83
+00:02:56,038 --> 00:02:57,087
+thousand iterations, we can
+
+84
+00:02:58,006 --> 00:03:01,021
+plot these costs that we've been computing in the previous step.
+
+85
+00:03:01,046 --> 00:03:03,030
+We can plot those costs average
+
+86
+00:03:03,081 --> 00:03:05,003
+over, say, the last thousand
+
+87
+00:03:05,037 --> 00:03:07,003
+examples processed by the algorithm.
+
+88
+00:03:08,030 --> 00:03:09,038
+And if you do this, it kind
+
+89
+00:03:09,058 --> 00:03:10,050
+of gives you a running estimate
+
+90
+00:03:11,016 --> 00:03:12,044
+of how well the algorithm is doing.
+
+91
+00:03:12,091 --> 00:03:14,025
+on, you know, the last
+
+92
+00:03:14,068 --> 00:03:16,062
+1000 training examples that your has seen.
+
+93
+00:03:17,081 --> 00:03:19,084
+So, in contrast to computing
+
+94
+00:03:21,090 --> 00:03:23,086
+which needed to scan through the entire training set.
+
+95
+00:03:24,053 --> 00:03:26,037
+With this other procedure, well, as
+
+96
+00:03:26,059 --> 00:03:27,071
+part of stochastic gradient descent,
+
+97
+00:03:28,040 --> 00:03:29,053
+it doesn't cost much to compute
+
+98
+00:03:29,091 --> 00:03:32,065
+these costs as well right be updating to parameter theta.
+
+99
+00:03:33,050 --> 00:03:34,066
+And all we're doing is every thousand
+
+100
+00:03:35,006 --> 00:03:36,031
+integrations or so, we just
+
+101
+00:03:36,056 --> 00:03:37,081
+average the last 1,000 costs
+
+102
+00:03:38,050 --> 00:03:40,003
+that we computed and plot that.
+
+103
+00:03:41,006 --> 00:03:42,046
+And by looking at those
+
+104
+00:03:42,058 --> 00:03:44,000
+plots, this will allow
+
+105
+00:03:44,012 --> 00:03:46,093
+us to check if stochastic gradient descent is converging.
+
+106
+00:03:48,006 --> 00:03:48,087
+So here are a few examples
+
+107
+00:03:49,071 --> 00:03:51,056
+of what these plots might look like.
+
+108
+00:03:52,062 --> 00:03:53,074
+Suppose you have plotted the cost
+
+109
+00:03:53,096 --> 00:03:55,071
+average over the last thousand examples,
+
+110
+00:03:56,012 --> 00:03:57,065
+because these are averaged over
+
+111
+00:03:57,087 --> 00:03:59,024
+just a thousand examples they are
+
+112
+00:03:59,033 --> 00:04:00,034
+going to be a little bit noisy
+
+113
+00:04:00,087 --> 00:04:01,081
+and so, it may not
+
+114
+00:04:02,015 --> 00:04:03,037
+decrease on every single iteration.
+
+115
+00:04:04,034 --> 00:04:05,038
+Then if you get a figure that
+
+116
+00:04:05,056 --> 00:04:06,077
+looks like this, So the
+
+117
+00:04:07,000 --> 00:04:08,028
+plot is noisy because it's
+
+118
+00:04:08,046 --> 00:04:09,050
+average over, you know, just
+
+119
+00:04:09,065 --> 00:04:11,056
+a small subset, say a thousand training examples.
+
+120
+00:04:11,088 --> 00:04:13,009
+If you get a figure
+
+121
+00:04:13,046 --> 00:04:14,053
+that looks like this, you know
+
+122
+00:04:14,075 --> 00:04:15,088
+that would be a pretty decent
+
+123
+00:04:16,042 --> 00:04:17,068
+run with the algorithm, maybe, where
+
+124
+00:04:17,097 --> 00:04:19,031
+it looks like the cost has
+
+125
+00:04:19,050 --> 00:04:20,072
+gone down and then this
+
+126
+00:04:20,099 --> 00:04:21,098
+plateau that looks kind of
+
+127
+00:04:22,025 --> 00:04:23,087
+flattened out, you know, starting from around there.
+
+128
+00:04:24,054 --> 00:04:25,073
+look like, this is
+
+129
+00:04:25,087 --> 00:04:28,044
+what your cost looks like then maybe your learning algorithm has converged.
+
+130
+00:04:30,052 --> 00:04:31,061
+If you want to try using a
+
+131
+00:04:31,063 --> 00:04:33,036
+smaller learning rate, something you
+
+132
+00:04:33,049 --> 00:04:34,082
+might see is that the
+
+133
+00:04:35,041 --> 00:04:36,061
+algorithm may initially learn more
+
+134
+00:04:36,081 --> 00:04:39,002
+slowly so the cost goes down more slowly.
+
+135
+00:04:40,006 --> 00:04:41,041
+But then eventually you have a
+
+136
+00:04:41,056 --> 00:04:42,057
+smaller learning rate is actually possible
+
+137
+00:04:43,057 --> 00:04:44,092
+for the algorithm to end up
+
+138
+00:04:45,007 --> 00:04:47,006
+at a, maybe very slightly better solution.
+
+139
+00:04:47,070 --> 00:04:48,087
+So the red line may represent
+
+140
+00:04:49,050 --> 00:04:50,073
+the behavior of stochastic gradient descent
+
+141
+00:04:51,011 --> 00:04:52,042
+using a slower, using a
+
+142
+00:04:52,066 --> 00:04:54,045
+smaller And the
+
+143
+00:04:54,068 --> 00:04:55,075
+reason this is the case is
+
+144
+00:04:55,093 --> 00:04:57,087
+because, you remember, stochastic gradient
+
+145
+00:04:58,018 --> 00:04:59,064
+descent doesn't just converge
+
+146
+00:04:59,070 --> 00:05:01,017
+the global minimum, is that
+
+147
+00:05:01,039 --> 00:05:02,022
+what it does is the parameters
+
+148
+00:05:02,093 --> 00:05:04,082
+will oscillate a bit around the global minimum.
+
+149
+00:05:05,037 --> 00:05:06,069
+So by using a smaller learning
+
+150
+00:05:07,006 --> 00:05:08,061
+rate, you'll end up with smaller oscillations.
+
+151
+00:05:09,058 --> 00:05:11,018
+And Sometimes this little
+
+152
+00:05:11,041 --> 00:05:12,038
+difference will be negligible
+
+153
+00:05:13,080 --> 00:05:14,094
+and sometimes with a smaller
+
+154
+00:05:15,007 --> 00:05:16,018
+than you can get a slightly
+
+155
+00:05:16,048 --> 00:05:19,001
+better value for the parameters.
+
+156
+00:05:19,087 --> 00:05:21,031
+Here are some other things that might happen.
+
+157
+00:05:21,083 --> 00:05:23,019
+Let's say you run stochastic gradient
+
+158
+00:05:23,043 --> 00:05:24,050
+descent and you average over a
+
+159
+00:05:24,061 --> 00:05:26,098
+thousand examples when plotting these costs.
+
+160
+00:05:28,044 --> 00:05:29,045
+So, you know, here might be
+
+161
+00:05:30,039 --> 00:05:32,020
+the result of averaging another one of these plots.
+
+162
+00:05:32,062 --> 00:05:35,048
+Then again, it kind of looks like it's converged.
+
+163
+00:05:35,079 --> 00:05:36,076
+If you were to take this number,
+
+164
+00:05:37,029 --> 00:05:39,006
+a thousand, and increase to
+
+165
+00:05:39,058 --> 00:05:41,063
+averaging over 5 thousand examples.
+
+166
+00:05:42,064 --> 00:05:43,088
+Then it's possible that you might
+
+167
+00:05:44,043 --> 00:05:47,067
+get a smoother curve that looks more like this.
+
+168
+00:05:48,097 --> 00:05:50,077
+And by averaging over, say
+
+169
+00:05:50,097 --> 00:05:53,010
+5,000 examples instead of
+
+170
+00:05:53,025 --> 00:05:54,060
+1,000, you might be able
+
+171
+00:05:54,075 --> 00:05:57,012
+to get a smoother curve like this.
+
+172
+00:05:57,023 --> 00:06:00,007
+And so that's the effect of increasing the number of examples you have is your over.
+
+173
+00:06:00,074 --> 00:06:01,087
+The disadvantage of making this
+
+174
+00:06:02,001 --> 00:06:03,004
+too big of course is that
+
+175
+00:06:03,018 --> 00:06:05,049
+now you get one date point only every 5,000 examples.
+
+176
+00:06:06,087 --> 00:06:08,000
+And so the feedback you get
+
+177
+00:06:08,031 --> 00:06:09,012
+on how well your learning learning
+
+178
+00:06:09,039 --> 00:06:10,032
+algorithm is doing is, sort of,
+
+179
+00:06:10,062 --> 00:06:12,023
+maybe it's more delayed because you
+
+180
+00:06:12,035 --> 00:06:13,075
+get one data point on
+
+181
+00:06:14,006 --> 00:06:16,070
+your plot only every 5,000 examples rather than every 1,000 examples.
+
+182
+00:06:18,039 --> 00:06:19,094
+Along a similar vein some
+
+183
+00:06:20,020 --> 00:06:21,062
+times you may run a
+
+184
+00:06:21,074 --> 00:06:23,083
+gradient descent and end up with a plot that looks like this.
+
+185
+00:06:24,091 --> 00:06:25,087
+And with a plot that looks
+
+186
+00:06:26,007 --> 00:06:28,023
+like this, you know, it
+
+187
+00:06:28,043 --> 00:06:30,029
+looks like the cost just
+
+188
+00:06:30,066 --> 00:06:31,087
+is not decreasing at all.
+
+189
+00:06:32,019 --> 00:06:33,072
+It looks like the algorithm is just not learning.
+
+190
+00:06:34,049 --> 00:06:35,045
+It's just, looks like things
+
+191
+00:06:35,075 --> 00:06:36,075
+get flat, basically a flat curve and the cost is
+
+192
+00:06:36,088 --> 00:06:38,008
+
+
+193
+00:06:38,019 --> 00:06:40,037
+just not decreasing but, again
+
+194
+00:06:41,008 --> 00:06:42,056
+if you were to increase this
+
+195
+00:06:43,075 --> 00:06:44,087
+to averaging over a larger
+
+196
+00:06:45,023 --> 00:06:46,072
+number of examples it is possible
+
+197
+00:06:47,049 --> 00:06:48,075
+that you see something like this
+
+198
+00:06:49,012 --> 00:06:50,019
+it looks like the cost
+
+199
+00:06:50,056 --> 00:06:52,008
+actually is decreasing, it's just
+
+200
+00:06:52,031 --> 00:06:53,069
+that the blue line averaging
+
+201
+00:06:54,007 --> 00:06:55,080
+over 2, 3 examples, the
+
+202
+00:06:55,094 --> 00:06:57,017
+blue line was too noisy so
+
+203
+00:06:57,030 --> 00:06:58,056
+you couldn't see the actual trend
+
+204
+00:06:59,047 --> 00:07:01,094
+in the cost actually decreasing
+
+205
+00:07:02,036 --> 00:07:04,005
+and possibly averaging over 5,000
+
+206
+00:07:04,081 --> 00:07:05,092
+examples instead of 1,000 may help.
+
+207
+00:07:07,019 --> 00:07:08,037
+Of course we averaged over a
+
+208
+00:07:08,042 --> 00:07:10,024
+larger number examples that we've
+
+209
+00:07:10,041 --> 00:07:11,087
+averaged here over 5,000
+
+210
+00:07:12,010 --> 00:07:13,025
+examples, I'm just using a different
+
+211
+00:07:13,052 --> 00:07:14,075
+color, it is also possible that you
+
+212
+00:07:14,086 --> 00:07:16,082
+that see a learning curve ends up looking like this.
+
+213
+00:07:17,000 --> 00:07:18,058
+That it's still fat even
+
+214
+00:07:18,075 --> 00:07:20,058
+when you average over a larger number of examples.
+
+215
+00:07:21,025 --> 00:07:23,005
+And as you get that, then
+
+216
+00:07:23,025 --> 00:07:24,054
+that's maybe just a more
+
+217
+00:07:24,079 --> 00:07:26,013
+firm verification that unfortunately
+
+218
+00:07:26,098 --> 00:07:28,094
+the algorithm just isn't learning much for whatever reason.
+
+219
+00:07:29,049 --> 00:07:30,092
+And you need to
+
+220
+00:07:31,029 --> 00:07:32,048
+either change the learning rate or
+
+221
+00:07:32,054 --> 00:07:34,062
+change the features or change something else about the algorithm.
+
+222
+00:07:35,020 --> 00:07:36,049
+Finally, one last thing that
+
+223
+00:07:36,061 --> 00:07:37,054
+you might see would be if
+
+224
+00:07:37,074 --> 00:07:39,012
+you were to plot these and
+
+225
+00:07:39,091 --> 00:07:40,094
+you see a curve that looks like
+
+226
+00:07:41,002 --> 00:07:42,062
+this, where it actually looks like it's increasing.
+
+227
+00:07:43,095 --> 00:07:45,038
+And if that's the case then this
+
+228
+00:07:45,063 --> 00:07:47,052
+is a sign that the algorithm is diverging.
+
+229
+00:07:48,075 --> 00:07:49,062
+And What you really should
+
+230
+00:07:49,088 --> 00:07:51,029
+do is use a smaller
+
+231
+00:07:51,050 --> 00:07:53,067
+value of the learning rate alpha.
+
+232
+00:07:55,008 --> 00:07:56,011
+So hopefully this gives you
+
+233
+00:07:56,024 --> 00:07:57,012
+a sense of the range of
+
+234
+00:07:57,018 --> 00:07:58,036
+phenomena you might see when
+
+235
+00:07:58,051 --> 00:08:00,012
+you plot these cost average over
+
+236
+00:08:00,086 --> 00:08:02,055
+some range of examples as well
+
+237
+00:08:02,093 --> 00:08:04,051
+as suggests the sorts
+
+238
+00:08:04,064 --> 00:08:05,048
+of things you might try to do
+
+239
+00:08:05,079 --> 00:08:08,037
+in response to seeing different plots.
+
+240
+00:08:08,056 --> 00:08:09,051
+So if the plots looks too noisy,
+
+241
+00:08:10,008 --> 00:08:10,098
+or if it wiggles up and
+
+242
+00:08:11,008 --> 00:08:12,062
+down too much, then try
+
+243
+00:08:12,095 --> 00:08:14,060
+increasing the number of
+
+244
+00:08:14,067 --> 00:08:16,000
+examples you're averaging over so
+
+245
+00:08:16,012 --> 00:08:18,035
+you can see the overall trend in the plot better.
+
+246
+00:08:19,026 --> 00:08:20,039
+And if you see that
+
+247
+00:08:20,098 --> 00:08:22,037
+the errors are actually increasing, the
+
+248
+00:08:22,048 --> 00:08:24,004
+costs are actually increasing, try
+
+249
+00:08:24,031 --> 00:08:25,081
+using a smaller value of alpha.
+
+250
+00:08:26,075 --> 00:08:28,055
+Finally, it's worth examining the
+
+251
+00:08:29,012 --> 00:08:31,006
+of the learning rate just a little bit more.
+
+252
+00:08:32,026 --> 00:08:33,026
+We saw that when we run stochastic
+
+253
+00:08:33,088 --> 00:08:35,070
+gradient descent, the algorithm will
+
+254
+00:08:35,083 --> 00:08:37,008
+start here and sort of
+
+255
+00:08:37,075 --> 00:08:39,012
+meander towards the minimum And
+
+256
+00:08:39,053 --> 00:08:41,012
+then it won't really converge, and
+
+257
+00:08:41,028 --> 00:08:42,092
+instead it'll wander around the minimum forever.
+
+258
+00:08:44,001 --> 00:08:44,084
+And so you end up with
+
+259
+00:08:45,001 --> 00:08:46,016
+a parameter value that is
+
+260
+00:08:46,029 --> 00:08:47,012
+hopefully close to the global
+
+261
+00:08:47,049 --> 00:08:49,064
+minimum that won't be exact at the global minimum.
+
+262
+00:08:50,095 --> 00:08:53,020
+In most typical implementations of stochastic
+
+263
+00:08:53,079 --> 00:08:55,050
+gradient descent the learning rate
+
+264
+00:08:55,089 --> 00:08:57,050
+alpha is typically held constant.
+
+265
+00:08:58,028 --> 00:08:59,040
+And so what you we end
+
+266
+00:08:59,076 --> 00:09:01,029
+up is exactly a picture
+
+267
+00:09:01,050 --> 00:09:02,092
+like this.
+
+268
+00:09:03,016 --> 00:09:04,064
+If you want stochastic gradient descent
+
+269
+00:09:04,082 --> 00:09:05,087
+to actually converge to the
+
+270
+00:09:05,095 --> 00:09:07,044
+global minimum, there's one thing
+
+271
+00:09:08,011 --> 00:09:09,000
+which you can do which is
+
+272
+00:09:09,012 --> 00:09:11,097
+You can slowly decrease the learning rate alpha over time.
+
+273
+00:09:12,095 --> 00:09:14,048
+So, a pretty typical way
+
+274
+00:09:14,084 --> 00:09:16,010
+of doing that would be
+
+275
+00:09:16,037 --> 00:09:18,055
+to set alpha equals some
+
+276
+00:09:18,086 --> 00:09:20,007
+constant one divided by iteration
+
+277
+00:09:20,085 --> 00:09:22,058
+number plus constant 2.
+
+278
+00:09:22,075 --> 00:09:24,004
+So, iteration number is the
+
+279
+00:09:24,016 --> 00:09:25,035
+number of iterations you've run
+
+280
+00:09:25,071 --> 00:09:27,000
+of stochastic gradient descent,
+
+281
+00:09:27,012 --> 00:09:28,012
+so it's really the number of
+
+282
+00:09:28,037 --> 00:09:30,000
+training examples you've And counts
+
+283
+00:09:30,037 --> 00:09:31,090
+1 and counts 2 are
+
+284
+00:09:32,025 --> 00:09:33,062
+additional parameters that you have
+
+285
+00:09:34,002 --> 00:09:34,078
+that you might have to play
+
+286
+00:09:35,005 --> 00:09:37,055
+with a bit in order to get good performance.
+
+287
+00:09:39,012 --> 00:09:40,039
+reasons people tend not to
+
+288
+00:09:40,063 --> 00:09:41,074
+do this is because you end
+
+289
+00:09:41,096 --> 00:09:43,001
+up needing to spend time playing
+
+290
+00:09:43,036 --> 00:09:44,073
+with these 2 extra parameters, constant
+
+291
+00:09:45,024 --> 00:09:47,064
+1 and constant 2, and so this makes the algorithm more finicky.
+
+292
+00:09:48,008 --> 00:09:49,012
+You know, it's just more parameters able
+
+293
+00:09:49,042 --> 00:09:51,088
+to fiddle with in order to make the algorithm work well.
+
+294
+00:09:52,075 --> 00:09:53,078
+But if you manage to tune
+
+295
+00:09:54,007 --> 00:09:56,004
+the parameters well, then the
+
+296
+00:09:56,012 --> 00:09:57,030
+picture you can get is that
+
+297
+00:09:57,057 --> 00:10:00,094
+the algorithm will actually around towards
+
+298
+00:10:01,029 --> 00:10:02,020
+the minimum, but as it gets
+
+299
+00:10:02,041 --> 00:10:04,007
+closer because you're decreasing the
+
+300
+00:10:04,029 --> 00:10:06,000
+learning rate the meanderings will
+
+301
+00:10:06,011 --> 00:10:07,062
+get smaller and smaller until
+
+302
+00:10:07,092 --> 00:10:10,005
+it pretty much just to the global minimum.
+
+303
+00:10:11,071 --> 00:10:12,062
+I hope this makes sense, right?
+
+304
+00:10:13,011 --> 00:10:14,040
+And the reason this formula makes
+
+305
+00:10:14,062 --> 00:10:15,072
+sense is because as the
+
+306
+00:10:15,088 --> 00:10:18,014
+algorithm runs, the iteration number becomes
+
+307
+00:10:18,052 --> 00:10:20,037
+large So alpha will slowly
+
+308
+00:10:20,088 --> 00:10:22,030
+become small, and so
+
+309
+00:10:22,040 --> 00:10:23,067
+you take smaller and smaller steps
+
+310
+00:10:24,024 --> 00:10:25,037
+until it sort of, you
+
+311
+00:10:25,057 --> 00:10:27,000
+know, hopefully converges to the global minimum.
+
+312
+00:10:28,087 --> 00:10:30,015
+So If you do slowly decrease
+
+313
+00:10:30,058 --> 00:10:32,097
+alpha to zero you can end up with a slightly better hypothesis.
+
+314
+00:10:34,015 --> 00:10:35,035
+But because of the extra work
+
+315
+00:10:35,075 --> 00:10:38,091
+needed for the constants and because frankly you.
+
+316
+00:10:39,019 --> 00:10:40,078
+we're pretty happy with any
+
+317
+00:10:41,000 --> 00:10:43,048
+parameter value that is, you know, pretty close to the global minimum.
+
+318
+00:10:44,026 --> 00:10:45,065
+Typically this process of decreasing
+
+319
+00:10:46,024 --> 00:10:48,004
+alpha slowly is usually not
+
+320
+00:10:48,037 --> 00:10:49,094
+done and Keeping the learning.
+
+321
+00:10:50,019 --> 00:10:51,064
+Alpha constant is the more
+
+322
+00:10:51,084 --> 00:10:53,066
+common application of stochastic
+
+323
+00:10:54,000 --> 00:10:56,063
+gradient descent although you will see people use either version.
+
+324
+00:10:59,025 --> 00:11:00,055
+To summarize in this video
+
+325
+00:11:00,096 --> 00:11:02,013
+we talk about a way for
+
+326
+00:11:02,047 --> 00:11:04,039
+approximately monitoring how the
+
+327
+00:11:04,067 --> 00:11:05,083
+stochastic gradient descent is doing
+
+328
+00:11:06,040 --> 00:11:08,000
+in terms for optimizing the cost function.
+
+329
+00:11:08,090 --> 00:11:09,087
+And this is a method that
+
+330
+00:11:10,001 --> 00:11:12,005
+does not require scanning over
+
+331
+00:11:12,034 --> 00:11:13,054
+the entire training set periodically
+
+332
+00:11:14,033 --> 00:11:15,048
+to compute the cost function.
+
+333
+00:11:16,044 --> 00:11:18,012
+But instead it looks
+
+334
+00:11:18,034 --> 00:11:19,040
+at say only the last thousand
+
+335
+00:11:21,002 --> 00:11:21,074
+examples or so.
+
+336
+00:11:22,020 --> 00:11:23,040
+And you can use this method both
+
+337
+00:11:23,066 --> 00:11:25,009
+to make sure the stochastic gradient
+
+338
+00:11:25,033 --> 00:11:26,098
+descent is okay and is converging
+
+339
+00:11:28,037 --> 00:11:30,062
+or to use it to tune the learning rate alpha.

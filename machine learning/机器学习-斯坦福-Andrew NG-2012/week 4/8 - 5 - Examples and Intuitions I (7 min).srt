@@ -1,0 +1,805 @@
+
+1
+00:00:00,013 --> 00:00:00,098
+In this and the next
+
+2
+00:00:01,024 --> 00:00:02,002
+video I want to work
+
+3
+00:00:02,014 --> 00:00:03,064
+through a detailed example, showing
+
+4
+00:00:04,053 --> 00:00:05,092
+how a neural network can compute
+
+5
+00:00:06,021 --> 00:00:07,074
+a complex nonlinear function of
+
+6
+00:00:07,096 --> 00:00:09,077
+the input and hopefully, this will
+
+7
+00:00:09,094 --> 00:00:10,094
+give you a good sense of why
+
+8
+00:00:11,050 --> 00:00:12,047
+Neural Networks can be used
+
+9
+00:00:13,005 --> 00:00:14,081
+to learn complex, nonlinear hypotheses.
+
+10
+00:00:16,078 --> 00:00:18,021
+Consider the following problem where
+
+11
+00:00:18,089 --> 00:00:20,055
+we have input features x1
+
+12
+00:00:20,076 --> 00:00:21,067
+and x2 that are binary
+
+13
+00:00:22,030 --> 00:00:23,076
+values, so either zero or one.
+
+14
+00:00:23,098 --> 00:00:25,032
+So x1 and x2 can each
+
+15
+00:00:25,051 --> 00:00:27,016
+take on only one of two possible values.
+
+16
+00:00:28,066 --> 00:00:29,067
+In this example, I've drawn
+
+17
+00:00:29,098 --> 00:00:31,042
+only two positive examples and
+
+18
+00:00:31,053 --> 00:00:33,024
+two negative examples, but you
+
+19
+00:00:33,032 --> 00:00:34,036
+can think of this as a
+
+20
+00:00:34,053 --> 00:00:36,021
+simplified version of a
+
+21
+00:00:36,028 --> 00:00:37,071
+more complex learning problem where
+
+22
+00:00:37,092 --> 00:00:38,090
+we may have a bunch
+
+23
+00:00:39,003 --> 00:00:40,032
+of positive examples in the upper
+
+24
+00:00:40,047 --> 00:00:41,035
+right and the lower left and
+
+25
+00:00:41,046 --> 00:00:43,009
+a bunch of negative examples to notify
+
+26
+00:00:43,057 --> 00:00:46,010
+the circles, and what
+
+27
+00:00:46,014 --> 00:00:46,089
+we'd like to do is learn a nonlinear, you know,
+
+28
+00:00:48,032 --> 00:00:50,009
+decision boundary that we
+
+29
+00:00:50,021 --> 00:00:52,021
+need to separate the positive and the negative examples.
+
+30
+00:00:53,075 --> 00:00:54,059
+So how can a neural
+
+31
+00:00:55,007 --> 00:00:56,015
+network do this and rather than
+
+32
+00:00:56,071 --> 00:00:57,054
+use an example on the
+
+33
+00:00:57,060 --> 00:00:59,025
+right. I'm going to use this, maybe easier
+
+34
+00:00:59,067 --> 00:01:01,067
+to examine example on the left.
+
+35
+00:01:02,061 --> 00:01:03,093
+Concretely, what this is
+
+36
+00:01:04,010 --> 00:01:05,056
+is really computing the target
+
+37
+00:01:05,098 --> 00:01:09,081
+label y equals x1 XOR x2.
+
+38
+00:01:10,006 --> 00:01:11,065
+Or this is actually the
+
+39
+00:01:11,090 --> 00:01:13,087
+x1 XNOR x2 function
+
+40
+00:01:14,070 --> 00:01:15,075
+where XNOR is the alternative
+
+41
+00:01:16,040 --> 00:01:18,042
+notation for "not x1 or x2".
+
+42
+00:01:19,034 --> 00:01:20,073
+So x1, XOR or
+
+43
+00:01:20,076 --> 00:01:22,073
+x2 - that's true only
+
+44
+00:01:23,020 --> 00:01:24,081
+if exactly one of
+
+45
+00:01:25,018 --> 00:01:27,090
+x1 or x2 is equal to 1.
+
+46
+00:01:27,095 --> 00:01:29,015
+It turns out that the specific
+
+47
+00:01:29,045 --> 00:01:30,068
+example I'm going to use works out
+
+48
+00:01:30,081 --> 00:01:32,084
+a little bit better if we
+
+49
+00:01:33,001 --> 00:01:35,000
+use the XNOR example, instead.
+
+50
+00:01:35,045 --> 00:01:36,029
+These two are the same, of course.
+
+51
+00:01:36,071 --> 00:01:38,054
+It means not x1 XOR
+
+52
+00:01:38,078 --> 00:01:40,014
+x2, and so we're going
+
+53
+00:01:40,031 --> 00:01:42,035
+to have positive examples
+
+54
+00:01:42,095 --> 00:01:44,015
+if either both are true or
+
+55
+00:01:44,053 --> 00:01:46,046
+both are false and we'll
+
+56
+00:01:46,062 --> 00:01:49,059
+have that's y equals 1, y equals 1 and
+
+57
+00:01:49,098 --> 00:01:51,048
+we're going to have y equals 0 if
+
+58
+00:01:51,085 --> 00:01:52,065
+only one of them is
+
+59
+00:01:52,076 --> 00:01:53,082
+true and we want
+
+60
+00:01:54,000 --> 00:01:54,070
+to figure out if we can
+
+61
+00:01:54,085 --> 00:01:57,020
+get a neural network to fit to this sort of training set.
+
+62
+00:01:59,015 --> 00:02:00,020
+In order to build up
+
+63
+00:02:00,045 --> 00:02:01,060
+to a network that fits the
+
+64
+00:02:02,007 --> 00:02:04,090
+XNOR example, we're going
+
+65
+00:02:05,034 --> 00:02:06,059
+to start to a slightly simpler one
+
+66
+00:02:07,004 --> 00:02:09,071
+and show a network that fits the AND function.
+
+67
+00:02:10,075 --> 00:02:12,015
+Concretely, lets say we
+
+68
+00:02:12,031 --> 00:02:14,006
+have inputs x1 and
+
+69
+00:02:14,024 --> 00:02:17,018
+x2 that are again binary. So, it's either zero or one.
+
+70
+00:02:17,081 --> 00:02:18,068
+And let's say our target
+
+71
+00:02:18,075 --> 00:02:20,097
+labels y are you know, is
+
+72
+00:02:21,090 --> 00:02:23,046
+equal to x1 and x2.
+
+73
+00:02:23,086 --> 00:02:24,087
+This is a logical AND.
+
+74
+00:02:30,074 --> 00:02:31,081
+So can we get a
+
+75
+00:02:32,006 --> 00:02:34,033
+one unit network to compute
+
+76
+00:02:35,006 --> 00:02:36,012
+this logical AND function?
+
+77
+00:02:37,040 --> 00:02:38,053
+In order to do so, I'm
+
+78
+00:02:38,068 --> 00:02:40,000
+going to actually draw in
+
+79
+00:02:40,058 --> 00:02:42,078
+the bias unit as well, the plus one unit.
+
+80
+00:02:45,003 --> 00:02:46,050
+Now, let me just assign some
+
+81
+00:02:46,077 --> 00:02:48,005
+values to the weights or
+
+82
+00:02:48,015 --> 00:02:50,012
+the parameters of this network.
+
+83
+00:02:50,044 --> 00:02:52,021
+I am going to write down the parameters on this diagram.
+
+84
+00:02:52,081 --> 00:02:54,009
+Write minus 30 here
+
+85
+00:02:56,036 --> 00:02:57,074
+plus 20 and plus
+
+86
+00:02:58,071 --> 00:02:59,059
+20 and what this means
+
+87
+00:02:59,096 --> 00:03:01,031
+is that I'm assigning a value
+
+88
+00:03:01,086 --> 00:03:03,078
+of minus thirty to the
+
+89
+00:03:04,012 --> 00:03:05,077
+value associated with x0.
+
+90
+00:03:06,012 --> 00:03:07,022
+This is plus 1 going
+
+91
+00:03:07,053 --> 00:03:08,084
+to this unit and a
+
+92
+00:03:09,041 --> 00:03:10,088
+parameter value of plus 20
+
+93
+00:03:11,025 --> 00:03:12,096
+that multiplies in x1 in
+
+94
+00:03:13,006 --> 00:03:14,030
+a value of plus 20 for
+
+95
+00:03:14,068 --> 00:03:15,097
+the parameter that multiplies into x2.
+
+96
+00:03:17,018 --> 00:03:18,086
+So, concretely, this is saying
+
+97
+00:03:19,006 --> 00:03:20,034
+that my hypotheses h of
+
+98
+00:03:20,041 --> 00:03:21,078
+x is equal to
+
+99
+00:03:22,040 --> 00:03:24,050
+g of  -30 + 20x1 + 20x2.
+
+100
+00:03:25,049 --> 00:03:31,038
+So sometimes it's just
+
+101
+00:03:31,063 --> 00:03:33,024
+convenient to draw these
+
+102
+00:03:33,081 --> 00:03:34,087
+weights and draw these parameters
+
+103
+00:03:35,062 --> 00:03:38,025
+up here, you know, in the diagram of the neural network.
+
+104
+00:03:38,078 --> 00:03:40,022
+And of course this minus 30
+
+105
+00:03:40,038 --> 00:03:42,050
+this is actually theta 1
+
+106
+00:03:43,066 --> 00:03:44,083
+of 1,0.
+
+107
+00:03:45,028 --> 00:03:47,038
+This is theta 1
+
+108
+00:03:47,059 --> 00:03:50,055
+of 1,1 and that's theta
+
+109
+00:03:51,056 --> 00:03:52,099
+1 of 1,2
+
+110
+00:03:53,028 --> 00:03:54,031
+but it's just easier think about
+
+111
+00:03:54,059 --> 00:03:56,065
+it as, you know, associating these
+
+112
+00:03:56,084 --> 00:03:58,043
+parameters with the edges of the network.
+
+113
+00:04:01,016 --> 00:04:04,016
+Let's look at what this little single neuron network will compute.
+
+114
+00:04:05,005 --> 00:04:06,028
+Just to remind you, the sigmoid
+
+115
+00:04:06,071 --> 00:04:08,081
+activation function g of z looks like this.
+
+116
+00:04:09,011 --> 00:04:10,081
+It starts from 0, rises
+
+117
+00:04:11,015 --> 00:04:12,027
+smoothly, crosses 0.5, and
+
+118
+00:04:12,075 --> 00:04:14,071
+then it asymptotes at one.
+
+119
+00:04:15,072 --> 00:04:16,050
+And to give you some landmarks,
+
+120
+00:04:17,035 --> 00:04:18,085
+if the horizontal axis value
+
+121
+00:04:19,045 --> 00:04:21,076
+z is equal to 4.6, then
+
+122
+00:04:23,083 --> 00:04:25,091
+the sigmoid function is equal to 0.99.
+
+123
+00:04:26,022 --> 00:04:27,094
+This is very close
+
+124
+00:04:28,014 --> 00:04:29,056
+to 1 and kind of symmetrically
+
+125
+00:04:30,035 --> 00:04:32,026
+if it is negative 4.6, then
+
+126
+00:04:33,008 --> 00:04:34,097
+the sigmoid function there is
+
+127
+00:04:35,007 --> 00:04:37,081
+equal to 0.01 which is very close to 0.
+
+128
+00:04:39,043 --> 00:04:40,069
+Let's look at the four possible input
+
+129
+00:04:41,004 --> 00:04:41,068
+values for x1 and x2
+
+130
+00:04:41,073 --> 00:04:43,047
+and look at whether the hypothesis will
+
+131
+00:04:43,062 --> 00:04:47,008
+open in that case.
+
+132
+00:04:47,022 --> 00:04:47,091
+If x1 and x2 are both
+
+133
+00:04:48,014 --> 00:04:49,016
+equal to 0 - if
+
+134
+00:04:49,045 --> 00:04:50,056
+you look at this, if
+
+135
+00:04:50,070 --> 00:04:51,064
+x1 and x2 are both equal
+
+136
+00:04:52,000 --> 00:04:54,077
+to 0 then the hypotheses of point g of -30.
+
+137
+00:04:55,012 --> 00:04:56,079
+So, it's like very
+
+138
+00:04:57,029 --> 00:04:58,050
+far to the left of this diagram.
+
+139
+00:04:58,075 --> 00:05:01,037
+This will be very close to 0.
+
+140
+00:05:01,058 --> 00:05:03,016
+If x1 equals 0 and
+
+141
+00:05:03,032 --> 00:05:05,010
+x2 equals 1 then this
+
+142
+00:05:05,055 --> 00:05:07,061
+formula here evaluates to
+
+143
+00:05:07,082 --> 00:05:09,047
+g, thus the sigmoid function applied
+
+144
+00:05:09,088 --> 00:05:12,000
+to -10 and again,
+
+145
+00:05:12,044 --> 00:05:13,063
+that's, you know, to the far left
+
+146
+00:05:13,087 --> 00:05:14,097
+of this plot and so,
+
+147
+00:05:15,014 --> 00:05:16,054
+that's again very close to 0.
+
+148
+00:05:16,066 --> 00:05:19,018
+This is also g of -10.
+
+149
+00:05:19,026 --> 00:05:21,031
+That is if x1
+
+150
+00:05:22,000 --> 00:05:24,011
+is equal to 1 and
+
+151
+00:05:24,056 --> 00:05:26,011
+x(2)0, this is -30 plus 20, which is -10.
+
+152
+00:05:26,023 --> 00:05:28,044
+And finally if
+
+153
+00:05:28,058 --> 00:05:29,093
+x1 equals 1, x2 equals
+
+154
+00:05:30,067 --> 00:05:31,097
+1, then you have g of
+
+155
+00:05:32,076 --> 00:05:34,001
+-30 +20 +20,
+
+156
+00:05:34,018 --> 00:05:35,037
+so that's g of
+
+157
+00:05:35,043 --> 00:05:36,048
++10, which is
+
+158
+00:05:36,070 --> 00:05:38,013
+therefore very close to 1.
+
+159
+00:05:39,004 --> 00:05:40,020
+And if you look
+
+160
+00:05:40,049 --> 00:05:42,069
+in this column, this is
+
+161
+00:05:43,000 --> 00:05:45,027
+exactly the logical "and" function.
+
+162
+00:05:45,081 --> 00:05:47,079
+So, this is computing h of
+
+163
+00:05:47,088 --> 00:05:49,087
+x is, you know,
+
+164
+00:05:50,025 --> 00:05:54,091
+approximately x1 and x2.
+
+165
+00:05:55,019 --> 00:05:56,020
+In other words, it outputs
+
+166
+00:05:56,064 --> 00:05:57,081
+1 if and only
+
+167
+00:05:58,026 --> 00:05:59,047
+if x1 and x2 are
+
+168
+00:06:00,094 --> 00:06:02,041
+both equal to 1.
+
+169
+00:06:03,036 --> 00:06:04,083
+So by writing out our little
+
+170
+00:06:05,031 --> 00:06:07,006
+truth table like this,
+
+171
+00:06:07,077 --> 00:06:09,006
+we manage to figure out what's
+
+172
+00:06:09,035 --> 00:06:11,017
+the logical function that our
+
+173
+00:06:11,064 --> 00:06:12,087
+neural network computes.
+
+174
+00:06:16,099 --> 00:06:18,035
+This network shown here computes
+
+175
+00:06:18,087 --> 00:06:20,027
+the OR function just to
+
+176
+00:06:20,037 --> 00:06:21,081
+show you how I worked that out.
+
+177
+00:06:22,052 --> 00:06:23,023
+If you are to write out
+
+178
+00:06:23,068 --> 00:06:25,024
+the hypotheses you find that
+
+179
+00:06:25,036 --> 00:06:26,068
+it's computing g of
+
+180
+00:06:27,011 --> 00:06:29,098
+-10 +20 x1
+
+181
+00:06:30,017 --> 00:06:32,004
++20 x2. And so
+
+182
+00:06:32,026 --> 00:06:33,037
+if you fill in these values you
+
+183
+00:06:33,051 --> 00:06:35,011
+find that's g of
+
+184
+00:06:35,045 --> 00:06:37,007
+-10 which is approximately 0,
+
+185
+00:06:37,081 --> 00:06:38,083
+g of 10 which is
+
+186
+00:06:39,004 --> 00:06:40,055
+approximately 1, and so on.
+
+187
+00:06:40,093 --> 00:06:42,064
+These are approximately 1, and approximately
+
+188
+00:06:43,055 --> 00:06:45,041
+1, and these numbers is
+
+189
+00:06:46,016 --> 00:06:47,064
+essentially the logical OR
+
+190
+00:06:47,086 --> 00:06:50,020
+function.
+ So, hopefully
+
+191
+00:06:50,058 --> 00:06:52,000
+with this, you now understand how
+
+192
+00:06:52,035 --> 00:06:53,093
+single neurons in a
+
+193
+00:06:54,001 --> 00:06:54,098
+neural network can be used
+
+194
+00:06:55,018 --> 00:06:58,038
+to compute logical functions like AND and OR and so on.
+
+195
+00:06:59,000 --> 00:07:00,027
+In the next video, we'll continue
+
+196
+00:07:00,079 --> 00:07:03,087
+building on these examples and work through a more complex example.
+
+197
+00:07:04,073 --> 00:07:05,061
+We'll get to show you how
+
+198
+00:07:06,017 --> 00:07:07,056
+a neural network, now with
+
+199
+00:07:07,081 --> 00:07:09,077
+multiple layers of units can
+
+200
+00:07:09,095 --> 00:07:10,095
+be used to compute more complex
+
+201
+00:07:11,039 --> 00:07:13,087
+functions like the XOR function or the XNOR function.

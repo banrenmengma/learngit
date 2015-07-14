@@ -1,0 +1,1184 @@
+
+1
+00:00:00,024 --> 00:00:01,040
+In this video, I'd like to
+
+2
+00:00:01,056 --> 00:00:03,058
+talk about the Gaussian distribution, which
+
+3
+00:00:03,083 --> 00:00:05,080
+is also called the normal distribution.
+
+4
+00:00:07,042 --> 00:00:08,093
+In case you're already intimately
+
+5
+00:00:09,061 --> 00:00:11,098
+familiar with the Gaussian distribution, it is
+
+6
+00:00:12,016 --> 00:00:13,081
+probably okay to skip this video.
+
+7
+00:00:14,064 --> 00:00:15,089
+But if you're not sure or
+
+8
+00:00:15,097 --> 00:00:16,089
+if it's been a while since you've
+
+9
+00:00:17,003 --> 00:00:18,076
+worked with a Gaussian distribution or the normal
+
+10
+00:00:19,001 --> 00:00:20,048
+distribution then please do
+
+11
+00:00:20,060 --> 00:00:22,096
+watch this video all the way to the end.
+
+12
+00:00:23,021 --> 00:00:24,026
+And in the video after this,
+
+13
+00:00:24,048 --> 00:00:25,073
+we'll start applying the Gaussian
+
+14
+00:00:25,098 --> 00:00:28,089
+distribution to developing an anomaly detection algorithm.
+
+15
+00:00:31,098 --> 00:00:33,031
+Let's say x is a
+
+16
+00:00:33,053 --> 00:00:36,046
+real value random variable, so x is a real number.
+
+17
+00:00:37,038 --> 00:00:39,007
+If the probability distribution of
+
+18
+00:00:39,027 --> 00:00:41,015
+x is Gaussian, it
+
+19
+00:00:41,039 --> 00:00:42,071
+would mean Mu and variant
+
+20
+00:00:43,010 --> 00:00:45,035
+sigma squared, then we'll
+
+21
+00:00:45,053 --> 00:00:47,060
+write this as x the
+
+22
+00:00:47,068 --> 00:00:49,027
+random variable tilde.
+
+23
+00:00:51,092 --> 00:00:53,029
+That's this little tilde
+
+24
+00:00:53,053 --> 00:00:59,052
+as distributed as and then
+
+25
+00:00:59,072 --> 00:01:01,054
+to denote the Gaussian Distribution, sometimes
+
+26
+00:01:02,007 --> 00:01:03,092
+you're going to write script n, parentheses
+
+27
+00:01:04,082 --> 00:01:07,014
+Mu, sigma squared.
+
+28
+00:01:07,046 --> 00:01:09,031
+So, this script's end stands for
+
+29
+00:01:09,053 --> 00:01:10,092
+normal, since Gaussian and normal
+
+30
+00:01:11,029 --> 00:01:12,017
+distribution, they mean the same
+
+31
+00:01:12,039 --> 00:01:14,065
+phase of synonymous and a
+
+32
+00:01:14,078 --> 00:01:16,018
+Gussian distribution is parameterized
+
+33
+00:01:17,006 --> 00:01:18,043
+by 2 parameters, by a
+
+34
+00:01:19,001 --> 00:01:20,093
+mean parameter which we
+
+35
+00:01:21,001 --> 00:01:22,076
+denote Mu, and a variance
+
+36
+00:01:23,009 --> 00:01:25,001
+parameter, which we denote by sigma squared.
+
+37
+00:01:26,012 --> 00:01:27,026
+If we pluck the Gaussian distribution
+
+38
+00:01:27,098 --> 00:01:30,009
+or Gaussian probability density, it
+
+39
+00:01:30,021 --> 00:01:31,076
+will look like the bell shaped
+
+40
+00:01:32,009 --> 00:01:34,081
+curve, which you may have seen before.
+
+41
+00:01:36,023 --> 00:01:37,085
+And so, this bell-shaped curve
+
+42
+00:01:38,010 --> 00:01:40,034
+is parameterized by those 2 parameters Mu and sigma.
+
+43
+00:01:41,032 --> 00:01:42,067
+And the location of the
+
+44
+00:01:42,093 --> 00:01:44,023
+center of this bell-shaped curve
+
+45
+00:01:44,057 --> 00:01:46,095
+is the mean Mu, and the
+
+46
+00:01:47,004 --> 00:01:48,015
+width of this bell-shaped curve,
+
+47
+00:01:49,043 --> 00:01:51,001
+so it's roughly that, is
+
+48
+00:01:51,029 --> 00:01:52,096
+the, this parameter
+
+49
+00:01:53,050 --> 00:01:55,039
+sigma, is also called one standard deviation.
+
+50
+00:01:56,054 --> 00:01:58,034
+And so, this specifies the
+
+51
+00:01:58,053 --> 00:01:59,062
+probability of x taking
+
+52
+00:01:59,090 --> 00:02:00,098
+on different values, so x
+
+53
+00:02:01,018 --> 00:02:02,073
+taking on values, you know
+
+54
+00:02:02,081 --> 00:02:03,076
+in the middle here is pretty high
+
+55
+00:02:04,001 --> 00:02:05,029
+since the Gaussian density here
+
+56
+00:02:05,040 --> 00:02:06,048
+is pretty high whereas
+
+57
+00:02:06,060 --> 00:02:08,053
+x taking on values further and
+
+58
+00:02:08,071 --> 00:02:10,031
+further away will be diminishing
+
+59
+00:02:10,086 --> 00:02:12,059
+in probability. Finally, just
+
+60
+00:02:12,091 --> 00:02:13,077
+for completeness, let me write
+
+61
+00:02:14,002 --> 00:02:15,025
+out the formula for the Gaussian
+
+62
+00:02:16,008 --> 00:02:17,031
+distribution so the property
+
+63
+00:02:17,071 --> 00:02:19,078
+of x and I'll
+
+64
+00:02:19,093 --> 00:02:20,093
+sometimes write this instead of
+
+65
+00:02:21,005 --> 00:02:22,006
+p of x, I'm going
+
+66
+00:02:22,018 --> 00:02:22,096
+to write this as p of
+
+67
+00:02:23,034 --> 00:02:24,093
+x semicolon Mu comma sigma squared.
+
+68
+00:02:25,050 --> 00:02:26,075
+And so this denotes that the probability of
+
+69
+00:02:26,090 --> 00:02:28,066
+x is parametrized by
+
+70
+00:02:28,081 --> 00:02:30,065
+the two parameters Mu and sigma squared.
+
+71
+00:02:31,093 --> 00:02:33,033
+And the formula for the
+
+72
+00:02:33,037 --> 00:02:34,075
+Gaussian density is this,
+
+73
+00:02:35,016 --> 00:02:37,086
+1 over 2pi, sigma e
+
+74
+00:02:38,006 --> 00:02:41,050
+to the negative x minus Mu squared over 2 sigma squared.
+
+75
+00:02:41,087 --> 00:02:45,097
+So there's no need to memorize this
+
+76
+00:02:46,046 --> 00:02:47,053
+formula, you know, this
+
+77
+00:02:47,068 --> 00:02:49,040
+is just the formula for the
+
+78
+00:02:49,053 --> 00:02:51,002
+bell-shaped curve over here on the left.
+
+79
+00:02:51,069 --> 00:02:53,009
+There's no need to memorize it and
+
+80
+00:02:53,027 --> 00:02:53,099
+if you ever need to use this,
+
+81
+00:02:54,018 --> 00:02:56,046
+you can always look this up.
+
+82
+00:02:56,053 --> 00:02:57,044
+And so that figure on the
+
+83
+00:02:57,074 --> 00:02:58,041
+left, that is what you get
+
+84
+00:02:58,090 --> 00:03:00,009
+if you take a fixed
+
+85
+00:03:00,028 --> 00:03:01,019
+value of Mu and a
+
+86
+00:03:01,025 --> 00:03:04,006
+fixed value of sigma and
+
+87
+00:03:04,044 --> 00:03:06,013
+you plot p of x. So this
+
+88
+00:03:06,087 --> 00:03:07,083
+curve here, this is really
+
+89
+00:03:08,038 --> 00:03:10,000
+p of x plotted as a
+
+90
+00:03:10,003 --> 00:03:11,053
+function of x, you know,
+
+91
+00:03:11,063 --> 00:03:15,096
+for a fixed value of Mu
+
+92
+00:03:16,018 --> 00:03:18,077
+and of sigma squared sigma squared, that's called the variance.
+
+93
+00:03:19,094 --> 00:03:22,027
+And sometimes it's easier to think in terms of sigma.
+
+94
+00:03:22,094 --> 00:03:24,072
+So sigma is called the
+
+95
+00:03:25,012 --> 00:03:27,084
+standard deviation and it,
+
+96
+00:03:28,000 --> 00:03:29,063
+so it specifies the
+
+97
+00:03:29,080 --> 00:03:31,031
+width of this Gaussian probability
+
+98
+00:03:31,072 --> 00:03:33,012
+density whereas the square
+
+99
+00:03:33,033 --> 00:03:34,049
+of sigma, so sigma squared, is
+
+100
+00:03:34,062 --> 00:03:36,083
+called the variance. Let's look
+
+101
+00:03:37,000 --> 00:03:39,097
+at some examples of what the Gaussian distribution looks like.
+
+102
+00:03:41,000 --> 00:03:43,028
+If Mu equals zero, sigma equals 1.
+
+103
+00:03:43,065 --> 00:03:44,072
+Then we have a Gaussian distribution
+
+104
+00:03:45,047 --> 00:03:48,000
+that is centered around zero, because that's Mu.
+
+105
+00:03:48,081 --> 00:03:50,056
+And the width of this Gaussian, so
+
+106
+00:03:50,072 --> 00:03:53,061
+that's one standard deviation is sigma over there.
+
+107
+00:03:55,013 --> 00:03:56,033
+Let's look at some examples of
+
+108
+00:03:56,069 --> 00:03:58,077
+Gaussians. If Mu
+
+109
+00:03:58,096 --> 00:04:00,075
+is equal to zero it equals 1.
+
+110
+00:04:00,094 --> 00:04:02,015
+Then that corresponds to a
+
+111
+00:04:02,037 --> 00:04:04,003
+Gaussian distribution that is centered
+
+112
+00:04:04,077 --> 00:04:06,037
+at zero since Mu is zero.
+
+113
+00:04:07,038 --> 00:04:08,031
+And the width of this Gaussian
+
+114
+00:04:10,081 --> 00:04:12,056
+is Gaussian thus controlled
+
+115
+00:04:13,000 --> 00:04:15,043
+by sigma by that variance parameter sigma.
+
+116
+00:04:16,085 --> 00:04:17,038
+Here's another example.
+
+117
+00:04:20,051 --> 00:04:21,026
+Let's say Mu is equal to
+
+118
+00:04:21,055 --> 00:04:23,067
+zero and sigma is equal to one-half.
+
+119
+00:04:24,019 --> 00:04:26,029
+So the standard deviation is
+
+120
+00:04:26,052 --> 00:04:27,064
+one-half and the variance
+
+121
+00:04:28,027 --> 00:04:29,055
+sigma squared would therefore be
+
+122
+00:04:29,070 --> 00:04:33,060
+the square of 0.5 would be 0.25.
+
+123
+00:04:33,068 --> 00:04:34,091
+And in that case the Gaussian distribution,
+
+124
+00:04:35,060 --> 00:04:37,004
+the Gaussian probability density looks
+
+125
+00:04:37,018 --> 00:04:39,049
+like this, is also centered at zero.
+
+126
+00:04:40,011 --> 00:04:41,041
+But now the width of
+
+127
+00:04:41,060 --> 00:04:43,025
+this is much smaller because
+
+128
+00:04:43,062 --> 00:04:45,017
+the smaller variance, the
+
+129
+00:04:45,051 --> 00:04:46,098
+width of this Gaussian density
+
+130
+00:04:47,044 --> 00:04:49,035
+is roughly half as wide.
+
+131
+00:04:50,055 --> 00:04:51,070
+But because this is a
+
+132
+00:04:51,097 --> 00:04:53,058
+probability distribution, the area under
+
+133
+00:04:53,080 --> 00:04:54,085
+the curve, that is the shaded
+
+134
+00:04:55,031 --> 00:04:56,079
+area there, that area
+
+135
+00:04:57,018 --> 00:04:58,081
+must integrate to 1.
+
+136
+00:04:58,081 --> 00:05:00,050
+This is a property of probability distributions.
+
+137
+00:05:01,064 --> 00:05:02,068
+And so, you know, this
+
+138
+00:05:02,082 --> 00:05:04,052
+is a much taller Gaussian density because
+
+139
+00:05:04,081 --> 00:05:06,005
+it's half as wide, with
+
+140
+00:05:06,019 --> 00:05:08,014
+half the standard deviation, but it's twice as tall.
+
+141
+00:05:09,012 --> 00:05:11,050
+Another example, if sigma is
+
+142
+00:05:11,063 --> 00:05:12,054
+equal to 2, then you
+
+143
+00:05:12,064 --> 00:05:14,087
+get a much fatter, or much wider Gaussian density.
+
+144
+00:05:15,031 --> 00:05:17,008
+And so here, the sigma
+
+145
+00:05:17,037 --> 00:05:19,030
+parameter controls that this
+
+146
+00:05:19,062 --> 00:05:21,000
+Gaussian density has a wider width.
+
+147
+00:05:21,093 --> 00:05:23,018
+And once again, the area under
+
+148
+00:05:23,022 --> 00:05:24,038
+the curve, that is this shaded
+
+149
+00:05:24,069 --> 00:05:26,072
+area, you know, it always integrates to 1.
+
+150
+00:05:26,083 --> 00:05:28,017
+That's a property of probability
+
+151
+00:05:28,080 --> 00:05:30,027
+distributions, and because it's
+
+152
+00:05:30,048 --> 00:05:31,093
+wider, it's also half as
+
+153
+00:05:32,064 --> 00:05:36,063
+tall, in order to just integrate to the same thing.
+
+154
+00:05:36,075 --> 00:05:37,051
+And finally, one last example would be,
+
+155
+00:05:37,087 --> 00:05:38,098
+if we now changed the Mu
+
+156
+00:05:39,012 --> 00:05:40,066
+parameters as well, then instead
+
+157
+00:05:41,000 --> 00:05:42,031
+of being centered at zero, we
+
+158
+00:05:42,041 --> 00:05:43,083
+now we have a Gaussian distribution
+
+159
+00:05:44,082 --> 00:05:46,081
+that is centered at three, because
+
+160
+00:05:47,070 --> 00:05:49,074
+this shifts over the entire Gaussian distribution.
+
+161
+00:05:51,017 --> 00:05:54,004
+Next, lets take about the parameter estimation problem.
+
+162
+00:05:55,010 --> 00:05:56,056
+So what is the parameter estimation problem?
+
+163
+00:05:57,051 --> 00:05:58,035
+Let's say we have a data set
+
+164
+00:05:58,085 --> 00:06:00,018
+of m examples, so x1
+
+165
+00:06:00,035 --> 00:06:01,047
+through x(m), and let's say
+
+166
+00:06:01,070 --> 00:06:03,025
+each of these examples is a real number.
+
+167
+00:06:04,019 --> 00:06:05,051
+Here in the figure, I've plotted an
+
+168
+00:06:05,062 --> 00:06:06,038
+example of a data set,
+
+169
+00:06:06,057 --> 00:06:08,038
+so the horizontal axis is the
+
+170
+00:06:08,057 --> 00:06:09,043
+x axis and, you know, I
+
+171
+00:06:09,056 --> 00:06:12,029
+have a range of examples of x and I've just plotted them
+
+172
+00:06:12,056 --> 00:06:15,006
+on this figure here.
+
+173
+00:06:15,025 --> 00:06:17,027
+And the parameter estimation problem is, let's
+
+174
+00:06:17,050 --> 00:06:18,075
+say I suspect that these examples
+
+175
+00:06:19,044 --> 00:06:21,016
+came from a Gaussian distribution so
+
+176
+00:06:21,030 --> 00:06:24,056
+let's say I suspect that each of my example x(i) was distributed.
+
+177
+00:06:25,030 --> 00:06:26,093
+That's what this tilde thing means.
+
+178
+00:06:27,058 --> 00:06:28,051
+Thus, I suspect that each of
+
+179
+00:06:28,057 --> 00:06:30,022
+these examples was distributed according
+
+180
+00:06:30,075 --> 00:06:32,018
+to a normal distribution or
+
+181
+00:06:32,025 --> 00:06:34,006
+Gaussian distribution with some
+
+182
+00:06:34,030 --> 00:06:36,020
+parameter Mu and some parameter sigma squared.
+
+183
+00:06:37,056 --> 00:06:39,056
+But I don't know what the values of these parameters are.
+
+184
+00:06:40,081 --> 00:06:42,036
+The problem with parameter estimation is,
+
+185
+00:06:43,016 --> 00:06:44,048
+given my data set I want
+
+186
+00:06:44,080 --> 00:06:45,072
+to figure out, I want to
+
+187
+00:06:45,087 --> 00:06:46,083
+estimate, what are the
+
+188
+00:06:46,099 --> 00:06:48,047
+values of Mu and sigma squared.
+
+189
+00:06:49,062 --> 00:06:50,056
+So, if you're given a
+
+190
+00:06:50,063 --> 00:06:51,066
+data set like this, you know,
+
+191
+00:06:51,079 --> 00:06:54,005
+it looks like maybe, if I
+
+192
+00:06:54,018 --> 00:06:56,020
+estimate what Gaussian distribution the
+
+193
+00:06:56,035 --> 00:06:59,000
+data came from, maybe that
+
+194
+00:07:00,066 --> 00:07:01,076
+might be roughly the Gaussian distribution
+
+195
+00:07:02,027 --> 00:07:04,041
+it came from, with Mu
+
+196
+00:07:05,050 --> 00:07:07,035
+being the center of the distribution and
+
+197
+00:07:07,099 --> 00:07:11,068
+sigma the standard deviation controlling the width of this Gaussian distribution.
+
+198
+00:07:12,013 --> 00:07:12,081
+It seems like a reasonable
+
+199
+00:07:13,025 --> 00:07:15,027
+fit to the data, because, you know, it
+
+200
+00:07:15,043 --> 00:07:16,087
+looks the data has
+
+201
+00:07:17,011 --> 00:07:18,091
+a very high probability of being
+
+202
+00:07:19,024 --> 00:07:20,058
+in the central region, low probability of
+
+203
+00:07:21,063 --> 00:07:24,072
+being further out, low probability of being further out, and so on.
+
+204
+00:07:24,077 --> 00:07:25,076
+And so, maybe this is
+
+205
+00:07:25,088 --> 00:07:27,036
+a reasonable estimate of
+
+206
+00:07:28,001 --> 00:07:29,092
+Mu and of sigma squared,
+
+207
+00:07:30,041 --> 00:07:31,081
+that is, if it corresponds to
+
+208
+00:07:31,095 --> 00:07:33,097
+a Gaussian distribution, that then looks like this.
+
+209
+00:07:35,064 --> 00:07:36,033
+So, what I'm going to
+
+210
+00:07:36,043 --> 00:07:37,055
+do is write out the
+
+211
+00:07:37,066 --> 00:07:39,008
+formulas, the standard formulas
+
+212
+00:07:39,075 --> 00:07:40,092
+for estimating the parameters from
+
+213
+00:07:41,012 --> 00:07:43,048
+Mu and sigma squared.
+
+214
+00:07:44,011 --> 00:07:44,086
+The way we are going to
+
+215
+00:07:45,038 --> 00:07:47,013
+estimate Mu is going to
+
+216
+00:07:47,037 --> 00:07:48,085
+be just the average
+
+217
+00:07:49,067 --> 00:07:50,062
+of my example.
+
+218
+00:07:51,020 --> 00:07:52,018
+So Mu is the mean parameter,
+
+219
+00:07:52,075 --> 00:07:53,033
+so I'm going to take my
+
+220
+00:07:53,037 --> 00:07:54,035
+training set, take my m
+
+221
+00:07:54,044 --> 00:07:56,019
+examples and average them.
+
+222
+00:07:56,047 --> 00:07:58,012
+And that just gives me the center of this distribution.
+
+223
+00:08:01,014 --> 00:08:01,067
+How about sigma squared?
+
+224
+00:08:01,088 --> 00:08:03,011
+Well the variance, I'll just
+
+225
+00:08:03,033 --> 00:08:04,088
+write out the standard formula again,
+
+226
+00:08:05,014 --> 00:08:06,077
+I'm going to estimate as sum
+
+227
+00:08:07,027 --> 00:08:08,089
+of 1 through m of x(i),
+
+228
+00:08:09,014 --> 00:08:11,073
+minus Mu squared,
+
+229
+00:08:12,012 --> 00:08:13,012
+and so this Mu here is
+
+230
+00:08:13,024 --> 00:08:14,002
+actually the Mu that I compute
+
+231
+00:08:14,044 --> 00:08:15,057
+over here using this formula,
+
+232
+00:08:16,079 --> 00:08:17,092
+and what the variance is, or
+
+233
+00:08:18,004 --> 00:08:18,088
+one interpretation of the variance,
+
+234
+00:08:19,043 --> 00:08:20,023
+is that, if you look at the
+
+235
+00:08:20,025 --> 00:08:21,057
+this term, that's the square
+
+236
+00:08:22,008 --> 00:08:23,057
+difference between the value
+
+237
+00:08:24,001 --> 00:08:25,018
+I've got in my example minus
+
+238
+00:08:25,074 --> 00:08:28,030
+the mean, minus the center, minus the mean of distribution.
+
+239
+00:08:28,081 --> 00:08:29,068
+And so, you know, the
+
+240
+00:08:29,073 --> 00:08:30,062
+variance, I'm gonna estimate
+
+241
+00:08:31,025 --> 00:08:32,052
+as just the average of
+
+242
+00:08:32,057 --> 00:08:35,051
+the square differences, between my examples, minus the mean.
+
+243
+00:08:37,026 --> 00:08:38,037
+And as a side comment,
+
+244
+00:08:38,085 --> 00:08:40,014
+only for those of you that are experts
+
+245
+00:08:40,049 --> 00:08:41,082
+in statistics, if you're
+
+246
+00:08:42,000 --> 00:08:43,069
+an expert in statistics and if
+
+247
+00:08:43,083 --> 00:08:45,057
+you've heard of maximum likelihood estimation,
+
+248
+00:08:46,067 --> 00:08:47,095
+then these estimates are actually the
+
+249
+00:08:48,076 --> 00:08:50,052
+maximum likelihood estimates of the parameters
+
+250
+00:08:50,067 --> 00:08:52,059
+of Mu and sigma squared.
+
+251
+00:08:53,022 --> 00:08:55,025
+But if you haven't heard of that before, don't worry about it.
+
+252
+00:08:55,044 --> 00:08:56,050
+All you need to know is that
+
+253
+00:08:56,075 --> 00:08:57,087
+these are the two standard formulas
+
+254
+00:08:58,060 --> 00:09:01,009
+for how you try to
+
+255
+00:09:01,051 --> 00:09:03,082
+figure out what our Mu and sigma squared given the dataset.
+
+256
+00:09:05,004 --> 00:09:06,013
+Finally one last side comment.
+
+257
+00:09:06,064 --> 00:09:07,080
+Again only for those of
+
+258
+00:09:07,095 --> 00:09:10,051
+you that has maybe taken a statistics class before.
+
+259
+00:09:10,087 --> 00:09:12,003
+But if you have taken a statistics
+
+260
+00:09:12,020 --> 00:09:13,052
+class before, some of you
+
+261
+00:09:13,061 --> 00:09:14,062
+may have seen the formula here
+
+262
+00:09:14,082 --> 00:09:15,080
+where, you know, this is m minus
+
+263
+00:09:16,002 --> 00:09:17,029
+1, instead of m. So
+
+264
+00:09:17,070 --> 00:09:19,030
+this first term becomes 1
+
+265
+00:09:19,051 --> 00:09:20,040
+over m minus 1, instead
+
+266
+00:09:20,045 --> 00:09:22,063
+of 1 over m. In machine
+
+267
+00:09:22,096 --> 00:09:25,016
+learning, people tend to use this 1 over m formula.
+
+268
+00:09:26,000 --> 00:09:27,023
+But in practice, whether it
+
+269
+00:09:27,047 --> 00:09:28,048
+is 1 over m or 1
+
+270
+00:09:28,054 --> 00:09:29,071
+over m minus one, makes essentially
+
+271
+00:09:30,016 --> 00:09:32,028
+no difference, assuming, you know, m is
+
+272
+00:09:32,053 --> 00:09:34,066
+reasonably large, it's a large training set size.
+
+273
+00:09:35,030 --> 00:09:36,048
+So, just in case you've seen
+
+274
+00:09:36,074 --> 00:09:38,057
+this other version before, in either
+
+275
+00:09:38,080 --> 00:09:39,097
+version it works just equally
+
+276
+00:09:40,029 --> 00:09:41,062
+well, but in machine
+
+277
+00:09:41,090 --> 00:09:42,085
+learning most people tend to
+
+278
+00:09:42,097 --> 00:09:44,040
+use 1 over m in this formula.
+
+279
+00:09:45,069 --> 00:09:46,074
+And the two versions have slightly
+
+280
+00:09:47,007 --> 00:09:48,076
+different theoretical properties, slightly different
+
+281
+00:09:49,002 --> 00:09:50,052
+mathematical properties, but in
+
+282
+00:09:50,059 --> 00:09:54,008
+practice it really makes very little difference, if any.
+
+283
+00:09:56,049 --> 00:09:57,066
+So, hopefully, you now have
+
+284
+00:09:57,088 --> 00:09:58,089
+a good sense of what the
+
+285
+00:09:59,001 --> 00:10:00,040
+Gaussian distribution looks like,
+
+286
+00:10:00,074 --> 00:10:02,021
+as well as how to estimate
+
+287
+00:10:02,026 --> 00:10:03,073
+the parameters, mu and sigma
+
+288
+00:10:04,000 --> 00:10:05,076
+squared, of the Gaussian distribution, and
+
+289
+00:10:05,090 --> 00:10:07,050
+if you're given a training set,
+
+290
+00:10:07,085 --> 00:10:08,094
+that is if you're given a
+
+291
+00:10:09,024 --> 00:10:10,022
+set of data that you suspect
+
+292
+00:10:11,012 --> 00:10:12,035
+comes from a Gaussian
+
+293
+00:10:12,040 --> 00:10:15,019
+distribution with unknown parameters using sigma squared.
+
+294
+00:10:16,019 --> 00:10:17,050
+In the next video, we'll start
+
+295
+00:10:17,080 --> 00:10:18,082
+to take this and apply it
+
+296
+00:10:18,091 --> 00:10:20,080
+to develop the anomaly detection algorithm.

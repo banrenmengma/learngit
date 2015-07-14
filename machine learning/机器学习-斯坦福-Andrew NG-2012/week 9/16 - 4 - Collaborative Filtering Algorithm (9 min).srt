@@ -1,0 +1,956 @@
+
+1
+00:00:00,024 --> 00:00:01,069
+In the last couple videos, we
+
+2
+00:00:01,082 --> 00:00:02,099
+talked about the ideas of
+
+3
+00:00:03,014 --> 00:00:04,057
+how, first, if you're
+
+4
+00:00:04,078 --> 00:00:06,020
+given features for movies, you
+
+5
+00:00:06,092 --> 00:00:08,060
+can use that to learn parameters data for users.
+
+6
+00:00:09,049 --> 00:00:11,040
+And second, if you're given parameters for the users,
+
+7
+00:00:11,092 --> 00:00:13,057
+you can use that to learn features for the movies.
+
+8
+00:00:14,048 --> 00:00:15,055
+In this video we're going
+
+9
+00:00:15,065 --> 00:00:16,067
+to take those ideas and put
+
+10
+00:00:16,085 --> 00:00:18,012
+them together to come up
+
+11
+00:00:18,028 --> 00:00:20,012
+with a collaborative filtering algorithm.
+
+12
+00:00:21,025 --> 00:00:22,044
+So one of the things we worked
+
+13
+00:00:22,051 --> 00:00:23,064
+out earlier is that if
+
+14
+00:00:23,067 --> 00:00:24,051
+you have features for the
+
+15
+00:00:24,060 --> 00:00:25,073
+movies then you can solve
+
+16
+00:00:26,007 --> 00:00:27,058
+this minimization problem to find
+
+17
+00:00:27,094 --> 00:00:30,001
+the parameters theta for your users.
+
+18
+00:00:30,073 --> 00:00:32,025
+And then we also
+
+19
+00:00:32,064 --> 00:00:33,096
+worked that out, if you
+
+20
+00:00:34,035 --> 00:00:37,043
+are given the parameters theta,
+
+21
+00:00:38,007 --> 00:00:38,099
+you can also use that to
+
+22
+00:00:39,017 --> 00:00:40,079
+estimate the features x, and
+
+23
+00:00:40,086 --> 00:00:42,097
+you can do that by solving this minimization problem.
+
+24
+00:00:44,031 --> 00:00:45,071
+So one thing you
+
+25
+00:00:45,088 --> 00:00:47,035
+could do is actually go back and forth.
+
+26
+00:00:47,086 --> 00:00:50,022
+Maybe randomly initialize the parameters
+
+27
+00:00:50,050 --> 00:00:51,035
+and then solve for theta,
+
+28
+00:00:51,078 --> 00:00:52,068
+solve for x, solve for theta,
+
+29
+00:00:52,086 --> 00:00:54,032
+solve for x. But, it
+
+30
+00:00:54,042 --> 00:00:55,021
+turns out that there is a
+
+31
+00:00:55,039 --> 00:00:56,075
+more efficient algorithm that doesn't
+
+32
+00:00:56,097 --> 00:00:57,090
+need to go back and forth
+
+33
+00:00:58,010 --> 00:00:59,070
+between the x's and the
+
+34
+00:00:59,072 --> 00:01:00,067
+thetas, but that can solve
+
+35
+00:01:01,029 --> 00:01:04,025
+for theta and x simultaneously.
+
+36
+00:01:05,015 --> 00:01:06,031
+And here it is. What we are going to do, is basically take
+
+37
+00:01:06,059 --> 00:01:08,098
+both of these optimization objectives, and
+
+38
+00:01:09,012 --> 00:01:10,064
+put them into the same objective.
+
+39
+00:01:11,054 --> 00:01:12,059
+So I'm going to define the
+
+40
+00:01:12,073 --> 00:01:15,001
+new optimization objective j, which
+
+41
+00:01:15,025 --> 00:01:16,054
+is a cost function, that
+
+42
+00:01:16,064 --> 00:01:17,062
+is a function of my features
+
+43
+00:01:18,004 --> 00:01:19,015
+x and a function
+
+44
+00:01:19,079 --> 00:01:20,075
+of my parameters theta.
+
+45
+00:01:21,065 --> 00:01:23,004
+And, it's basically the two optimization objectives
+
+46
+00:01:23,051 --> 00:01:24,092
+I had on top, but I put together.
+
+47
+00:01:26,026 --> 00:01:27,076
+So, in order to
+
+48
+00:01:28,006 --> 00:01:31,014
+explain this, first, I want to point out that this
+
+49
+00:01:31,040 --> 00:01:33,042
+term over here, this squared
+
+50
+00:01:33,081 --> 00:01:35,048
+error term, is the same
+
+51
+00:01:35,092 --> 00:01:39,025
+as this squared error term and the
+
+52
+00:01:39,076 --> 00:01:40,087
+summations look a little bit
+
+53
+00:01:41,004 --> 00:01:42,093
+different, but let's see what the summations are really doing.
+
+54
+00:01:43,079 --> 00:01:45,009
+The first summation is sum
+
+55
+00:01:45,048 --> 00:01:48,028
+over all users J and
+
+56
+00:01:48,037 --> 00:01:50,059
+then sum over all movies rated by that user.
+
+57
+00:01:51,089 --> 00:01:53,023
+So, this is really summing over all
+
+58
+00:01:53,046 --> 00:01:55,095
+pairs IJ, that correspond
+
+59
+00:01:56,051 --> 00:01:57,082
+to a movie that was rated by a user.
+
+60
+00:01:58,054 --> 00:01:59,095
+Sum over J says, for every
+
+61
+00:02:00,015 --> 00:02:01,051
+user, the sum of
+
+62
+00:02:01,073 --> 00:02:03,010
+all the movies rated by that user.
+
+63
+00:02:04,025 --> 00:02:07,034
+This summation down here, just does things in the opposite order.
+
+64
+00:02:07,062 --> 00:02:08,071
+This says for every movie
+
+65
+00:02:09,005 --> 00:02:11,013
+I, sum over all
+
+66
+00:02:11,034 --> 00:02:12,047
+the users J that have
+
+67
+00:02:12,068 --> 00:02:14,058
+rated that movie and so, you
+
+68
+00:02:14,068 --> 00:02:16,009
+know these summations, both of these
+
+69
+00:02:16,021 --> 00:02:18,015
+are just summations over all pairs
+
+70
+00:02:18,093 --> 00:02:21,015
+ij for which
+
+71
+00:02:21,043 --> 00:02:24,062
+r of i J is equal to 1.
+
+72
+00:02:24,065 --> 00:02:26,058
+It's just something over all the
+
+73
+00:02:27,018 --> 00:02:29,081
+user movie pairs for which you have a rating.
+
+74
+00:02:30,084 --> 00:02:32,022
+and so those two terms
+
+75
+00:02:32,059 --> 00:02:34,074
+up there is just
+
+76
+00:02:34,093 --> 00:02:36,046
+exactly this first term, and
+
+77
+00:02:36,050 --> 00:02:38,031
+I've just written the summation here explicitly,
+
+78
+00:02:39,031 --> 00:02:40,028
+where I'm just saying the sum
+
+79
+00:02:40,058 --> 00:02:42,028
+of all pairs IJ, such that
+
+80
+00:02:42,053 --> 00:02:45,006
+RIJ is equal to 1.
+
+81
+00:02:45,031 --> 00:02:46,080
+So what we're going
+
+82
+00:02:46,093 --> 00:02:48,078
+to do is define a
+
+83
+00:02:49,012 --> 00:02:51,040
+combined optimization objective that
+
+84
+00:02:51,066 --> 00:02:53,028
+we want to minimize in order
+
+85
+00:02:53,055 --> 00:02:55,069
+to solve simultaneously for x and theta.
+
+86
+00:02:56,096 --> 00:02:58,003
+And then the other terms in
+
+87
+00:02:58,006 --> 00:03:00,025
+the optimization objective are this,
+
+88
+00:03:00,056 --> 00:03:02,087
+which is a regularization in terms of theta.
+
+89
+00:03:03,077 --> 00:03:05,083
+So that came down here and
+
+90
+00:03:06,028 --> 00:03:08,018
+the final piece is this
+
+91
+00:03:08,090 --> 00:03:10,068
+term which is
+
+92
+00:03:10,084 --> 00:03:12,096
+my optimization objective for
+
+93
+00:03:13,016 --> 00:03:16,018
+the x's and that became this.
+
+94
+00:03:16,050 --> 00:03:18,002
+And this optimization objective
+
+95
+00:03:18,071 --> 00:03:19,072
+j actually has an interesting property
+
+96
+00:03:20,024 --> 00:03:20,094
+that if you were to hold
+
+97
+00:03:21,040 --> 00:03:23,006
+the x's constant and just
+
+98
+00:03:23,025 --> 00:03:25,049
+minimize with respect to the thetas then
+
+99
+00:03:25,066 --> 00:03:27,003
+you'd be solving exactly this problem,
+
+100
+00:03:27,084 --> 00:03:28,044
+whereas if you were to do
+
+101
+00:03:28,062 --> 00:03:29,059
+the opposite, if you were to
+
+102
+00:03:29,068 --> 00:03:31,031
+hold the thetas constant, and minimize
+
+103
+00:03:31,066 --> 00:03:32,065
+j only with respect to
+
+104
+00:03:32,075 --> 00:03:34,091
+the x's, then it becomes equivalent to this.
+
+105
+00:03:35,022 --> 00:03:36,078
+Because either this term
+
+106
+00:03:37,006 --> 00:03:38,086
+or this term is constant if
+
+107
+00:03:38,096 --> 00:03:40,050
+you're minimizing only the respective x's or only respective thetas.
+
+108
+00:03:40,091 --> 00:03:43,068
+So here's an optimization
+
+109
+00:03:44,063 --> 00:03:46,084
+objective that puts together my
+
+110
+00:03:47,043 --> 00:03:50,022
+cost functions in terms of x and in terms of theta.
+
+111
+00:03:51,062 --> 00:03:53,005
+And in order to
+
+112
+00:03:53,046 --> 00:03:54,075
+come up with just one
+
+113
+00:03:55,009 --> 00:03:56,012
+optimization problem, what we're going
+
+114
+00:03:56,028 --> 00:03:57,059
+to do, is treat this
+
+115
+00:03:58,043 --> 00:03:59,084
+cost function, as a
+
+116
+00:03:59,087 --> 00:04:00,088
+function of my features
+
+117
+00:04:01,040 --> 00:04:02,053
+x and of my user
+
+118
+00:04:03,018 --> 00:04:05,002
+pro user parameters data and
+
+119
+00:04:05,013 --> 00:04:06,056
+just minimize this whole thing, as
+
+120
+00:04:06,074 --> 00:04:07,083
+a function of both the
+
+121
+00:04:08,012 --> 00:04:10,021
+Xs and a function of the thetas.
+
+122
+00:04:11,030 --> 00:04:12,040
+And really the only difference
+
+123
+00:04:12,053 --> 00:04:13,080
+between this and the older
+
+124
+00:04:14,015 --> 00:04:15,065
+algorithm is that, instead
+
+125
+00:04:15,097 --> 00:04:17,033
+of going back and forth, previously
+
+126
+00:04:17,083 --> 00:04:20,011
+we talked about minimizing with respect
+
+127
+00:04:20,042 --> 00:04:22,012
+to theta then minimizing with respect to x,
+
+128
+00:04:22,025 --> 00:04:23,037
+whereas minimizing with respect to theta,
+
+129
+00:04:23,089 --> 00:04:25,026
+minimizing with respect to x and so on.
+
+130
+00:04:26,012 --> 00:04:28,008
+In this new version instead of
+
+131
+00:04:28,056 --> 00:04:30,001
+sequentially going between the
+
+132
+00:04:30,022 --> 00:04:31,087
+2 sets of parameters x and theta,
+
+133
+00:04:32,018 --> 00:04:32,093
+what we are going to do
+
+134
+00:04:33,023 --> 00:04:34,060
+is just minimize with respect
+
+135
+00:04:34,077 --> 00:04:36,041
+to both sets of parameters simultaneously.
+
+136
+00:04:39,075 --> 00:04:41,029
+Finally one last detail
+
+137
+00:04:42,002 --> 00:04:44,037
+is that when we're learning the features this way.
+
+138
+00:04:45,011 --> 00:04:46,041
+Previously we have been using
+
+139
+00:04:46,083 --> 00:04:49,029
+this convention that
+
+140
+00:04:49,047 --> 00:04:50,054
+we have a feature x0 equals
+
+141
+00:04:50,074 --> 00:04:52,093
+one that corresponds to an interceptor.
+
+142
+00:04:54,013 --> 00:04:55,052
+When we are using this
+
+143
+00:04:55,075 --> 00:04:57,079
+sort of formalism where we're are actually learning the features,
+
+144
+00:04:58,030 --> 00:05:00,019
+we are actually going to do away with this convention.
+
+145
+00:05:01,039 --> 00:05:04,022
+And so the features we are going to learn x, will be in Rn.
+
+146
+00:05:05,043 --> 00:05:06,064
+Whereas previously we had
+
+147
+00:05:06,081 --> 00:05:09,076
+features x and Rn + 1 including the intercept term.
+
+148
+00:05:10,038 --> 00:05:13,038
+By getting rid of x0 we now just have x in Rn.
+
+149
+00:05:14,087 --> 00:05:16,051
+And so similarly, because the
+
+150
+00:05:16,058 --> 00:05:17,077
+parameters theta is in
+
+151
+00:05:17,085 --> 00:05:19,025
+the same dimension, we now
+
+152
+00:05:19,050 --> 00:05:21,000
+also have theta in RN
+
+153
+00:05:21,054 --> 00:05:23,033
+because if there's no
+
+154
+00:05:23,070 --> 00:05:24,057
+x0, then there's no need
+
+155
+00:05:25,037 --> 00:05:26,087
+parameter theta 0 as well.
+
+156
+00:05:27,095 --> 00:05:28,087
+And the reason we do away
+
+157
+00:05:29,016 --> 00:05:30,038
+with this convention is because
+
+158
+00:05:31,000 --> 00:05:32,061
+we're now learning all the features, right?
+
+159
+00:05:32,081 --> 00:05:34,027
+So there is no need
+
+160
+00:05:34,042 --> 00:05:36,064
+to hard code the feature that is always equal to one.
+
+161
+00:05:37,017 --> 00:05:38,031
+Because if the algorithm really wants
+
+162
+00:05:38,060 --> 00:05:39,044
+a feature that is always equal
+
+163
+00:05:40,006 --> 00:05:41,082
+to 1, it can choose to learn one for itself.
+
+164
+00:05:42,029 --> 00:05:43,043
+So if the algorithm chooses,
+
+165
+00:05:43,072 --> 00:05:45,032
+it can set the feature X1 equals 1.
+
+166
+00:05:45,067 --> 00:05:47,000
+So there's no need
+
+167
+00:05:47,025 --> 00:05:48,030
+to hard code the feature of
+
+168
+00:05:48,043 --> 00:05:50,006
+001, the algorithm now has
+
+169
+00:05:50,033 --> 00:05:55,088
+the flexibility to just learn it by itself. So, putting
+
+170
+00:05:56,042 --> 00:05:58,041
+everything together, here is
+
+171
+00:05:58,077 --> 00:05:59,091
+our collaborative filtering algorithm.
+
+172
+00:06:01,045 --> 00:06:02,032
+first we are going to
+
+173
+00:06:03,000 --> 00:06:05,057
+initialize x and
+
+174
+00:06:05,081 --> 00:06:07,029
+theta to small random values.
+
+175
+00:06:08,044 --> 00:06:09,019
+And this is a little bit
+
+176
+00:06:09,031 --> 00:06:11,069
+like neural network training, where there
+
+177
+00:06:11,072 --> 00:06:14,024
+we were also initializing all the parameters of a neural network to small random values.
+
+178
+00:06:16,063 --> 00:06:17,073
+Next we're then going
+
+179
+00:06:17,094 --> 00:06:20,011
+to minimize the cost function using
+
+180
+00:06:20,050 --> 00:06:23,036
+great intercepts or one of the advance optimization algorithms.
+
+181
+00:06:24,061 --> 00:06:25,088
+So, if you take derivatives you
+
+182
+00:06:26,001 --> 00:06:27,045
+find that the great intercept
+
+183
+00:06:27,058 --> 00:06:29,031
+like these and so this
+
+184
+00:06:29,062 --> 00:06:31,016
+term here is the
+
+185
+00:06:31,066 --> 00:06:33,088
+partial derivative of the cost function,
+
+186
+00:06:35,013 --> 00:06:35,093
+I'm not going to write that out,
+
+187
+00:06:36,011 --> 00:06:37,086
+with respect to the feature
+
+188
+00:06:38,006 --> 00:06:40,001
+value Xik and similarly
+
+189
+00:06:41,001 --> 00:06:42,043
+this term here is also
+
+190
+00:06:43,002 --> 00:06:44,066
+a partial derivative value of
+
+191
+00:06:44,073 --> 00:06:46,048
+the cost function with respect to the parameter
+
+192
+00:06:46,093 --> 00:06:48,094
+theta that we're minimizing.
+
+193
+00:06:50,020 --> 00:06:51,041
+And just as a reminder, in
+
+194
+00:06:51,075 --> 00:06:52,092
+this formula that we no
+
+195
+00:06:53,012 --> 00:06:54,075
+longer have this X0 equals
+
+196
+00:06:54,097 --> 00:06:56,074
+1 and so we have
+
+197
+00:06:57,000 --> 00:07:00,000
+that x is in Rn and theta is a Rn.
+
+198
+00:07:01,048 --> 00:07:03,010
+In this new formalism, we're regularizing
+
+199
+00:07:03,075 --> 00:07:05,022
+every one of our perimeters theta, you know, every one of our parameters Xn.
+
+200
+00:07:07,039 --> 00:07:09,006
+There's no longer the special
+
+201
+00:07:09,048 --> 00:07:11,085
+case theta zero, which was
+
+202
+00:07:12,020 --> 00:07:13,075
+regularized differently, or which
+
+203
+00:07:13,086 --> 00:07:15,043
+was not regularized compared to
+
+204
+00:07:15,056 --> 00:07:17,064
+the parameters theta 1 down to theta.
+
+205
+00:07:18,037 --> 00:07:19,070
+So there is now no longer a
+
+206
+00:07:20,006 --> 00:07:21,014
+theta 0, which is why
+
+207
+00:07:21,039 --> 00:07:22,044
+in these updates, I did not
+
+208
+00:07:22,069 --> 00:07:24,007
+break out a special case for k equals 0.
+
+209
+00:07:26,006 --> 00:07:27,023
+So we then use gradient descent
+
+210
+00:07:27,074 --> 00:07:28,070
+to minimize the cost function
+
+211
+00:07:29,008 --> 00:07:30,025
+j with respect to the
+
+212
+00:07:30,038 --> 00:07:32,000
+features x and with respect to the parameters theta.
+
+213
+00:07:33,016 --> 00:07:35,005
+And finally, given a
+
+214
+00:07:35,013 --> 00:07:36,031
+user, if a user
+
+215
+00:07:36,056 --> 00:07:38,092
+has some parameters, theta, and
+
+216
+00:07:39,041 --> 00:07:40,054
+if there's a movie with
+
+217
+00:07:40,068 --> 00:07:41,098
+some sort of learned features x,
+
+218
+00:07:42,057 --> 00:07:43,072
+we would then predict that that
+
+219
+00:07:43,097 --> 00:07:44,093
+movie would be given a
+
+220
+00:07:45,002 --> 00:07:46,019
+star rating by that user
+
+221
+00:07:47,000 --> 00:07:48,077
+of theta transpose j. Or
+
+222
+00:07:48,086 --> 00:07:50,037
+just to fill those in,
+
+223
+00:07:50,063 --> 00:07:52,025
+then we're saying that if user
+
+224
+00:07:52,062 --> 00:07:53,077
+J has not yet
+
+225
+00:07:54,000 --> 00:07:55,098
+rated movie I, then
+
+226
+00:07:56,017 --> 00:07:57,030
+what we do is predict that
+
+227
+00:07:58,014 --> 00:07:59,012
+user J is going to
+
+228
+00:07:59,070 --> 00:08:01,042
+rate movie I according to
+
+229
+00:08:02,030 --> 00:08:04,023
+theta J transpose Xi.
+
+230
+00:08:06,064 --> 00:08:08,000
+So that's the collaborative
+
+231
+00:08:08,081 --> 00:08:10,017
+filtering algorithm and if
+
+232
+00:08:10,031 --> 00:08:12,023
+you implement this algorithm you actually get a pretty
+
+233
+00:08:12,073 --> 00:08:14,007
+decent algorithm that will simultaneously
+
+234
+00:08:15,006 --> 00:08:16,076
+learn good features for hopefully
+
+235
+00:08:17,011 --> 00:08:18,045
+all the movies as well as
+
+236
+00:08:18,056 --> 00:08:19,088
+learn parameters for all the
+
+237
+00:08:20,005 --> 00:08:21,029
+users and hopefully give
+
+238
+00:08:21,043 --> 00:08:23,006
+pretty good predictions for how
+
+239
+00:08:23,029 --> 00:08:25,088
+different users will rate different movies that they have not yet rated

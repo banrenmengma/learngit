@@ -1,0 +1,1584 @@
+
+1
+00:00:00,024 --> 00:00:01,056
+So, it's taken us a
+
+2
+00:00:01,070 --> 00:00:02,069
+lot of videos to get through
+
+3
+00:00:03,012 --> 00:00:04,048
+the neural network learning algorithm.
+
+4
+00:00:05,062 --> 00:00:06,063
+In this video, what I'd like
+
+5
+00:00:06,079 --> 00:00:08,008
+to do is try to
+
+6
+00:00:08,034 --> 00:00:10,003
+put all the pieces together, to
+
+7
+00:00:10,036 --> 00:00:12,011
+give a overall summary or
+
+8
+00:00:12,035 --> 00:00:13,041
+a bigger picture view, of how
+
+9
+00:00:13,065 --> 00:00:15,028
+all the pieces fit together and
+
+10
+00:00:15,052 --> 00:00:16,098
+of the overall process of how
+
+11
+00:00:17,026 --> 00:00:18,082
+to implement a neural network learning algorithm.
+
+12
+00:00:21,087 --> 00:00:23,021
+When training a neural network, the
+
+13
+00:00:23,028 --> 00:00:24,028
+first thing you need to do
+
+14
+00:00:24,039 --> 00:00:25,092
+is pick some network architecture
+
+15
+00:00:26,067 --> 00:00:27,094
+and by architecture I just
+
+16
+00:00:28,019 --> 00:00:30,051
+mean connectivity pattern between the neurons.
+
+17
+00:00:31,007 --> 00:00:31,083
+So, you know, we might choose
+
+18
+00:00:32,070 --> 00:00:33,077
+between say, a neural network
+
+19
+00:00:34,022 --> 00:00:35,043
+with three input units
+
+20
+00:00:35,096 --> 00:00:37,039
+and five hidden units and
+
+21
+00:00:37,050 --> 00:00:39,056
+four output units versus one
+
+22
+00:00:39,079 --> 00:00:41,046
+of 3, 5 hidden, 5
+
+23
+00:00:41,070 --> 00:00:43,042
+hidden, 4 output and
+
+24
+00:00:43,090 --> 00:00:45,021
+here are 3, 5,
+
+25
+00:00:45,054 --> 00:00:47,006
+5, 5 units in each
+
+26
+00:00:47,032 --> 00:00:48,086
+of three hidden layers and four
+
+27
+00:00:49,011 --> 00:00:50,025
+open units, and so these
+
+28
+00:00:50,042 --> 00:00:52,000
+choices of how many hidden
+
+29
+00:00:52,027 --> 00:00:53,040
+units in each layer
+
+30
+00:00:53,081 --> 00:00:55,056
+and how many hidden layers, those
+
+31
+00:00:55,078 --> 00:00:57,057
+are architecture choices.
+
+32
+00:00:57,090 --> 00:00:58,067
+So, how do you make these choices?
+
+33
+00:00:59,071 --> 00:01:01,027
+Well first, the number
+
+34
+00:01:01,053 --> 00:01:03,084
+of input units well that's pretty well defined.
+
+35
+00:01:04,068 --> 00:01:05,095
+And once you decides on the fix
+
+36
+00:01:06,057 --> 00:01:07,087
+set of features x the
+
+37
+00:01:08,007 --> 00:01:09,042
+number of input units will just be, you know, the
+
+38
+00:01:10,014 --> 00:01:12,018
+dimension of your features x(i)
+
+39
+00:01:12,032 --> 00:01:14,046
+would be determined by that.
+
+40
+00:01:14,076 --> 00:01:15,096
+And if you are doing multiclass
+
+41
+00:01:16,020 --> 00:01:17,037
+classifications the number of
+
+42
+00:01:17,051 --> 00:01:18,031
+output of this will be
+
+43
+00:01:18,042 --> 00:01:19,071
+determined by the number
+
+44
+00:01:20,006 --> 00:01:22,085
+of classes in your classification problem.
+
+45
+00:01:23,026 --> 00:01:24,089
+And just a reminder if you have
+
+46
+00:01:25,015 --> 00:01:27,029
+a multiclass classification where y
+
+47
+00:01:27,056 --> 00:01:28,096
+takes on say values between
+
+48
+00:01:30,004 --> 00:01:31,034
+1 and 10, so that
+
+49
+00:01:31,046 --> 00:01:33,056
+you have ten possible classes.
+
+50
+00:01:34,068 --> 00:01:37,020
+Then remember to right, your
+
+51
+00:01:37,081 --> 00:01:39,034
+output y as these were the vectors.
+
+52
+00:01:40,012 --> 00:01:41,056
+So instead of clause one, you
+
+53
+00:01:41,073 --> 00:01:42,084
+recode it as a vector
+
+54
+00:01:43,015 --> 00:01:44,059
+like that, or for
+
+55
+00:01:44,067 --> 00:01:47,028
+the second class you recode it as a vector like that.
+
+56
+00:01:48,012 --> 00:01:49,007
+So if one of these
+
+57
+00:01:49,020 --> 00:01:51,000
+apples takes on
+
+58
+00:01:51,014 --> 00:01:53,090
+the fifth class, you know, y equals 5, then
+
+59
+00:01:54,012 --> 00:01:55,012
+what you're showing to your neural
+
+60
+00:01:55,037 --> 00:01:56,084
+network is not actually a value
+
+61
+00:01:57,025 --> 00:01:59,051
+of y equals 5, instead here
+
+62
+00:02:00,003 --> 00:02:00,095
+at the upper layer which would
+
+63
+00:02:01,028 --> 00:02:02,065
+have ten output units, you
+
+64
+00:02:02,073 --> 00:02:03,092
+will instead feed to the
+
+65
+00:02:04,006 --> 00:02:05,070
+vector which you know
+
+66
+00:02:07,046 --> 00:02:08,043
+with one in the fifth
+
+67
+00:02:08,077 --> 00:02:11,005
+position and a bunch of zeros down here.
+
+68
+00:02:11,041 --> 00:02:12,046
+So the choice of number
+
+69
+00:02:12,088 --> 00:02:14,033
+of input units and number of output units
+
+70
+00:02:14,096 --> 00:02:16,059
+is maybe somewhat reasonably straightforward.
+
+71
+00:02:18,000 --> 00:02:18,094
+And as for the number
+
+72
+00:02:19,040 --> 00:02:21,003
+of hidden units and the
+
+73
+00:02:21,013 --> 00:02:23,011
+number of hidden layers, a
+
+74
+00:02:23,021 --> 00:02:24,034
+reasonable default is to
+
+75
+00:02:24,053 --> 00:02:26,000
+use a single hidden layer
+
+76
+00:02:26,065 --> 00:02:28,003
+and so this type of
+
+77
+00:02:28,087 --> 00:02:30,040
+neural network shown on the left with
+
+78
+00:02:30,058 --> 00:02:33,027
+just one hidden layer is probably the most common.
+
+79
+00:02:34,049 --> 00:02:35,087
+Or if you use more
+
+80
+00:02:36,013 --> 00:02:38,040
+than one hidden layer, again the
+
+81
+00:02:38,066 --> 00:02:39,059
+reasonable default will be to
+
+82
+00:02:39,075 --> 00:02:40,094
+have the same number of
+
+83
+00:02:41,012 --> 00:02:42,056
+hidden units in every single layer.
+
+84
+00:02:42,081 --> 00:02:44,059
+So here we have two
+
+85
+00:02:45,002 --> 00:02:46,037
+hidden layers and each
+
+86
+00:02:46,061 --> 00:02:47,065
+of these hidden layers have the
+
+87
+00:02:47,086 --> 00:02:49,050
+same number five of hidden
+
+88
+00:02:49,078 --> 00:02:50,074
+units and here we have, you know,
+
+89
+00:02:51,059 --> 00:02:53,002
+three hidden layers and
+
+90
+00:02:53,016 --> 00:02:54,078
+each of them has the same
+
+91
+00:02:54,097 --> 00:02:56,040
+number, that is five hidden units.
+
+92
+00:02:57,043 --> 00:02:59,043
+Rather than doing this sort
+
+93
+00:02:59,074 --> 00:03:02,084
+of network architecture on the left would be a perfect ably reasonable default.
+
+94
+00:03:04,002 --> 00:03:04,078
+And as for the number
+
+95
+00:03:05,012 --> 00:03:07,003
+of hidden units - usually, the
+
+96
+00:03:07,012 --> 00:03:08,009
+more hidden units the better;
+
+97
+00:03:08,056 --> 00:03:09,063
+it's just that if you have
+
+98
+00:03:09,090 --> 00:03:11,011
+a lot of hidden units, it
+
+99
+00:03:11,033 --> 00:03:13,015
+can become more computationally expensive, but
+
+100
+00:03:13,030 --> 00:03:15,084
+very often, having more hidden units is a good thing.
+
+101
+00:03:17,025 --> 00:03:18,056
+And usually the number of hidden
+
+102
+00:03:18,071 --> 00:03:20,081
+units in each layer will be maybe
+
+103
+00:03:21,008 --> 00:03:22,012
+comparable to the dimension
+
+104
+00:03:22,049 --> 00:03:23,066
+of x, comparable to the
+
+105
+00:03:23,081 --> 00:03:24,094
+number of features, or it could
+
+106
+00:03:25,013 --> 00:03:26,087
+be any where from same number
+
+107
+00:03:27,018 --> 00:03:29,059
+of hidden units of input features to
+
+108
+00:03:29,077 --> 00:03:32,043
+maybe so that three or four times of that.
+
+109
+00:03:32,068 --> 00:03:34,077
+So having the number of hidden units is comparable.
+
+110
+00:03:35,013 --> 00:03:36,034
+You know, several times, or
+
+111
+00:03:36,040 --> 00:03:37,037
+some what bigger than the number
+
+112
+00:03:37,043 --> 00:03:38,075
+of input features is often
+
+113
+00:03:39,028 --> 00:03:41,031
+a useful thing to do So,
+
+114
+00:03:42,015 --> 00:03:43,049
+hopefully this gives you one
+
+115
+00:03:43,081 --> 00:03:45,013
+reasonable set of default choices
+
+116
+00:03:45,065 --> 00:03:47,077
+for neural architecture and and
+
+117
+00:03:48,019 --> 00:03:49,046
+if you follow these guidelines, you
+
+118
+00:03:49,053 --> 00:03:50,058
+will probably get something that works
+
+119
+00:03:50,093 --> 00:03:52,018
+well, but in a
+
+120
+00:03:52,036 --> 00:03:53,077
+later set of videos where
+
+121
+00:03:54,005 --> 00:03:55,027
+I will talk specifically about
+
+122
+00:03:55,058 --> 00:03:56,090
+advice for how to apply
+
+123
+00:03:57,040 --> 00:03:58,077
+algorithms, I will actually
+
+124
+00:03:58,084 --> 00:04:01,087
+say a lot more about how to choose a neural network architecture.
+
+125
+00:04:02,053 --> 00:04:03,091
+Or actually have quite
+
+126
+00:04:03,096 --> 00:04:04,096
+a lot I want to
+
+127
+00:04:04,096 --> 00:04:06,018
+say later to make good choices
+
+128
+00:04:06,071 --> 00:04:08,078
+for the number of hidden units, the number of hidden layers, and so on.
+
+129
+00:04:10,062 --> 00:04:12,031
+Next, here's what we
+
+130
+00:04:12,041 --> 00:04:13,074
+need to implement in order to
+
+131
+00:04:13,086 --> 00:04:15,036
+trade in neural network, there are
+
+132
+00:04:15,050 --> 00:04:16,081
+actually six steps that I
+
+133
+00:04:17,007 --> 00:04:18,002
+have; I have four on this
+
+134
+00:04:18,016 --> 00:04:19,010
+slide and two more steps
+
+135
+00:04:19,037 --> 00:04:21,048
+on the next slide.
+
+136
+00:04:21,062 --> 00:04:22,022
+First step is to set up the neural
+
+137
+00:04:22,043 --> 00:04:23,050
+network and to randomly
+
+138
+00:04:24,007 --> 00:04:25,056
+initialize the values of the weights.
+
+139
+00:04:25,079 --> 00:04:27,000
+And we usually initialize the
+
+140
+00:04:27,007 --> 00:04:29,070
+weights to small values near zero.
+
+141
+00:04:31,010 --> 00:04:33,012
+Then we implement forward propagation
+
+142
+00:04:34,007 --> 00:04:35,006
+so that we can input
+
+143
+00:04:35,048 --> 00:04:37,014
+any excellent neural network and
+
+144
+00:04:37,049 --> 00:04:38,086
+compute h of x which is this
+
+145
+00:04:39,006 --> 00:04:40,081
+output vector of the y values.
+
+146
+00:04:44,025 --> 00:04:45,091
+We then also implement code to
+
+147
+00:04:46,000 --> 00:04:47,050
+compute this cost function j of theta.
+
+148
+00:04:49,076 --> 00:04:51,016
+And next we implement
+
+149
+00:04:52,012 --> 00:04:53,032
+back-prop, or the back-propagation
+
+150
+00:04:54,039 --> 00:04:55,068
+algorithm, to compute these
+
+151
+00:04:55,091 --> 00:04:58,000
+partial derivatives terms, partial
+
+152
+00:04:58,043 --> 00:04:59,082
+derivatives of j of theta
+
+153
+00:05:00,033 --> 00:05:04,024
+with respect to the parameters. Concretely, to implement back prop.
+
+154
+00:05:04,095 --> 00:05:05,087
+Usually we will do that
+
+155
+00:05:06,025 --> 00:05:08,045
+with a fore loop over the training examples.
+
+156
+00:05:09,069 --> 00:05:10,064
+Some of you may have heard of
+
+157
+00:05:10,082 --> 00:05:12,063
+advanced, and frankly very
+
+158
+00:05:12,093 --> 00:05:14,050
+advanced factorization methods where you
+
+159
+00:05:14,067 --> 00:05:15,072
+don't have a four-loop over
+
+160
+00:05:16,056 --> 00:05:18,057
+the m-training examples, that the
+
+161
+00:05:18,066 --> 00:05:19,089
+first time you're implementing back prop
+
+162
+00:05:20,025 --> 00:05:21,042
+there should almost certainly the four
+
+163
+00:05:21,042 --> 00:05:22,098
+loop in your code,
+
+164
+00:05:23,080 --> 00:05:25,000
+where you're iterating over the examples,
+
+165
+00:05:25,081 --> 00:05:27,075
+you know, x1, y1, then so
+
+166
+00:05:28,002 --> 00:05:29,050
+you do forward prop and
+
+167
+00:05:29,063 --> 00:05:30,039
+back prop on the first
+
+168
+00:05:30,085 --> 00:05:32,050
+example, and then in
+
+169
+00:05:32,070 --> 00:05:33,073
+the second iteration of the
+
+170
+00:05:33,077 --> 00:05:35,036
+four-loop, you do forward propagation
+
+171
+00:05:35,098 --> 00:05:38,005
+and back propagation on the second example, and so on.
+
+172
+00:05:38,017 --> 00:05:40,089
+Until you get through the final example.
+
+173
+00:05:41,068 --> 00:05:43,011
+So there should be
+
+174
+00:05:43,023 --> 00:05:44,025
+a four-loop in your implementation
+
+175
+00:05:45,005 --> 00:05:47,018
+of back prop, at least the first time implementing it.
+
+176
+00:05:48,012 --> 00:05:49,016
+And then there are frankly
+
+177
+00:05:49,038 --> 00:05:50,051
+somewhat complicated ways to do
+
+178
+00:05:50,088 --> 00:05:52,066
+this without a four-loop, but
+
+179
+00:05:52,081 --> 00:05:53,094
+I definitely do not recommend
+
+180
+00:05:54,036 --> 00:05:55,033
+trying to do that much more
+
+181
+00:05:55,066 --> 00:05:58,042
+complicated version the first time you try to implement back prop.
+
+182
+00:05:59,085 --> 00:06:00,092
+So concretely, we have a
+
+183
+00:06:01,000 --> 00:06:02,019
+four-loop over my m-training examples
+
+184
+00:06:03,024 --> 00:06:04,062
+and inside the four-loop we're
+
+185
+00:06:04,076 --> 00:06:06,030
+going to perform fore prop
+
+186
+00:06:06,057 --> 00:06:08,008
+and back prop using just this one example.
+
+187
+00:06:09,031 --> 00:06:10,031
+And what that means is that
+
+188
+00:06:10,056 --> 00:06:12,047
+we're going to take x(i), and
+
+189
+00:06:12,068 --> 00:06:14,000
+feed that to my input layer,
+
+190
+00:06:14,076 --> 00:06:16,037
+perform forward-prop, perform back-prop
+
+191
+00:06:17,037 --> 00:06:18,036
+and that will if all of
+
+192
+00:06:18,043 --> 00:06:19,083
+these activations and all of
+
+193
+00:06:19,093 --> 00:06:22,008
+these delta terms for all
+
+194
+00:06:22,030 --> 00:06:23,043
+of the layers of all my
+
+195
+00:06:23,076 --> 00:06:24,072
+units in the neural
+
+196
+00:06:24,094 --> 00:06:27,017
+network then still
+
+197
+00:06:27,061 --> 00:06:28,075
+inside this four-loop, let
+
+198
+00:06:29,018 --> 00:06:30,044
+me draw some curly braces
+
+199
+00:06:30,093 --> 00:06:31,094
+just to show the scope with
+
+200
+00:06:32,002 --> 00:06:32,093
+the four-loop, this is in
+
+201
+00:06:34,016 --> 00:06:35,048
+octave code of course, but it's more a sequence Java
+
+202
+00:06:36,018 --> 00:06:38,035
+code, and a four-loop encompasses all this.
+
+203
+00:06:39,006 --> 00:06:40,006
+We're going to compute those delta
+
+204
+00:06:40,048 --> 00:06:43,068
+terms, which are is the formula that we gave earlier.
+
+205
+00:06:45,054 --> 00:06:47,037
+Plus, you know, delta l plus one times
+
+206
+00:06:48,062 --> 00:06:51,014
+a, l transpose of the code.
+
+207
+00:06:51,049 --> 00:06:53,054
+And then finally, outside the
+
+208
+00:06:54,018 --> 00:06:55,062
+having computed these delta
+
+209
+00:06:55,097 --> 00:06:57,055
+terms, these accumulation terms, we
+
+210
+00:06:57,087 --> 00:06:59,005
+would then have some other
+
+211
+00:06:59,017 --> 00:07:00,043
+code and then that will
+
+212
+00:07:00,072 --> 00:07:03,024
+allow us to compute these partial derivative terms.
+
+213
+00:07:03,086 --> 00:07:05,044
+Right and these partial derivative
+
+214
+00:07:05,097 --> 00:07:07,001
+terms have to take
+
+215
+00:07:07,020 --> 00:07:10,026
+into account the regularization term lambda as well.
+
+216
+00:07:11,005 --> 00:07:13,024
+And so, those formulas were given in the earlier video.
+
+217
+00:07:14,082 --> 00:07:15,072
+So, how do you done that
+
+218
+00:07:16,068 --> 00:07:18,007
+you now hopefully have code to
+
+219
+00:07:18,018 --> 00:07:20,005
+compute these partial derivative terms.
+
+220
+00:07:21,018 --> 00:07:23,002
+Next is step five, what I
+
+221
+00:07:23,024 --> 00:07:24,042
+do is then use gradient
+
+222
+00:07:24,073 --> 00:07:26,069
+checking to compare these partial
+
+223
+00:07:27,012 --> 00:07:28,052
+derivative terms that were computed. So, I've
+
+224
+00:07:29,042 --> 00:07:30,098
+compared the versions computed using
+
+225
+00:07:31,026 --> 00:07:33,099
+back propagation versus the
+
+226
+00:07:34,043 --> 00:07:36,047
+partial derivatives computed using the numerical
+
+227
+00:07:37,070 --> 00:07:39,085
+estimates as using numerical estimates of the derivatives.
+
+228
+00:07:40,035 --> 00:07:41,081
+So, I do gradient checking to make
+
+229
+00:07:41,097 --> 00:07:44,033
+sure that both of these give you very similar values.
+
+230
+00:07:45,082 --> 00:07:47,041
+Having done gradient checking just now reassures
+
+231
+00:07:47,091 --> 00:07:49,027
+us that our implementation of back
+
+232
+00:07:49,058 --> 00:07:51,047
+propagation is correct, and is
+
+233
+00:07:51,061 --> 00:07:52,085
+then very important that we disable
+
+234
+00:07:53,052 --> 00:07:54,070
+gradient checking, because the gradient
+
+235
+00:07:55,007 --> 00:07:57,014
+checking code is computationally very slow.
+
+236
+00:07:59,001 --> 00:08:00,087
+And finally, we then
+
+237
+00:08:01,012 --> 00:08:03,027
+use an optimization algorithm such
+
+238
+00:08:03,050 --> 00:08:04,093
+as gradient descent, or one of
+
+239
+00:08:04,095 --> 00:08:07,051
+the advanced optimization methods such
+
+240
+00:08:07,074 --> 00:08:10,001
+as LB of GS, contract gradient has
+
+241
+00:08:10,025 --> 00:08:13,012
+embodied into fminunc or other  optimization methods.
+
+242
+00:08:13,093 --> 00:08:15,050
+We use these together with
+
+243
+00:08:15,073 --> 00:08:17,037
+back propagation, so back
+
+244
+00:08:17,062 --> 00:08:18,067
+propagation is the thing
+
+245
+00:08:18,076 --> 00:08:20,063
+that computes these partial derivatives for us.
+
+246
+00:08:21,073 --> 00:08:22,068
+And so, we know how to
+
+247
+00:08:22,086 --> 00:08:24,001
+compute the cost function, we know
+
+248
+00:08:24,010 --> 00:08:25,055
+how to compute the partial derivatives using
+
+249
+00:08:25,082 --> 00:08:27,041
+back propagation, so we
+
+250
+00:08:27,048 --> 00:08:28,082
+can use one of these optimization methods
+
+251
+00:08:29,057 --> 00:08:30,085
+to try to minimize j of
+
+252
+00:08:31,012 --> 00:08:33,050
+theta as a function of the parameters theta.
+
+253
+00:08:34,033 --> 00:08:35,040
+And by the way, for
+
+254
+00:08:35,065 --> 00:08:37,033
+neural networks, this cost function
+
+255
+00:08:38,029 --> 00:08:39,062
+j of theta is non-convex,
+
+256
+00:08:40,052 --> 00:08:42,049
+or is not convex and so
+
+257
+00:08:43,025 --> 00:08:45,060
+it can theoretically be susceptible
+
+258
+00:08:46,025 --> 00:08:47,048
+to local minima, and in
+
+259
+00:08:47,064 --> 00:08:49,058
+fact algorithms like gradient descent and
+
+260
+00:08:49,084 --> 00:08:51,095
+the advance optimization methods can,
+
+261
+00:08:52,039 --> 00:08:53,065
+in theory, get stuck in local
+
+262
+00:08:55,019 --> 00:08:56,029
+optima, but it turns out
+
+263
+00:08:56,048 --> 00:08:57,067
+that in practice this is
+
+264
+00:08:57,087 --> 00:08:59,023
+not usually a huge problem
+
+265
+00:08:59,055 --> 00:09:00,079
+and even though we can't guarantee
+
+266
+00:09:01,021 --> 00:09:02,032
+that these algorithms will find a
+
+267
+00:09:02,050 --> 00:09:04,025
+global optimum, usually algorithms like
+
+268
+00:09:04,038 --> 00:09:05,087
+gradient descent will do a
+
+269
+00:09:05,092 --> 00:09:07,070
+very good job minimizing this
+
+270
+00:09:07,085 --> 00:09:09,023
+cost function j of
+
+271
+00:09:09,027 --> 00:09:10,035
+theta and get a
+
+272
+00:09:10,041 --> 00:09:11,082
+very good local minimum, even
+
+273
+00:09:12,005 --> 00:09:13,069
+if it doesn't get to the global optimum.
+
+274
+00:09:14,050 --> 00:09:16,095
+Finally, gradient descents for
+
+275
+00:09:17,023 --> 00:09:19,050
+a neural network might still seem a little bit magical.
+
+276
+00:09:20,016 --> 00:09:21,067
+So, let me just show one
+
+277
+00:09:21,088 --> 00:09:22,099
+more figure to try to get
+
+278
+00:09:23,016 --> 00:09:25,065
+that intuition about what gradient descent for a neural network is doing.
+
+279
+00:09:27,001 --> 00:09:28,046
+This was actually similar to the
+
+280
+00:09:28,059 --> 00:09:31,019
+figure that I was using earlier to explain gradient descent.
+
+281
+00:09:31,073 --> 00:09:32,075
+So, we have some cost
+
+282
+00:09:33,009 --> 00:09:34,048
+function, and we have
+
+283
+00:09:34,071 --> 00:09:36,059
+a number of parameters in our neural network. Right
+
+284
+00:09:36,080 --> 00:09:39,019
+here I've just written down two of the parameter values.
+
+285
+00:09:40,008 --> 00:09:41,025
+In reality, of course, in
+
+286
+00:09:41,051 --> 00:09:43,057
+the neural network, we can have lots of parameters with these.
+
+287
+00:09:44,019 --> 00:09:46,098
+Theta one, theta two--all of these are matrices, right?
+
+288
+00:09:47,002 --> 00:09:48,012
+So we can have very high dimensional
+
+289
+00:09:48,058 --> 00:09:49,087
+parameters but because of
+
+290
+00:09:49,096 --> 00:09:51,062
+the limitations the source of
+
+291
+00:09:51,078 --> 00:09:52,097
+parts we can draw. I'm pretending
+
+292
+00:09:53,040 --> 00:09:55,084
+that we have only two parameters in this neural network.
+
+293
+00:09:56,026 --> 00:09:56,088
+Although obviously we have a lot more in practice.
+
+294
+00:09:59,027 --> 00:10:00,070
+Now, this cost function j of
+
+295
+00:10:00,079 --> 00:10:02,047
+theta measures how well
+
+296
+00:10:02,087 --> 00:10:04,073
+the neural network fits the training data.
+
+297
+00:10:06,000 --> 00:10:06,091
+So, if you take a point
+
+298
+00:10:07,012 --> 00:10:08,059
+like this one, down here,
+
+299
+00:10:10,026 --> 00:10:11,017
+that's a point where j
+
+300
+00:10:11,046 --> 00:10:12,058
+of theta is pretty low,
+
+301
+00:10:12,087 --> 00:10:16,016
+and so this corresponds to a setting of the parameters.
+
+302
+00:10:17,001 --> 00:10:17,084
+There's a setting of the parameters
+
+303
+00:10:18,035 --> 00:10:19,091
+theta, where, you know, for most
+
+304
+00:10:20,013 --> 00:10:22,045
+of the training examples, the output
+
+305
+00:10:24,012 --> 00:10:26,026
+of my hypothesis, that may
+
+306
+00:10:26,040 --> 00:10:27,041
+be pretty close to y(i)
+
+307
+00:10:27,064 --> 00:10:28,072
+and if this is
+
+308
+00:10:28,084 --> 00:10:31,055
+true than that's what causes my cost function to be pretty low.
+
+309
+00:10:32,069 --> 00:10:33,076
+Whereas in contrast, if you were
+
+310
+00:10:33,082 --> 00:10:35,013
+to take a value like that, a
+
+311
+00:10:35,050 --> 00:10:37,025
+point like that corresponds to,
+
+312
+00:10:38,008 --> 00:10:39,025
+where for many training examples,
+
+313
+00:10:39,088 --> 00:10:40,077
+the output of my neural
+
+314
+00:10:41,003 --> 00:10:42,086
+network is far from
+
+315
+00:10:43,011 --> 00:10:44,034
+the actual value y(i)
+
+316
+00:10:44,053 --> 00:10:45,085
+that was observed in the training set.
+
+317
+00:10:46,061 --> 00:10:47,048
+So points like this on the
+
+318
+00:10:47,059 --> 00:10:50,010
+line correspond to where the
+
+319
+00:10:50,045 --> 00:10:51,045
+hypothesis, where the neural
+
+320
+00:10:51,074 --> 00:10:53,033
+network is outputting values
+
+321
+00:10:53,076 --> 00:10:54,080
+on the training set that are
+
+322
+00:10:55,001 --> 00:10:56,025
+far from y(i). So, it's not
+
+323
+00:10:56,047 --> 00:10:57,097
+fitting the training set well, whereas
+
+324
+00:10:58,016 --> 00:10:59,063
+points like this with low
+
+325
+00:10:59,097 --> 00:11:01,029
+values of the cost function corresponds
+
+326
+00:11:02,012 --> 00:11:03,037
+to where j of theta
+
+327
+00:11:04,012 --> 00:11:05,026
+is low, and therefore corresponds
+
+328
+00:11:05,095 --> 00:11:07,059
+to where the neural network happens
+
+329
+00:11:07,085 --> 00:11:09,028
+to be fitting my training set
+
+330
+00:11:09,050 --> 00:11:11,034
+well, because I mean this is what's
+
+331
+00:11:11,054 --> 00:11:14,007
+needed to be true in order for j of theta to be small.
+
+332
+00:11:15,048 --> 00:11:16,080
+So what gradient descent does is
+
+333
+00:11:16,087 --> 00:11:18,033
+we'll start from some random
+
+334
+00:11:18,073 --> 00:11:20,029
+initial point like that
+
+335
+00:11:20,042 --> 00:11:22,099
+one over there, and it will repeatedly go downhill.
+
+336
+00:11:24,003 --> 00:11:25,039
+And so what back propagation is
+
+337
+00:11:25,057 --> 00:11:27,022
+doing is computing the direction
+
+338
+00:11:27,094 --> 00:11:29,037
+of the gradient, and what
+
+339
+00:11:29,051 --> 00:11:30,074
+gradient descent is doing is
+
+340
+00:11:31,003 --> 00:11:32,005
+it's taking little steps downhill
+
+341
+00:11:32,087 --> 00:11:34,022
+until hopefully it gets to,
+
+342
+00:11:34,061 --> 00:11:36,040
+in this case, a pretty good local optimum.
+
+343
+00:11:37,087 --> 00:11:39,025
+So, when you implement back
+
+344
+00:11:39,040 --> 00:11:40,084
+propagation and use gradient
+
+345
+00:11:41,020 --> 00:11:42,041
+descent or one of the
+
+346
+00:11:42,084 --> 00:11:44,075
+advanced optimization methods, this picture
+
+347
+00:11:45,033 --> 00:11:47,028
+sort of explains what the algorithm is doing.
+
+348
+00:11:47,045 --> 00:11:48,082
+It's trying to find a value
+
+349
+00:11:49,025 --> 00:11:50,091
+of the parameters where the
+
+350
+00:11:51,025 --> 00:11:52,017
+output values in the neural
+
+351
+00:11:52,045 --> 00:11:54,029
+network closely matches the
+
+352
+00:11:54,040 --> 00:11:55,051
+values of the y(i)'s
+
+353
+00:11:55,065 --> 00:11:58,079
+observed in your training set.
+
+354
+00:11:58,090 --> 00:12:00,025
+So, hopefully this gives you
+
+355
+00:12:00,039 --> 00:12:01,061
+a better sense of how
+
+356
+00:12:01,091 --> 00:12:03,092
+the many different pieces of
+
+357
+00:12:04,012 --> 00:12:05,075
+neural network learning fit together.
+
+358
+00:12:07,012 --> 00:12:09,000
+In case even after this video, in
+
+359
+00:12:09,012 --> 00:12:10,012
+case you still feel like there
+
+360
+00:12:10,036 --> 00:12:11,041
+are, like, a lot of different pieces
+
+361
+00:12:12,007 --> 00:12:13,045
+and it's not entirely clear what
+
+362
+00:12:13,069 --> 00:12:14,066
+some of them do or how all
+
+363
+00:12:14,086 --> 00:12:17,075
+of these pieces come together, that's actually okay.
+
+364
+00:12:18,078 --> 00:12:21,077
+Neural network learning and back propagation is a complicated algorithm.
+
+365
+00:12:23,000 --> 00:12:23,096
+And even though I've seen
+
+366
+00:12:24,028 --> 00:12:25,034
+the math behind back propagation
+
+367
+00:12:25,086 --> 00:12:26,071
+for many years and I've used
+
+368
+00:12:27,002 --> 00:12:28,047
+back propagation, I think very
+
+369
+00:12:28,067 --> 00:12:30,021
+successfully, for many years, even
+
+370
+00:12:30,037 --> 00:12:31,050
+today I still feel like I
+
+371
+00:12:31,057 --> 00:12:32,066
+don't always have a great
+
+372
+00:12:33,039 --> 00:12:35,061
+grasp of exactly what back propagation is doing sometimes.
+
+373
+00:12:36,020 --> 00:12:37,085
+And what the optimization process
+
+374
+00:12:38,051 --> 00:12:41,048
+looks like of minimizing j if theta.
+
+375
+00:12:41,091 --> 00:12:42,083
+Much this is a much harder algorithm
+
+376
+00:12:43,045 --> 00:12:44,067
+to feel like I have a
+
+377
+00:12:44,083 --> 00:12:46,059
+much less good handle on
+
+378
+00:12:46,069 --> 00:12:47,069
+exactly what this is doing
+
+379
+00:12:48,024 --> 00:12:49,036
+compared to say, linear regression or logistic regression.
+
+380
+00:12:51,038 --> 00:12:53,017
+Which were mathematically and conceptually
+
+381
+00:12:53,050 --> 00:12:55,009
+much simpler and much cleaner algorithms.
+
+382
+00:12:56,020 --> 00:12:57,002
+But so in case if you feel the
+
+383
+00:12:57,007 --> 00:12:58,055
+same way, you know, that's actually perfectly
+
+384
+00:12:58,097 --> 00:13:01,000
+okay, but if you
+
+385
+00:13:01,016 --> 00:13:02,078
+do implement back propagation, hopefully
+
+386
+00:13:03,015 --> 00:13:04,025
+what you find is that this
+
+387
+00:13:04,046 --> 00:13:05,040
+is one of the most powerful
+
+388
+00:13:05,078 --> 00:13:08,002
+learning algorithms and if you
+
+389
+00:13:08,012 --> 00:13:09,050
+implement this algorithm, implement back propagation,
+
+390
+00:13:10,025 --> 00:13:11,023
+implement one of these optimization
+
+391
+00:13:11,034 --> 00:13:13,025
+methods, you find that
+
+392
+00:13:13,061 --> 00:13:14,094
+back propagation will be able
+
+393
+00:13:15,038 --> 00:13:17,033
+to fit very complex, powerful, non-linear
+
+394
+00:13:17,083 --> 00:13:19,037
+functions to your data,
+
+395
+00:13:20,008 --> 00:13:21,005
+and this is one of the
+
+396
+00:13:21,019 --> 00:13:22,078
+most effective learning algorithms we have today.

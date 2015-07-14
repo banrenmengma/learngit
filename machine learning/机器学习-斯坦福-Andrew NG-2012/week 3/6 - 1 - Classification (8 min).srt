@@ -1,0 +1,933 @@
+
+1
+00:00:00,046 --> 00:00:01,040
+In this and the next
+
+2
+00:00:01,058 --> 00:00:02,073
+few videos, I want to
+
+3
+00:00:02,096 --> 00:00:04,066
+start to talk about classification problems,
+
+4
+00:00:05,051 --> 00:00:07,000
+where the variable y that
+
+5
+00:00:07,011 --> 00:00:08,016
+you want to predict is discreet
+
+6
+00:00:08,057 --> 00:00:10,018
+valued. We'll develop an
+
+7
+00:00:10,041 --> 00:00:11,085
+algorithm called logistic regression,
+
+8
+00:00:12,041 --> 00:00:13,061
+which is one of the
+
+9
+00:00:13,069 --> 00:00:16,055
+most popular and most widely used learning algorithms today.
+
+10
+00:00:19,076 --> 00:00:22,014
+Here are some examples of classification problems.
+
+11
+00:00:23,017 --> 00:00:24,071
+Earlier, we talked about emails,
+
+12
+00:00:25,026 --> 00:00:26,069
+spam classification as an
+
+13
+00:00:27,007 --> 00:00:28,026
+example of a classification problem.
+
+14
+00:00:29,037 --> 00:00:32,015
+Another example would be classifying online transactions.
+
+15
+00:00:33,007 --> 00:00:34,010
+So, if you have a website
+
+16
+00:00:34,034 --> 00:00:35,053
+that sells stuff and if you
+
+17
+00:00:35,075 --> 00:00:36,074
+want to know if a physical
+
+18
+00:00:37,003 --> 00:00:39,014
+transaction is fraudulent or
+
+19
+00:00:39,025 --> 00:00:40,092
+not, whether someone has, you
+
+20
+00:00:41,006 --> 00:00:42,025
+know, is using a stolen credit card
+
+21
+00:00:42,057 --> 00:00:43,089
+or has stolen the user's password.
+
+22
+00:00:44,056 --> 00:00:46,082
+That's another classification problem, and
+
+23
+00:00:47,003 --> 00:00:48,021
+earlier we also talked about
+
+24
+00:00:48,040 --> 00:00:50,060
+the example of classifying tumors
+
+25
+00:00:51,064 --> 00:00:53,067
+as a cancerous malignant or as benign tumors.
+
+26
+00:00:55,007 --> 00:00:56,000
+In all of these problems,
+
+27
+00:00:56,068 --> 00:00:57,060
+the variable that we're trying
+
+28
+00:00:57,085 --> 00:00:58,086
+to predict is a variable
+
+29
+00:00:59,028 --> 00:01:00,010
+Y that we can think
+
+30
+00:01:00,042 --> 00:01:01,071
+of as taking on two values,
+
+31
+00:01:02,060 --> 00:01:04,012
+either zero or one, either
+
+32
+00:01:04,034 --> 00:01:05,078
+a spam or not spam, fraudulent
+
+33
+00:01:06,062 --> 00:01:08,073
+or not fraudulent, malignant or benign.
+
+34
+00:01:10,048 --> 00:01:11,043
+Another name for the class
+
+35
+00:01:11,081 --> 00:01:13,015
+that we denote with 0 is
+
+36
+00:01:13,081 --> 00:01:15,065
+the negative class, and another
+
+37
+00:01:15,095 --> 00:01:16,092
+name for the class that we
+
+38
+00:01:17,001 --> 00:01:19,034
+denote with 1 is the positive class.
+
+39
+00:01:20,017 --> 00:01:21,050
+So 0 may denote the
+
+40
+00:01:22,006 --> 00:01:23,045
+benign tumor and 1
+
+41
+00:01:23,084 --> 00:01:25,093
+positive class may denote a malignant tumor.
+
+42
+00:01:27,009 --> 00:01:28,040
+The assignment of the 2
+
+43
+00:01:28,085 --> 00:01:29,093
+classes, you know, spam,
+
+44
+00:01:30,004 --> 00:01:31,014
+no spam, and so on -
+
+45
+00:01:31,032 --> 00:01:32,046
+the assignment of the 2
+
+46
+00:01:32,079 --> 00:01:34,014
+classes to positive and negative,
+
+47
+00:01:34,050 --> 00:01:35,095
+to 0 and 1 is somewhat
+
+48
+00:01:36,025 --> 00:01:37,084
+arbitrary and it doesn't really matter.
+
+49
+00:01:38,068 --> 00:01:39,081
+But often there is this
+
+50
+00:01:39,098 --> 00:01:40,096
+intuition that the negative
+
+51
+00:01:41,045 --> 00:01:43,043
+class is conveying the
+
+52
+00:01:43,059 --> 00:01:44,068
+absence of something, like the absence
+
+53
+00:01:45,000 --> 00:01:47,043
+of a malignant tumor, whereas one,
+
+54
+00:01:47,085 --> 00:01:49,040
+the positive class, is conveying
+
+55
+00:01:49,095 --> 00:01:52,010
+the presence of something that we may be looking for.
+
+56
+00:01:52,076 --> 00:01:54,034
+But the definition of which
+
+57
+00:01:54,056 --> 00:01:55,040
+is negative and which is positive
+
+58
+00:01:55,068 --> 00:01:58,048
+is somewhat arbitrary and it doesn't matter that much.
+
+59
+00:02:00,009 --> 00:02:00,098
+For now, we're going to start
+
+60
+00:02:01,034 --> 00:02:03,003
+with classification problems with just
+
+61
+00:02:03,029 --> 00:02:04,054
+two classes; zero and one.
+
+62
+00:02:05,048 --> 00:02:07,001
+Later on, we'll talk about multi-class
+
+63
+00:02:07,043 --> 00:02:09,031
+problems as well, whether variable
+
+64
+00:02:09,075 --> 00:02:10,096
+Y may take on say,
+
+65
+00:02:11,055 --> 00:02:13,012
+for value zero, one, two and three.
+
+66
+00:02:14,021 --> 00:02:16,081
+This is called a multi-class classification problem,
+
+67
+00:02:17,068 --> 00:02:18,080
+but for the next few
+
+68
+00:02:18,094 --> 00:02:20,028
+videos, let's start with the
+
+69
+00:02:20,065 --> 00:02:22,075
+two class or the binary classification problem.
+
+70
+00:02:23,058 --> 00:02:25,065
+and we'll worry about the multi-class setting later.
+
+71
+00:02:26,097 --> 00:02:29,043
+So, how do we develop a classification algorithm?
+
+72
+00:02:30,053 --> 00:02:31,066
+Here's an example of a
+
+73
+00:02:31,075 --> 00:02:32,072
+training set for a classification
+
+74
+00:02:34,034 --> 00:02:35,080
+task for classifying a tumor
+
+75
+00:02:36,024 --> 00:02:37,053
+as malignant or benign and
+
+76
+00:02:37,081 --> 00:02:39,025
+notice that malignancy takes on
+
+77
+00:02:39,053 --> 00:02:41,019
+only two values zero or
+
+78
+00:02:41,037 --> 00:02:43,021
+no or one or one or yes.
+
+79
+00:02:44,055 --> 00:02:45,065
+So, one thing we could
+
+80
+00:02:45,084 --> 00:02:46,096
+do given this training set
+
+81
+00:02:47,043 --> 00:02:48,069
+is to apply the algorithm
+
+82
+00:02:49,012 --> 00:02:52,071
+that we already know, linear regression to this data set
+
+83
+00:02:53,015 --> 00:02:55,031
+and just try to fit the straight line to the data.
+
+84
+00:02:56,028 --> 00:02:57,047
+So, if you take this training
+
+85
+00:02:57,078 --> 00:02:58,075
+set and fill a straight
+
+86
+00:02:58,090 --> 00:03:00,031
+line to it, maybe you get
+
+87
+00:03:00,069 --> 00:03:03,053
+hypothesis that looks like that.
+
+88
+00:03:03,069 --> 00:03:05,091
+Alright, so that's my hypothesis, h of
+
+89
+00:03:06,002 --> 00:03:07,088
+x equals theta transpose
+
+90
+00:03:08,002 --> 00:03:09,033
+x.
+If you want
+
+91
+00:03:09,056 --> 00:03:11,027
+to make predictions, one thing
+
+92
+00:03:11,050 --> 00:03:12,097
+you could try doing is then
+
+93
+00:03:13,061 --> 00:03:16,075
+threshold the classifier outputs at 0.5.
+
+94
+00:03:17,011 --> 00:03:19,087
+That is at the vertical access value 0.5.
+
+95
+00:03:21,075 --> 00:03:23,093
+And if the hypothesis outputs
+
+96
+00:03:24,033 --> 00:03:25,049
+a value that's greater than
+
+97
+00:03:25,062 --> 00:03:27,050
+equal to 0.5 you predict y equals one.
+
+98
+00:03:27,086 --> 00:03:29,093
+If it's less than 0.5, you predict y equals zero.
+
+99
+00:03:31,006 --> 00:03:32,053
+Let's see what happens when we do that.
+
+100
+00:03:32,074 --> 00:03:33,090
+So, let's take 0.5, and
+
+101
+00:03:34,009 --> 00:03:36,066
+so, you know, that's where the threshold is.
+
+102
+00:03:37,006 --> 00:03:39,025
+And thus, using linear regression this way.
+
+103
+00:03:39,091 --> 00:03:41,006
+Everything to the right
+
+104
+00:03:41,033 --> 00:03:42,046
+of this point, we will end
+
+105
+00:03:42,063 --> 00:03:43,068
+up predicting as the positive
+
+106
+00:03:44,028 --> 00:03:45,038
+class because of the output
+
+107
+00:03:45,068 --> 00:03:46,080
+values are greater than 0.5
+
+108
+00:03:47,027 --> 00:03:48,068
+on the vertical axis and
+
+109
+00:03:49,034 --> 00:03:50,072
+everything to the left
+
+110
+00:03:51,000 --> 00:03:52,025
+of that point we will end
+
+111
+00:03:52,049 --> 00:03:54,016
+up predicting as a negative value.
+
+112
+00:03:55,065 --> 00:03:57,056
+In this particular example, it
+
+113
+00:03:57,071 --> 00:03:59,040
+looks like linear regression is actually
+
+114
+00:03:59,078 --> 00:04:01,087
+doing something reasonable even though
+
+115
+00:04:02,018 --> 00:04:03,090
+this is a classification task we're
+
+116
+00:04:04,013 --> 00:04:05,043
+interested in.
+
+117
+00:04:05,050 --> 00:04:07,041
+But now let's try changing problem a bit.
+
+118
+00:04:08,006 --> 00:04:09,036
+Let me extend out the horizontal
+
+119
+00:04:10,003 --> 00:04:11,046
+axis of orbit and let's
+
+120
+00:04:11,065 --> 00:04:12,063
+say we got one more training
+
+121
+00:04:12,099 --> 00:04:15,003
+example way out there on the right.
+
+122
+00:04:16,051 --> 00:04:17,082
+Notice that that additional training
+
+123
+00:04:18,017 --> 00:04:19,019
+example, this one out
+
+124
+00:04:19,038 --> 00:04:21,070
+here, it doesn't actually change anything, right?
+
+125
+00:04:22,042 --> 00:04:23,047
+Looking at the training set, it
+
+126
+00:04:23,056 --> 00:04:26,033
+is pretty clear what a good hypothesis is.
+
+127
+00:04:26,088 --> 00:04:27,092
+Well, everything to the right of
+
+128
+00:04:28,000 --> 00:04:29,005
+somewhere around here to the
+
+129
+00:04:29,018 --> 00:04:29,097
+right of this we should predict
+
+130
+00:04:30,030 --> 00:04:31,027
+as positive, and everything to
+
+131
+00:04:31,048 --> 00:04:32,068
+the left we should probably predict
+
+132
+00:04:33,006 --> 00:04:34,069
+as negative because from this
+
+133
+00:04:34,087 --> 00:04:35,093
+training set it looks like
+
+134
+00:04:36,019 --> 00:04:37,087
+all the tumors larger than, you
+
+135
+00:04:37,097 --> 00:04:39,018
+know, a certain value around here
+
+136
+00:04:39,049 --> 00:04:41,002
+are malignant, and all the
+
+137
+00:04:41,019 --> 00:04:42,011
+tumors smaller than that are
+
+138
+00:04:42,022 --> 00:04:44,066
+not malignant, at least for this training set.
+
+139
+00:04:46,016 --> 00:04:47,027
+But once we've added
+
+140
+00:04:47,072 --> 00:04:49,006
+that extra example out here,
+
+141
+00:04:49,062 --> 00:04:50,066
+if you now run linear regression,
+
+142
+00:04:51,057 --> 00:04:53,058
+you instead get a straight line fit to the data.
+
+143
+00:04:54,043 --> 00:04:55,062
+That might maybe look like this, and
+
+144
+00:04:57,088 --> 00:04:59,086
+if you now threshold this hypothesis
+
+145
+00:05:02,048 --> 00:05:03,045
+at 0.5, you end up with
+
+146
+00:05:04,011 --> 00:05:05,055
+a threshold that's around here
+
+147
+00:05:06,031 --> 00:05:07,031
+so that everything to the right
+
+148
+00:05:07,056 --> 00:05:08,079
+of this point you predict as
+
+149
+00:05:08,095 --> 00:05:11,050
+positive, and everything to the left of that point you predict as negative.
+
+150
+00:05:14,057 --> 00:05:15,072
+And this seems a pretty
+
+151
+00:05:16,010 --> 00:05:18,050
+bad thing for linear regression to have done, right?
+
+152
+00:05:18,076 --> 00:05:19,083
+Because, you know, these are
+
+153
+00:05:19,093 --> 00:05:22,000
+our positive examples, these are our negative examples.
+
+154
+00:05:23,005 --> 00:05:24,057
+It's pretty clear, we should
+
+155
+00:05:24,080 --> 00:05:26,000
+really be separating the two classes
+
+156
+00:05:26,055 --> 00:05:28,018
+somewhere around there, but somehow
+
+157
+00:05:28,067 --> 00:05:30,002
+by adding one example way
+
+158
+00:05:30,018 --> 00:05:31,027
+out here to the right, this
+
+159
+00:05:31,042 --> 00:05:33,033
+example really isn't giving us any new information.
+
+160
+00:05:33,076 --> 00:05:34,094
+I mean, it should be no
+
+161
+00:05:35,017 --> 00:05:36,030
+surprise to the learning out of
+
+162
+00:05:37,002 --> 00:05:39,010
+that the example way out here turns out to be malignant.
+
+163
+00:05:40,023 --> 00:05:41,020
+But somehow adding that example
+
+164
+00:05:41,074 --> 00:05:43,042
+out there caused linear regression
+
+165
+00:05:44,041 --> 00:05:45,067
+to change in straight line fit
+
+166
+00:05:45,098 --> 00:05:47,064
+to the data from this
+
+167
+00:05:48,083 --> 00:05:50,000
+magenta line out here
+
+168
+00:05:50,083 --> 00:05:51,093
+to this blue line over here,
+
+169
+00:05:52,085 --> 00:05:54,076
+and caused it to give us a worse hypothesis.
+
+170
+00:05:56,094 --> 00:05:58,043
+So, applying linear regression
+
+171
+00:05:59,007 --> 00:06:01,002
+to a classification problem usually
+
+172
+00:06:01,061 --> 00:06:03,039
+isn't, often isn't a great idea.
+
+173
+00:06:04,043 --> 00:06:05,075
+In the first instance, in the
+
+174
+00:06:05,081 --> 00:06:07,008
+first example before I added
+
+175
+00:06:07,054 --> 00:06:08,077
+this extra training example,
+
+176
+00:06:09,081 --> 00:06:11,043
+previously linear regression was
+
+177
+00:06:11,064 --> 00:06:13,019
+just getting lucky and it
+
+178
+00:06:13,037 --> 00:06:14,099
+got us a hypothesis that, you
+
+179
+00:06:15,008 --> 00:06:16,029
+know, worked well for that particular
+
+180
+00:06:16,067 --> 00:06:19,047
+example, but usually apply
+
+181
+00:06:19,098 --> 00:06:20,097
+linear regression to a data set,
+
+182
+00:06:21,081 --> 00:06:23,004
+you know, you might get lucky but
+
+183
+00:06:23,026 --> 00:06:24,012
+often it isn't a good
+
+184
+00:06:24,025 --> 00:06:25,073
+idea, so I wouldn't use
+
+185
+00:06:25,098 --> 00:06:27,095
+linear regression for classification problems.
+
+186
+00:06:29,067 --> 00:06:30,081
+Here is one other funny thing
+
+187
+00:06:31,025 --> 00:06:32,064
+about what would happen if
+
+188
+00:06:32,093 --> 00:06:35,050
+we were to use linear regression for a classification problem.
+
+189
+00:06:36,068 --> 00:06:38,022
+For classification, we know that
+
+190
+00:06:38,044 --> 00:06:39,079
+Y is either zero or one,
+
+191
+00:06:40,057 --> 00:06:41,062
+but if you are using
+
+192
+00:06:41,088 --> 00:06:43,005
+linear regression, well the hypothesis
+
+193
+00:06:44,020 --> 00:06:45,075
+can output values much larger
+
+194
+00:06:46,006 --> 00:06:47,032
+than one or less than
+
+195
+00:06:47,050 --> 00:06:48,081
+zero, even if all
+
+196
+00:06:49,005 --> 00:06:50,068
+of good the training examples have labels
+
+197
+00:06:51,013 --> 00:06:52,041
+Y equals zero or one,
+
+198
+00:06:53,089 --> 00:06:54,087
+and it seems kind of strange
+
+199
+00:06:55,051 --> 00:06:56,075
+that even though we
+
+200
+00:06:56,095 --> 00:06:58,016
+know that the label should
+
+201
+00:06:58,035 --> 00:06:59,031
+be zero one, it seems
+
+202
+00:06:59,042 --> 00:07:00,088
+kind of strange if the
+
+203
+00:07:01,020 --> 00:07:02,057
+algorithm can offer values much
+
+204
+00:07:02,083 --> 00:07:04,089
+larger than one or much smaller than zero.
+
+205
+00:07:09,054 --> 00:07:10,089
+So what we'll do in the
+
+206
+00:07:11,000 --> 00:07:12,039
+next few videos is develop
+
+207
+00:07:12,086 --> 00:07:14,063
+an algorithm called logistic regression
+
+208
+00:07:15,055 --> 00:07:17,038
+which has the property that the
+
+209
+00:07:17,077 --> 00:07:19,029
+output, the predictions of logistic
+
+210
+00:07:19,067 --> 00:07:21,022
+regression are always between zero
+
+211
+00:07:21,062 --> 00:07:22,075
+and one, and doesn't become
+
+212
+00:07:23,006 --> 00:07:24,017
+bigger than one or become less
+
+213
+00:07:24,037 --> 00:07:26,037
+than zero and by
+
+214
+00:07:26,052 --> 00:07:28,056
+the way, logistic regression is
+
+215
+00:07:29,008 --> 00:07:30,014
+and we will use it as
+
+216
+00:07:30,035 --> 00:07:32,076
+a classification algorithm in some,
+
+217
+00:07:33,032 --> 00:07:35,006
+maybe sometimes confusing that
+
+218
+00:07:35,077 --> 00:07:37,041
+the term regression appears in
+
+219
+00:07:37,069 --> 00:07:39,036
+his name, even though logistic regression
+
+220
+00:07:39,097 --> 00:07:41,027
+is actually a classification algorithm.
+
+221
+00:07:42,012 --> 00:07:43,004
+But that's just the name it
+
+222
+00:07:43,016 --> 00:07:46,013
+was given for historical reasons so don't be confused by that.
+
+223
+00:07:46,068 --> 00:07:48,033
+Logistic Regression is actually a
+
+224
+00:07:48,043 --> 00:07:50,025
+classification algorithm that we
+
+225
+00:07:50,037 --> 00:07:52,002
+apply to settings where the
+
+226
+00:07:52,016 --> 00:07:54,077
+label Y is discreet valued. The 1001.
+
+227
+00:07:55,081 --> 00:07:57,043
+So hopefully you now
+
+228
+00:07:57,068 --> 00:07:59,018
+know why if you
+
+229
+00:07:59,027 --> 00:08:00,094
+have a causation problem using
+
+230
+00:08:01,039 --> 00:08:02,066
+linear regression isn't a good idea .
+
+231
+00:08:03,020 --> 00:08:04,048
+In the next video we'll
+
+232
+00:08:04,069 --> 00:08:05,068
+start working out the details
+
+233
+00:08:06,029 --> 00:08:07,063
+of the logistic regression algorithm.

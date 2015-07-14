@@ -1,0 +1,1528 @@
+
+1
+00:00:00,009 --> 00:00:01,044
+In an earlier video, I had
+
+2
+00:00:01,061 --> 00:00:02,071
+said that PCA can be
+
+3
+00:00:02,083 --> 00:00:05,041
+sometimes used to speed up the running time of a learning algorithm.
+
+4
+00:00:07,007 --> 00:00:08,014
+In this video, I'd like
+
+5
+00:00:08,036 --> 00:00:09,051
+to explain how to actually
+
+6
+00:00:09,082 --> 00:00:11,026
+do that, and also say
+
+7
+00:00:11,046 --> 00:00:12,090
+some, just try to give
+
+8
+00:00:12,099 --> 00:00:14,055
+some advice about how to apply PCA.
+
+9
+00:00:17,010 --> 00:00:19,062
+Here's how you can use PCA to speed up a learning algorithm,
+
+10
+00:00:20,026 --> 00:00:21,094
+and this supervised learning algorithm
+
+11
+00:00:22,026 --> 00:00:23,062
+speed up is actually the most
+
+12
+00:00:23,087 --> 00:00:25,087
+common use that I
+
+13
+00:00:26,053 --> 00:00:27,071
+personally make of PCA.
+
+14
+00:00:28,071 --> 00:00:29,064
+Let's say you have a supervised
+
+15
+00:00:30,030 --> 00:00:31,066
+learning problem, note this is
+
+16
+00:00:31,080 --> 00:00:33,038
+a supervised learning problem with inputs
+
+17
+00:00:33,068 --> 00:00:35,050
+X and labels Y, and
+
+18
+00:00:35,081 --> 00:00:37,032
+let's say that your examples
+
+19
+00:00:37,082 --> 00:00:39,014
+xi are very high dimensional.
+
+20
+00:00:39,084 --> 00:00:41,067
+So, lets say that your examples, xi are
+
+21
+00:00:41,079 --> 00:00:44,000
+10,000 dimensional feature vectors.
+
+22
+00:00:45,050 --> 00:00:46,054
+One example of that, would
+
+23
+00:00:46,070 --> 00:00:48,013
+be, if you were doing some computer
+
+24
+00:00:48,053 --> 00:00:50,039
+vision problem, where you have
+
+25
+00:00:50,064 --> 00:00:52,040
+a 100x100 images, and so
+
+26
+00:00:52,078 --> 00:00:55,054
+if you have 100x100, that's 10000
+
+27
+00:00:55,085 --> 00:00:57,052
+pixels, and so if xi are,
+
+28
+00:00:57,078 --> 00:00:59,024
+you know, feature vectors
+
+29
+00:00:59,075 --> 00:01:01,067
+that contain your 10000 pixel
+
+30
+00:01:02,046 --> 00:01:03,057
+intensity values, then
+
+31
+00:01:04,040 --> 00:01:05,057
+you have 10000 dimensional feature vectors.
+
+32
+00:01:06,087 --> 00:01:08,053
+So with very high-dimensional
+
+33
+00:01:09,029 --> 00:01:10,089
+feature vectors like this, running a
+
+34
+00:01:11,031 --> 00:01:12,085
+learning algorithm can be slow, right?
+
+35
+00:01:13,003 --> 00:01:14,029
+Just, if you feed 10,000 dimensional
+
+36
+00:01:14,079 --> 00:01:16,098
+feature vectors into logistic regression,
+
+37
+00:01:17,056 --> 00:01:19,078
+or a new network, or support vector machine or what have you,
+
+38
+00:01:20,045 --> 00:01:22,000
+just because that's a lot of data,
+
+39
+00:01:22,020 --> 00:01:23,006
+that's 10,000 numbers,
+
+40
+00:01:24,012 --> 00:01:25,096
+it can make your learning algorithm run more slowly.
+
+41
+00:01:27,017 --> 00:01:28,053
+Fortunately with PCA we'll be
+
+42
+00:01:28,068 --> 00:01:29,081
+able to reduce the dimension of
+
+43
+00:01:30,006 --> 00:01:31,004
+this data and so make
+
+44
+00:01:31,018 --> 00:01:32,040
+our algorithms run more
+
+45
+00:01:32,092 --> 00:01:34,043
+efficiently. Here's how you
+
+46
+00:01:34,059 --> 00:01:35,078
+do that. We are going
+
+47
+00:01:35,098 --> 00:01:37,003
+first check our labeled
+
+48
+00:01:37,040 --> 00:01:39,051
+training set and extract just
+
+49
+00:01:39,079 --> 00:01:41,082
+the inputs, we're just going to extract the X's
+
+50
+00:01:42,073 --> 00:01:45,012
+and temporarily put aside the Y's.
+
+51
+00:01:45,085 --> 00:01:46,075
+So this will now give us
+
+52
+00:01:47,009 --> 00:01:49,015
+an unlabelled training set x1
+
+53
+00:01:49,040 --> 00:01:51,000
+through xm which are maybe
+
+54
+00:01:51,023 --> 00:01:53,059
+there's a ten thousand dimensional data,
+
+55
+00:01:53,093 --> 00:01:55,079
+ten thousand dimensional examples we have.
+
+56
+00:01:55,087 --> 00:01:57,023
+So just extract the input vectors
+
+57
+00:01:58,037 --> 00:01:58,093
+x1 through xm.
+
+58
+00:02:00,065 --> 00:02:01,081
+Then we're going to apply PCA
+
+59
+00:02:02,070 --> 00:02:03,073
+and this will give me a
+
+60
+00:02:03,098 --> 00:02:06,009
+reduced dimension representation of the
+
+61
+00:02:06,040 --> 00:02:08,000
+data, so instead of
+
+62
+00:02:08,025 --> 00:02:09,053
+10,000 dimensional feature vectors I now
+
+63
+00:02:09,078 --> 00:02:11,087
+have maybe one thousand dimensional feature vectors.
+
+64
+00:02:12,033 --> 00:02:13,050
+So that's like a 10x savings.
+
+65
+00:02:15,011 --> 00:02:17,025
+So this gives me, if you will, a new training set.
+
+66
+00:02:17,090 --> 00:02:19,043
+So whereas previously I might
+
+67
+00:02:19,062 --> 00:02:21,018
+have had an example x1, y1,
+
+68
+00:02:21,049 --> 00:02:24,034
+my first training input, is now represented by z1.
+
+69
+00:02:24,058 --> 00:02:25,080
+And so we'll have a
+
+70
+00:02:26,005 --> 00:02:27,000
+new sort of training example,
+
+71
+00:02:28,021 --> 00:02:29,024
+which is Z1 paired with y1.
+
+72
+00:02:30,069 --> 00:02:33,016
+And similarly Z2, Y2, and so on, up to ZM, YM.
+
+73
+00:02:33,077 --> 00:02:35,030
+Because my training examples are
+
+74
+00:02:35,046 --> 00:02:36,097
+now represented with this much
+
+75
+00:02:37,047 --> 00:02:41,003
+lower dimensional representation Z1, Z2, up to ZM.
+
+76
+00:02:41,031 --> 00:02:42,034
+Finally, I can take this
+
+77
+00:02:43,065 --> 00:02:45,006
+reduced dimension training set and
+
+78
+00:02:45,024 --> 00:02:46,053
+feed it to a learning algorithm maybe
+
+79
+00:02:46,063 --> 00:02:47,090
+a neural network, maybe logistic
+
+80
+00:02:48,028 --> 00:02:49,044
+regression, and I can
+
+81
+00:02:49,075 --> 00:02:51,099
+learn the hypothesis H, that
+
+82
+00:02:52,022 --> 00:02:53,083
+takes this input, these low-dimensional
+
+83
+00:02:54,033 --> 00:02:56,022
+representations Z and tries to make predictions.
+
+84
+00:02:57,088 --> 00:02:59,003
+So if I were using logistic
+
+85
+00:02:59,046 --> 00:03:00,087
+regression for example, I would
+
+86
+00:03:01,006 --> 00:03:02,075
+train a hypothesis that outputs, you know,
+
+87
+00:03:03,008 --> 00:03:04,002
+one over one plus E to
+
+88
+00:03:04,018 --> 00:03:06,002
+the negative-theta transpose
+
+89
+00:03:07,062 --> 00:03:10,015
+Z, that
+
+90
+00:03:10,061 --> 00:03:11,053
+takes this input to one these
+
+91
+00:03:11,096 --> 00:03:13,065
+z vectors, and tries to make a prediction.
+
+92
+00:03:15,025 --> 00:03:16,031
+And finally, if you have
+
+93
+00:03:16,062 --> 00:03:17,080
+a new example, maybe a new
+
+94
+00:03:17,091 --> 00:03:20,006
+test example X. What
+
+95
+00:03:20,021 --> 00:03:21,034
+you do is you would
+
+96
+00:03:22,012 --> 00:03:23,072
+take your test example x,
+
+97
+00:03:24,096 --> 00:03:26,059
+map it through the same mapping
+
+98
+00:03:26,099 --> 00:03:27,086
+that was found by PCA
+
+99
+00:03:28,021 --> 00:03:29,061
+to get you your corresponding z.
+
+100
+00:03:30,038 --> 00:03:31,028
+And that z then gets
+
+101
+00:03:31,094 --> 00:03:33,074
+fed to this hypothesis, and this
+
+102
+00:03:33,090 --> 00:03:35,044
+hypothesis then makes a
+
+103
+00:03:35,075 --> 00:03:36,074
+prediction on your input x.
+
+104
+00:03:38,011 --> 00:03:40,009
+One final note, what PCA does
+
+105
+00:03:40,050 --> 00:03:42,034
+is it defines a mapping from
+
+106
+00:03:42,071 --> 00:03:45,009
+x to z and
+
+107
+00:03:45,096 --> 00:03:46,096
+this mapping from x to
+
+108
+00:03:47,005 --> 00:03:48,028
+z should be defined by running
+
+109
+00:03:48,058 --> 00:03:50,084
+PCA only on the training sets.
+
+110
+00:03:51,065 --> 00:03:53,031
+And in particular, this mapping that
+
+111
+00:03:53,053 --> 00:03:54,077
+PCA is learning, right, this
+
+112
+00:03:54,094 --> 00:03:57,065
+mapping, what that does is it computes the set of parameters.
+
+113
+00:03:58,021 --> 00:04:00,050
+That's the feature scaling and mean normalization.
+
+114
+00:04:01,024 --> 00:04:04,003
+And there's also computing this matrix U reduced.
+
+115
+00:04:04,068 --> 00:04:05,050
+But all of these things that
+
+116
+00:04:05,066 --> 00:04:06,097
+U reduce, that's like a
+
+117
+00:04:07,012 --> 00:04:08,041
+parameter that is learned
+
+118
+00:04:08,066 --> 00:04:09,094
+by PCA and we should
+
+119
+00:04:10,015 --> 00:04:12,027
+be fitting our parameters only to
+
+120
+00:04:12,047 --> 00:04:13,099
+our training sets and not
+
+121
+00:04:14,003 --> 00:04:16,025
+to our cross validation or test sets and
+
+122
+00:04:16,037 --> 00:04:17,056
+so these things the U reduced
+
+123
+00:04:18,018 --> 00:04:19,045
+so on, that should be
+
+124
+00:04:19,081 --> 00:04:22,043
+obtained by running PCA only on your training set.
+
+125
+00:04:23,030 --> 00:04:26,093
+And then having found U reduced, or having found the parameters for feature
+
+126
+00:04:27,035 --> 00:04:28,062
+scaling where the mean normalization
+
+127
+00:04:29,031 --> 00:04:31,079
+and scaling the scale
+
+128
+00:04:32,018 --> 00:04:34,050
+that you divide the features by to get them on to comparable scales.
+
+129
+00:04:34,075 --> 00:04:36,000
+Having found all those parameters
+
+130
+00:04:36,056 --> 00:04:38,000
+on the training set, you can
+
+131
+00:04:38,022 --> 00:04:41,056
+then apply the same mapping to other examples that may be
+
+132
+00:04:41,081 --> 00:04:45,001
+In your cross-validation sets or
+
+133
+00:04:45,018 --> 00:04:46,068
+in your test sets, OK?
+
+134
+00:04:47,014 --> 00:04:48,033
+Just to summarize, when you're
+
+135
+00:04:48,044 --> 00:04:49,079
+running PCA, run your
+
+136
+00:04:49,089 --> 00:04:51,006
+PCA only on the
+
+137
+00:04:51,022 --> 00:04:52,044
+training set portion of the
+
+138
+00:04:52,049 --> 00:04:55,087
+data not the cross-validation set or the test set portion of your data.
+
+139
+00:04:56,041 --> 00:04:57,062
+And that defines the mapping from
+
+140
+00:04:57,087 --> 00:04:58,076
+x to z and you can
+
+141
+00:04:58,094 --> 00:05:00,031
+then apply that mapping to
+
+142
+00:05:00,056 --> 00:05:02,024
+your cross-validation set and your
+
+143
+00:05:02,029 --> 00:05:03,037
+test set and by the
+
+144
+00:05:03,044 --> 00:05:04,066
+way in this example I talked
+
+145
+00:05:05,000 --> 00:05:06,066
+about reducing the data from
+
+146
+00:05:06,094 --> 00:05:08,050
+ten thousand dimensional to one
+
+147
+00:05:08,074 --> 00:05:10,035
+thousand dimensional, this is actually
+
+148
+00:05:10,066 --> 00:05:11,094
+not that unrealistic. For many
+
+149
+00:05:12,027 --> 00:05:14,072
+problems we actually reduce the dimensional data. You
+
+150
+00:05:17,060 --> 00:05:18,069
+know by 5x maybe by 10x
+
+151
+00:05:18,077 --> 00:05:20,091
+and still retain most of the variance and we can do this
+
+152
+00:05:21,026 --> 00:05:22,068
+barely effecting the performance,
+
+153
+00:05:23,089 --> 00:05:25,083
+in terms of classification accuracy, let's say,
+
+154
+00:05:26,024 --> 00:05:27,097
+barely affecting the classification
+
+155
+00:05:28,076 --> 00:05:30,031
+accuracy of the learning algorithm.
+
+156
+00:05:31,008 --> 00:05:32,013
+And by working with lower dimensional
+
+157
+00:05:32,058 --> 00:05:33,073
+data our learning algorithm
+
+158
+00:05:34,006 --> 00:05:36,050
+can often run much much faster.
+
+159
+00:05:36,091 --> 00:05:38,012
+To summarize, we've so far talked
+
+160
+00:05:38,041 --> 00:05:40,092
+about the following applications of PCA.
+
+161
+00:05:41,097 --> 00:05:43,077
+First is the compression application where
+
+162
+00:05:44,001 --> 00:05:45,013
+we might do so to reduce
+
+163
+00:05:45,050 --> 00:05:46,043
+the memory or the disk space
+
+164
+00:05:46,058 --> 00:05:47,095
+needed to store data and we
+
+165
+00:05:48,024 --> 00:05:49,038
+just talked about how to
+
+166
+00:05:49,045 --> 00:05:51,062
+use this to speed up a learning algorithm.
+
+167
+00:05:52,010 --> 00:05:53,087
+In these applications, in order
+
+168
+00:05:54,012 --> 00:05:56,024
+to choose K, often we'll
+
+169
+00:05:56,042 --> 00:05:58,076
+do so according to, figuring
+
+170
+00:05:59,016 --> 00:06:00,058
+out what is the percentage of
+
+171
+00:06:00,081 --> 00:06:03,087
+variance retained, and so
+
+172
+00:06:04,077 --> 00:06:06,031
+for this learning algorithm, speed
+
+173
+00:06:06,056 --> 00:06:10,005
+up application often will retain 99%  of the variance.
+
+174
+00:06:10,052 --> 00:06:11,068
+That would be a very typical choice
+
+175
+00:06:12,010 --> 00:06:14,026
+for how to choose k. So
+
+176
+00:06:14,073 --> 00:06:16,063
+that's how you choose k for these compression applications.
+
+177
+00:06:17,085 --> 00:06:19,058
+Whereas for visualization applications
+
+178
+00:06:20,075 --> 00:06:22,010
+while usually we know
+
+179
+00:06:22,023 --> 00:06:23,055
+how to plot only two dimensional
+
+180
+00:06:24,001 --> 00:06:25,051
+data or three dimensional data,
+
+181
+00:06:26,054 --> 00:06:28,064
+and so for visualization applications, we'll
+
+182
+00:06:28,082 --> 00:06:29,066
+usually choose k equals 2
+
+183
+00:06:29,070 --> 00:06:31,093
+or k equals 3, because we can plot
+
+184
+00:06:32,074 --> 00:06:33,050
+only 2D and 3D data sets.
+
+185
+00:06:34,050 --> 00:06:35,072
+So that summarizes the main
+
+186
+00:06:36,001 --> 00:06:37,023
+applications of PCA, as well
+
+187
+00:06:37,087 --> 00:06:39,057
+as how to choose the
+
+188
+00:06:39,067 --> 00:06:41,054
+value of k for these different applications.
+
+189
+00:06:42,088 --> 00:06:45,070
+I should mention that there is often one frequent misuse
+
+190
+00:06:46,039 --> 00:06:48,010
+of PCA and
+
+191
+00:06:48,080 --> 00:06:50,030
+you sometimes hear about others
+
+192
+00:06:50,057 --> 00:06:51,081
+doing this hopefully not too often.
+
+193
+00:06:52,023 --> 00:06:54,077
+I just want to mention this so that you know not to do it.
+
+194
+00:06:55,048 --> 00:06:56,045
+And there is one bad use of
+
+195
+00:06:56,054 --> 00:06:59,017
+PCA, which iss to try to use it to prevent over-fitting.
+
+196
+00:07:00,037 --> 00:07:00,066
+Here's the reasoning.
+
+197
+00:07:01,091 --> 00:07:03,007
+This is not a great
+
+198
+00:07:03,073 --> 00:07:04,061
+way to use PCA,
+
+199
+00:07:04,067 --> 00:07:05,062
+but here's the reasoning behind
+
+200
+00:07:05,068 --> 00:07:07,007
+this method, which is,you know
+
+201
+00:07:07,035 --> 00:07:09,008
+if we have Xi, then
+
+202
+00:07:09,030 --> 00:07:10,066
+maybe we'll have n features, but
+
+203
+00:07:10,082 --> 00:07:12,063
+if we compress the data, and
+
+204
+00:07:12,075 --> 00:07:13,069
+use Zi instead
+
+205
+00:07:14,026 --> 00:07:15,041
+and that reduces the number
+
+206
+00:07:15,056 --> 00:07:17,005
+of features to k, which
+
+207
+00:07:17,029 --> 00:07:19,030
+could be much lower dimensional. And
+
+208
+00:07:19,041 --> 00:07:21,012
+so if we have a much smaller
+
+209
+00:07:21,049 --> 00:07:22,051
+number of features, if k
+
+210
+00:07:22,076 --> 00:07:25,080
+is 1,000 and n is
+
+211
+00:07:26,008 --> 00:07:27,000
+10,000, then if we have
+
+212
+00:07:27,077 --> 00:07:29,038
+only 1,000 dimensional data, maybe
+
+213
+00:07:29,067 --> 00:07:30,057
+we're less likely to over-fit
+
+214
+00:07:31,025 --> 00:07:32,023
+than if we were using 10,000-dimensional
+
+215
+00:07:33,027 --> 00:07:34,098
+data with like a thousand features.
+
+216
+00:07:35,094 --> 00:07:37,016
+So some people think
+
+217
+00:07:37,036 --> 00:07:39,036
+of PCA as a way to prevent over-fitting.
+
+218
+00:07:39,094 --> 00:07:41,093
+But just to emphasize this
+
+219
+00:07:42,011 --> 00:07:44,000
+is a bad application of PCA
+
+220
+00:07:44,025 --> 00:07:46,007
+and I do not recommend doing this.
+
+221
+00:07:46,051 --> 00:07:48,043
+And it's not that this method works badly.
+
+222
+00:07:49,000 --> 00:07:49,092
+If you want to use
+
+223
+00:07:50,032 --> 00:07:51,056
+this method to reduce the dimensional
+
+224
+00:07:51,088 --> 00:07:52,082
+data, to try to prevent over-fitting,
+
+225
+00:07:53,068 --> 00:07:54,082
+it might actually work OK.
+
+226
+00:07:55,056 --> 00:07:56,072
+But this just is not
+
+227
+00:07:57,004 --> 00:07:58,033
+a good way to address
+
+228
+00:07:58,068 --> 00:08:00,038
+over-fitting and instead, if you're
+
+229
+00:08:00,050 --> 00:08:01,081
+worried about over-fitting, there is
+
+230
+00:08:02,002 --> 00:08:03,042
+a much better way to address
+
+231
+00:08:03,080 --> 00:08:05,068
+it, to use regularization instead of
+
+232
+00:08:05,089 --> 00:08:07,091
+using PCA to reduce the dimension of the data.
+
+233
+00:08:08,067 --> 00:08:10,000
+And the reason is, if
+
+234
+00:08:11,000 --> 00:08:12,014
+you think about how PCA works,
+
+235
+00:08:12,089 --> 00:08:13,094
+it does not use the labels
+
+236
+00:08:14,052 --> 00:08:15,068
+y. You are just looking
+
+237
+00:08:16,005 --> 00:08:17,022
+at your inputs xi, and you're
+
+238
+00:08:17,033 --> 00:08:19,006
+using that to find a
+
+239
+00:08:19,012 --> 00:08:21,014
+lower-dimensional approximation to your data.
+
+240
+00:08:21,038 --> 00:08:22,083
+So what PCA does,
+
+241
+00:08:23,018 --> 00:08:25,041
+is it throws away some information.
+
+242
+00:08:26,045 --> 00:08:28,004
+It throws away or reduces the
+
+243
+00:08:28,018 --> 00:08:29,068
+dimension of your data without
+
+244
+00:08:30,011 --> 00:08:31,038
+knowing what the values of y
+
+245
+00:08:32,037 --> 00:08:33,070
+is, so this is probably
+
+246
+00:08:34,025 --> 00:08:35,076
+okay using PCA this way
+
+247
+00:08:35,091 --> 00:08:37,075
+is probably okay if, say
+
+248
+00:08:37,099 --> 00:08:39,019
+99 percent of the
+
+249
+00:08:39,040 --> 00:08:40,039
+variance is retained, if you're keeping most
+
+250
+00:08:40,083 --> 00:08:41,097
+of the variance, but
+
+251
+00:08:42,010 --> 00:08:44,023
+it might also throw away some valuable information.
+
+252
+00:08:45,000 --> 00:08:45,098
+And it turns out that
+
+253
+00:08:46,030 --> 00:08:47,058
+if you're retaining 99% of
+
+254
+00:08:47,082 --> 00:08:49,025
+the variance or 95%
+
+255
+00:08:49,036 --> 00:08:50,094
+of the variance or whatever, it
+
+256
+00:08:51,001 --> 00:08:52,030
+turns out that just using
+
+257
+00:08:52,072 --> 00:08:54,064
+regularization will often give
+
+258
+00:08:54,078 --> 00:08:56,000
+you at least as good
+
+259
+00:08:56,022 --> 00:08:57,087
+a method for preventing over-fitting
+
+260
+00:08:58,089 --> 00:09:00,034
+and regularization will often just
+
+261
+00:09:00,059 --> 00:09:02,022
+work better, because when you
+
+262
+00:09:02,035 --> 00:09:03,088
+are applying linear regression or logistic
+
+263
+00:09:04,025 --> 00:09:05,024
+regression or some other method
+
+264
+00:09:05,060 --> 00:09:07,038
+with regularization, well, this minimization
+
+265
+00:09:08,000 --> 00:09:09,041
+problem actually knows what the
+
+266
+00:09:09,048 --> 00:09:10,074
+values of y are, and
+
+267
+00:09:10,096 --> 00:09:12,067
+so is less likely to throw
+
+268
+00:09:12,087 --> 00:09:14,033
+away some valuable information, whereas
+
+269
+00:09:14,073 --> 00:09:15,078
+PCA doesn't make use
+
+270
+00:09:16,005 --> 00:09:17,080
+of the labels and is more
+
+271
+00:09:17,085 --> 00:09:19,094
+likely to throw away valuable information.
+
+272
+00:09:20,023 --> 00:09:21,037
+So, to summarize, it is
+
+273
+00:09:21,062 --> 00:09:22,089
+a good use of PCA, if your
+
+274
+00:09:23,000 --> 00:09:24,037
+main motivation to speed up
+
+275
+00:09:24,052 --> 00:09:26,049
+your learning algorithm, but using
+
+276
+00:09:26,078 --> 00:09:28,036
+PCA to prevent over-fitting, that
+
+277
+00:09:28,064 --> 00:09:29,062
+is not a good use of
+
+278
+00:09:30,002 --> 00:09:32,026
+PCA, and using regularization instead
+
+279
+00:09:32,089 --> 00:09:36,019
+is really what many people
+
+280
+00:09:36,044 --> 00:09:40,049
+would recommend doing instead. Finally,
+
+281
+00:09:41,030 --> 00:09:43,035
+one last misuse of PCA.
+
+282
+00:09:43,075 --> 00:09:45,075
+And so I should say PCA is a very useful algorithm,
+
+283
+00:09:46,026 --> 00:09:49,016
+I often use it for the compression on the visualization purposes.
+
+284
+00:09:50,023 --> 00:09:51,039
+But, what I sometimes
+
+285
+00:09:51,057 --> 00:09:53,030
+see, is also people sometimes
+
+286
+00:09:53,071 --> 00:09:56,008
+use PCA where it shouldn't be.
+
+287
+00:09:56,022 --> 00:09:57,094
+So, here's a pretty common thing that
+
+288
+00:09:58,002 --> 00:09:59,013
+I see, which is if someone
+
+289
+00:09:59,033 --> 00:10:00,033
+is designing a machine-learning system,
+
+290
+00:10:01,000 --> 00:10:02,012
+they may write down the
+
+291
+00:10:02,020 --> 00:10:04,014
+plan like this: let's design a learning system.
+
+292
+00:10:05,005 --> 00:10:06,008
+Get a training set and then,
+
+293
+00:10:06,057 --> 00:10:07,035
+you know, what I'm going to
+
+294
+00:10:07,039 --> 00:10:08,070
+do is run PCA, then train
+
+295
+00:10:08,086 --> 00:10:11,020
+logistic regression and then test on my test data.
+
+296
+00:10:11,067 --> 00:10:12,076
+So often at the very
+
+297
+00:10:13,009 --> 00:10:14,036
+start of a project,
+
+298
+00:10:14,060 --> 00:10:15,060
+someone will just write out a
+
+299
+00:10:15,072 --> 00:10:16,098
+project plan than says lets
+
+300
+00:10:17,030 --> 00:10:18,061
+do these four steps with PCA inside.
+
+301
+00:10:20,021 --> 00:10:21,022
+Before writing down a project
+
+302
+00:10:21,052 --> 00:10:23,035
+plan the incorporates PCA like
+
+303
+00:10:23,055 --> 00:10:24,086
+this, one very good
+
+304
+00:10:25,002 --> 00:10:27,011
+question to ask is, well, what if we
+
+305
+00:10:27,062 --> 00:10:28,055
+were to just do the whole
+
+306
+00:10:29,053 --> 00:10:31,047
+without using PCA.
+
+307
+00:10:32,016 --> 00:10:33,045
+And often people do not
+
+308
+00:10:33,079 --> 00:10:34,094
+consider this step before
+
+309
+00:10:35,044 --> 00:10:37,008
+coming up with a complicated project plan and
+
+310
+00:10:37,091 --> 00:10:40,062
+implementing PCA and so on.
+
+311
+00:10:40,080 --> 00:10:42,036
+And sometime, and so specifically,
+
+312
+00:10:43,004 --> 00:10:44,029
+what I often advise people
+
+313
+00:10:44,066 --> 00:10:45,098
+is, before you implement
+
+314
+00:10:46,045 --> 00:10:47,097
+PCA, I would first
+
+315
+00:10:48,022 --> 00:10:49,040
+suggest that, you know, do
+
+316
+00:10:49,060 --> 00:10:50,076
+whatever it is, take whatever it
+
+317
+00:10:50,085 --> 00:10:52,002
+is you want to do and first
+
+318
+00:10:52,045 --> 00:10:53,064
+consider doing it with your
+
+319
+00:10:53,098 --> 00:10:56,041
+original raw data xi, and
+
+320
+00:10:56,060 --> 00:10:57,086
+only if that doesn't do
+
+321
+00:10:57,096 --> 00:10:59,064
+what you want, then implement PCA before using Zi.
+
+322
+00:11:01,000 --> 00:11:02,041
+So, before using PCA you know,
+
+323
+00:11:03,002 --> 00:11:03,092
+instead of reducing the dimension
+
+324
+00:11:04,036 --> 00:11:05,071
+of the data, I would consider
+
+325
+00:11:06,063 --> 00:11:08,001
+well, let's ditch this PCA step,
+
+326
+00:11:08,041 --> 00:11:09,069
+and I would consider, let's
+
+327
+00:11:10,003 --> 00:11:11,046
+just train my learning algorithm
+
+328
+00:11:12,044 --> 00:11:13,055
+on my original data.
+
+329
+00:11:14,040 --> 00:11:15,099
+Let's just use my original raw
+
+330
+00:11:16,029 --> 00:11:17,076
+inputs xi, and I would
+
+331
+00:11:18,017 --> 00:11:19,054
+recommend, instead of putting
+
+332
+00:11:19,072 --> 00:11:20,090
+PCA into the algorithm, just
+
+333
+00:11:21,002 --> 00:11:23,025
+try doing whatever it is you're doing with the xi first.
+
+334
+00:11:24,009 --> 00:11:25,000
+And only if you have
+
+335
+00:11:25,014 --> 00:11:26,017
+a reason to believe that doesn't
+
+336
+00:11:26,048 --> 00:11:27,059
+work, so that only if your
+
+337
+00:11:27,078 --> 00:11:29,047
+learning algorithm ends up
+
+338
+00:11:29,050 --> 00:11:31,010
+running too slowly, or only if
+
+339
+00:11:31,027 --> 00:11:32,067
+the memory requirement or the
+
+340
+00:11:32,090 --> 00:11:34,013
+disk space requirement is too large,
+
+341
+00:11:34,042 --> 00:11:35,085
+so you want to compress your
+
+342
+00:11:36,019 --> 00:11:37,080
+representation, but if only
+
+343
+00:11:38,000 --> 00:11:39,001
+using the xi doesn't work,
+
+344
+00:11:39,036 --> 00:11:40,063
+only if you have evidence or strong
+
+345
+00:11:40,095 --> 00:11:41,088
+reason to believe that using
+
+346
+00:11:42,037 --> 00:11:43,088
+the xi won't work, then implement
+
+347
+00:11:44,037 --> 00:11:46,073
+PCA and consider using the compressed representation.
+
+348
+00:11:47,099 --> 00:11:48,083
+Because what I do see, is
+
+349
+00:11:49,010 --> 00:11:50,037
+sometimes people start off with
+
+350
+00:11:50,052 --> 00:11:51,051
+a project plan that incorporates PCA
+
+351
+00:11:52,010 --> 00:11:54,058
+inside, and sometimes they,
+
+352
+00:11:54,064 --> 00:11:55,062
+whatever they're
+
+353
+00:11:55,082 --> 00:11:57,037
+doing will work just
+
+354
+00:11:57,065 --> 00:11:59,051
+fine, even with out using PCA instead.
+
+355
+00:11:59,084 --> 00:12:01,064
+So, just consider that
+
+356
+00:12:01,086 --> 00:12:03,012
+as an alternative as well, before you
+
+357
+00:12:03,032 --> 00:12:04,016
+go to spend a lot of
+
+358
+00:12:04,029 --> 00:12:05,057
+time to get PCA in, figure
+
+359
+00:12:05,076 --> 00:12:08,010
+out what k is and so on.
+
+360
+00:12:08,025 --> 00:12:09,033
+So, that's it for PCA.
+
+361
+00:12:09,079 --> 00:12:11,000
+Despite these last sets of
+
+362
+00:12:11,008 --> 00:12:12,037
+comments, PCA is an
+
+363
+00:12:12,069 --> 00:12:14,005
+incredibly useful algorithm, when you
+
+364
+00:12:14,014 --> 00:12:15,033
+use it for the appropriate applications
+
+365
+00:12:16,007 --> 00:12:17,048
+and I've actually used PCA pretty
+
+366
+00:12:17,076 --> 00:12:19,033
+often and for me,
+
+367
+00:12:19,058 --> 00:12:20,064
+I use it mostly to speed
+
+368
+00:12:20,085 --> 00:12:22,014
+up the running time of my learning algorithms.
+
+369
+00:12:22,087 --> 00:12:24,030
+But I think, just as
+
+370
+00:12:24,039 --> 00:12:25,069
+common an application of PCA,
+
+371
+00:12:26,001 --> 00:12:27,029
+is to use it to
+
+372
+00:12:27,040 --> 00:12:29,002
+compress data, to reduce
+
+373
+00:12:29,062 --> 00:12:30,064
+the memory or disk space
+
+374
+00:12:30,099 --> 00:12:33,012
+requirements, or to use it to visualize data.
+
+375
+00:12:34,026 --> 00:12:35,071
+And PCA is one of
+
+376
+00:12:35,075 --> 00:12:36,096
+the most commonly used and one
+
+377
+00:12:36,099 --> 00:12:39,041
+of the most powerful unsupervised learning algorithms.
+
+378
+00:12:40,005 --> 00:12:41,021
+And with what you've learned
+
+379
+00:12:41,041 --> 00:12:43,012
+in these videos, I think hopefully
+
+380
+00:12:43,050 --> 00:12:44,071
+you'll be able to implement
+
+381
+00:12:45,014 --> 00:12:46,027
+PCA and use them
+
+382
+00:12:46,050 --> 00:12:47,092
+through all of these purposes as well.
