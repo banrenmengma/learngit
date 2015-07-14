@@ -1,0 +1,10 @@
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.exe
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.exe.config
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.exe
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.MultiObjPSO.resources
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.Properties.Resources.resources
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Applications\PSO_MutiObjective - Portfolio Optimization\PSO_MutiObjective\obj\Debug\GenerateResource.write.1.tlog

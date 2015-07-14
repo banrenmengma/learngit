@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="DE_lib.newDE">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DE_JSP.cs</FileName>
+      <HashCode>AQACAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DE_lib.MainClass">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DE_JSP.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PSO_basic.Swarm">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Swarm.cs</FileName>
+      <HashCode>IAIAAABACIAAgAAAEAAAACAAAAAoAAAAAAAAAAEwAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DE_lib.DE">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DE.cs</FileName>
+      <HashCode>QQASAIAAAAEAAAAAACAAAwAAAACAAAAAAAAAAEBAZAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

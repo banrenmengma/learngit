@@ -1,0 +1,10 @@
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ClassLibrary1\bin\Debug\ETLib_DE_JSP.dll
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ClassLibrary1\bin\Debug\ETLib_DE_JSP.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ClassLibrary1\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ClassLibrary1\obj\Debug\ETLib_DE_JSP.dll
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ClassLibrary1\obj\Debug\ETLib_DE_JSP.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ETLib_DE_JSP\bin\Debug\ETLib_DE_JSP.dll
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ETLib_DE_JSP\bin\Debug\ETLib_DE_JSP.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ETLib_DE_JSP\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ETLib_DE_JSP\obj\Debug\ETLib_DE_JSP.dll
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\ETLib_DE_JSP\obj\Debug\ETLib_DE_JSP.pdb

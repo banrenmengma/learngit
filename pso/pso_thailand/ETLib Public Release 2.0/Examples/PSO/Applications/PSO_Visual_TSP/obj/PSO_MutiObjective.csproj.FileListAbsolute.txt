@@ -1,0 +1,16 @@
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.Form1.resources
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.Properties.Resources.resources
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.csproj.GenerateResource.Cache
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.exe
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.pdb
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.exe
+C:\Users\HP\Desktop\AIT tasks\PSO_MutiObjective\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\bin\Debug\PSO_MutiObjective.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.Form1.resources
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.Properties.Resources.resources
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO_Visual\PSO_MutiObjective\obj\Debug\PSO_MutiObjective.csproj.GenerateResource.Cache

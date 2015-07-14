@@ -1,0 +1,5 @@
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\ClassLibrary1\bin\Release\ClassLibrary1.dll
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\ClassLibrary1\bin\Release\ClassLibrary1.pdb
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\ClassLibrary1\obj\Release\ResolveAssemblyReference.cache
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\ClassLibrary1\obj\Release\ClassLibrary1.dll
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\ClassLibrary1\obj\Release\ClassLibrary1.pdb

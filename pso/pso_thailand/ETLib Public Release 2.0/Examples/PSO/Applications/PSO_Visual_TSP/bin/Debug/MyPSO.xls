@@ -1,0 +1,38 @@
+50 Number of Particle  
+200 Number of Iteration 
+5 Number of Neighbor  
+0.9 Parameter wmax      
+0.4 Parameter wmin      
+2 Parameter cp        
+2 Parameter cg        
+0 Parameter cl        
+0 Parameter cn        
+MyPSO.xls Output File Name    
+Number of replications	1
+
+Replication 1
+
+Result:
+-------
+x(0) = 0.706779803857305
+x(1) = 0.414593470653284
+x(2) = 0.775256494108823
+x(3) = 0
+x(4) = 0.983713563379176
+x(5) = 0.761519936445035
+x(6) = 0.198485422422813
+x(7) = 0.390810494302982
+x(8) = 0.53312346762513
+x(9) = 0.271444014329895
+x(10) = 0.0366154882653598
+x(11) = 0.754702242888111
+x(12) = 0.880970076395265
+x(13) = 1
+x(14) = 0.996580388195484
+x(15) = 0.643038104188554
+x(16) = 1
+x(17) = 0.0858071757169322
+x(18) = 0.498755950481403
+f(x) = 56.1955016612203
+00:00:00.6406250 is the computational time
+

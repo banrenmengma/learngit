@@ -1,0 +1,28 @@
+C:\Users\HP\Desktop\AIT tasks\PSO_JobShop\GLNPSO JSP\PSO basic\PSO basic\bin\Debug\PSO basic.exe
+C:\Users\HP\Desktop\AIT tasks\PSO_JobShop\GLNPSO JSP\PSO basic\PSO basic\bin\Debug\PSO basic.pdb
+C:\Users\HP\Desktop\AIT tasks\PSO_JobShop\GLNPSO JSP\PSO basic\PSO basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\PSO_JobShop\GLNPSO JSP\PSO basic\PSO basic\obj\Debug\PSO basic.exe
+C:\Users\HP\Desktop\AIT tasks\PSO_JobShop\GLNPSO JSP\PSO basic\PSO basic\obj\Debug\PSO basic.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO JSP\PSO basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO JSP\PSO basic\bin\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO JSP\PSO basic\bin\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO JSP\PSO basic\obj\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\PSO JSP\PSO basic\obj\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\GLNPSO basic\Applications\PSO JSP\PSO basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HP\Desktop\AIT tasks\GLNPSO manual\ETLib\Applications\PSO JSP\PSO basic\bin\Debug\ETLib_AdvancedPSO.dll
+C:\Users\HP\Desktop\AIT tasks\ETLib manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\ETLib manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\ETLib manual\ETLib\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.exe
+C:\Users\HP\Desktop\AIT tasks\ETLib manual\ETLib\Applications\PSO JSP\PSO basic\bin\Debug\PSO_JSP.pdb
+C:\Users\HP\Desktop\AIT tasks\ETLib manual\ETLib\Applications\PSO JSP\PSO basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\My Documents\Work folder\ETLib\ETLib_Public_Release 1.0\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.exe
+C:\Documents and Settings\Voratas\My Documents\Work folder\ETLib\ETLib_Public_Release 1.0\Applications\PSO JSP\PSO basic\obj\Debug\PSO_JSP.pdb

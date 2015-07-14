@@ -1,0 +1,107 @@
+        public void UpdateBestSingle(int nbSize)
+        {	//updating cognitive and social information 
+
+            int l_temp, n_temp;
+            double FDR;
+            double FDRBest;
+            double pen = 1e10;
+            //update personal best
+            for (int i = 0; i < Member; i++)
+            {
+
+                int c_obj = pParticle[i].type;
+                if (!constr)
+                {
+                    if (pParticle[i].Objective[c_obj] < pParticle[i].ObjectiveP[c_obj])
+                    {
+                        for (int o = 0; o < this.pParticle[i].NoObj; o++)
+                            pParticle[i].ObjectiveP[o] = pParticle[i].Objective[o];
+                        for (int j = 0; j < pParticle[i].Dimension; j++)
+                            pParticle[i].BestP[j] = pParticle[i].Position[j];
+                    }
+                }
+                else
+                {
+                    if (pParticle[i].Objective[c_obj] + pParticle[i].inFeasible * pen
+                        < pParticle[i].ObjectiveP[c_obj] + pParticle[i].ObjectiveP[pParticle[i].NoObj - 2] * pen)
+                    {
+                        for (int o = 0; o < this.pParticle[i].NoObj; o++)
+                            pParticle[i].ObjectiveP[o] = pParticle[i].Objective[o];
+                        for (int j = 0; j < pParticle[i].Dimension; j++)
+                            pParticle[i].BestP[j] = pParticle[i].Position[j];
+                    }
+                }
+            }
+
+            //update global best
+            for (int i = 0; i < Member; i++)
+            {
+                int c_obj = pParticle[i].type;
+                if (!constr)
+                {
+                    if (pParticle[i].ObjectiveP[c_obj] < pParticle[posBest[c_obj]].ObjectiveP[c_obj])
+                        posBest[c_obj] = i;
+                }
+                else
+                {
+                    if (pParticle[i].ObjectiveP[c_obj] + pParticle[i].ObjectiveP[pParticle[i].NoObj - 2] * pen
+                        < pParticle[posBest[c_obj]].ObjectiveP[c_obj] + pParticle[posBest[c_obj]].ObjectiveP[pParticle[posBest[c_obj]].NoObj - 2] * pen)
+                        posBest[c_obj] = i;
+                }
+            }
+
+            //update local best
+            for (int i = 0; i < Member; i++)
+            {
+                int c_obj = pParticle[i].type;
+                pParticle[i].localBest = i;
+                for (int j = i - nbSize / 2; j <= i + nbSize / 2; j++)
+                {
+                    l_temp = j;
+                    if (i == j)
+                        continue;
+                    if (l_temp < 0)
+                        l_temp += Member;
+                    if (l_temp >= Member)
+                        l_temp -= Member;
+                    if (!constr)
+                    {
+                        if (pParticle[l_temp].ObjectiveP[c_obj] < pParticle[pParticle[i].localBest].ObjectiveP[c_obj])
+                            pParticle[i].localBest = l_temp;
+                    }
+                    else
+                    {
+                        if (pParticle[l_temp].ObjectiveP[c_obj] + pParticle[l_temp].ObjectiveP[pParticle[l_temp].NoObj - 2]
+                            < pParticle[pParticle[i].localBest].ObjectiveP[c_obj] + pParticle[pParticle[i].localBest].ObjectiveP[pParticle[pParticle[i].localBest].NoObj - 2] * pen)
+                            pParticle[i].localBest = l_temp;
+                    }
+                }
+            }
+
+            //update near neighbor best
+            for (int i = 0; i < Member; i++)
+            {
+                int c_obj = pParticle[i].type;
+                for (int j = 0; j < pParticle[i].Dimension; j++)
+                {
+                    if (i == 0)
+                        n_temp = 1;
+                    else
+                        n_temp = 0;
+
+                    FDRBest = (pParticle[i].Objective[c_obj] - pParticle[n_temp].ObjectiveP[c_obj]) / Math.Abs(pParticle[i].Position[j] - pParticle[n_temp].BestP[j]);
+
+                    for (int k = 0; k < Member; k++)
+                    {
+                        if (i == k) continue;
+                        FDR = (pParticle[i].Objective[c_obj] - pParticle[k].ObjectiveP[c_obj]) / Math.Abs(pParticle[i].Position[j] - pParticle[k].BestP[j]);
+                        if (FDR > FDRBest)
+                        {
+                            n_temp = k;
+                            FDRBest = FDR;
+                        }
+                    }
+                    pParticle[i].Neighbor[j] = pParticle[n_temp].BestP[j];
+                }
+            }
+        }

@@ -1,0 +1,13 @@
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\DE basic\obj\Debug\DE_lib.exe
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\DE basic\obj\Debug\DE_lib.pdb
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\DE basic\bin\Debug\DE_lib.exe
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\DE basic\bin\Debug\DE_lib.pdb
+D:\program\Warisa\Documents\AIT\DE_Program\DE Lib_new011110\DE basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\obj\Debug\DE_lib.exe
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\obj\Debug\DE_lib.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\bin\Debug\DE_lib.exe
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\bin\Debug\DE_lib.pdb
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\bin\Debug\DE_lib.exe.config
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\bin\Debug\ETLib_DE_JSP.dll
+C:\Documents and Settings\Voratas\Desktop\ETLib 2.0\ETLib Public Release 2.0\Different Evolution\Applications\DE Lib_new011110\DE basic\bin\Debug\ETLib_DE_JSP.pdb
